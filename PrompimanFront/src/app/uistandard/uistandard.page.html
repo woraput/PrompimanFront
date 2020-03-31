@@ -9,4 +9,114 @@
   <ion-searchbar>searchbar</ion-searchbar>
   <ion-button>button</ion-button>
 
+<ion-input type="date" name="" id=""></ion-input>
+<ion-input type="datetime" name="" id="">   </ion-input>
+
+<ion-item>
+  <ion-label>Todo</ion-label>
+  <ion-input type="text"  name="title"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label>Tododddddddddd</ion-label>
+  <ion-input type="text"  name="title"></ion-input>
+</ion-item>
+
+<ion-list>
+  <ion-item>
+    <ion-label>Input</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Toggle</ion-label>
+    <ion-toggle slot="end"></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>Radio</ion-label>
+    <ion-radio slot="end"></ion-radio>
+  </ion-item>
+  <ion-item>
+    <ion-label>Checkbox</ion-label>
+    <ion-checkbox slot="start"></ion-checkbox>
+  </ion-item>
+</ion-list>
+
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      ion-col
+    </ion-col>
+    <ion-col>
+      ion-col
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      ion-col
+    </ion-col>
+    <ion-col>
+      ion-col
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+<div>
+  <table pedding>
+    <thead class="bgb">
+      <tr>
+        <th>No.</th>
+        <th width="150">RM N.</th>
+        <th width="250">GuestName</th>
+        <th>Pax</th>
+        <th width="150">Arrival</th>
+        <th width="150">TimeIn</th>
+        <th width="150">Departure</th>
+        <th width="150">TimeOut</th>
+        <th>Nationality</th>
+        <th width="150">Company</th>
+        <th>RMRate</th>
+        <th>ABF</th>
+        <th width="250">Remark</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let member of GuestRegists;let i = index">
+      <tr>
+        <td>{{i+1}}</td>
+        <td width="150">{{ member.roomNo }}</td>
+        <td width="250">{{ member.name }}</td>
+        <td>{{ member.pax }}</td>
+        <td width="150">{{ member.arriveDate }}</td>
+        <td width="150">{{ member.arriveTime }}</td>
+        <td width="150">{{ member.departureDate }}</td>
+        <td width="150">{{ member.departureTime }}</td>
+        <td>{{ member.nationality }}</td>
+        <td width="150">{{ member.company }}</td>
+        <td>{{ member.roomrate }}</td>
+        <td>{{ member.abf }}</td>
+        <td width="250">{{ member.remark }}</td>
+      </tr>
+    </tbody>
+
+    <tbody>
+       <tr>
+        <td></td>
+        <td width="150"></td>
+        <td width="250"></td>
+        <td>11</td>
+        <td width="150"></td>
+        <td width="150"></td>
+        <td width="150"></td>
+        <td width="150"></td>
+        <td></td>
+        <td width="150"></td>
+        <td>3300</td>
+        <td>11</td>
+        <td width="250"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </ion-content>
