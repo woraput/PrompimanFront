@@ -117,3 +117,19 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+table, td, th {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid lightgray;
+  text-align: center;
+}
+
+table{
+  width: 100%;
+  table-layout: auto;
+}
