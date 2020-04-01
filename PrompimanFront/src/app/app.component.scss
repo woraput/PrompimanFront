@@ -134,7 +134,23 @@ table{
   table-layout: auto;
 }
 
-.wide-as-needed {
-  overflow: scroll;
-  white-space: nowrap;
+.bgb{
+  background-color: #f8f9fa;
+}
+
+div[scrollx=true], div[scrolly=true] {
+  position: relative;
+  overflow: hidden;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+div[scrollx=true] {
+  overflow-x: auto;
+}
+
+div[scrolly=true] {
+  overflow-y: auto;
 }

@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content  class="ion-padding">
+<ion-content class="ion-padding">
   <ion-segment (ionChange)="segmentChanged($event)">
     <ion-segment-button value="friends">
       <ion-label>Friends</ion-label>
@@ -57,8 +57,8 @@
     </ion-col>
   </ion-row>
 
-  <ion-list>
-    <ion-item lines="none">
+  <ion-list lines="none">
+    <ion-item>
       <ion-label>
         กรอกข้อมูล
       </ion-label>
@@ -80,198 +80,215 @@
         <ion-label>เลือกชั้น</ion-label>
       </ion-col>
       <ion-select interface="action-sheet" placeholder="กรุณาเลือก">
-        <ion-select-option>1</ion-select-option>
-        <ion-select-option>2</ion-select-option>
-        <ion-select-option>3</ion-select-option>
-        <ion-select-option>4</ion-select-option>
+        <ion-select-option value="1">1</ion-select-option>
+        <ion-select-option value="2">2</ion-select-option>
+        <ion-select-option value="3">3</ion-select-option>
+        <ion-select-option value="4">4</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
 
-  <ion-list>
+  <ion-list lines="none">
     <ion-radio-group>
-      <ion-item lines="none">
+      <ion-item>
         <ion-label>
           เลือกได้อย่างใดอย่างหนึ่ง
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-radio slot="start"></ion-radio>
+        <ion-radio slot="start" value="1"></ion-radio>
         <ion-label>Cord</ion-label>
       </ion-item>
       <ion-item>
-        <ion-radio slot="start"></ion-radio>
+        <ion-radio slot="start" value="2"></ion-radio>
         <ion-label>Duesenberg</ion-label>
       </ion-item>
     </ion-radio-group>
   </ion-list>
 
-  <ion-list>
-    <ion-label>
-      เลือกได้หลายอย่าง
-    </ion-label>
+  <ion-list lines="none">
     <ion-item>
-      <ion-label>Checkbox1</ion-label>
-      <ion-checkbox slot="start"></ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-label>Checkbox2</ion-label>
-      <ion-checkbox slot="start"></ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-label>Checkbox3</ion-label>
-      <ion-checkbox slot="start"></ion-checkbox>
-    </ion-item>
-  </ion-list>
-
-
-  <ion-list>
-    <ion-item lines="none">
       <ion-label>
         เลือกได้หลายอย่าง
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Checkbox1</ion-label>
-      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-checkbox slot="start" value=""></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Checkbox2</ion-label>
-      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-checkbox slot="start" value=""></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>Checkbox3</ion-label>
-      <ion-checkbox slot="start"></ion-checkbox>
+      <ion-checkbox slot="start" value=""></ion-checkbox>
     </ion-item>
   </ion-list>
 
   <ion-card>
     <ion-card-header>
-      <ion-row text-center>
-        <ion-col col-2>
-          ไอดี
+      <ion-row class="ion-text-center">
+        <ion-col size="2">
+          <h4>ไอดี</h4>
         </ion-col>
-        <ion-col col-3>
-          ชื่อ - สกุล
+        <ion-col size="3">
+          <h4>ชื่อ - สกุล</h4>
         </ion-col>
-        <ion-col col-3>
-          Full Name
+        <ion-col size="3">
+          <h4>Full Name</h4>
         </ion-col>
-        <ion-col col-3>
-          เบอร์โทรศัพท์
+        <ion-col size="3">
+          <h4>เบอร์โทรศัพท์</h4>
         </ion-col>
       </ion-row>
     </ion-card-header>
   </ion-card>
 
   <ion-card>
-    <ion-card-content>
+    <ion-card-content class="ion-text-center">
       <ion-row>
-        <ion-col col-2>
+        <ion-col size="2">
           ไอดี
         </ion-col>
-        <ion-col col-3>
+        <ion-col size="3">
           ชื่อ - สกุล
         </ion-col>
-        <ion-col col-3>
+        <ion-col size="3">
           Full Name
         </ion-col>
-        <ion-col col-3>
+        <ion-col size="3">
           เบอร์โทรศัพท์
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-2>
+        <ion-col size="2">
           ไอดี
         </ion-col>
-        <ion-col col-3>
+        <ion-col size="3">
           ชื่อ - สกุล
         </ion-col>
-        <ion-col col-3>
+        <ion-col size="3">
           Full Name
         </ion-col>
-        <ion-col col-3>
+        <ion-col size="3">
           เบอร์โทรศัพท์
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-2>
+        <ion-col size="2">
           ไอดี
         </ion-col>
-        <ion-col col-3>
+        <ion-col size="3">
           ชื่อ - สกุล
         </ion-col>
-        <ion-col col-3>
+        <ion-col size="3">
           Full Name
         </ion-col>
-        <ion-col col-3>
+        <ion-col size="3">
           เบอร์โทรศัพท์
         </ion-col>
       </ion-row>
     </ion-card-content>
   </ion-card>
 
+  <div scrollX="true" class="ion-padding">
+    <table>
+      <thead class="bgb">
+        <tr>
+          <th>No.</th>
+          <th width="150">RM N.</th>
+          <th width="250">GuestName</th>
+          <th>Pax</th>
+          <th width="150">Arrival</th>
+          <th width="150">TimeIn</th>
+          <th width="150">Departure</th>
+          <th width="150">TimeOut</th>
+          <th>Nationality</th>
+          <th width="150">Company</th>
+          <th>RMRate</th>
+          <th>ABF</th>
+          <th width="250">Remark</th>
+        </tr>
+      </thead>
 
-  <!-- <ion-scroll direction="x" class="wide-as-needed"> -->
-  <table pedding >
-    <thead>
-      <tr>
-        <th>No.</th>
-        <th width="150">RM N.</th>
-        <th width="250">GuestName</th>
-        <th>Pax</th>
-        <th width="150">Arrival</th>
-        <th width="150">TimeIn</th>
-        <th width="150">Departure</th>
-        <th width="150">TimeOut</th>
-        <th>Nationality</th>
-        <th width="150">Company</th>
-        <th>RMRate</th>
-        <th>ABF</th>
-        <th width="250">Remark</th>
-        <th width="250">Remark</th>
-        <th width="250">Remark</th>
-        <th width="250">Remark</th>
-        <th width="250">Remark</th>
-        <th width="250">Remark</th>
-        <th width="250">Remark</th>
-        <th width="250">Remark</th>
-      </tr>
-    </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td width="150">201</td>
+          <td width="250">บุตรี จารุธนเศรษฐ์</td>
+          <td>2</td>
+          <td width="150">6/7/2018</td>
+          <td width="150">18:10</td>
+          <td width="150">12/7/18</td>
+          <td width="150">12:10</td>
+          <td>ไทย</td>
+          <td width="150">w-in</td>
+          <td>600</td>
+          <td>2</td>
+          <td width="250">ไม่มีตัง เงินหาย รอเงินเดือนออก ทำไงดี ขอพี่ๆได้ไหมคะ</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <tbody>
-      <tr>
-        <td>x</td>
-        <td width="150">xxx</td>
-        <td width="250">xxx</td>
-        <td>xxx</td>
-        <td width="150">123</td>
-        <td width="150">123</td>
-        <td width="150">xxx</td>
-        <td width="150">xxx</td>
-        <td>xxx</td>
-        <td width="150">xxx</td>
-        <td>xxx</td>
-        <td>xxx</td>
-        <td width="250">xxx</td>
-        <td width="250">xxx</td>
-        <td width="250">xxx</td>
-        <td width="250">xxx</td>
-        <td width="250">xxx</td>
-        <td width="250">xxx</td>
-        <td width="250">xxx</td>
-      </tr>
-    </tbody>
-  </table>
-  <!-- </ion-scroll> -->
-
-
-    <div class="ion-text-end">
-      <ion-button color="primary">บันทึก</ion-button>
-      <ion-button color="danger">ยกเลิก</ion-button>
-    </div>
-    <div class="ion-text-end" >
-      <ion-button color="warning">แก้ไข</ion-button>
-    </div>
+  <div class="ion-text-end">
+    <ion-button color="primary" class="ion-padding">บันทึก</ion-button>
+    <ion-button color="danger" class="ion-padding">ยกเลิก</ion-button>
+    <ion-button color="warning" class="ion-padding">แก้ไข</ion-button>
+  </div>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-list>
+      <ion-row>
+        <ion-col size="2">
+          <div>
+            <ion-item lines="none">ค่าใช้จ่ายทั้งหมด</ion-item>
+            <ion-item lines="none">ยอดที่ชำระแล้ว</ion-item>
+            <ion-item lines="none">คงค้าง</ion-item>
+          </div>
+        </ion-col>
+
+        <ion-col size="1">
+          <ion-item lines="none">xxxxxx</ion-item>
+          <ion-item lines="none">xxxxx</ion-item>
+          <ion-item lines="none">xxxx</ion-item>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-item lines="none">บาท</ion-item>
+          <ion-item lines="none">บาท</ion-item>
+          <ion-item lines="none">บาท</ion-item>
+        </ion-col>
+
+        <ion-col size="1">
+          <ion-item lines="none"></ion-item>
+          <ion-item lines="none"></ion-item>
+          <ion-item lines="none"></ion-item>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-item lines="none"></ion-item>
+          <ion-item lines="none">ยอดที่เลือกชำระ</ion-item>
+          <ion-item lines="none"></ion-item>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-item lines="none"></ion-item>
+          <ion-item lines="none">xxxxx</ion-item>
+          <ion-item lines="none"></ion-item>
+        </ion-col>
+
+        <ion-col size="2">
+          <ion-item lines="none"></ion-item>
+          <ion-item lines="none">บาท</ion-item>
+          <ion-button color="primary" class="ion-text-end">ถัดไป</ion-button>
+        </ion-col>
+
+      </ion-row>
+    </ion-list>
+  </ion-toolbar>
+</ion-footer>
