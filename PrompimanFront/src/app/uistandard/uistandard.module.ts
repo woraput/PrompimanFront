@@ -18,4 +18,4 @@ import { DisplayDatePipe } from '../pipe/displayDate/display-date.pipe';
   ],
   declarations: [UIStandardPage, DisplayDatePipe],
 })
-export class UIStandardPageModule {}
+export class UIStandardPageModule { }
