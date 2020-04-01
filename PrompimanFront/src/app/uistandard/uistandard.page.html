@@ -5,26 +5,46 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-searchbar>searchbar</ion-searchbar>
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="friends">
+      <ion-label>Friends</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      <ion-label>Enemies</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-searchbar></ion-searchbar>
 
   <ion-row>
     <ion-col>
-      <ion-item>
-        <ion-label item-> วันที่ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{date |  displayDate:'date'}}
-        </ion-label>
-        <ion-icon item-right ion-button name="calendar" (click)="picker.open()">
-          <ion-datetime #picker pickerFormat="DD MMMM YYYY" [(ngModel)]="date">
-          </ion-datetime>
-        </ion-icon>
+      <ion-item class="row">
+        <ion-col size="2">
+          <ion-label item-lelf> วันที่ </ion-label>
+        </ion-col>
+        <ion-col class="ion-text-center" size="9">
+          {{date |  displayDate:'date'}}
+        </ion-col>
+        <ion-col>
+          <ion-icon ion-button name="calendar" (click)="picker.open()">
+            <ion-datetime #picker pickerFormat="DD MM YY" [(ngModel)]="date">
+            </ion-datetime>
+          </ion-icon>
+        </ion-col>
       </ion-item>
     </ion-col>
     <ion-col>
-      <ion-item>
-        <ion-label>เวลา &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{time |  displayDate:'time'}}</ion-label>
-        <ion-icon name="alarm-outline" (click)="clock.open()">
-          <ion-datetime #clock display-format="HH:mm" [(ngModel)]="time" display-timezone="utc"></ion-datetime>
-        </ion-icon>
+      <ion-item class="row">
+        <ion-col size="2">
+          <ion-label item-lelf> เวลา </ion-label>
+        </ion-col>
+        <ion-col class="ion-text-center" size="9">
+          {{ time |  displayDate:'time'}}
+        </ion-col>
+        <ion-col>
+          <ion-icon ion-button name="alarm-outline" (click)="clock.open()">
+            <ion-datetime #clock display-format="HH:mm" [(ngModel)]="time" display-timezone="utc"></ion-datetime>
+          </ion-icon>
+        </ion-col>
       </ion-item>
     </ion-col>
     <ion-col>
@@ -199,4 +219,5 @@
       </tr>
     </tbody>
   </table>
+
 </ion-content>
