@@ -17,8 +17,42 @@ export class AppComponent implements OnInit {
       url: '/uistandard',
       icon: 'warning'
     },
+    {
+      title: 'ลงทะเบียน',
+      url: '/register',
+      icon: 'warning'
+    },
+    {
+      title: 'ลงทะเบียน',
+      url: '/register',
+      icon: 'warning'
+    },
+    {
+      title: 'ลงทะเบียน',
+      url: '/register',
+      icon: 'warning'
+    },
+    {
+      title: 'ลงทะเบียน',
+      url: '/register',
+      icon: 'warning'
+    },
+    {
+      title: 'ลงทะเบียน',
+      url: '/register',
+      icon: 'warning'
+    },
+    {
+      title: 'ลงทะเบียน',
+      url: '/register',
+      icon: 'warning'
+    },
+    {
+      title: 'ลงทะเบียน',
+      url: '/register',
+      icon: 'warning'
+    },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
