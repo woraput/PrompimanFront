@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'uistandard',
     loadChildren: () => import('./uistandard/uistandard.module').then( m => m.UIStandardPageModule)
-  },  {
+  },
+  {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },

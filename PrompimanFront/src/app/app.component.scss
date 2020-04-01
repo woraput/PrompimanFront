@@ -133,3 +133,8 @@ table{
   width: 100%;
   table-layout: auto;
 }
+
+.wide-as-needed {
+  overflow: scroll;
+  white-space: nowrap;
+}

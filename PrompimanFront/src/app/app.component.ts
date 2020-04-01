@@ -53,7 +53,6 @@ export class AppComponent implements OnInit {
       icon: 'copy'
     },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   date: Date;
   constructor(

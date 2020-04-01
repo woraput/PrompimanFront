@@ -16,9 +16,6 @@ export class UIStandardPage implements OnInit {
     // });
 
   }
-  logForm() {
-    console.log(this.todo.value)
-  }
 
   ngOnInit() { }
 
