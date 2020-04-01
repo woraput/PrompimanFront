@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UIStandardPageRoutingModule } from './uistandard-routing.module';
 
 import { UIStandardPage } from './uistandard.page';
+import { DisplayDatePipe } from '../pipe/displayDate/display-date.pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { UIStandardPage } from './uistandard.page';
     IonicModule,
     UIStandardPageRoutingModule
   ],
-  declarations: [UIStandardPage]
+  declarations: [UIStandardPage, DisplayDatePipe],
 })
 export class UIStandardPageModule {}
