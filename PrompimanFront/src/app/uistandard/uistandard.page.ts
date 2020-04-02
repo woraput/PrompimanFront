@@ -11,22 +11,28 @@ import { ModalController } from '@ionic/angular';
 })
 export class UIStandardPage implements OnInit {
   // date: Date;
-  option = "element";
-  time: Date;
-  todo: FormGroup;
-  top: Date;
-  bottom: Date;
-  anchored: Date;
-  center: Date;
-  datetime: Date;
-  date: Date;
-  setBtn: Date;
-  setCancel: Date;
-  inline: Date;
-  constructor(private modalController: ModalController, private formBuilder: FormBuilder) {
-    this.todo = this.formBuilder.group({
-      title: ['', Validators.required],
-      description: [''],
+  private option = 'element';
+  private fg: FormGroup;
+  private submitRequested: boolean;
+  private top: Date;
+  private bottom: Date;
+  private anchored: Date;
+  private center: Date;
+  private datetime: Date;
+  private date: Date;
+  private setBtn: Date;
+  private setCancel: Date;
+  private inline: Date;
+
+  constructor(private modalController: ModalController, private fb: FormBuilder) {
+    this.fg = this.fb.group({
+      input1: ['', Validators.required],
+      input2: ['', Validators.required],
+      input3: '',
+      date: ['', Validators.required],
+      time: ['', Validators.required],
+      select: ['', Validators.required],
+      detail: ['', Validators.required],
     });
 
   }
@@ -58,20 +64,31 @@ export class UIStandardPage implements OnInit {
     touchUi: false
   };
 
-  logForm() {
-    console.log(this.todo.value)
+  public handleSubmit() {
+    this.submitRequested = true;
+    if (this.fg.valid) {
+      console.log(this.fg.value);
+
+      //   this.store.dispatch(new SaveHouseHold(newHouseHold));
+      //   this.navCtrl.popTo("CheckListPage");
+    }
   }
+
   ngOnInit() { }
 
   segmentChanged() { }
 
-  dateSelect(ev) {
-    console.log(this.date);
-    console.log(ev);
+  public isValid(name: string): boolean {
+    let ctrl = this.fg.get(name);
+    if (name == 'checkMember') {
+      const ctrls = this.fg;
+      return ctrls.errors && ctrls.errors.checkMember && (ctrls.dirty || this.submitRequested);
+    }
+
+    return ctrl.invalid && (ctrl.dirty || this.submitRequested);
   }
 
   async presentModal() {
-    console.log("faaw");
     const modal = await this.modalController.create({
       component: RegisterPage
     });
