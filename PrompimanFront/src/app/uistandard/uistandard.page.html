@@ -16,7 +16,6 @@
 
   <ng-container [ngSwitch]="option">
     <ng-container *ngSwitchCase="'form'">
-
       <h2> import "ReactiveFormsModule" in (namePage).module.ts </h2>
       <h2> Form </h2>
       <form [formGroup]="todo" (ngSubmit)="logForm()">
@@ -32,7 +31,6 @@
           <ion-button block type="submit" [disabled]="!todo.valid">Submit
           </ion-button>
         </div>
-
       </form>
 
     </ng-container>
@@ -217,7 +215,8 @@
         </ion-card-content>
       </ion-card>
 
-      <div scrollX="true" scrollY="true" class="ion-padding">
+      <br>
+      <div scrollX="true" scrollY="true" class="ion-no-padding">
         <table>
           <thead class="bgb">
             <tr>
@@ -259,13 +258,13 @@
 
       <ion-row>
         <ion-col size="9"></ion-col>
-        <ion-col>
+        <ion-col size="1">
           <ion-button expand="block" color="primary" block type="">บันทึก</ion-button>
         </ion-col>
-        <ion-col>
+        <ion-col size="1">
           <ion-button expand="block" color="danger" block type="">ยกเลิก</ion-button>
         </ion-col>
-        <ion-col>
+        <ion-col size="1">
           <ion-button expand="block" color="warning" block type="">แก้ไข</ion-button>
         </ion-col>
       </ion-row>
@@ -275,53 +274,66 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-list>
-      <ion-row>
-        <ion-col size="2">
-          <div>
-            <ion-item lines="none">ค่าใช้จ่ายทั้งหมด</ion-item>
-            <ion-item lines="none">ยอดที่ชำระแล้ว</ion-item>
-            <ion-item lines="none">คงค้าง</ion-item>
-          </div>
-        </ion-col>
 
-        <ion-col size="1">
-          <ion-item lines="none">xxxxxx</ion-item>
-          <ion-item lines="none">xxxxx</ion-item>
-          <ion-item lines="none">xxxx</ion-item>
-        </ion-col>
+    <ion-row>
+      <ion-col size="2">
+        <ion-item lines="none">ค่าใช้จ่ายทั้งหมด</ion-item>
+      </ion-col>
+      <ion-col size="1">
+        <ion-item lines="none">xxxxxx</ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item lines="none">บาท</ion-item>
+      </ion-col>
+    </ion-row>
 
-        <ion-col size="2">
-          <ion-item lines="none">บาท</ion-item>
-          <ion-item lines="none">บาท</ion-item>
-          <ion-item lines="none">บาท</ion-item>
-        </ion-col>
+    <ion-row>
+      <ion-col size="2">
+        <ion-item lines="none">ยอดที่ชำระแล้ว</ion-item>
+      </ion-col>
+      <ion-col size="1">
+        <ion-item lines="none">xxxxxx</ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item lines="none">บาท</ion-item>
+      </ion-col>
+    </ion-row>
 
-        <ion-col size="1">
-          <ion-item lines="none"></ion-item>
-          <ion-item lines="none"></ion-item>
-          <ion-item lines="none"></ion-item>
-        </ion-col>
+    <ion-row>
+      <ion-col size="2">
+        <ion-item lines="none">คงค้าง</ion-item>
+      </ion-col>
+      <ion-col size="1">
+        <ion-item lines="none">xxxxxx</ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item lines="none">บาท</ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item lines="none">
+          <h3>
+            ยอดที่เลือกชำระ
+          </h3>
+        </ion-item>
+      </ion-col>
+      <ion-col size="1">
+        <ion-item lines="none">
+          <h3>
+            xxxxx
+          </h3>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item lines="none">
+          <h3>
+            บาท
+          </h3>
+        </ion-item>
+      </ion-col>
 
-        <ion-col size="2">
-          <ion-item lines="none"></ion-item>
-          <ion-item lines="none">ยอดที่เลือกชำระ</ion-item>
-          <ion-item lines="none"></ion-item>
-        </ion-col>
-
-        <ion-col size="2">
-          <ion-item lines="none"></ion-item>
-          <ion-item lines="none">xxxxx</ion-item>
-          <ion-item lines="none"></ion-item>
-        </ion-col>
-
-        <ion-col size="2">
-          <ion-item lines="none"></ion-item>
-          <ion-item lines="none">บาท</ion-item>
-          <ion-button color="primary" class="ion-text-end" block type="">ถัดไป</ion-button>
-        </ion-col>
-
-      </ion-row>
-    </ion-list>
+      <ion-col size="1">
+        <ion-button expand="block" color="primary" class="ion-text-end" type="">ถัดไป</ion-button>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-footer>
