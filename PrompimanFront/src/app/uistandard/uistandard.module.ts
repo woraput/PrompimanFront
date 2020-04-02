@@ -8,10 +8,11 @@ import { UIStandardPageRoutingModule } from './uistandard-routing.module';
 
 import { UIStandardPage } from './uistandard.page';
 import { DisplayDatePipe } from '../pipe/displayDate/display-date.pipe';
-
+import { MbscModule } from '@mobiscroll/angular';
 @NgModule({
   imports: [
     CommonModule,
+    MbscModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule,

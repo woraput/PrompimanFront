@@ -9,9 +9,9 @@
       </ion-header>
 
       <ion-content>
-        <ion-list>
+        <ion-list  lines="none">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="inset"
+            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" 
               [class.selected]="selectedIndex == i" detail>
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
