@@ -154,3 +154,7 @@ div[scrollx=true] {
 div[scrolly=true] {
   overflow-y: auto;
 }
+
+ion-input, ion-textarea {
+  background-color: lightgray;
+}
