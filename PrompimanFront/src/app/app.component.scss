@@ -158,3 +158,19 @@ div[scrolly=true] {
 ion-input, ion-textarea {
   background-color: lightgray;
 }
+
+.invalid {
+  border: 1px solid red;
+}
+
+.invalid-msg{
+  color: red;
+}
+
+.warning-msg {
+  color: orangered;
+}
+
+.warning {
+  color: darkorange;
+}
