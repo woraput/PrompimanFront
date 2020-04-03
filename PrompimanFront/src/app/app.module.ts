@@ -12,15 +12,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterPageModule } from './register/register.module';
 import { ComponentsModule } from '../components/components.module';
-import { DatetimeComponent } from '../components/datetime/datetime.component';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [ 
-    FormsModule,  
+  imports: [
+    FormsModule,
     RegisterPageModule,
-    MbscModule, 
+    MbscModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,

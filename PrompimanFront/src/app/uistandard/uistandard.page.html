@@ -51,38 +51,7 @@
             </span>
           </ion-item>
 
-          <ion-item ion-input>
-            <ion-col size="2">
-              <ion-label> วันที่ </ion-label>
-            </ion-col>
-            <!-- <mbsc-calendar [(ngModel)]="center" [touchUi]="false" display="center" placeholder="Please select...">Center
-            </mbsc-calendar> -->
-            <ion-input type="date" formControlName="date" [class.invalid]="isValid('date')">
-            </ion-input>
-          </ion-item>
-          <ion-item *ngIf="isValid('date')">
-            <ion-col size="2"></ion-col>
-            <span class="invalid-msg">
-              กรุณาเลือก
-            </span>
-          </ion-item>
-          <ion-item (click)="clock.open()">
-            <ion-col size="2">
-              <ion-label> เวลา </ion-label>
-            </ion-col>
-            <div>
-              <ion-datetime #clock display-format="HH:mm" value="" formControlName="time"
-                [class.invalid]="isValid('time')" display-timezone="utc" placeholder="กรุณาเลือก">
-              </ion-datetime>
-            </div>
-            <ion-icon slot="end" name="alarm-outline"> </ion-icon>
-          </ion-item>
-          <ion-item *ngIf="isValid('time')">
-            <ion-col size="2"></ion-col>
-            <span class="invalid-msg">
-              กรุณาเลือก
-            </span>
-          </ion-item>
+          <app-datetime [FormItem]="fg.get('date_time')"></app-datetime>
 
           <ion-item>
             <ion-col size="2">
@@ -126,54 +95,12 @@
             <ion-button size="default" slot="end" expand="block" type="submit">บันทึก</ion-button>
           </ion-item>
         </ion-list>
-
       </form>
 
       <h1>demo modal</h1>
       <h4> import "(namePage).module" in app.module </h4>
       <ion-button (click)="presentModal()">demo modal</ion-button>
 
-      <h1>example calenda</h1>
-      <h2>calenda</h2>
-      <mbsc-form>
-        <div class="mbsc-grid mbsc-no-padding">
-          <div class="mbsc-row mbsc-justify-content-center">
-            <div class="mbsc-col-xl-5 mbsc-col-md-6">
-              <mbsc-form-group inset>
-                <mbsc-form-group-title>Pop-up positioning</mbsc-form-group-title>
-                <mbsc-calendar [(ngModel)]="top" [touchUi]="false" display="top" placeholder="Please select...">Top
-                </mbsc-calendar>
-                <mbsc-calendar [(ngModel)]="bottom" [touchUi]="false" display="bottom" placeholder="Please select...">
-                  Bottom</mbsc-calendar>
-                <mbsc-calendar [(ngModel)]="anchored" [touchUi]="false" placeholder="Please select...">Anchored
-                </mbsc-calendar>
-                <mbsc-calendar [(ngModel)]="center" [touchUi]="false" display="center" placeholder="Please select...">
-                  Center</mbsc-calendar>
-              </mbsc-form-group>
-              <mbsc-form-group inset>
-                <mbsc-form-group-title>Basic usage</mbsc-form-group-title>
-                <mbsc-calendar [(ngModel)]="datetime" [options]="datetimeSettings" placeholder="Please select...">Date &
-                  Time</mbsc-calendar>
-                <mbsc-calendar [(ngModel)]="date" [options]="dateSettings" placeholder="Please select...">Date
-                </mbsc-calendar>
-              </mbsc-form-group>
-              <mbsc-form-group inset>
-                <mbsc-form-group-title>With buttons</mbsc-form-group-title>
-                <mbsc-calendar [(ngModel)]="setBtn" [options]="setBtnSettings" placeholder="Please select...">Set button
-                </mbsc-calendar>
-                <mbsc-calendar [(ngModel)]="setCancel" [options]="setCancelSettings" placeholder="Please select...">
-                  Set/Cancel</mbsc-calendar>
-              </mbsc-form-group>
-            </div>
-            <div class="mbsc-col-xl-4 mbsc-col-lg-5 mbsc-col-md-6">
-              <mbsc-form-group inset>
-                <mbsc-form-group-title>Embedded Date & Time</mbsc-form-group-title>
-                <mbsc-calendar [(ngModel)]="inline" [options]="inlineSettings"></mbsc-calendar>
-              </mbsc-form-group>
-            </div>
-          </div>
-        </div>
-      </mbsc-form>
     </ng-container>
     <ng-container *ngSwitchCase="'element'">
 
@@ -401,7 +328,6 @@
         </ion-col>
       </ion-row>
 
-      <app-datetime></app-datetime>
     </ng-container>
   </ng-container>
 </ion-content>
