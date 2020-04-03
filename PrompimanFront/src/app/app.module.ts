@@ -11,6 +11,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterPageModule } from './register/register.module';
+import { ComponentsModule } from '../components/components.module';
+import { DatetimeComponent } from '../components/datetime/datetime.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +23,8 @@ import { RegisterPageModule } from './register/register.module';
     MbscModule, 
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    ComponentsModule,
   ],
   providers: [
     StatusBar,
