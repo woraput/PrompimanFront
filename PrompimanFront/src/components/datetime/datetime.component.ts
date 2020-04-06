@@ -23,8 +23,8 @@ export class DatetimeComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.FormItem = this.fb.group({
-      date: ['', Validators.required],
-      time: ['', Validators.required],
+      'date': ['', Validators.required],
+      'time': ['', Validators.required],
     });
   }
 

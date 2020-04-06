@@ -90,6 +90,79 @@
             </ion-col>
             <ion-textarea placeholder="รายละเอียดเพิ่มเติม" formControlName="detail" clearOnEdit="true"></ion-textarea>
           </ion-item>
+
+
+          <ion-item>
+            <ion-label>
+              เลือกได้หลายอย่าง
+            </ion-label>
+          </ion-item>
+          <ion-list lines="none" formGroupName="checkbox" [class.invalid]="isValid('checkbox')">
+            <ion-item *ngIf="isValid('checkbox')">
+              <span class="invalid-msg">
+                กรุณาเลือก
+              </span>
+            </ion-item>
+            <ion-item>
+              <ion-label>Checkbox1</ion-label>
+              <ion-checkbox formControlName="checkbox1" slot="start" value="false"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label>Checkbox2</ion-label>
+              <ion-checkbox formControlName="checkbox2" slot="start" value="false"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+              <ion-label>Checkbox3</ion-label>
+              <ion-checkbox formControlName="checkbox3" slot="start" value="false"></ion-checkbox>
+            </ion-item>
+          </ion-list>
+
+            <ion-item>
+              <ion-label>
+                1.เลือกรายการ
+              </ion-label>
+            </ion-item>
+            <ion-row [class.invalid]="isValid('tax')">
+              <ion-radio-group formControlName="tax" >
+                <ion-item *ngIf="isValid('tax')">
+                  <span class="invalid-msg">กรุณาเลือก</span>
+                </ion-item>
+                <ion-item>
+                  <ion-label>ห้องประชุม</ion-label>
+                  <ion-radio slot="start" value="1"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>ห้องอาหาร</ion-label>
+                  <ion-radio slot="start" value="2"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>ห้องพัก</ion-label>
+                  <ion-radio slot="start" value="3"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-row>
+     
+
+            <ion-item>
+              <ion-label>
+                2.เลือกได้อย่างใดอย่างหนึ่ง
+              </ion-label>
+            </ion-item>
+            <ion-row [class.invalid]="isValid('tax2')">
+              <ion-radio-group formControlName="tax2" >
+                <ion-item *ngIf="isValid('tax2')">
+                  <span class="invalid-msg">กรุณาเลือก</span>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Cord</ion-label>
+                  <ion-radio slot="start" value="1"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Duesenberg</ion-label>
+                  <ion-radio slot="start" value="2"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-row>
           <ion-item>
             <ion-button size="default" slot="end" expand="block" color="danger">ยกเลิก</ion-button>
             <ion-button size="default" slot="end" expand="block" type="submit">บันทึก</ion-button>
