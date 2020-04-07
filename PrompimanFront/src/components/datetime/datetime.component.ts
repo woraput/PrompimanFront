@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MbscCalendarOptions } from '@mobiscroll/angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-datetime',
@@ -23,9 +23,37 @@ export class DatetimeComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.FormItem = this.fb.group({
+      'problem': DatetimeComponent.CreateFormGroup(fb),
+    });
+  }
+
+  public static CreateFormGroup(fb: FormBuilder): FormGroup {
+    return fb.group({
       'date': ['', Validators.required],
       'time': ['', Validators.required],
-    });
+    }, {
+        validator: DatetimeComponent.checkAnyOrOther()
+      });
+  }
+
+  public isValid(name: string): boolean {
+    var ctrl = this.FormItem.get(name);
+    if (name == 'anycheck') {
+      ctrl = this.FormItem;
+      return ctrl.errors && ctrl.errors.anycheck && (ctrl.dirty || this.submitRequested);
+    }
+    return ctrl.invalid && (ctrl.dirty || this.submitRequested);
+  }
+
+  public static checkAnyOrOther(): ValidatorFn {
+    return (c: AbstractControl): ValidationErrors | null => {
+      const date = c.get('date')
+      const time = c.get('time');
+      if (!date.value && !time.value) {
+        return { 'anycheck': true };
+      }
+      return null;
+    }
   }
 
   datetimeSettings1: MbscCalendarOptions = {
@@ -74,8 +102,8 @@ export class DatetimeComponent implements OnInit {
     this.submitRequested = true;
   }
 
-  public isValid(name: string): boolean {
-    const ctrl = this.FormItem.get(name);
-    return ctrl.invalid && (ctrl.dirty || this.submitRequested);
-  }
+  // public isValid(name: string): boolean {
+  //   const ctrl = this.FormItem.get(name);
+  //   return ctrl.invalid && (ctrl.dirty || this.submitRequested);
+  // }
 }
