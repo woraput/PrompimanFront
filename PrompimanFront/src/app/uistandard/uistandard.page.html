@@ -17,41 +17,53 @@
 
   <ng-container [ngSwitch]="option">
     <ng-container *ngSwitchCase="'form'">
-
+<!-- 
       <h1> Form </h1>
-      <h4> import "ReactiveFormsModule" in (namePage).module.ts </h4>
+      <h4> import "ReactiveFormsModule" in (namePage).module.ts </h4> -->
 
       <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
         <ion-list lines="none">
 
-
+          <div class="ion-padding">
+            <ion-searchbar></ion-searchbar>
+          </div>
+    
           <ion-row>
-            <ion-col size="6">
+            <ion-col size="2">
               <ion-item>
-                <ion-col size="4">
-                  <ion-label>ชื่อ - สกุล(อังกฤษ)</ion-label>
-                </ion-col>
+                <ion-label>ชื่อ - สกุล(อังกฤษ)</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item>
                 <ion-input type="text" placeholder="กรุณากรอกข้อมูล" formControlName="room3"
                   [class.invalid]="isValid('room3')"></ion-input>
               </ion-item>
-              <ion-item *ngIf="isValid('room3')">
-                <ion-col size="4"></ion-col>
-                <span class="invalid-msg">
-                  กรุณากรอกข้อมูล
-                </span>
+            </ion-col>
+            <ion-col size="2">
+              <ion-item>
+                <ion-label>ชื่อ - สกุล(ไทย)</ion-label>
               </ion-item>
             </ion-col>
-
-            <ion-col size="6">
+            <ion-col size="4">
               <ion-item>
-                <ion-col size="4">
-                  <ion-label>ชื่อ - สกุล(ไทย</ion-label>
-                </ion-col>
                 <ion-input type="text" placeholder="กรุณากรอกข้อมูล" formControlName="room4"
                   [class.invalid]="isValid('room4')"></ion-input>
               </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2"></ion-col>
+            <ion-col size="4">
+              <ion-item *ngIf="isValid('room3')">
+                <span class="invalid-msg">
+                  กรุณากรอกข้อมูล
+                </span>
+              </ion-item>
+            </ion-col>
+            <ion-col size="2"></ion-col>
+            <ion-col size="4">
               <ion-item *ngIf="isValid('room4')">
-                <ion-col size="4"></ion-col>
                 <span class="invalid-msg">
                   กรุณากรอกข้อมูล
                 </span>
@@ -59,148 +71,177 @@
             </ion-col>
           </ion-row>
 
-          <ion-item>
+          <ion-row>
             <ion-col size="2">
-              <ion-label>Input1</ion-label>
+              <ion-item>
+                <ion-label>Input1</ion-label>
+              </ion-item>
             </ion-col>
-            <ion-input type="text" formControlName="input1" placeholder="กรุณากรอกข้อมูล"
-              [class.invalid]="isValid('input1')"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="isValid('input1')">
+            <ion-col size="10">
+              <ion-item>
+                <ion-input type="text" formControlName="input1" placeholder="กรุณากรอกข้อมูล"
+                  [class.invalid]="isValid('input1')"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
             <ion-col size="2"></ion-col>
-            <span class="invalid-msg">
-              กรุณากรอกข้อมูล
-            </span>
-          </ion-item>
+            <ion-col size="10">
+              <ion-item *ngIf="isValid('input1')">
+                <span class="invalid-msg">
+                  กรุณากรอกข้อมูล
+                </span>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-          <ion-item>
+          <ion-row>
             <ion-col size="2">
-              <ion-label>Input2</ion-label>
+              <ion-item>
+                <ion-label>Input2</ion-label>
+              </ion-item>
             </ion-col>
-            <ion-input type="text" formControlName="input2" placeholder="กรุณากรอกข้อมูล"
-              [class.invalid]="isValid('input2')"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="isValid('input2')">
+            <ion-col size="10">
+              <ion-item>
+                <ion-input type="text" formControlName="input2" placeholder="กรุณากรอกข้อมูล"
+                  [class.invalid]="isValid('input2')"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
             <ion-col size="2"></ion-col>
-            <span class="invalid-msg">
-              กรุณากรอกข้อมูล
-            </span>
-          </ion-item>
+            <ion-col size="10">
+              <ion-item *ngIf="isValid('input2')">
+                <span class="invalid-msg">
+                  กรุณากรอกข้อมูล
+                </span>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="2">
+              <ion-item>
+                <ion-label>หมายเหตุ</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="10">
+              <ion-item>
+                <ion-input type="text" formControlName="input3" placeholder="กรุณากรอกข้อมูล"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
           <app-datetime [FormItem]="fg.get('date_time')"></app-datetime>
 
-
-          <ion-item>
-            <ion-col size="2">
-              <ion-label>เลือกชั้น</ion-label>
-            </ion-col>
-            <ion-select interface="action-sheet" formControlName="select" placeholder="กรุณาเลือก"
-              [class.invalid]="isValid('select')">
-              <ion-select-option value="1">1</ion-select-option>
-              <ion-select-option value="2">2</ion-select-option>
-              <ion-select-option value="3">3</ion-select-option>
-              <ion-select-option value="4">4</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-item *ngIf="isValid('select')">
+          <ion-row>
             <ion-col size="2"></ion-col>
-            <span class="invalid-msg">
-              กรุณาเลือก
-            </span>
-          </ion-item>
-
-          <ion-item>
-            <ion-col size="2">
-              <ion-label>inputUnrequire</ion-label>
+            <ion-col size="10">
+              <ion-item *ngIf="isValid('select')">
+                <span class="invalid-msg">
+                  กรุณาเลือก
+                </span>
+              </ion-item>
             </ion-col>
-            <ion-input type="text" formControlName="input3" placeholder="กรุณากรอกข้อมูล"
-              [class.invalid]="isValid('input3')"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="isValid('input3')">
-            <ion-col size="2"></ion-col>
-            <span class="invalid-msg">
-              กรุณากรอกข้อมูล
-            </span>
-          </ion-item>
-          <ion-item>
+          </ion-row>
+          <ion-row>
             <ion-col size="2">
-              <ion-label>หมายเหตุ</ion-label>
+              <ion-item>
+                <ion-label>เลือกชั้น</ion-label>
+              </ion-item>
             </ion-col>
-            <ion-input type="text" placeholder="รายละเอียดเพิ่มเติม" formControlName="detail" clearOnEdit="true">
-            </ion-input>
-          </ion-item>
-
-
-          <ion-item>
-            <ion-label>
-              เลือกได้หลายอย่าง
-            </ion-label>
-          </ion-item>
-          <ion-list lines="none" formGroupName="checkbox" [class.invalid]="isValid('checkbox')">
-            <ion-item *ngIf="isValid('checkbox')">
-              <span class="invalid-msg">
-                กรุณาเลือก
-              </span>
-            </ion-item>
-            <ion-item>
-              <ion-label>Checkbox1</ion-label>
-              <ion-checkbox formControlName="checkbox1" slot="start" value="false"></ion-checkbox>
-            </ion-item>
-            <ion-item>
-              <ion-label>Checkbox2</ion-label>
-              <ion-checkbox formControlName="checkbox2" slot="start" value="false"></ion-checkbox>
-            </ion-item>
-            <ion-item>
-              <ion-label>Checkbox3</ion-label>
-              <ion-checkbox formControlName="checkbox3" slot="start" value="false"></ion-checkbox>
-            </ion-item>
-          </ion-list>
-
-          <ion-item>
-            <ion-label>
-              1.เลือกรายการ
-            </ion-label>
-          </ion-item>
-          <ion-row [class.invalid]="isValid('tax')">
-            <ion-radio-group formControlName="tax">
-              <ion-item *ngIf="isValid('tax')">
-                <span class="invalid-msg">กรุณาเลือก</span>
+            <ion-col size="10">
+              <ion-item [class.invalid]="isValid('select')">
+                <!-- <ion-label style="color: darkgrey;">กรุณาเลือก</ion-label> -->
+                <ion-select interface="action-sheet" formControlName="select">
+                  <ion-select-option value="1">1</ion-select-option>
+                  <ion-select-option value="2">2</ion-select-option>
+                  <ion-select-option value="3">3</ion-select-option>
+                  <ion-select-option value="4">4</ion-select-option>
+                </ion-select>
               </ion-item>
-              <ion-item>
-                <ion-label>ห้องประชุม</ion-label>
-                <ion-radio slot="start" value="1"></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>ห้องอาหาร</ion-label>
-                <ion-radio slot="start" value="2"></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>ห้องพัก</ion-label>
-                <ion-radio slot="start" value="3"></ion-radio>
-              </ion-item>
-            </ion-radio-group>
+            </ion-col>
           </ion-row>
 
+          <ion-row>
+            <ion-col size="2">
+              <ion-item>
+                <ion-label>เลือกได้หลายอย่าง</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col lines="none" formGroupName="checkbox" [class.invalid]="isValid('checkbox')">
+                <ion-item *ngIf="isValid('checkbox')">
+                  <span class="invalid-msg">กรุณาเลือก</span>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Checkbox1</ion-label>
+                  <ion-checkbox formControlName="checkbox1" slot="start" value="false"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Checkbox2</ion-label>
+                  <ion-checkbox formControlName="checkbox2" slot="start" value="false"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Checkbox3</ion-label>
+                  <ion-checkbox formControlName="checkbox3" slot="start" value="false"></ion-checkbox>
+                </ion-item>
+            </ion-col>
+          </ion-row>
 
-          <ion-item>
-            <ion-label>
-              2.เลือกได้อย่างใดอย่างหนึ่ง
-            </ion-label>
-          </ion-item>
-          <ion-row [class.invalid]="isValid('tax2')">
-            <ion-radio-group formControlName="tax2">
-              <ion-item *ngIf="isValid('tax2')">
-                <span class="invalid-msg">กรุณาเลือก</span>
-              </ion-item>
+          <ion-row>
+            <ion-col size="2">
               <ion-item>
-                <ion-label>Cord</ion-label>
-                <ion-radio slot="start" value="1"></ion-radio>
+                <ion-label> 1.หมวดที่ใช้ในใบกำกับภาษี</ion-label>
               </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col [class.invalid]="isValid('tax')">
+              <ion-radio-group formControlName="tax">
+                <ion-item *ngIf="isValid('tax')">
+                  <span class="invalid-msg">กรุณาเลือก</span>
+                </ion-item>
+                <ion-item>
+                  <ion-label>ห้องประชุม</ion-label>
+                  <ion-radio slot="start" value="1"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>ห้องอาหาร</ion-label>
+                  <ion-radio slot="start" value="2"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>ห้องพัก</ion-label>
+                  <ion-radio slot="start" value="3"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="2">
               <ion-item>
-                <ion-label>Duesenberg</ion-label>
-                <ion-radio slot="start" value="2"></ion-radio>
+                <ion-label>2.เลือกได้อย่างใดอย่างหนึ่ง</ion-label>
               </ion-item>
-            </ion-radio-group>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col [class.invalid]="isValid('tax')">
+              <ion-radio-group formControlName="tax2">
+                <ion-item *ngIf="isValid('tax2')">
+                  <span class="invalid-msg">กรุณาเลือก</span>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Cord</ion-label>
+                  <ion-radio slot="start" value="1"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Duesenberg</ion-label>
+                  <ion-radio slot="start" value="2"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-col>
           </ion-row>
 
           <ion-item>
@@ -221,26 +262,6 @@
       <div class="ion-padding">
         <ion-searchbar></ion-searchbar>
       </div>
-      <!-- 
-      <ion-row>
-        <ion-col size="6">
-          <ion-item lines="none">
-            <ion-col size="4">
-              <ion-label>จำนวนห้อง</ion-label>
-            </ion-col>
-            <ion-input type="text" placeholder="กรุณากรอกข้อมูล"></ion-input>
-          </ion-item>
-        </ion-col>
-
-        <ion-col size="6">
-          <ion-item lines="none">
-            <ion-col size="4">
-              <ion-label>เงินสำรองจ่าย</ion-label>
-            </ion-col>
-            <ion-input type="text" placeholder="กรุณากรอกข้อมูล"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row> -->
 
       <ion-row>
         <ion-col size="6">
