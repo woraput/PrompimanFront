@@ -42,7 +42,11 @@ const routes: Routes = [
   {
     path: 'management',
     loadChildren: () => import('./management/management.module').then( m => m.ManagementPageModule)
+  },  {
+    path: 'register-information',
+    loadChildren: () => import('./register-information/register-information.module').then( m => m.RegisterInformationPageModule)
   }
+
 
 ];
 

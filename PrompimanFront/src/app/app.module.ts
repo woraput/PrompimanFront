@@ -1,3 +1,4 @@
+import { RegisterInformationPageModule } from './register-information/register-information.module';
 import { FormsModule } from '@angular/forms';
 import { MbscModule } from '@mobiscroll/angular';
 import { NgModule } from '@angular/core';
@@ -19,6 +20,7 @@ import { ComponentsModule } from '../components/components.module';
   imports: [
     FormsModule,
     RegisterPageModule,
+    RegisterInformationPageModule,
     MbscModule,
     BrowserModule,
     IonicModule.forRoot(),
