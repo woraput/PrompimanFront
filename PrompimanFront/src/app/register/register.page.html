@@ -5,6 +5,62 @@
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="register()">ลงทะเบียน</ion-button>
+  <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
+    <ion-item lines="none">
+      <ion-button size="default" slot="end" expand="block" type="submit">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        ลงทะเบียน
+      </ion-button>
+    </ion-item>
 
+    <div class="ion-padding">
+      <ion-searchbar></ion-searchbar>
+    </div>
+
+    <div class="ion-padding">
+      <ion-card>
+        <ion-card-header>
+          <ion-row class="ion-text-center">
+            <ion-col size="2">
+              <h4>วันที่ลงทะเบียน</h4>
+            </ion-col>
+            <ion-col size="3">
+              <h4>ไอดี</h4>
+            </ion-col>
+            <ion-col size="3">
+              <h4>ชื่อ - สกุล</h4>
+            </ion-col>
+            <ion-col size="3">
+              <h4>เบอร์โทรศัพท์</h4>
+            </ion-col>
+          </ion-row>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content>
+          <ion-item class="ion-text-center">
+            <ion-col size="2">
+              วันที่ลงทะเบียน
+            </ion-col>
+            <ion-col size="3">
+              ไอดี
+            </ion-col>
+            <ion-col size="3">
+              ชื่อ - สกุล
+            </ion-col>
+            <ion-col size="3">
+              เบอร์โทรศัพท์
+            </ion-col>
+            <ion-col size="1">
+              <ion-button size="default" expand="block" type="submit">Check-in</ion-button>
+            </ion-col>
+
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    
+    <ion-button (click)="register()">ลงทะเบียน</ion-button>
+  </form>
 </ion-content>
