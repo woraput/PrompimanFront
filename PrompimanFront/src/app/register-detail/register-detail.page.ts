@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CloudSyncService } from '../cloud-sync.service';
 
 @Component({
   selector: 'app-register-detail',
@@ -10,7 +11,7 @@ export class RegisterDetailPage implements OnInit {
 
   public fg: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private cloud: CloudSyncService) {
     this.fg = this.fb.group({
       'idCard': [null],
       'th_Prefix': [null],
@@ -29,7 +30,15 @@ export class RegisterDetailPage implements OnInit {
       'photo': [null],
       'passportNo': [null],
     });
+
+    // this.cloud.get().subscribe(data => {
+    //   console.log('service: ', data);
+    // });
+    let item = this.cloud.get();
+    console.log(item);
+    
   }
+
 
   ngOnInit() {
   }
