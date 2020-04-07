@@ -52,6 +52,11 @@ export class AppComponent implements OnInit {
       url: '/management',
       icon: 'copy'
     },
+    {
+      title: 'RegisterInformation',
+      url: '/register-information',
+      icon: 'copy'
+    },
   ];
 
   date: Date;

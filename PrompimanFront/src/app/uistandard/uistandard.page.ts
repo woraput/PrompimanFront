@@ -21,7 +21,8 @@ export class UIStandardPage implements OnInit {
     this.fg = this.fb.group({
       'input1': ['', Validators.required],
       'input2': ['', Validators.required],
-      'date_time': DatetimeComponent.CreateFormGroup(fb),
+      'date': ['', Validators.required],
+      'time': ['', Validators.required],
       'input3': [''],
       'select': ['', Validators.required],
       'detail': ['', Validators.required],

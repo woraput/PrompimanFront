@@ -17,7 +17,7 @@
 
   <ng-container [ngSwitch]="option">
     <ng-container *ngSwitchCase="'form'">
-<!-- 
+      <!-- 
       <h1> Form </h1>
       <h4> import "ReactiveFormsModule" in (namePage).module.ts </h4> -->
 
@@ -27,7 +27,7 @@
           <div class="ion-padding">
             <ion-searchbar></ion-searchbar>
           </div>
-    
+
           <ion-row>
             <ion-col size="2">
               <ion-item>
@@ -132,7 +132,8 @@
             </ion-col>
           </ion-row>
 
-          <app-datetime [FormItem]="fg.get('date_time')"></app-datetime>
+          <app-datetime [fg]="fg" formName="date" text="วันที่" mode="date"></app-datetime>
+          <app-datetime text="เวลา" mode="time" [fg]="fg" formName="time"></app-datetime>
 
           <ion-row>
             <ion-col size="2"></ion-col>
@@ -172,21 +173,21 @@
           </ion-row>
           <ion-row>
             <ion-col lines="none" formGroupName="checkbox" [class.invalid]="isValid('checkbox')">
-                <ion-item *ngIf="isValid('checkbox')">
-                  <span class="invalid-msg">กรุณาเลือก</span>
-                </ion-item>
-                <ion-item>
-                  <ion-label>Checkbox1</ion-label>
-                  <ion-checkbox formControlName="checkbox1" slot="start" value="false"></ion-checkbox>
-                </ion-item>
-                <ion-item>
-                  <ion-label>Checkbox2</ion-label>
-                  <ion-checkbox formControlName="checkbox2" slot="start" value="false"></ion-checkbox>
-                </ion-item>
-                <ion-item>
-                  <ion-label>Checkbox3</ion-label>
-                  <ion-checkbox formControlName="checkbox3" slot="start" value="false"></ion-checkbox>
-                </ion-item>
+              <ion-item *ngIf="isValid('checkbox')">
+                <span class="invalid-msg">กรุณาเลือก</span>
+              </ion-item>
+              <ion-item>
+                <ion-label>Checkbox1</ion-label>
+                <ion-checkbox formControlName="checkbox1" slot="start" value="false"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label>Checkbox2</ion-label>
+                <ion-checkbox formControlName="checkbox2" slot="start" value="false"></ion-checkbox>
+              </ion-item>
+              <ion-item>
+                <ion-label>Checkbox3</ion-label>
+                <ion-checkbox formControlName="checkbox3" slot="start" value="false"></ion-checkbox>
+              </ion-item>
             </ion-col>
           </ion-row>
 
@@ -340,116 +341,116 @@
         </ion-item>
       </ion-list> -->
       <div class="ion-padding">
-      <ion-card>
-        <ion-card-header>
-          <ion-row class="ion-text-center">
-            <ion-col size="2">
-              <h4>ไอดี</h4>
-            </ion-col>
-            <ion-col size="3">
-              <h4>ชื่อ - สกุล</h4>
-            </ion-col>
-            <ion-col size="3">
-              <h4>Full Name</h4>
-            </ion-col>
-            <ion-col size="3">
-              <h4>เบอร์โทรศัพท์</h4>
-            </ion-col>
-          </ion-row>
-        </ion-card-header>
-      </ion-card>
+        <ion-card>
+          <ion-card-header>
+            <ion-row class="ion-text-center">
+              <ion-col size="2">
+                <h4>ไอดี</h4>
+              </ion-col>
+              <ion-col size="3">
+                <h4>ชื่อ - สกุล</h4>
+              </ion-col>
+              <ion-col size="3">
+                <h4>Full Name</h4>
+              </ion-col>
+              <ion-col size="3">
+                <h4>เบอร์โทรศัพท์</h4>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
 
-      <ion-card>
-        <ion-card-content>
-          <ion-item class="ion-text-center">
-            <ion-col size="2">
-              ไอดี
-            </ion-col>
-            <ion-col size="3">
-              ชื่อ - สกุล
-            </ion-col>
-            <ion-col size="3">
-              Full Name
-            </ion-col>
-            <ion-col size="3">
-              เบอร์โทรศัพท์
-            </ion-col>
-          </ion-item>
+        <ion-card>
+          <ion-card-content>
+            <ion-item class="ion-text-center">
+              <ion-col size="2">
+                ไอดี
+              </ion-col>
+              <ion-col size="3">
+                ชื่อ - สกุล
+              </ion-col>
+              <ion-col size="3">
+                Full Name
+              </ion-col>
+              <ion-col size="3">
+                เบอร์โทรศัพท์
+              </ion-col>
+            </ion-item>
 
-          <ion-item class="ion-text-center">
-            <ion-col size="2">
-              ไอดี
-            </ion-col>
-            <ion-col size="3">
-              ชื่อ - สกุล
-            </ion-col>
-            <ion-col size="3">
-              Full Name
-            </ion-col>
-            <ion-col size="3">
-              เบอร์โทรศัพท์
-            </ion-col>
-          </ion-item>
+            <ion-item class="ion-text-center">
+              <ion-col size="2">
+                ไอดี
+              </ion-col>
+              <ion-col size="3">
+                ชื่อ - สกุล
+              </ion-col>
+              <ion-col size="3">
+                Full Name
+              </ion-col>
+              <ion-col size="3">
+                เบอร์โทรศัพท์
+              </ion-col>
+            </ion-item>
 
-          <ion-item class="ion-text-center">
-            <ion-col size="2">
-              ไอดี
-            </ion-col>
-            <ion-col size="3">
-              ชื่อ - สกุล
-            </ion-col>
-            <ion-col size="3">
-              Full Name
-            </ion-col>
-            <ion-col size="3">
-              เบอร์โทรศัพท์
-            </ion-col>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
+            <ion-item class="ion-text-center">
+              <ion-col size="2">
+                ไอดี
+              </ion-col>
+              <ion-col size="3">
+                ชื่อ - สกุล
+              </ion-col>
+              <ion-col size="3">
+                Full Name
+              </ion-col>
+              <ion-col size="3">
+                เบอร์โทรศัพท์
+              </ion-col>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
 
-      <br>
-      <div scrollX="true" scrollY="true" class="ion-no-padding">
-        <table>
-          <thead class="bgb">
-            <tr>
-              <th>No.</th>
-              <th width="150">RMN.</th>
-              <th width="600">GuestName</th>
-              <th>Pax</th>
-              <th width="100">Arrival</th>
-              <th width="100">TimeIn</th>
-              <th width="100">Departure</th>
-              <th width="100">TimeOut</th>
-              <th>Nationality</th>
-              <th width="100">Company</th>
-              <th>RMRate</th>
-              <th>ABF</th>
-              <th width="250">Remark</th>
-            </tr>
-          </thead>
+        <br>
+        <div scrollX="true" scrollY="true" class="ion-no-padding">
+          <table>
+            <thead class="bgb">
+              <tr>
+                <th>No.</th>
+                <th width="150">RMN.</th>
+                <th width="600">GuestName</th>
+                <th>Pax</th>
+                <th width="100">Arrival</th>
+                <th width="100">TimeIn</th>
+                <th width="100">Departure</th>
+                <th width="100">TimeOut</th>
+                <th>Nationality</th>
+                <th width="100">Company</th>
+                <th>RMRate</th>
+                <th>ABF</th>
+                <th width="250">Remark</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td width="150">201</td>
-              <td width="600">ศศินารา ประดิษฐ์วัฒนกร</td>
-              <td>2</td>
-              <td width="100">16/17/2018</td>
-              <td width="100">18:10</td>
-              <td width="100">12/17/18</td>
-              <td width="100">12:10</td>
-              <td>ไทย</td>
-              <td width="100">w-in</td>
-              <td>600</td>
-              <td>2</td>
-              <td width="250">DJ.I-Bar</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td width="150">201</td>
+                <td width="600">ศศินารา ประดิษฐ์วัฒนกร</td>
+                <td>2</td>
+                <td width="100">16/17/2018</td>
+                <td width="100">18:10</td>
+                <td width="100">12/17/18</td>
+                <td width="100">12:10</td>
+                <td>ไทย</td>
+                <td width="100">w-in</td>
+                <td>600</td>
+                <td>2</td>
+                <td width="250">DJ.I-Bar</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <!-- <ion-row>
+        <!-- <ion-row>
         <ion-col size="9"></ion-col>
         <ion-col size="1">
           <ion-button expand="block" color="primary" type="">บันทึก</ion-button>

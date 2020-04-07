@@ -1,4 +1,4 @@
-<form [formGroup]="FormItem">
+<form [formGroup]="fg">
 
   <!-- <ion-item ion-input>
   <ion-col size="2">
@@ -18,57 +18,59 @@
   </div>
   <ion-icon slot="end" name="alarm-outline"> </ion-icon>
 </ion-item> -->
+  <ng-container *ngIf=" mode == 'date'">
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col size="10">
+        <ion-item *ngIf="isValid(formName)">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2">
+        <ion-item>
+          <ion-label>{{text}}</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="10">
+        <ion-item>
+          <mbsc-calendar formControlName={{formName}} [class.invalid]="isValid(formName)" [options]="datetimeSettings1"
+            placeholder="กรุณาเลือก">
+          </mbsc-calendar>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ng-container>
 
-<ion-row>
-  <ion-col size="2"></ion-col>
-  <ion-col size="10">
-    <ion-item *ngIf="isValid('date')">
-      <span class="invalid-msg">
-        กรุณาเลือก
-      </span>
-    </ion-item>
-  </ion-col>
-</ion-row>
-  <ion-row>
-    <ion-col size="2">
-      <ion-item>
-        <ion-label>วันที่</ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="10">
-      <ion-item>
-        <mbsc-calendar [class.invalid]="isValid('date')" [options]="datetimeSettings1" placeholder="กรุณาเลือก"
-          formControlName="date">
-        </mbsc-calendar>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+  <ng-container *ngIf=" mode == 'time'">
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col size="10">
+        <ion-item *ngIf="isValid(formName)">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2">
+        <ion-item>
+          <ion-label>{{text}}</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="10">
+        <ion-item>
+          <mbsc-calendar [class.invalid]="isValid(formName)" formControlName={{formName}} [options]="datetimeSettings2"
+            placeholder="กรุณาเลือก"></mbsc-calendar>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-
-  <ion-row>
-    <ion-col size="2"></ion-col>
-    <ion-col size="10">
-      <ion-item *ngIf="isValid('time')">
-        <span class="invalid-msg">
-          กรุณาเลือก
-        </span>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col size="2">
-      <ion-item>
-        <ion-label>Time</ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="10">
-      <ion-item>
-        <mbsc-calendar [class.invalid]="isValid('time')" formControlName="time" [options]="datetimeSettings2"
-          placeholder="กรุณาเลือก"></mbsc-calendar>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-
+  </ng-container>
 
 
 
@@ -146,4 +148,4 @@
     </div>
   </div>
 </mbsc-form> -->
-</form>
+  <!-- </form> -->

@@ -2,6 +2,22 @@ ion-menu ion-content {
   --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
 
+.invalid {
+  border: 1px solid red;
+}
+
+.invalid-msg{
+  color: red;
+}
+
+.warning-msg {
+  color: orangered;
+}
+
+.warning {
+  color: darkorange;
+}
+
 ion-menu.md ion-content {
   --padding-start: 8px;
   --padding-end: 8px;
@@ -157,20 +173,4 @@ div[scrolly=true] {
 
 ion-input, ion-textarea {
   background-color: lightgray;
-}
-
-.invalid {
-  border: 1px solid red;
-}
-
-.invalid-msg{
-  color: red;
-}
-
-.warning-msg {
-  color: orangered;
-}
-
-.warning {
-  color: darkorange;
 }
