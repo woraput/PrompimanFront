@@ -17,4 +17,10 @@ export class CloudSyncService {
   get(){
     return "hello, i am a cloudSyncProvider";
   }
+
+  getuser(page: number, size: number){
+    console.log();
+    
+    return this.http.get("http://localhost:5000/api/Member/Get/"+page+"/"+size+"?word=%20");
+  }
 }
