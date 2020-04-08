@@ -1,7 +1,7 @@
 import { DateTime } from '@mobiscroll/angular/src/js/presets/datetime';
 
 export class member {
-    public id: string;
+    public _id: string;
     public idCard: string;
     public passportNo: string;
     public th_Prefix: string;

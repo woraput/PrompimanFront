@@ -5,104 +5,104 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
-    <ion-list lines="none">
+  <!-- <form [formGroup]="fg" (ngSubmit)="handleSubmit()"> -->
+  <ion-list lines="none">
 
-      <ion-row class="ion-text-center">
-        <ion-col size="1"></ion-col>
-        <ion-col size="3">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQOWk4oFbAc18206aLh3GSnbFDN2SUnXPzhu7FIJzqio-J67gtd&usqp=CAU">
-        </ion-col>
-        <ion-col size="6">
-          <ion-item>
-            <ion-label>รหัสบัตรประจำตัวประชาชน</ion-label>
-            <ion-label>รหัสบัตรประจำตัวประชาชน</ion-label>
-            <!-- <ion-label >{{idCard}}</ion-label> -->
-          </ion-item>
-          <ion-item>
-            <ion-label>ชื่อ-สกุล (ไทย)</ion-label>
-            <ion-label>ชื่อ-สกุล (ไทย)</ion-label>
-            <!-- <ion-label>{{{{th_Firstname}}{{th_Lastname}}}}</ion-label> -->
-          </ion-item>
-          <ion-item>
-            <ion-label>ชื่อ-สกุล (อังกฤษ)</ion-label>
-            <ion-label>ชื่อ-สกุล (อังกฤษ)</ion-label>
-            <!-- <ion-label>{{en_Firstname}}{{en_Lastname}}</ion-label> -->
-          </ion-item>
-          <ion-item>
-            <ion-label>เกิดวันที่</ion-label>
-            <ion-label>เกิดวันที่</ion-label>
-            <!-- <ion-label>{{birthday}}</ion-label> -->
-          </ion-item>
-          <ion-item>
-            <ion-label>ที่อยู่</ion-label>
-            <ion-label>ที่อยู่</ion-label>
-            <!-- <ion-label>{{address}}</ion-label> -->
-          </ion-item>
-          <ion-item>
-            <ion-label>วันออกบัตร</ion-label>
-            <ion-label>วันออกบัตร</ion-label>
-            <!-- <ion-label>{{issueDate}}</ion-label> -->
-          </ion-item>
-          <ion-item>
-            <ion-label>วันบัตรหมดอายุ</ion-label>
-            <ion-label>วันบัตรหมดอายุ</ion-label>
-            <!-- <ion-label>{{expiryDate}}</ion-label> -->
-          </ion-item>
-          <ion-item>
-            <ion-label>เบอร์โทรศัพท์</ion-label>
-            <ion-label>เบอร์โทรศัพท์</ion-label>
-            <!-- <ion-label>{{telephone}}</ion-label> -->
-          </ion-item>
-          <ion-item>
-            <ion-label>อาชีพ</ion-label>
-            <ion-label>อาชีพ</ion-label>
-            <!-- <ion-label>{{job}}</ion-label> -->
-          </ion-item>
-          <ion-item>
-            <ion-label>เพศ</ion-label>
-            <ion-label>เพศ</ion-label>
-            <!-- <ion-label>{{sex}}</ion-label> -->
-          </ion-item>
-          <ion-col size="2"></ion-col>
-        </ion-col>
-      </ion-row>
-      <ion-item>
-        <ion-button size="default" slot="end" expand="block" color="danger">แก้ไขข้อมูล</ion-button>
-        <ion-button size="default" slot="end" expand="block" type="submit">Check In</ion-button>
-      </ion-item>
+    <ion-row class="ion-text-center">
+      <ion-col size="1"></ion-col>
+      <ion-col size="3">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQOWk4oFbAc18206aLh3GSnbFDN2SUnXPzhu7FIJzqio-J67gtd&usqp=CAU">
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label>รหัสบัตรประจำตัวประชาชน</ion-label>
+          <ion-label>{{listdata.idCard}}</ion-label>
+          <!-- <ion-label >{{idCard}}</ion-label> -->
+        </ion-item>
+        <ion-item>
+          <ion-label>ชื่อ-สกุล (ไทย)</ion-label>
+          <ion-label>{{listdata.th_Firstname}} {{listdata.th_Lastname}}</ion-label>
+          <!-- <ion-label>{{{{th_Firstname}}{{th_Lastname}}}}</ion-label> -->
+        </ion-item>
+        <ion-item>
+          <ion-label>ชื่อ-สกุล (อังกฤษ)</ion-label>
+          <ion-label>{{listdata.en_Firstname}} {{listdata.en_Lastname}}</ion-label>
+          <!-- <ion-label>{{en_Firstname}}{{en_Lastname}}</ion-label> -->
+        </ion-item>
+        <ion-item>
+          <ion-label>เกิดวันที่</ion-label>
+          <ion-label>{{listdata.birthday | date:"dd/MM/yyyy"}}</ion-label>
+          <!-- <ion-label>{{birthday}}</ion-label> -->
+        </ion-item>
+        <ion-item>
+          <ion-label>ที่อยู่</ion-label>
+          <ion-label>{{listdata.address}}</ion-label>
+          <!-- <ion-label>{{address}}</ion-label> -->
+        </ion-item>
+        <ion-item>
+          <ion-label>วันออกบัตร</ion-label>
+          <ion-label>{{listdata.issueDate | date:"dd/MM/yyyy"}}</ion-label>
+          <!-- <ion-label>{{issueDate}}</ion-label> -->
+        </ion-item>
+        <ion-item>
+          <ion-label>วันบัตรหมดอายุ</ion-label>
+          <ion-label>{{listdata.expiryDate | date:"dd/MM/yyyy"}}</ion-label>
+          <!-- <ion-label>{{expiryDate}}</ion-label> -->
+        </ion-item>
+        <ion-item>
+          <ion-label>เบอร์โทรศัพท์</ion-label>
+          <ion-label>{{listdata.telephone}}</ion-label>
+          <!-- <ion-label>{{telephone}}</ion-label> -->
+        </ion-item>
+        <ion-item>
+          <ion-label>อาชีพ</ion-label>
+          <ion-label>{{listdata.job}}</ion-label>
+          <!-- <ion-label>{{job}}</ion-label> -->
+        </ion-item>
+        <ion-item>
+          <ion-label>เพศ</ion-label>
+          <ion-label>{{listdata.sex}}</ion-label>
+          <!-- <ion-label>{{sex}}</ion-label> -->
+        </ion-item>
+        <ion-col size="2"></ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-item>
+      <ion-button size="default" slot="end" expand="block" color="danger">แก้ไขข้อมูล</ion-button>
+      <ion-button size="default" slot="end" expand="block" type="submit">Check In</ion-button>
+    </ion-item>
 
-      <ion-row>
-        <ion-col size="3">
-          <ion-item>
-            <h5><b>ประวัติการเข้าพัก</b></h5>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <ion-item>
+          <h5><b>ประวัติการเข้าพัก</b></h5>
+        </ion-item>
+      </ion-col>
+    </ion-row>
 
-      <div scrollX="true" scrollY="true" class="ion-no-padding">
-        <table>
-          <thead class="bgb">
-            <tr>
-              <th width="100">วันที่เข้าพัก</th>
-              <th width="100">วันที่ออก</th>
-              <th width="100">Bed Night</th>
-              <th width="100">จำนวนเงิน</th>
-            </tr>
-          </thead>
+    <div scrollX="true" scrollY="true" class="ion-no-padding">
+      <table>
+        <thead class="bgb">
+          <tr>
+            <th width="100">วันที่เข้าพัก</th>
+            <th width="100">วันที่ออก</th>
+            <th width="100">Bed Night</th>
+            <th width="100">จำนวนเงิน</th>
+          </tr>
+        </thead>
 
-          <tbody>
-            <tr>
-              <td width="100">16/17/2018</td>
-              <td width="100">18:10</td>
-              <td width="100">12/17/18</td>
-              <td width="100">12:10</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <tbody>
+          <tr>
+            <td width="100">16/17/2018</td>
+            <td width="100">18:10</td>
+            <td width="100">12/17/18</td>
+            <td width="100">12:10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    </ion-list>
-  </form>
+  </ion-list>
+  <!-- </form> -->
 </ion-content>

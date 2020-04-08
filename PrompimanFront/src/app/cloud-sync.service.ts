@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { member } from 'src/models/member';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,12 @@ export class CloudSyncService {
   constructor(private http: HttpClient) {
     console.log('Create CloudSyncProvider Provider');
   }
-
-  get(){
-    return "hello, i am a cloudSyncProvider";
+  
+  getuser(page: number, size: number){
+    return this.http.get<member[]>("http://localhost:5000/api/Member/Get/"+page+"/"+size+"?word=%20");
   }
 
-  getuser(page: number, size: number){
-    console.log();
-    
-    return this.http.get("http://localhost:5000/api/Member/Get/"+page+"/"+size+"?word=%20");
+  getByID(_id: string){
+    return this.http.get<member>("http://localhost:5000/api/Member/GetById/"+ _id);
   }
 }

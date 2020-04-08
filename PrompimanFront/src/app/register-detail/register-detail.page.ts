@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CloudSyncService } from '../cloud-sync.service';
 import { ActivatedRoute } from '@angular/router';
+import { member } from 'src/models/member';
 
 @Component({
   selector: 'app-register-detail',
@@ -11,40 +12,47 @@ import { ActivatedRoute } from '@angular/router';
 export class RegisterDetailPage implements OnInit {
 
   public fg: FormGroup;
-  public myId = null;
-
+  public _id: string;
+  public listdata: member = new member;
+  
   constructor(private fb: FormBuilder, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute) {
-    this.fg = this.fb.group({
-      'idCard': [null],
-      'th_Prefix': [null],
-      'th_Firstname': [null],
-      'th_Lastname': [null],
-      'en_Prefix': [null],
-      'en_Firstname': [null],
-      'en_Lastname': [null],
-      'birthday': [null],
-      'address': [null],
-      'issueDate': [null],
-      'expiryDate': [null],
-      'telephone': [null],
-      'job': [null],
-      'sex': [null],
-      'photo': [null],
-      'passportNo': [null],
-    });
-
-    // this.cloud.get().subscribe(data => {
-    //   console.log('service: ', data);
+    // this.fg = this.fb.group({
+    //   'idCard': [null],
+    //   'th_Prefix': [null],
+    //   'th_Firstname': [null],
+    //   'th_Lastname': [null],
+    //   'en_Prefix': [null],
+    //   'en_Firstname': [null],
+    //   'en_Lastname': [null],
+    //   'birthday': [null],
+    //   'address': [null],
+    //   'issueDate': [null],
+    //   'expiryDate': [null],
+    //   'telephone': [null],
+    //   'job': [null],
+    //   'sex': [null],
+    //   'photo': [null],
+    //   'passportNo': [null],
     // });
-    let item = this.cloud.get();
-    console.log(item);
+
+    this._id = this.activatedRoute.snapshot.paramMap.get('_id');
+    console.log(this._id);
+
+    this.cloud.getByID(this._id).subscribe(data => {
+      if (data != null) {
+        this.listdata = data
+        console.log('getByID', this.listdata);
+        console.log('idCard', this.listdata.idCard);
+      }
+    })
+  }
+
+  ngOnInit() {
 
   }
 
+  handleSubmit() {
 
-  ngOnInit() {
-    this.myId = this.activatedRoute.snapshot.paramMap.get('myid');
-    console.log(this.myId);
   }
 
 }

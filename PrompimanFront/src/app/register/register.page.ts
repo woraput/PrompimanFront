@@ -4,6 +4,7 @@ import { RegisterInformationPage } from '../register-information/register-inform
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CloudSyncService } from '../cloud-sync.service';
+import { member } from 'src/models/member';
 
 @Component({
   selector: 'app-register',
@@ -12,23 +13,24 @@ import { CloudSyncService } from '../cloud-sync.service';
 })
 export class RegisterPage implements OnInit {
   public fg: FormGroup;
-  public foo = 'aurora';
-  listdata:any;
-
-  constructor(private modalController: ModalController, private fb: FormBuilder, private nav: NavController, public router: Router,  private cloud: CloudSyncService) {
-    this.fg = this.fb.group({
-      'CreationDateTime': [''],
-      '_id': [''],
-      'Th_Firstname': [''],
-      'Th_Lastname': [''],
-      'Telephone': [''],
-    })
+  // public foo = 'aurora';
+  public listdata: member[] = [];
+  name: any;
+  constructor(private modalController: ModalController, private fb: FormBuilder, private nav: NavController, public router: Router, private cloud: CloudSyncService) {
+    // this.fg = this.fb.group({
+    //   'CreationDateTime': [''],
+    //   '_id': [''],
+    //   'Th_Firstname': [''],
+    //   'Th_Lastname': [''],
+    //   'Telephone': [''],
+    // })
     this.cloud.getuser(1, 10).subscribe(data => {
-      console.log("data",data);
-      this.listdata = data
-      console.log("listdata",this.listdata);      
+      if (data != null) {
+        this.listdata = data
+        console.log("data", data);
+        console.log("listdata", this.listdata);
+      }
     });
-    
   }
 
 
