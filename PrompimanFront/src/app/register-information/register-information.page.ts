@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChildren, ViewChild, ElementRef } from '@angular
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 import { CloudSyncService } from '../cloud-sync.service';
-import { nationalityData, Nationality } from 'src/model/Member';
+import { nationalityData, Nationality } from 'src/models/Member';
 import { IonSelect } from '@ionic/angular';
 
 @Component({
