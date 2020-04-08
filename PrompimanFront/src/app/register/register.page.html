@@ -39,7 +39,8 @@
 
       <ion-card>
         <ion-card-content>
-          <ion-item class="ion-text-center">
+          <ion-item class="ion-text-center" 
+          [routerLink]="['/register-detail/', foo]" routerDirection="forward">
             <ion-col size="2">
               วันที่ลงทะเบียน
             </ion-col>
@@ -55,7 +56,6 @@
             <ion-col size="1">
               <ion-button size="default" expand="block" type="submit">Check-in</ion-button>
             </ion-col>
-
           </ion-item>
         </ion-card-content>
       </ion-card>
