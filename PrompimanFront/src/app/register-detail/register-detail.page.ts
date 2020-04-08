@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CloudSyncService } from '../cloud-sync.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register-detail',
@@ -10,8 +11,9 @@ import { CloudSyncService } from '../cloud-sync.service';
 export class RegisterDetailPage implements OnInit {
 
   public fg: FormGroup;
+  public myId = null;
 
-  constructor(private fb: FormBuilder, private cloud: CloudSyncService) {
+  constructor(private fb: FormBuilder, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute) {
     this.fg = this.fb.group({
       'idCard': [null],
       'th_Prefix': [null],
@@ -36,11 +38,13 @@ export class RegisterDetailPage implements OnInit {
     // });
     let item = this.cloud.get();
     console.log(item);
-    
+
   }
 
 
   ngOnInit() {
+    this.myId = this.activatedRoute.snapshot.paramMap.get('myid');
+    console.log(this.myId);
   }
 
 }

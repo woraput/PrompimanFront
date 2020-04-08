@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { RegisterInformationPage } from '../register-information/register-information.page';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,8 +11,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class RegisterPage implements OnInit {
   public fg: FormGroup;
+  public foo = 'aurora';
 
-  constructor(private modalController: ModalController, private fb: FormBuilder) {
+  constructor(private modalController: ModalController, private fb: FormBuilder, private nav: NavController, public router: Router) {
     this.fg = this.fb.group({
       'CreationDateTime': [''],
       '_id': [''],
@@ -35,5 +37,10 @@ export class RegisterPage implements OnInit {
 
   }
 
+  // todo() {
+  //   this.nav.navigateForward(['/register-detail/${this.foo}'])
+  //   console.log(this.foo);
+  //   ;
+  // }
 
 }

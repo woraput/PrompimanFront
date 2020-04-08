@@ -42,9 +42,14 @@ const routes: Routes = [
   {
     path: 'management',
     loadChildren: () => import('./management/management.module').then( m => m.ManagementPageModule)
-  },  {
+  },
+  {
     path: 'register-information',
     loadChildren: () => import('./register-information/register-information.module').then( m => m.RegisterInformationPageModule)
+  },
+  {
+    path: 'register-detail/:myid',
+    loadChildren: () => import('./register-detail/register-detail.module').then( m => m.RegisterDetailPageModule)
   },
   {
     path: 'register-detail',
