@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { RegisterInformationPage } from '../register-information/register-information.page';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CloudSyncService } from '../cloud-sync.service';
 
 @Component({
   selector: 'app-register',
@@ -10,8 +11,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class RegisterPage implements OnInit {
   public fg: FormGroup;
-
-  constructor(private modalController: ModalController, private fb: FormBuilder) { 
+  listdata:any;
+  constructor(private modalController: ModalController, private fb: FormBuilder, private cloud: CloudSyncService) {
     this.fg = this.fb.group({
       'CreationDateTime': [''],
       '_id': [''],
@@ -19,8 +20,15 @@ export class RegisterPage implements OnInit {
       'Th_Lastname': [''],
       'Telephone': [''],
     })
-  }
+    this.cloud.getuser(1, 10).subscribe(data => {
+      console.log("data",data);
+      this.listdata = data
+      console.log("listdata",this.listdata);      
+    });
     
+  }
+
+
   ngOnInit() {
   }
 
