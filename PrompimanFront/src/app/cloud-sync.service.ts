@@ -20,10 +20,12 @@ export class CloudSyncService {
   public getMember(_id: string): any {
     return this.http.get<Member>(this.baseUrl + 'Member/GetById/' + _id);
   }
-
+  
   getuser(page: number, size: number){
-    console.log();
-    
-    return this.http.get("http://localhost:5000/api/Member/Get/"+page+"/"+size+"?word=%20");
+    return this.http.get<Member[]>("http://localhost:5000/api/Member/Get/"+page+"/"+size+"?word=%20");
+  }
+
+  getByID(_id: string){
+    return this.http.get<Member>("http://localhost:5000/api/Member/GetById/"+ _id);
   }
 }

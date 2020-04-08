@@ -5,60 +5,61 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
-    <ion-item lines="none">
-      <ion-button size="default" (click)="register()" slot="end" expand="block" type="submit">
-        <ion-icon name="add-circle-outline"></ion-icon>
-        ลงทะเบียน
-      </ion-button>
-    </ion-item>
+  <!-- <form [formGroup]="fg" (ngSubmit)="handleSubmit()"> -->
+  <ion-item lines="none">
+    <ion-button size="default" (click)="register()" slot="end" expand="block" type="submit">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      ลงทะเบียน
+    </ion-button>
+  </ion-item>
 
-    <div class="ion-padding">
-      <ion-searchbar></ion-searchbar>
-    </div>
+  <div class="ion-padding">
+    <ion-searchbar></ion-searchbar>
+  </div>
 
-    <div class="ion-padding">
-      <ion-card>
-        <ion-card-header>
-          <ion-row class="ion-text-center">
-            <ion-col size="2">
-              <h4>วันที่ลงทะเบียน</h4>
-            </ion-col>
-            <ion-col size="3">
-              <h4>ไอดี</h4>
-            </ion-col>
-            <ion-col size="3">
-              <h4>ชื่อ - สกุล</h4>
-            </ion-col>
-            <ion-col size="3">
-              <h4>เบอร์โทรศัพท์</h4>
-            </ion-col>
-          </ion-row>
-        </ion-card-header>
-      </ion-card>
+  <div class="ion-padding">
+    <ion-card>
+      <ion-card-header>
+        <ion-row class="ion-text-center">
+          <ion-col size="2">
+            <h4>วันที่ลงทะเบียน</h4>
+          </ion-col>
+          <ion-col size="3">
+            <h4>ไอดี</h4>
+          </ion-col>
+          <ion-col size="3">
+            <h4>ชื่อ - สกุล</h4>
+          </ion-col>
+          <ion-col size="3">
+            <h4>เบอร์โทรศัพท์</h4>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+    </ion-card>
 
-      <ion-card>
-        <ion-card-content>
-          <ion-item class="ion-text-center" 
-          [routerLink]="['/register-detail/', foo]" routerDirection="forward">
-            <ion-col size="2">
-              วันที่ลงทะเบียน
-            </ion-col>
-            <ion-col size="3">
-              ไอดี
-            </ion-col>
-            <ion-col size="3">
-              ชื่อ - สกุล
-            </ion-col>
-            <ion-col size="3">
-              เบอร์โทรศัพท์
-            </ion-col>
-            <ion-col size="1">
-              <ion-button size="default" expand="block" type="submit">Check-in</ion-button>
-            </ion-col>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </form>
+    <ion-card>
+      <ion-card-content>
+        <!-- <tr *ngFor="let item of ulst.users| paginate: { itemsPerPage: 10, currentPage: ulst.page, totalItems: ulst.count } "> -->
+        <ion-item class="ion-text-center" *ngFor="let item of listdata.members"
+          [routerLink]="['/register-detail/', item._id]" routerDirection="forward">
+          <ion-col size="2">
+            {{item.creationDateTime | date:"dd/MM/yyyy" }}
+          </ion-col>
+          <ion-col size="3">
+            {{item._id}}
+          </ion-col>
+          <ion-col size="3">
+            {{item.th_Firstname}} {{item.th_Lastname}}123
+          </ion-col>
+          <ion-col size="3">
+            {{item.telephone}}
+          </ion-col>
+          <ion-col size="1">
+            <ion-button size="default" expand="block" type="submit">Check-in</ion-button>
+          </ion-col>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <!-- </form> -->
 </ion-content>
