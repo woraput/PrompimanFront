@@ -7,7 +7,7 @@
 <ion-content>
   <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
     <ion-item lines="none">
-      <ion-button size="default" slot="end" expand="block" type="submit">
+      <ion-button size="default" (click)="register()" slot="end" expand="block" type="submit">
         <ion-icon name="add-circle-outline"></ion-icon>
         ลงทะเบียน
       </ion-button>
@@ -60,7 +60,6 @@
         </ion-card-content>
       </ion-card>
     </div>
-    
-    <ion-button (click)="register()">ลงทะเบียน</ion-button>
+
   </form>
 </ion-content>

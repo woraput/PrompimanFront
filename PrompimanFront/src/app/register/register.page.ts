@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class RegisterPage implements OnInit {
   public fg: FormGroup;
 
-  constructor(private modalController: ModalController, private fb: FormBuilder) { 
+  constructor(private modalController: ModalController, private fb: FormBuilder) {
     this.fg = this.fb.group({
       'CreationDateTime': [''],
       '_id': [''],
@@ -20,7 +20,7 @@ export class RegisterPage implements OnInit {
       'Telephone': [''],
     })
   }
-    
+
   ngOnInit() {
   }
 
@@ -29,6 +29,10 @@ export class RegisterPage implements OnInit {
       component: RegisterInformationPage
     });
     return await modal.present();
+  }
+
+  handleSubmit() {
+
   }
 
 
