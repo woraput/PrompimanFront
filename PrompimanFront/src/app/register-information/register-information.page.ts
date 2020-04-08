@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChildren, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
+import { CloudSyncService } from '../cloud-sync.service';
+import { nationalityData, Nationality } from 'src/model/Member';
+import { IonSelect } from '@ionic/angular';
 
 @Component({
   selector: 'app-register-information',
@@ -8,11 +11,14 @@ import { DatetimeComponent } from 'src/components/datetime/datetime.component';
   styleUrls: ['./register-information.page.scss'],
 })
 export class RegisterInformationPage implements OnInit {
+  @ViewChild("nationSelect", { static: false }) private nation: IonSelect;
   public option = 'thai';
   private submitRequested: boolean;
+  public Nation: Nationality[] = nationalityData.filter(it => it.Tag == true);
+  public OtherNation: Nationality[] = nationalityData;
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
   public fg: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private api: CloudSyncService) {
     this.fg = this.fb.group({
       'idCard': ['', Validators.required],
       'passportNo': ['', Validators.required],
@@ -35,7 +41,7 @@ export class RegisterInformationPage implements OnInit {
   }
 
   public isValid(name: string): boolean {
-    var ctrl = this.fg.get(name);
+    let ctrl = this.fg.get(name);
     if (name == 'anycheck') {
       ctrl = this.fg;
       return ctrl.errors && ctrl.errors.anycheck && (ctrl.dirty || this.submitRequested);
@@ -46,12 +52,27 @@ export class RegisterInformationPage implements OnInit {
   public handleSubmit() {
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
-    console.log(this.fg.value);
     if (this.fg.valid) {
     }
   }
 
+  change(event) {
+
+    if (event.detail.value == 'สัญชาติอื่นๆ') {
+      this.fg.get('nationality').setValue(null);
+      this.nation.placeholder = "เลือก";
+      this.Nation = this.OtherNation;
+    }
+  }
+
   ngOnInit() {
+    this.api.getMember('637218721923017536').subscribe(date => {
+      if (date != null) {
+        let member = date;
+        this.fg.patchValue(member);
+      }
+    });
+
   }
 
 

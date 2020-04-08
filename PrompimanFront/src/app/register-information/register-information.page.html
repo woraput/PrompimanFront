@@ -14,260 +14,445 @@
     </ion-segment-button>
   </ion-segment>
 
-
-
-  <!-- <ion-row>
-    <ion-col size="2">
-      <ion-item>
-        <ion-label>ชื่อ</ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="4">
-      <ion-item>
-        <ion-input type="text" placeholder="กรุณากรอกข้อมูล" formControlName="room3"
-          [class.invalid]="isValid('room3')"></ion-input>
-      </ion-item>
-    </ion-col>
-    <ion-col size="2">
-      <ion-item>
-        <ion-label>นามสกุล</ion-label>
-      </ion-item>
-    </ion-col>
-    <ion-col size="4">
-      <ion-item>
-        <ion-input type="text" placeholder="กรุณากรอกข้อมูล" formControlName="room4"
-          [class.invalid]="isValid('room4')"></ion-input>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-
   <ion-row>
-    <ion-col size="2"></ion-col>
-    <ion-col size="4">
-      <ion-item *ngIf="isValid('room3')">
-        <span class="invalid-msg">
-          กรุณากรอกข้อมูล
-        </span>
-      </ion-item>
+    <ion-col size="2">
+
+      <img src="../../assets/image/Funny-Ugly-Old-People.jpg" class="img-responsive" alt="Image">
+
     </ion-col>
-    <ion-col size="2"></ion-col>
-    <ion-col size="4">
-      <ion-item *ngIf="isValid('room4')">
-        <span class="invalid-msg">
-          กรุณากรอกข้อมูล
-        </span>
-      </ion-item>
+
+    <ion-col>
+      <ng-container [ngSwitch]="option">
+        <ng-container *ngSwitchCase="'thai'">
+          <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
+            <ion-list lines="none">
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>รหัสบัตรประชาชน</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="idCard" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('idCard')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-item *ngIf="isValid('idCard')">
+                  <span class="invalid-msg">
+                    กรุณากรอกข้อมูล
+                  </span>
+                </ion-item>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>คำนำหน้า</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="th_Prefix" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('th_Prefix')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('th_Prefix')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>ชื่อ</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="th_Firstname" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('th_Firstname')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('th_Firstname')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>นามสกุล</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="th_Lastname" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('th_Lastname')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('th_Lastname')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <app-datetime text="เกิดวันที่" mode="date" [fg]="fg" formName="birthday"></app-datetime>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>ที่อยู่</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="address" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('address')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('address')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <app-datetime text="วันออกบัตร" mode="date" [fg]="fg" formName="issueDate"></app-datetime>
+              <app-datetime text="วันบัตรหมดอายุ" mode="date" [fg]="fg" formName="expiryDate"></app-datetime>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>เบอร์โทร</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="telephone" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('telephone')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('telephone')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>อาชีพ</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="job" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('job')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('job')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>เพศ</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col [class.invalid]="isValid('sex')">
+                  <ion-radio-group formControlName="sex">
+                    <ion-item class="row" *ngIf="isValid('sex')">
+                      <span class="invalid-msg">กรุณาเลือก</span>
+                    </ion-item>
+                    <ion-item>
+                      <ion-radio slot="start" value='M'></ion-radio>
+                      <ion-label>ชาย</ion-label>
+                    </ion-item>
+                    <ion-item>
+                      <ion-radio slot="start" value='F'></ion-radio>
+                      <ion-label>หญิง</ion-label>
+                    </ion-item>
+                  </ion-radio-group>
+                </ion-col>
+              </ion-row>
+
+              <ion-item>
+                <ion-button size="default" slot="end" expand="block" color="danger">ยกเลิก</ion-button>
+                <ion-button size="default" slot="end" expand="block" type="submit">บันทึก</ion-button>
+              </ion-item>
+            </ion-list>
+          </form>
+
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'nation'">
+          <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
+            <ion-list lines="none">
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>Passport No.</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="passportNo" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('passportNo')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-item *ngIf="isValid('passportNo')">
+                  <span class="invalid-msg">
+                    กรุณากรอกข้อมูล
+                  </span>
+                </ion-item>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>Prefix</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="en_Prefix" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('en_Prefix')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('en_Prefix')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>First&Middle Name</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="en_Firstname" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('en_Firstname')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('en_Firstname')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>Last Name</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="en_Lastname" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('en_Lastname')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('en_Lastname')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <app-datetime text="Date of Birth" mode="date" [fg]="fg" formName="birthday"></app-datetime>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>Nationality</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col [class.invalid]="isValid('nationality')">
+                  <ion-item *ngIf="isValid('nationality')">
+                    <span class="invalid-msg">
+                      กรุณาเลือก
+                    </span>
+                  </ion-item>
+                  <ion-select #nationSelect interface="action-sheet" formControlName="nationality"
+                    (ionChange)="change($event)">
+                    <ion-select-option *ngFor="let item of Nation">{{ item.Name }}</ion-select-option>
+                    <ion-select-option>สัญชาติอื่นๆ</ion-select-option>
+                  </ion-select>
+                </ion-col>
+              </ion-row>
+              <!-- <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>ที่อยู่</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="address" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('address')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('address')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row> -->
+
+              <app-datetime text="Date of issue" mode="date" [fg]="fg" formName="issueDate"></app-datetime>
+              <app-datetime text="Date of expiry" mode="date" [fg]="fg" formName="expiryDate"></app-datetime>
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>Tellphone</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="telephone" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('telephone')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('telephone')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+
+              <!-- <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>อาชีพ</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                    <ion-input type="text" formControlName="job" placeholder="กรุณากรอกข้อมูล"
+                      [class.invalid]="isValid('job')"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="5"></ion-col>
+                <ion-col>
+                  <ion-item *ngIf="isValid('job')">
+                    <span class="invalid-msg">
+                      กรุณากรอกข้อมูล
+                    </span>
+                  </ion-item>
+                </ion-col>
+              </ion-row> -->
+
+              <ion-row>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label>sex</ion-label>
+                  </ion-item>
+                </ion-col>
+                <ion-col [class.invalid]="isValid('sex')">
+                  <ion-radio-group formControlName="sex">
+                    <ion-item class="row" *ngIf="isValid('sex')">
+                      <span class="invalid-msg">กรุณาเลือก</span>
+                    </ion-item>
+                    <ion-item>
+                      <ion-radio slot="start" value='M'></ion-radio>
+                      <ion-label>Male</ion-label>
+                    </ion-item>
+                    <ion-item>
+                      <ion-radio slot="start" value='F'></ion-radio>
+                      <ion-label>Female</ion-label>
+                    </ion-item>
+                  </ion-radio-group>
+                </ion-col>
+              </ion-row>
+
+              <ion-item>
+                <ion-button size="default" slot="end" expand="block" color="danger">ยกเลิก</ion-button>
+                <ion-button size="default" slot="end" expand="block" type="submit">บันทึก</ion-button>
+              </ion-item>
+            </ion-list>
+          </form>
+        </ng-container>
+      </ng-container>
     </ion-col>
-  </ion-row> -->
 
-  <ng-container [ngSwitch]="option">
-    <ng-container *ngSwitchCase="'thai'">
-      <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
-        <ion-list lines="none">
-          <ion-row>
-            <ion-col size="2">
-              <ion-item>
-                <ion-label>รหัสบัตรประชาชน</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col size="10">
-              <ion-item>
-                <ion-input type="text" formControlName="idCard" placeholder="กรุณากรอกข้อมูล"
-                  [class.invalid]="isValid('idCard')"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="2"></ion-col>
-            <ion-item *ngIf="isValid('idCard')">
-              <span class="invalid-msg">
-                กรุณากรอกข้อมูล
-              </span>
-            </ion-item>
-          </ion-row>
-
-          <ion-row>
-            <ion-col size="2">
-              <ion-item>
-                <ion-label>คำนำหน้า</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col size="10">
-              <ion-item>
-                <ion-input type="text" formControlName="th_Prefix" placeholder="กรุณากรอกข้อมูล"
-                  [class.invalid]="isValid('th_Prefix')"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="2"></ion-col>
-            <ion-col size="10">
-              <ion-item *ngIf="isValid('th_Prefix')">
-                <span class="invalid-msg">
-                  กรุณากรอกข้อมูล
-                </span>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col size="2">
-              <ion-item>
-                <ion-label>ชื่อ</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col size="10">
-              <ion-item>
-                <ion-input type="text" formControlName="th_Firstname" placeholder="กรุณากรอกข้อมูล"
-                  [class.invalid]="isValid('th_Firstname')"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="2"></ion-col>
-            <ion-col size="10">
-              <ion-item *ngIf="isValid('th_Firstname')">
-                <span class="invalid-msg">
-                  กรุณากรอกข้อมูล
-                </span>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col size="2">
-              <ion-item>
-                <ion-label>นามสกุล</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col size="10">
-              <ion-item>
-                <ion-input type="text" formControlName="th_Lastname" placeholder="กรุณากรอกข้อมูล"
-                  [class.invalid]="isValid('th_Lastname')"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="2"></ion-col>
-            <ion-col size="10">
-              <ion-item *ngIf="isValid('th_Lastname')">
-                <span class="invalid-msg">
-                  กรุณากรอกข้อมูล
-                </span>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <app-datetime text="เกิดวันที่" mode="date" [fg]="fg" formName="birthday"></app-datetime>
-
-          <ion-row>
-            <ion-col size="2">
-              <ion-item>
-                <ion-label>ที่อยู่</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col size="10">
-              <ion-item>
-                <ion-input type="text" formControlName="address" placeholder="กรุณากรอกข้อมูล"
-                  [class.invalid]="isValid('address')"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="2"></ion-col>
-            <ion-col size="10">
-              <ion-item *ngIf="isValid('address')">
-                <span class="invalid-msg">
-                  กรุณากรอกข้อมูล
-                </span>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <app-datetime text="วันออกบัตร" mode="date" [fg]="fg" formName="issueDate"></app-datetime>
-          <app-datetime text="วันบัตรหมดอายุ" mode="date" [fg]="fg" formName="expiryDate"></app-datetime>
-
-          <ion-row>
-            <ion-col size="2">
-              <ion-item>
-                <ion-label>เบอร์โทร</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col size="10">
-              <ion-item>
-                <ion-input type="text" formControlName="telephone" placeholder="กรุณากรอกข้อมูล"
-                  [class.invalid]="isValid('telephone')"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="2"></ion-col>
-            <ion-col size="10">
-              <ion-item *ngIf="isValid('telephone')">
-                <span class="invalid-msg">
-                  กรุณากรอกข้อมูล
-                </span>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col size="2">
-              <ion-item>
-                <ion-label>อาชีพ</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col size="10">
-              <ion-item>
-                <ion-input type="text" formControlName="job" placeholder="กรุณากรอกข้อมูล"
-                  [class.invalid]="isValid('job')"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="2"></ion-col>
-            <ion-col size="10">
-              <ion-item *ngIf="isValid('job')">
-                <span class="invalid-msg">
-                  กรุณากรอกข้อมูล
-                </span>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col size="2">
-              <ion-item>
-                <ion-label>เพศ</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col [class.invalid]="isValid('sex')">
-              <ion-radio-group formControlName="sex">
-                <ion-item class="row" *ngIf="isValid('sex')">
-                  <span class="invalid-msg">กรุณาเลือก</span>
-                </ion-item>
-                <ion-item>
-                  <ion-radio slot="start" value='M'></ion-radio>
-                  <ion-label>ชาย</ion-label>
-                </ion-item>
-                <ion-item>
-                  <ion-radio slot="start" value='F'></ion-radio>
-                  <ion-label>หญิง</ion-label>
-                </ion-item>
-              </ion-radio-group>
-            </ion-col>
-          </ion-row>
-
-          <ion-item>
-            <ion-button size="default" slot="end" expand="block" color="danger">ยกเลิก</ion-button>
-            <ion-button size="default" slot="end" expand="block" type="submit">บันทึก</ion-button>
-          </ion-item>
-        </ion-list>
-      </form>
-
-    </ng-container>
-
-    <ng-container *ngSwitchCase="'nation'">
-    </ng-container>
-  </ng-container>
-
+  </ion-row>
 </ion-content>
