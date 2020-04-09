@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 import { CloudSyncService } from '../cloud-sync.service';
 import { nationalityData, Nationality } from 'src/models/Member';
-import { IonSelect } from '@ionic/angular';
+import { IonSelect, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-register-information',
@@ -18,7 +18,8 @@ export class RegisterInformationPage implements OnInit {
   public OtherNation: Nationality[] = nationalityData;
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
   public fg: FormGroup;
-  constructor(private fb: FormBuilder, private api: CloudSyncService) {
+  public _id: string;
+  constructor(private fb: FormBuilder, private api: CloudSyncService, private navParam: NavParams) {
     this.fg = this.fb.group({
       'idCard': ['', Validators.required],
       'passportNo': ['', Validators.required],
@@ -66,9 +67,13 @@ export class RegisterInformationPage implements OnInit {
   }
 
   ngOnInit() {
-    this.api.getMember('637218721923017536').subscribe(date => {
+    this._id = this.navParam.get('passed_id');
+    console.log('_id is:',this._id);
+    
+    this.api.getMember(this._id).subscribe(date => {
       if (date != null) {
         let member = date;
+        console.log(member);
         this.fg.patchValue(member);
       }
     });

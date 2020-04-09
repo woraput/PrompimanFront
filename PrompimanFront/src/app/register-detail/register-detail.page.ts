@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CloudSyncService } from '../cloud-sync.service';
 import { ActivatedRoute } from '@angular/router';
 import { Member } from 'src/models/Member';
+import { ModalController } from '@ionic/angular';
+import { RegisterInformationPage } from '../register-information/register-information.page';
 
 @Component({
   selector: 'app-register-detail',
@@ -14,8 +16,8 @@ export class RegisterDetailPage implements OnInit {
   public fg: FormGroup;
   public _id: string;
   public listdata: any = {};
-  
-  constructor(private fb: FormBuilder, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute) {
+
+  constructor(private fb: FormBuilder, private modalController: ModalController, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute) {
     // this.fg = this.fb.group({
     //   'idCard': [null],
     //   'th_Prefix': [null],
@@ -36,7 +38,7 @@ export class RegisterDetailPage implements OnInit {
     // });
 
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
-    console.log(this._id);
+    console.log('_id is:',this._id);
 
     this.cloud.getByID(this._id).subscribe(data => {
       if (data != null) {
@@ -45,6 +47,16 @@ export class RegisterDetailPage implements OnInit {
         // console.log('idCard', this.listdata.idCard);
       }
     })
+  }
+
+  async editMember() {
+    const modal = await this.modalController.create({
+      component: RegisterInformationPage,
+      componentProps: {
+        passed_id : this._id
+      }
+    });
+    return await modal.present();
   }
 
   ngOnInit() {
