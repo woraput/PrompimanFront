@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Member } from 'src/models/Member';
 import { Observable } from 'rxjs';
+import { Member, Paging } from 'src/models/Member';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +25,6 @@ export class CloudSyncService {
     return this.http.get<Member>(this.baseUrl + 'Member/GetById/' + _id);
   }
 
-  public getuser(page: number, size: number) {
-    return this.http.get<Member[]>("http://localhost:5000/api/Member/Get/" + page + "/" + size + "?word=%20");
-  }
 
   public createMember(member: Member): Observable<any> {
     console.log(JSON.stringify(member));
@@ -43,5 +40,9 @@ export class CloudSyncService {
 
   public createEn(member: Member) {
     return this.http.post(this.baseUrl + "Member/CreateEn/", { member });
+  }
+
+  public getuser(page: number, size: number) {
+    return this.http.get<Paging>("http://localhost:5000/api/Member/Get/" + page + "/" + size + "?word=%20");
   }
 }

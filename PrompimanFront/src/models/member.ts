@@ -20,6 +20,11 @@ export interface Member {
     CreationDateTime: Date;
     LastUpdate: Date;
 }
+export class Paging {
+    page: number;
+    count: number;
+    members : Member[]
+}
 
 export interface Nationality {
     Code: string;

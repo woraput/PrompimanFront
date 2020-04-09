@@ -14,11 +14,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { RegisterPageModule } from './register/register.module';
 import { ComponentsModule } from '../components/components.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [
+  imports: [NgxPaginationModule,
     FormsModule,
     RegisterPageModule,
     RegisterInformationPageModule,
