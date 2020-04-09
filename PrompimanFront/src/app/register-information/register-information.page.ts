@@ -18,9 +18,10 @@ export class RegisterInformationPage implements OnInit {
   public OtherNation: Nationality[] = nationalityData;
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
   public fg: FormGroup;
-  public _id: string;
+  private paramData: string;
   constructor(private fb: FormBuilder, private api: CloudSyncService, private navParam: NavParams) {
     this.fg = this.fb.group({
+      '_id': null,
       'idCard': ['', Validators.required],
       'passportNo': ['', Validators.required],
       'th_Prefix': ['', Validators.required],
@@ -35,9 +36,9 @@ export class RegisterInformationPage implements OnInit {
       'issueDate': ['', Validators.required],
       'expiryDate': ['', Validators.required],
       'telephone': ['', Validators.required],
-      'job': [null, Validators.required],
-      'nationality': [null, Validators.required],
-      'photo': [null, Validators.required],
+      'job': null,
+      'nationality': null,
+      'photo': null,
     });
   }
 
@@ -53,7 +54,18 @@ export class RegisterInformationPage implements OnInit {
   public handleSubmit() {
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
+
+    this.fg.get("photo").setValue("aaaaa");
+    this.fg.get("passportNo").setValue("5555");
+    console.log(this.fg);
+
     if (this.fg.valid) {
+      console.log("button");
+      this.api.createMember(this.fg.value).subscribe(data => {
+        if (data != null) {
+          console.log("ok");
+        }
+      })
     }
   }
 
@@ -67,16 +79,23 @@ export class RegisterInformationPage implements OnInit {
   }
 
   ngOnInit() {
-    this._id = this.navParam.get('passed_id');
-    console.log('_id is:',this._id);
-    
-    this.api.getByID(this._id).subscribe(date => {
+    // console.log(this.navParam.get('passed_id'));
+    // this.paramData = this.navParam.get('passed_id');
+    // if (this.paramData != undefined) {
+
+    //   this.api.getByID(this.paramData).subscribe(date => {
+    //     if (date != null) {
+    //       let member = date;
+    //       this.fg.patchValue(member);
+    //     }
+    //   });
+    // }
+    this.api.getByID("637218721923017536").subscribe(date => {
       if (date != null) {
         let member = date;
         this.fg.patchValue(member);
       }
     });
-
   }
 
 
