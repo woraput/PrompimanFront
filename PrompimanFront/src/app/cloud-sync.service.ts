@@ -13,19 +13,11 @@ export class CloudSyncService {
     console.log('Create CloudSyncProvider Provider');
   }
 
-  get() {
-    return 'hello, i am a cloudSyncProvider';
-  }
-
-  public getMember(_id: string): any {
+  public getByID(_id: string): any {
     return this.http.get<Member>(this.baseUrl + 'Member/GetById/' + _id);
   }
   
-  getuser(page: number, size: number){
+  public getuser(page: number, size: number){
     return this.http.get<Member[]>("http://localhost:5000/api/Member/Get/"+page+"/"+size+"?word=%20");
-  }
-
-  getByID(_id: string){
-    return this.http.get<Member>("http://localhost:5000/api/Member/GetById/"+ _id);
   }
 }

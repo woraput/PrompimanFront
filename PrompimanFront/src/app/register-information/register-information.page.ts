@@ -70,7 +70,7 @@ export class RegisterInformationPage implements OnInit {
     this._id = this.navParam.get('passed_id');
     console.log('_id is:',this._id);
     
-    this.api.getMember(this._id).subscribe(date => {
+    this.api.getByID(this._id).subscribe(date => {
       if (date != null) {
         let member = date;
         console.log(member);
