@@ -14,56 +14,50 @@
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQOWk4oFbAc18206aLh3GSnbFDN2SUnXPzhu7FIJzqio-J67gtd&usqp=CAU">
       </ion-col>
-      <ion-col size="6">
+      <ion-col size="5">
         <ion-item>
           <ion-label>รหัสบัตรประจำตัวประชาชน</ion-label>
           <ion-label>{{listdata.idCard}}</ion-label>
-          <!-- <ion-label >{{idCard}}</ion-label> -->
         </ion-item>
         <ion-item>
           <ion-label>ชื่อ-สกุล (ไทย)</ion-label>
           <ion-label>{{listdata.th_Firstname}} {{listdata.th_Lastname}}</ion-label>
-          <!-- <ion-label>{{{{th_Firstname}}{{th_Lastname}}}}</ion-label> -->
         </ion-item>
         <ion-item>
           <ion-label>ชื่อ-สกุล (อังกฤษ)</ion-label>
           <ion-label>{{listdata.en_Firstname}} {{listdata.en_Lastname}}</ion-label>
-          <!-- <ion-label>{{en_Firstname}}{{en_Lastname}}</ion-label> -->
         </ion-item>
         <ion-item>
           <ion-label>เกิดวันที่</ion-label>
           <ion-label>{{listdata.birthday | date:"dd/MM/yyyy"}}</ion-label>
-          <!-- <ion-label>{{birthday}}</ion-label> -->
         </ion-item>
         <ion-item>
           <ion-label>ที่อยู่</ion-label>
           <ion-label>{{listdata.address}}</ion-label>
-          <!-- <ion-label>{{address}}</ion-label> -->
         </ion-item>
         <ion-item>
           <ion-label>วันออกบัตร</ion-label>
           <ion-label>{{listdata.issueDate | date:"dd/MM/yyyy"}}</ion-label>
-          <!-- <ion-label>{{issueDate}}</ion-label> -->
         </ion-item>
         <ion-item>
           <ion-label>วันบัตรหมดอายุ</ion-label>
           <ion-label>{{listdata.expiryDate | date:"dd/MM/yyyy"}}</ion-label>
-          <!-- <ion-label>{{expiryDate}}</ion-label> -->
         </ion-item>
         <ion-item>
           <ion-label>เบอร์โทรศัพท์</ion-label>
           <ion-label>{{listdata.telephone}}</ion-label>
-          <!-- <ion-label>{{telephone}}</ion-label> -->
         </ion-item>
         <ion-item>
           <ion-label>อาชีพ</ion-label>
           <ion-label>{{listdata.job}}</ion-label>
-          <!-- <ion-label>{{job}}</ion-label> -->
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf = "listdata.sex == 'M'">
           <ion-label>เพศ</ion-label>
-          <ion-label>{{listdata.sex}}</ion-label>
-          <!-- <ion-label>{{sex}}</ion-label> -->
+          <ion-label>ชาย</ion-label>
+        </ion-item>
+        <ion-item *ngIf = "listdata.sex == 'F'">
+          <ion-label>เพศ</ion-label>
+          <ion-label>หญิง</ion-label>
         </ion-item>
         <ion-col size="2"></ion-col>
       </ion-col>

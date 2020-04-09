@@ -27,7 +27,6 @@ export class RegisterPage implements OnInit {
     this.cloud.getuser(1, 10).subscribe(data => {
       if (data != null) {
         this.listdata = data
-        console.log("data", data);
         console.log("listdata", this.listdata);
       }
     });

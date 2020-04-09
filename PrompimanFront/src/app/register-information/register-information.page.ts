@@ -73,7 +73,6 @@ export class RegisterInformationPage implements OnInit {
     this.api.getByID(this._id).subscribe(date => {
       if (date != null) {
         let member = date;
-        console.log(member);
         this.fg.patchValue(member);
       }
     });
