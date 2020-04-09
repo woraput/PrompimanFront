@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Member } from 'src/models/Member';
+import { Member,  Paging } from 'src/models/Member';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,6 @@ export class CloudSyncService {
   }
   
   public getuser(page: number, size: number){
-    return this.http.get<Member[]>("http://localhost:5000/api/Member/Get/"+page+"/"+size+"?word=%20");
+    return this.http.get<Paging>("http://localhost:5000/api/Member/Get/"+page+"/"+size+"?word=%20");
   }
 }

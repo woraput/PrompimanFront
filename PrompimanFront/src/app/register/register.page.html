@@ -37,10 +37,14 @@
       </ion-card-header>
     </ion-card>
 
+    <!-- / | paginate: { itemsPerPage: 5, currentPage: p }; let i = index -->
+    <!-- | paginate: { id: 'item', itemsPerPage: paging.page, currentPage: 1, totalItems: paging.count } -->
+    <!-- | paginate: {id: 'Users', itemsPerPage: 10, currentPage: paging.page, totalItems: paging.count } -->
+    <!-- | paginate: { itemsPerPage: 10, currentPage: p } -->
     <ion-card>
       <ion-card-content>
-        <!-- <tr *ngFor="let item of ulst.users| paginate: { itemsPerPage: 10, currentPage: ulst.page, totalItems: ulst.count } "> -->
-        <ion-item class="ion-text-center" *ngFor="let item of listdata.members"
+        <ion-item class="ion-text-center"
+          *ngFor="let item of paging.members  | paginate: { itemsPerPage: 2, currentPage: p }"
           [routerLink]="['/register-detail/', item._id]" routerDirection="forward">
           <ion-col size="2">
             {{item.creationDateTime | date:"dd/MM/yyyy" }}
@@ -58,7 +62,14 @@
             <ion-button size="default" expand="block" type="submit">Check-in</ion-button>
           </ion-col>
         </ion-item>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </ion-card-content>
+      <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+      <!-- <pagination-controls (pageChange)="getPageUsers2($event)"></pagination-controls> -->
+
+      <!-- <pagination-controls (pageChange)="p1 = $event" id="first"></pagination-controls> -->
+      <!-- <pagination-controls (pageChange)="getPageUsers()"></pagination-controls> -->
+      <!-- <pagination-controls id="item" (pageChange)="paging($event)"></pagination-controls> -->
     </ion-card>
   </div>
   <!-- </form> -->
