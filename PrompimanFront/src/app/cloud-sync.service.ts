@@ -45,4 +45,8 @@ export class CloudSyncService {
   public getuser(page: number, size: number) {
     return this.http.get<Paging>("http://localhost:5000/api/Member/Get/" + page + "/" + size + "?word=%20");
   }
+
+  public search(page: number, size: number, word: string) {
+    return this.http.get<Paging>("http://localhost:5000/api/Member/Get/" + page + "/" + size + "?word=" + word);
+  }
 }

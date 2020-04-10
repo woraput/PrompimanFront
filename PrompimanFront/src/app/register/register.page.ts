@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { RegisterInformationPage } from '../register-information/register-information.page';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CloudSyncService } from '../cloud-sync.service';
 import { Paging } from 'src/models/Member';
@@ -18,9 +18,12 @@ export class RegisterPage implements OnInit {
   // public currentPage = 1;
   // public page =  this.cloud.getuser(1, 10);
   p: number = 1;
+  public searchBar: FormControl;
+
 
   constructor(private modalController: ModalController, private fb: FormBuilder, private nav: NavController, public router: Router, private cloud: CloudSyncService) {
-    this.getPageUsers(1);
+    this.getPageUsers(this.p);
+    this.searchBar = new FormControl('');
   }
 
 
@@ -37,24 +40,24 @@ export class RegisterPage implements OnInit {
   handleSubmit() {
   }
 
-  getPageUsers(page: number) {
-    this.cloud.getuser(1, 10).subscribe(data => {
+  getPageUsers(p:number) {
+    this.cloud.getuser(p, 10).subscribe(data => {
       this.paging = data;
       console.log(this.paging.members);
       console.log(this.paging.count);
       console.log(this.paging.page);
     });
+     
   }
-
-  // getPageUsers2(page: number) {
-  //   console.log(page);
-  //         this.cloud.getuser(page, 10).subscribe(data => {
-  //           this.paging = data;
-  //           console.log(this.paging.members);
-  //           console.log(this.paging.count);
-  //           console.log(this.paging.page);
-  //         });
-  // }
+  search(p:number,searchBar: string) {
+    console.log(searchBar);
+          this.cloud.search(p, 10, searchBar).subscribe(data => {
+            this.paging = data;
+            console.log(this.paging.members);
+            console.log(this.paging.count);
+            console.log(this.paging.page);
+          });
+  }
 
 
 }

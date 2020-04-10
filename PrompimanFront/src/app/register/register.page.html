@@ -13,9 +13,19 @@
     </ion-button>
   </ion-item>
 
-  <div class="ion-padding">
-    <ion-searchbar></ion-searchbar>
-  </div>
+  <ion-row>
+    <ion-col size="10">
+      <div class="ion-padding">
+        <ion-searchbar [formControl]="searchBar"></ion-searchbar>
+      </div>
+    </ion-col>
+    <ion-col size="2">
+      <button ion-button type="button" color="light" (click)="search(1,searchBar.value)">
+        ค้นหา
+      </button>
+    </ion-col>
+  </ion-row>
+
 
   <div class="ion-padding">
     <ion-card>
@@ -37,10 +47,6 @@
       </ion-card-header>
     </ion-card>
 
-    <!-- / | paginate: { itemsPerPage: 5, currentPage: p }; let i = index -->
-    <!-- | paginate: { id: 'item', itemsPerPage: paging.page, currentPage: 1, totalItems: paging.count } -->
-    <!-- | paginate: {id: 'Users', itemsPerPage: 10, currentPage: paging.page, totalItems: paging.count } -->
-    <!-- | paginate: { itemsPerPage: 10, currentPage: p } -->
     <ion-card>
       <ion-card-content>
         <ion-item class="ion-text-center"
@@ -53,7 +59,7 @@
             {{item._id}}
           </ion-col>
           <ion-col size="3">
-            {{item.th_Firstname}} {{item.th_Lastname}}123
+            {{item.th_Firstname}} {{item.th_Lastname}}
           </ion-col>
           <ion-col size="3">
             {{item.telephone}}
@@ -64,12 +70,6 @@
         </ion-item>
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </ion-card-content>
-      <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
-      <!-- <pagination-controls (pageChange)="getPageUsers2($event)"></pagination-controls> -->
-
-      <!-- <pagination-controls (pageChange)="p1 = $event" id="first"></pagination-controls> -->
-      <!-- <pagination-controls (pageChange)="getPageUsers()"></pagination-controls> -->
-      <!-- <pagination-controls id="item" (pageChange)="paging($event)"></pagination-controls> -->
     </ion-card>
   </div>
   <!-- </form> -->
