@@ -13,3 +13,13 @@
   .warning {
     color: darkorange;
   }
+
+  .card-content-md {
+    padding-left: unset;
+    padding-right: unset;
+    -webkit-padding-start: 16px;
+    padding-inline-start: 16px;
+    -webkit-padding-end: 16px;
+    padding-inline-end: 16px;
+    font-variant: all-petite-caps;
+}
