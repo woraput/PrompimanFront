@@ -22,7 +22,7 @@ export interface Member {
 }
 
 export interface MemberResponse {
-    isSuccess: bool;
+    isSuccess: boolean;
     errorMessage: string;
 }
 
