@@ -7,8 +7,10 @@ import { Member, Paging, MemberResponse } from 'src/models/Member';
 })
 export class CloudSyncService {
 
-  private readonly baseUrl: string = 'http://localhost:5000/api/'; // local
+  private readonly baseUrl: string = 'http://localhost:5000/api/'; // local  
+  // private readonly baseUrl: string = ' http://prompiman-api.azurewebsites.net'; // local
 
+ 
   constructor(private http: HttpClient) {
     console.log('Create CloudSyncProvider Provider');
   }
@@ -32,6 +34,10 @@ export class CloudSyncService {
   }
 
   public getuser(page: number, size: number) {
-    return this.http.get<Paging>("http://localhost:5000/api/Member/Get/" + page + "/" + size + "?word=%20");
+    return this.http.get<Paging>(this.baseUrl + "Member/Get/" + page + "/" + size);
+  }
+
+  public search(page: number, size: number, word: string) {
+    return this.http.get<Paging>(this.baseUrl + "Member/Get/" + page + "/" + size + "?word=" + word);
   }
 }
