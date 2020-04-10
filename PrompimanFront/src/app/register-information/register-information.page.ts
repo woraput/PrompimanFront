@@ -70,7 +70,33 @@ export class RegisterInformationPage implements OnInit {
       'nationality': null,
     });
 
+  }
 
+  ngOnInit() {
+    console.log(this.navParam.get('passed_id'));
+    this.paramData = this.navParam.get('passed_id');
+    if (this.paramData != undefined) {
+
+      this.api.getByID(this.paramData).subscribe(date => {
+        if (date != null) {
+          let member = date;
+          this.fg.patchValue(member);
+          this.fgTh.patchValue(member);
+          this.fgEn.patchValue(member);
+        }
+      });
+      
+    }
+    // this.api.getByID("637218721923017536").subscribe(date => {
+    //   if (date != null) {
+    //     let member = date;
+    //     console.log("gg");
+
+    //     this.fg.patchValue(member);
+    //     this.fgTh.patchValue(member);
+    //     this.fgEn.patchValue(member);
+    //   }
+    // });
   }
 
   public isValidTh(name: string): boolean {
@@ -128,25 +154,7 @@ export class RegisterInformationPage implements OnInit {
     }
   }
 
-  ngOnInit() {
-    // console.log(this.navParam.get('passed_id'));
-    // this.paramData = this.navParam.get('passed_id');
-    // if (this.paramData != undefined) {
 
-    //   this.api.getByID(this.paramData).subscribe(date => {
-    //     if (date != null) {
-    //       let member = date;
-    //       this.fg.patchValue(member);
-    //     }
-    //   });
-    // }
-    this.api.getByID("637218721923017536").subscribe(date => {
-      if (date != null) {
-        let member = date;
-        this.fg.patchValue(member);
-      }
-    });
-  }
 
 
   segmentChanged() { }
