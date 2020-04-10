@@ -142,7 +142,7 @@ export class RegisterInformationPage implements OnInit {
     this.fg.patchValue(fgType.value);
     this.api.editMember(this.fg.value).subscribe(data => {
       if (data != null) {
-        console.log("edit success: {1}", data.isSuccess);
+        console.log("edit success: ", data.isSuccess);
       }
     });
   }
@@ -151,7 +151,7 @@ export class RegisterInformationPage implements OnInit {
     this.fg.patchValue(fgType.value);
     this.api.createMember(this.fg.value).subscribe(data => {
       if (data != null) {
-        console.log("create success: {1}", data.isSuccess);
+        console.log("create success: }", data.isSuccess);
       }
     });
   }
@@ -165,6 +165,9 @@ export class RegisterInformationPage implements OnInit {
     }
   }
 
+  closeModal() {
+    this.modalCtrl.dismiss();
+  }
   // alertNotFoundPlant() {
   //   const notFoundPlant = this.alertCtrl.create({
   //     title: 'ระบุชื่อพืชอื่นๆที่ต้องการเพิ่ม',
