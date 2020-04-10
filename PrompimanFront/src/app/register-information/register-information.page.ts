@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 import { CloudSyncService } from '../cloud-sync.service';
 import { nationalityData, Nationality } from 'src/models/Member';
-import { IonSelect, NavParams } from '@ionic/angular';
+import { IonSelect, NavParams, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register-information',
@@ -21,82 +21,80 @@ export class RegisterInformationPage implements OnInit {
   public fgTh: FormGroup;
   public fgEn: FormGroup;
   private paramData: string;
-  constructor(private fb: FormBuilder, private api: CloudSyncService, private navParam: NavParams) {
+  private isEdit = false;
+  constructor(private modalCtrl: ModalController, private fb: FormBuilder, private api: CloudSyncService, private navParam: NavParams) {
     this.fg = this.fb.group({
       '_id': null,
-      'idCard': ['', Validators.required],
-      'passportNo': ['', Validators.required],
-      'th_Prefix': ['', Validators.required],
-      'th_Firstname': ['', Validators.required],
-      'th_Lastname': ['', Validators.required],
-      'en_Prefix': ['', Validators.required],
-      'en_Firstname': ['', Validators.required],
-      'en_Lastname': ['', Validators.required],
-      'sex': ['', Validators.required],
-      'birthday': ['', Validators.required],
-      'address': ['', Validators.required],
-      'issueDate': ['', Validators.required],
-      'expiryDate': ['', Validators.required],
-      'telephone': ['', Validators.required],
+      'idCard': null,
+      'passportNo': null,
+      'th_Prefix': null,
+      'th_Firstname': null,
+      'th_Lastname': null,
+      'en_Prefix': null,
+      'en_Firstname': null,
+      'en_Lastname': null,
+      'sex': null,
+      'birthday': null,
+      'address': null,
+      'issueDate': null,
+      'expiryDate': null,
+      'telephone': null,
       'job': null,
       'nationality': null,
       'photo': null,
     });
 
     this.fgTh = this.fb.group({
-      'idCard': ['', Validators.required],
-      'th_Prefix': ['', Validators.required],
-      'th_Firstname': ['', Validators.required],
-      'th_Lastname': ['', Validators.required],
-      'sex': ['', Validators.required],
-      'birthday': ['', Validators.required],
-      'address': ['', Validators.required],
-      'issueDate': ['', Validators.required],
-      'expiryDate': ['', Validators.required],
-      'telephone': ['', Validators.required],
+      'idCard': [null, Validators.required],
+      'th_Prefix': [null, Validators.required],
+      'th_Firstname': [null, Validators.required],
+      'th_Lastname': [null, Validators.required],
+      'sex': [null, Validators.required],
+      'birthday': [null, Validators.required],
+      'address': [null, Validators.required],
+      'issueDate': [null, Validators.required],
+      'expiryDate': [null, Validators.required],
+      'telephone': [null, Validators.required],
       'job': null,
     });
 
     this.fgEn = this.fb.group({
-      'passportNo': ['', Validators.required],
-      'en_Prefix': ['', Validators.required],
-      'en_Firstname': ['', Validators.required],
-      'en_Lastname': ['', Validators.required],
-      'sex': ['', Validators.required],
-      'birthday': ['', Validators.required],
-      'issueDate': ['', Validators.required],
-      'expiryDate': ['', Validators.required],
-      'telephone': ['', Validators.required],
-      'nationality': null,
+      'passportNo': [null, Validators.required],
+      'en_Prefix': [null, Validators.required],
+      'en_Firstname': [null, Validators.required],
+      'en_Lastname': [null, Validators.required],
+      'sex': [null, Validators.required],
+      'birthday': [null, Validators.required],
+      'issueDate': [null, Validators.required],
+      'expiryDate': [null, Validators.required],
+      'telephone': [null, Validators.required],
+      'nationality': [null, Validators.required]
     });
 
   }
 
+
   ngOnInit() {
     console.log(this.navParam.get('passed_id'));
     this.paramData = this.navParam.get('passed_id');
-    if (this.paramData != undefined) {
+    if (this.paramData !== undefined) {
 
-      this.api.getByID(this.paramData).subscribe(date => {
-        if (date != null) {
-          let member = date;
-          this.fg.patchValue(member);
-          this.fgTh.patchValue(member);
-          this.fgEn.patchValue(member);
+      this.api.getByID(this.paramData).subscribe(data => {
+        if (data != null) {
+          this.isEdit = true;
+          console.log(data);
+
+          this.fg.patchValue(data);
+
+          if (data.nationality == "ไทย") {
+            this.fgTh.patchValue(data);
+          } else {
+            this.option = "nation";
+            this.fgEn.patchValue(data);
+          }
         }
       });
-      
     }
-    // this.api.getByID("637218721923017536").subscribe(date => {
-    //   if (date != null) {
-    //     let member = date;
-    //     console.log("gg");
-
-    //     this.fg.patchValue(member);
-    //     this.fgTh.patchValue(member);
-    //     this.fgEn.patchValue(member);
-    //   }
-    // });
   }
 
   public isValidTh(name: string): boolean {
@@ -121,28 +119,41 @@ export class RegisterInformationPage implements OnInit {
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
 
-    if (this.fgTh.valid) {
-      this.fg.patchValue(this.fgTh.value);
-      this.api.createMember(this.fg.value).subscribe(data => {
-        if (data != null) {
-          console.log(data.isSuccess);
-        }
-      });
+    if (this.isEdit) {
+      if (this.fg.get('nationality').value === "ไทย") {
+        this.editMember(this.fgTh);
+      } else {
+        this.editMember(this.fgEn);
+      }
+    }
+    else if (this.fgTh.valid) {
+      this.createMember(this.fgTh);
     }
     else if (this.fgEn.valid) {
-      this.fg.patchValue(this.fgEn.value);
-      console.log(this.fg.value);
-
-      this.api.createMember(this.fg.value).subscribe(data => {
-        if (data != null) {
-          console.log(data.isSuccess);
-        }
-      });
+      this.createMember(this.fgEn);
     }
     else {
       console.log("invalid");
     }
+    this.modalCtrl.dismiss();
+  }
 
+  private editMember(fgType: FormGroup) {
+    this.fg.patchValue(fgType.value);
+    this.api.editMember(this.fg.value).subscribe(data => {
+      if (data != null) {
+        console.log("edit success: {1}", data.isSuccess);
+      }
+    });
+  }
+
+  private createMember(fgType: FormGroup) {
+    this.fg.patchValue(fgType.value);
+    this.api.createMember(this.fg.value).subscribe(data => {
+      if (data != null) {
+        console.log("create success: {1}", data.isSuccess);
+      }
+    });
   }
 
   change(event) {
@@ -154,8 +165,27 @@ export class RegisterInformationPage implements OnInit {
     }
   }
 
-
-
+  // alertNotFoundPlant() {
+  //   const notFoundPlant = this.alertCtrl.create({
+  //     title: 'ระบุชื่อพืชอื่นๆที่ต้องการเพิ่ม',
+  //     inputs: [
+  //       {
+  //         name: 'userName',
+  //         placeholder: 'Username'
+  //       },
+  //     ],
+  //     buttons: [
+  //       "ยกเลิก",
+  //       {
+  //         text: "ยืนยัน",
+  //         handler: data => {
+  //           this.addOtherPlantMedthod(data.userName, this.searchListData);
+  //         },
+  //       },
+  //     ]
+  //   });
+  //   notFoundPlant.present();
+  // }
 
   segmentChanged() { }
 
