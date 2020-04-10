@@ -56,14 +56,15 @@ export class RegisterInformationPage implements OnInit {
     this.datetimeComponent.forEach(it => it.submitRequest());
 
     this.fg.get("photo").setValue("aaaaa");
-    this.fg.get("passportNo").setValue("5555");
+    this.fg.get("passportNo").setValue("5555"); 
+    this.fg.get("_id").setValue("161651561561"); 
     console.log(this.fg);
 
     if (this.fg.valid) {
       console.log("button");
       this.api.createMember(this.fg.value).subscribe(data => {
         if (data != null) {
-          console.log("ok");
+          console.log(data.isSuccess);
         }
       })
     }

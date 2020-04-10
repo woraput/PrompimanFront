@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Member, Paging } from 'src/models/Member';
+import { HttpClient } from '@angular/common/http';
+import { Member, Paging, MemberResponse } from 'src/models/Member';
 
 @Injectable({
   providedIn: 'root'
@@ -14,24 +13,18 @@ export class CloudSyncService {
     console.log('Create CloudSyncProvider Provider');
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'accept': 'text/plain',
-      'Content-Type': 'application/json-patch+json'
-    })
-  }
 
   public getByID(_id: string): any {
     return this.http.get<Member>(this.baseUrl + 'Member/GetById/' + _id);
   }
 
 
-  public createMember(member: Member): Observable<any> {
+  public createMember(member: Member) {
     console.log(JSON.stringify(member));
     console.log(member);
     console.log({ member });
 
-    return this.http.post<any>(this.baseUrl + "Member/Create/", JSON.stringify(member), this.httpOptions);
+    return this.http.post<MemberResponse>(this.baseUrl + "Member/Create/", member);
   }
 
   public createTh(member: Member) {

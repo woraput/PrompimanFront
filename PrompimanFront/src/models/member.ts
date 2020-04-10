@@ -20,10 +20,16 @@ export interface Member {
     CreationDateTime: Date;
     LastUpdate: Date;
 }
+
+export interface MemberResponse {
+    isSuccess: bool;
+    errorMessage: string;
+}
+
 export class Paging {
     page: number;
     count: number;
-    members : Member[]
+    members: Member[]
 }
 
 export interface Nationality {
