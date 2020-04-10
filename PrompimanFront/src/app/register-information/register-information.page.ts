@@ -18,6 +18,8 @@ export class RegisterInformationPage implements OnInit {
   public OtherNation: Nationality[] = nationalityData;
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
   public fg: FormGroup;
+  public fgTh: FormGroup;
+  public fgEn: FormGroup;
   private paramData: string;
   constructor(private fb: FormBuilder, private api: CloudSyncService, private navParam: NavParams) {
     this.fg = this.fb.group({
@@ -40,12 +42,50 @@ export class RegisterInformationPage implements OnInit {
       'nationality': null,
       'photo': null,
     });
+
+    this.fgTh = this.fb.group({
+      'idCard': ['', Validators.required],
+      'th_Prefix': ['', Validators.required],
+      'th_Firstname': ['', Validators.required],
+      'th_Lastname': ['', Validators.required],
+      'sex': ['', Validators.required],
+      'birthday': ['', Validators.required],
+      'address': ['', Validators.required],
+      'issueDate': ['', Validators.required],
+      'expiryDate': ['', Validators.required],
+      'telephone': ['', Validators.required],
+      'job': null,
+    });
+
+    this.fgEn = this.fb.group({
+      'passportNo': ['', Validators.required],
+      'en_Prefix': ['', Validators.required],
+      'en_Firstname': ['', Validators.required],
+      'en_Lastname': ['', Validators.required],
+      'sex': ['', Validators.required],
+      'birthday': ['', Validators.required],
+      'issueDate': ['', Validators.required],
+      'expiryDate': ['', Validators.required],
+      'telephone': ['', Validators.required],
+      'nationality': null,
+    });
+
+
   }
 
-  public isValid(name: string): boolean {
-    let ctrl = this.fg.get(name);
+  public isValidTh(name: string): boolean {
+    let ctrl = this.fgTh.get(name);
     if (name == 'anycheck') {
-      ctrl = this.fg;
+      ctrl = this.fgTh;
+      return ctrl.errors && ctrl.errors.anycheck && (ctrl.dirty || this.submitRequested);
+    }
+    return ctrl.invalid && (ctrl.dirty || this.submitRequested);
+  }
+
+  public isValidEn(name: string): boolean {
+    let ctrl = this.fgEn.get(name);
+    if (name == 'anycheck') {
+      ctrl = this.fgEn;
       return ctrl.errors && ctrl.errors.anycheck && (ctrl.dirty || this.submitRequested);
     }
     return ctrl.invalid && (ctrl.dirty || this.submitRequested);
@@ -55,19 +95,28 @@ export class RegisterInformationPage implements OnInit {
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
 
-    this.fg.get("photo").setValue("aaaaa");
-    this.fg.get("passportNo").setValue("5555"); 
-    this.fg.get("_id").setValue("161651561561"); 
-    console.log(this.fg);
-
-    if (this.fg.valid) {
-      console.log("button");
+    if (this.fgTh.valid) {
+      this.fg.patchValue(this.fgTh.value);
       this.api.createMember(this.fg.value).subscribe(data => {
         if (data != null) {
           console.log(data.isSuccess);
         }
-      })
+      });
     }
+    else if (this.fgEn.valid) {
+      this.fg.patchValue(this.fgEn.value);
+      console.log(this.fg.value);
+
+      this.api.createMember(this.fg.value).subscribe(data => {
+        if (data != null) {
+          console.log(data.isSuccess);
+        }
+      });
+    }
+    else {
+      console.log("invalid");
+    }
+
   }
 
   change(event) {

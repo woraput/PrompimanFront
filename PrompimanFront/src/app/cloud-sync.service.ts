@@ -20,10 +20,6 @@ export class CloudSyncService {
 
 
   public createMember(member: Member) {
-    console.log(JSON.stringify(member));
-    console.log(member);
-    console.log({ member });
-
     return this.http.post<MemberResponse>(this.baseUrl + "Member/Create/", member);
   }
 
