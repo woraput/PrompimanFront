@@ -40,23 +40,24 @@ export class RegisterPage implements OnInit {
   handleSubmit() {
   }
 
-  getPageUsers(p:number) {
+  getPageUsers(p: number) {
     this.cloud.getuser(p, 10).subscribe(data => {
       this.paging = data;
       console.log(this.paging.members);
       console.log(this.paging.count);
       console.log(this.paging.page);
     });
-     
+
   }
-  search(p:number,searchBar: string) {
+  search(searchBar: string) {
+    this.p = 1;
     console.log(searchBar);
-          this.cloud.search(p, 10, searchBar).subscribe(data => {
-            this.paging = data;
-            console.log(this.paging.members);
-            console.log(this.paging.count);
-            console.log(this.paging.page);
-          });
+    this.cloud.search(this.p, 10, searchBar).subscribe(data => {
+      this.paging = data;
+      console.log(this.paging.members);
+      console.log(this.paging.count);
+      console.log(this.paging.page);
+    });
   }
 
 
