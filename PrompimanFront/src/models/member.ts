@@ -42,7 +42,7 @@ export const nationalityData: Nationality[] = [
     {
         Code: "764",
         Name: "ไทย",
-        Tag: true,
+        Tag: false,
     },
     {
         Code: "104",
