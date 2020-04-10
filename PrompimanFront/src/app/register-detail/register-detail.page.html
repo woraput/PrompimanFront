@@ -8,118 +8,160 @@
   <!-- <form [formGroup]="fg" (ngSubmit)="handleSubmit()"> -->
   <ion-list lines="none">
 
-    <ion-row class="ion-text-center">
-      <ion-col size="1"></ion-col>
-      <ion-col size="3">
-        <img
+    <ion-row *ngIf="listdata.idCard == null" class="ion-text-left">
+      <ion-col size="1">
+      </ion-col>
+      <ion-col size="2.5">
+        <img class="img-size"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQOWk4oFbAc18206aLh3GSnbFDN2SUnXPzhu7FIJzqio-J67gtd&usqp=CAU">
       </ion-col>
-      <ion-col size="5" *ngIf="listdata.idCard != null">
+      <ion-col size="2.5">
         <ion-item>
           <ion-label>รหัสบัตรประจำตัวประชาชน</ion-label>
-          <ion-label>{{listdata.idCard}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>คำนำหน้า</ion-label>
-          <ion-label>{{listdata.th_Prefix}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>ชื่อ-สกุล (ไทย)</ion-label>
-          <ion-label>{{listdata.th_Firstname}} {{listdata.th_Lastname}}</ion-label>
         </ion-item>
-        <!-- <ion-item>
-          <ion-label>ชื่อ-สกุล (อังกฤษ)</ion-label>
-          <ion-label>{{listdata.en_Firstname}} {{listdata.en_Lastname}}</ion-label>
-        </ion-item> -->
         <ion-item>
           <ion-label>เกิดวันที่</ion-label>
-          <ion-label>{{listdata.birthday | date:"dd/MM/yyyy"}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>ที่อยู่</ion-label>
-          <ion-label>{{listdata.address}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>วันออกบัตร</ion-label>
-          <ion-label>{{listdata.issueDate | date:"dd/MM/yyyy"}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>วันบัตรหมดอายุ</ion-label>
-          <ion-label>{{listdata.expiryDate | date:"dd/MM/yyyy"}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>เบอร์โทรศัพท์</ion-label>
-          <ion-label>{{listdata.telephone}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>อาชีพ</ion-label>
-          <ion-label>{{listdata.job}}</ion-label>
         </ion-item>
-        <ion-item *ngIf="listdata.sex == 'M'">
+        <ion-item>
           <ion-label>เพศ</ion-label>
-          <ion-label>ชาย</ion-label>
         </ion-item>
-        <ion-item *ngIf="listdata.sex == 'F'">
-          <ion-label>เพศ</ion-label>
-          <ion-label>หญิง</ion-label>
-        </ion-item>
-        <ion-col size="2"></ion-col>
       </ion-col>
-
-      <ion-col size="5" *ngIf="listdata.idCard == null">
+      <ion-col size="6">
         <ion-item>
-          <ion-label>Passport No.</ion-label>
-          <ion-label>{{listdata.passportNo}}</ion-label>
+          <ion-label>{{listdata.idCard}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Prefix</ion-label>
-          <ion-label>{{listdata.en_Prefix}}</ion-label>
+          <ion-label>{{listdata.th_Prefix}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>First&Middle Name</ion-label>
-          <ion-label>{{listdata.en_Firstname}}</ion-label>
+          <ion-label>{{listdata.th_Firstname}} {{listdata.th_Lastname}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Last Name</ion-label>
-          <ion-label>{{listdata.en_Lastname}}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>เกิดวันที่</ion-label>
           <ion-label>{{listdata.birthday | date:"dd/MM/yyyy"}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Nationality</ion-label>
-          <ion-label>{{listdata.nationality}}</ion-label>
+          <ion-label>{{listdata.address}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Date of issue</ion-label>
           <ion-label>{{listdata.issueDate | date:"dd/MM/yyyy"}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Date of expiry</ion-label>
           <ion-label>{{listdata.expiryDate | date:"dd/MM/yyyy"}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>Telephone No.</ion-label>
           <ion-label>{{listdata.telephone}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>อาชีพ</ion-label>
           <ion-label>{{listdata.job}}</ion-label>
         </ion-item>
         <ion-item *ngIf="listdata.sex == 'M'">
-          <ion-label>เพศ</ion-label>
           <ion-label>ชาย</ion-label>
         </ion-item>
         <ion-item *ngIf="listdata.sex == 'F'">
-          <ion-label>เพศ</ion-label>
           <ion-label>หญิง</ion-label>
         </ion-item>
-        <ion-col size="2"></ion-col>
       </ion-col>
     </ion-row>
+
+    <ion-row *ngIf="listdata.idCard != null" class="ion-text-left">
+      <ion-col size="1">
+      </ion-col>
+      <ion-col size="2.5">
+        <img class="img-size"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQOWk4oFbAc18206aLh3GSnbFDN2SUnXPzhu7FIJzqio-J67gtd&usqp=CAU">
+      </ion-col>
+      <ion-col size="2.5">
+        <ion-item>
+          <ion-label>Passport No.</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Prefix</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>First&Middle Name</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Last Name</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Date of Birth</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Nationality</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Date of issue</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Date of expiry</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Telephone No.</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>sex</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label>{{listdata.passportNo}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{listdata.en_Prefix}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{listdata.en_Firstname}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{listdata.en_Lastname}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{listdata.birthday | date:"dd/MM/yyyy"}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{listdata.nationality}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{listdata.issueDate | date:"dd/MM/yyyy"}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{listdata.expiryDate | date:"dd/MM/yyyy"}}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>{{listdata.telephone}}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="listdata.sex == 'M'">
+          <ion-label>Male</ion-label>
+        </ion-item>
+        <ion-item *ngIf="listdata.sex == 'F'">
+          <ion-label>Female</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
     <ion-item>
-      <ion-button size="default" slot="end" expand="block" color="danger" (click)="editMember()">แก้ไขข้อมูล
+      <ion-button size="default" slot="end" expand="block" color="medium" (click)="editMember()">แก้ไขข้อมูล
       </ion-button>
       <ion-button size="default" slot="end" expand="block" type="submit">Check In</ion-button>
     </ion-item>
