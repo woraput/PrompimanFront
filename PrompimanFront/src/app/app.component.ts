@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Rooms',
-      url: '/rooms',
+      url: './rooms',
       icon: 'construct'
     },
     {
@@ -60,6 +60,11 @@ export class AppComponent implements OnInit {
     {
       title: 'RegisterInformation',
       url: '/register-information',
+      icon: 'copy'
+    },
+    {
+      title: 'dlgBookingDetail',
+      url: './dlg-booking-detail',
       icon: 'copy'
     },
   ];

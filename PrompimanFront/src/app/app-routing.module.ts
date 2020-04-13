@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: 'register-detail',
     loadChildren: () => import('./register-detail/register-detail.module').then( m => m.RegisterDetailPageModule)
+  },  {
+    path: 'dlg-booking-detail',
+    loadChildren: () => import('./dlg-booking-detail/dlg-booking-detail.module').then( m => m.DlgBookingDetailPageModule)
   }
+
 
 
 ];

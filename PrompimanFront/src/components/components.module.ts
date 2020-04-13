@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { MbscModule } from '@mobiscroll/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UIStandardPage } from 'src/app/uistandard/uistandard.page';
+import { RoomComponent } from './room/room.component';
 
 
 
@@ -18,10 +19,12 @@ import { UIStandardPage } from 'src/app/uistandard/uistandard.page';
 
   declarations: [
     DatetimeComponent,
+    RoomComponent,
   ],
 
   exports: [
-    DatetimeComponent
+    DatetimeComponent,
+    RoomComponent,
   ]
 })
 export class ComponentsModule { }

@@ -51,7 +51,7 @@
     <ion-card>
       <ion-card-content>
         <ion-item class="ion-text-center"
-          *ngFor="let item of paging.members  | paginate: { itemsPerPage: 2, currentPage: p }"
+          *ngFor="let item of paging.members  | paginate: { itemsPerPage: 10, currentPage: p }"
           [routerLink]="['/register-detail/', item._id]" routerDirection="forward">
           <ion-col size="2">
             {{item.creationDateTime | date:"dd/MM/yyyy" }}
