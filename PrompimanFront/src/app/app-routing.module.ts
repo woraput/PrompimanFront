@@ -54,7 +54,15 @@ const routes: Routes = [
   {
     path: 'register-detail',
     loadChildren: () => import('./register-detail/register-detail.module').then( m => m.RegisterDetailPageModule)
+  },  {
+    path: 'booking-information',
+    loadChildren: () => import('./booking-information/booking-information.module').then( m => m.BookingInformationPageModule)
+  },
+  {
+    path: 'bill',
+    loadChildren: () => import('./bill/bill.module').then( m => m.BillPageModule)
   }
+
 
 
 ];
