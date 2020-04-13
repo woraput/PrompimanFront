@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
+import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 
 @Component({
   selector: 'app-booking-information',
   templateUrl: './booking-information.page.html',
-  styleUrls: ['./booking-information.page.scss'],
+  styleUrls: ['../app.component.scss'],
 })
 export class BookingInformationPage implements OnInit {
+
+@ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
 
   constructor() { }
 
