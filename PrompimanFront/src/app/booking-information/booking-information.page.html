@@ -79,7 +79,25 @@
           </ion-col>
         </ion-row> -->
 
-    <ion-label>ห้อง</ion-label>
+        <ion-row>
+          <ion-col size="2">
+            <ion-item>
+              <ion-label>ห้อง</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="9">
+            <ion-item>
+              <ion-label>
+                111
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1">
+            <ion-item (click)="room()">
+            <ion-icon slot="end" name="search-outline"></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
     <ion-row>
       <ion-col size="2">
