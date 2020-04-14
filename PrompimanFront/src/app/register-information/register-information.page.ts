@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Component, OnInit, ViewChildren, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
@@ -20,28 +21,29 @@ export class RegisterInformationPage implements OnInit {
   public fg: FormGroup;
   public fgTh: FormGroup;
   public fgEn: FormGroup;
+  private urlPhoto = "../../assets/image/user-silhouette.png";
   private paramData: string;
   private isEdit = false;
   constructor(private modalCtrl: ModalController, private fb: FormBuilder, private api: CloudSyncService, private navParam: NavParams) {
     this.fg = this.fb.group({
-      '_id': null,
-      'idCard': null,
-      'passportNo': null,
-      'th_Prefix': null,
-      'th_Firstname': null,
-      'th_Lastname': null,
-      'en_Prefix': null,
-      'en_Firstname': null,
-      'en_Lastname': null,
-      'sex': null,
-      'birthday': null,
-      'address': null,
-      'issueDate': null,
-      'expiryDate': null,
-      'telephone': null,
-      'job': null,
-      'nationality': null,
-      'photo': null,
+      '_id': '',
+      'idCard': '',
+      'passportNo': '',
+      'th_Prefix': '',
+      'th_Firstname': '',
+      'th_Lastname': '',
+      'en_Prefix': '',
+      'en_Firstname': '',
+      'en_Lastname': '',
+      'sex': '',
+      'birthday': '',
+      'address': '',
+      'issueDate': '',
+      'expiryDate': '',
+      'telephone': '',
+      'job': '',
+      'nationality': '',
+      'photo': '',
     });
 
     this.fgTh = this.fb.group({
@@ -73,6 +75,10 @@ export class RegisterInformationPage implements OnInit {
 
   }
 
+  async closeModal() {
+    await this.modalCtrl.dismiss();
+  }
+
 
   ngOnInit() {
     console.log(this.navParam.get('passed_id'));
@@ -85,6 +91,8 @@ export class RegisterInformationPage implements OnInit {
           console.log(data);
 
           this.fg.patchValue(data);
+          this.urlPhoto = this.fg.get('photo').value;
+          console.log(this.urlPhoto);
 
           if (data.nationality == "ไทย") {
             this.fgTh.patchValue(data);
@@ -135,7 +143,7 @@ export class RegisterInformationPage implements OnInit {
     else {
       console.log("invalid");
     }
-    this.modalCtrl.dismiss();
+
   }
 
   private editMember(fgType: FormGroup) {
@@ -145,6 +153,7 @@ export class RegisterInformationPage implements OnInit {
         console.log("edit success: ", data.isSuccess);
       }
     });
+    this.modalCtrl.dismiss();
   }
 
   private createMember(fgType: FormGroup) {
@@ -154,6 +163,7 @@ export class RegisterInformationPage implements OnInit {
         console.log("create success: }", data.isSuccess);
       }
     });
+    this.modalCtrl.dismiss();
   }
 
   change(event) {
@@ -165,9 +175,7 @@ export class RegisterInformationPage implements OnInit {
     }
   }
 
-  closeModal() {
-    this.modalCtrl.dismiss();
-  }
+
   // alertNotFoundPlant() {
   //   const notFoundPlant = this.alertCtrl.create({
   //     title: 'ระบุชื่อพืชอื่นๆที่ต้องการเพิ่ม',

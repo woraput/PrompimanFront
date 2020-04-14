@@ -1,24 +1,62 @@
 <form [formGroup]="fg">
-
-  <!-- <ion-item ion-input>
-  <ion-col size="2">
-    <ion-label> วันที่ </ion-label>
-  </ion-col>
-  <ion-input type="date">
-  </ion-input>
-</ion-item>
-
-<ion-item (click)="clock.open()">
-  <ion-col size="2">
-    <ion-label> เวลา </ion-label>
-  </ion-col>
-  <div>
-    <ion-datetime #clock display-format="HH:mm" value=" display-timezone=utc" placeholder="กรุณาเลือก">
-    </ion-datetime>
-  </div>
-  <ion-icon slot="end" name="alarm-outline"> </ion-icon>
-</ion-item> -->
   <ng-container *ngIf=" mode == 'date'">
+    <ion-row>
+      <ion-col size="2">
+        <ion-item>
+          <ion-label> {{text}} </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col  [class.invalid]="isValid(formName)">
+        <ion-item>
+          <ion-datetime slot="start" #time display-format="DD-MM-YYYY" placeholder="กรุณาเลือก" value="" display-timezone="utc"
+            formControlName={{formName}}>
+          </ion-datetime>
+          <ion-icon  slot="end" name="calendar-outline"> </ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col>
+        <ion-item *ngIf="isValid(formName)">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ng-container>
+
+  <ng-container *ngIf=" mode == 'time'">
+    <ion-row>
+      <ion-col size="2">
+        <ion-item>
+          <ion-label> {{text}} </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item [class.invalid]="isValid(formName)">
+          <ion-datetime #clock display-format="HH:mm" value="" display-timezone="utc" formControlName={{formName}}
+            placeholder="กรุณาเลือก">
+          </ion-datetime>
+          <ion-icon slot="end" name="alarm-outline"> </ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col>
+        <ion-item *ngIf="isValid(formName)">
+          <span class="invalid-msg">
+            กรุณาเลือก
+          </span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ng-container>
+
+  <!-- <ng-container *ngIf=" mode == 'date'">
     <ion-row>
       <ion-col size="2"></ion-col>
       <ion-col size="10">
@@ -70,82 +108,5 @@
       </ion-col>
     </ion-row>
 
-  </ng-container>
-
-
-
-  <!-- <ion-item class="row">
-    <ion-col size="2">
-      <ion-label> วันที่ </ion-label>
-    </ion-col>
-    <mbsc-calendar [class.invalid]="isValid('date')" [options]="datetimeSettings1" placeholder="กรุณาเลือก"
-      formControlName="date">
-    </mbsc-calendar>
-  </ion-item>
-  <ion-item *ngIf="isValid('date')">
-    <ion-col size="2"></ion-col>
-    <span class="invalid-msg">
-      กรุณาเลือก
-    </span>
-  </ion-item> -->
-
-  <!-- <ion-item class="row">
-    <ion-col size="2">
-      <ion-label> Time </ion-label>
-    </ion-col>
-    <mbsc-calendar [class.invalid]="isValid('time')" formControlName="time" [options]="datetimeSettings2"
-      placeholder="กรุณาเลือก"></mbsc-calendar>
-  </ion-item>
-  <ion-item *ngIf="isValid('time')">
-    <ion-col size="2"></ion-col>
-    <span class="invalid-msg">
-      กรุณาเลือก
-    </span>
-  </ion-item> -->
-
-
-
-
-
-
-
-  <!-- <mbsc-form>
-  <div class="mbsc-grid mbsc-no-padding">
-    <div class="mbsc-row mbsc-justify-content-center">
-      <div class="mbsc-col-xl-5 mbsc-col-md-6">
-        <mbsc-form-group inset>
-          <mbsc-form-group-title>Pop-up positioning</mbsc-form-group-title>
-          <mbsc-calendar [(ngModel)]="top" [touchUi]="false" display="top" placeholder="Please select...">Top
-          </mbsc-calendar>
-          <mbsc-calendar [(ngModel)]="bottom" [touchUi]="false" display="bottom" placeholder="Please select...">
-            Bottom</mbsc-calendar>
-          <mbsc-calendar [(ngModel)]="anchored" [touchUi]="false" placeholder="Please select...">Anchored
-          </mbsc-calendar>
-          <mbsc-calendar [(ngModel)]="center" [touchUi]="false" display="center" placeholder="Please select...">
-            Center</mbsc-calendar>
-        </mbsc-form-group>
-        <mbsc-form-group inset>
-          <mbsc-form-group-title>Basic usage</mbsc-form-group-title>
-          <mbsc-calendar [(ngModel)]="datetime" [options]="datetimeSettings" placeholder="Please select...">Date &
-            Time</mbsc-calendar>
-          <mbsc-calendar [(ngModel)]="date" [options]="dateSettings" placeholder="Please select...">Date
-          </mbsc-calendar>
-        </mbsc-form-group>
-        <mbsc-form-group inset>
-          <mbsc-form-group-title>With buttons</mbsc-form-group-title>
-          <mbsc-calendar [(ngModel)]="setBtn" [options]="setBtnSettings" placeholder="Please select...">Set button
-          </mbsc-calendar>
-          <mbsc-calendar [(ngModel)]="setCancel" [options]="setCancelSettings" placeholder="Please select...">
-            Set/Cancel</mbsc-calendar>
-        </mbsc-form-group>
-      </div>
-      <div class="mbsc-col-xl-4 mbsc-col-lg-5 mbsc-col-md-6">
-        <mbsc-form-group inset>
-          <mbsc-form-group-title>Embedded Date & Time</mbsc-form-group-title>
-          <mbsc-calendar [(ngModel)]="inline" [options]="inlineSettings"></mbsc-calendar>
-        </mbsc-form-group>
-      </div>
-    </div>
-  </div>
-</mbsc-form> -->
-  <!-- </form> -->
+  </ng-container> -->
+</form>

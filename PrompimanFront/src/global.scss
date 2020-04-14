@@ -26,3 +26,27 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import "~@mobiscroll/angular/dist/css/mobiscroll.scss";
+
+
+.dialog-modal .modal-wrapper{
+    width: 90%;
+    height: 70%;
+    position: relative; 
+    display: block;  
+  }
+
+  .invalid {
+    border: 1px solid red;
+  }
+  
+  .invalid-msg{
+    color: red;
+  }
+  
+  .warning-msg {
+    color: orangered;
+  }
+  
+  .warning {
+    color: darkorange;
+  }

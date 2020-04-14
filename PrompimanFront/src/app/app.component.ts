@@ -53,11 +53,6 @@ export class AppComponent implements OnInit {
       icon: 'copy'
     },
     {
-      title: 'RegisterInformation',
-      url: '/register-information',
-      icon: 'copy'
-    },
-    {
       title: 'BookingInformation',
       url: './booking-information',
       icon: 'copy'
