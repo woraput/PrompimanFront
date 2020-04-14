@@ -16,37 +16,17 @@ export class RegisterDetailPage implements OnInit {
   public fg: FormGroup;
   public _id: string;
   public listdata: any = {};
+  private urlPhoto = "../../assets/image/user-silhouette.png";
 
   constructor(private fb: FormBuilder, private modalController: ModalController, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute) {
-    // this.fg = this.fb.group({
-    //   'idCard': [null],
-    //   'th_Prefix': [null],
-    //   'th_Firstname': [null],
-    //   'th_Lastname': [null],
-    //   'en_Prefix': [null],
-    //   'en_Firstname': [null],
-    //   'en_Lastname': [null],
-    //   'birthday': [null],
-    //   'address': [null],
-    //   'issueDate': [null],
-    //   'expiryDate': [null],
-    //   'telephone': [null],
-    //   'job': [null],
-    //   'sex': [null],
-    //   'photo': [null],
-    //   'passportNo': [null],
-    // });
-
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
-    console.log('_id is:', this._id);
 
     this.cloud.getByID(this._id).subscribe(data => {
       if (data != null) {
-        this.listdata = data
-        console.log('getByID', this.listdata);
-        // console.log('idCard', this.listdata.idCard);
+        this.listdata = data;
+        if (this.listdata.photo !== null) { this.urlPhoto = this.listdata.photo; }
       }
-    })
+    });
   }
 
   async editMember() {
