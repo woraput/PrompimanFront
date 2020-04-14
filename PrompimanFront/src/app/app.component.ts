@@ -62,11 +62,6 @@ export class AppComponent implements OnInit {
       url: './bill',
       icon: 'copy'
     },
-    {
-      title: 'dlgBookingDetail',
-      url: './dlg-booking-detail',
-      icon: 'copy'
-    },
   
   ];
 

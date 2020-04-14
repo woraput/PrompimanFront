@@ -15,6 +15,7 @@ import { RegisterPageModule } from './register/register.module';
 import { ComponentsModule } from '../components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BookingDetailPageModule } from './booking-detail/booking-detail.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -22,6 +23,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     RegisterPageModule,
     RegisterInformationPageModule,
+    BookingDetailPageModule,
     MbscModule,
     BrowserModule,
     IonicModule.forRoot(),
