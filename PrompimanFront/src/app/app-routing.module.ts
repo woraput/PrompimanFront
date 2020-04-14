@@ -66,7 +66,11 @@ const routes: Routes = [
   {
     path: 'bill',
     loadChildren: () => import('./bill/bill.module').then( m => m.BillPageModule)
+  },  {
+    path: 'select-rooms',
+    loadChildren: () => import('./select-rooms/select-rooms.module').then( m => m.SelectRoomsPageModule)
   }
+
 
 
 

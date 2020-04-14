@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ห้องพัก</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list lines="none">
+    <ion-item>
+      <ion-row>
+        <ion-col *ngIf="roomsSelect != []">
+          <ion-item>
+            <ion-button size="default" (click)="confirm()">
+              ยืนยัน
+            </ion-button>
+
+
+            <ion-button ion-button icon-end round color="secondary" *ngFor="let room of roomsSelect"
+              (click)="deleteRoom(room)">
+              {{ room }}
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-row *ngFor="let f of floors; let i= index; ">
+      <ng-container>
+        <ion-row>
+          <ion-item>
+            ชั้น{{f}}
+          </ion-item>
+          <ion-item>
+            <ion-row>
+              <ng-container *ngFor="let room of rooms ">
+                <ion-col size="1" *ngIf="room.startsWith(i+1)">
+                  <ion-button expand=" block" [color]="color" [class.selected]="selected(room)"
+                    [class.notAvailable]="notAvailable(room)" [disabled]="notAvailable(room)"
+                    (click)="selectRoom(room)">
+                    {{ room }}
+                    <ion-icon name="bed"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ng-container>
+            </ion-row>
+          </ion-item>
+        </ion-row>
+      </ng-container>
+    </ion-row>
+  </ion-list>
+
+</ion-content>
