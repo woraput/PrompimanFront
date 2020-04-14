@@ -91,8 +91,7 @@ export class RegisterInformationPage implements OnInit {
           console.log(data);
 
           this.fg.patchValue(data);
-          this.urlPhoto = this.fg.get('photo').value;
-          console.log(this.urlPhoto);
+          if (this.fg.get('photo').value !== null) { this.urlPhoto = this.fg.get('photo').value; }
 
           if (data.nationality == "ไทย") {
             this.fgTh.patchValue(data);
