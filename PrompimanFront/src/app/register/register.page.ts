@@ -33,7 +33,7 @@ export class RegisterPage implements OnInit {
   async register() {
     const modal = await this.modalController.create({
       component: RegisterInformationPage,
-      cssClass: 'dialog-modal',
+      cssClass: 'dialog-modal-4-regis-info',
     });
     return await modal.present();
   }

@@ -52,7 +52,7 @@ export class RegisterDetailPage implements OnInit {
   async editMember() {
     const modal = await this.modalController.create({
       component: RegisterInformationPage,
-      cssClass: 'dialog-modal',
+      cssClass: 'dialog-modal-4-regis-info',
       componentProps: {
         passed_id: this._id
       }
