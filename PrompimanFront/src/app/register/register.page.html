@@ -28,7 +28,6 @@
     </ion-col>
   </ion-row>
 
-  <div>
     <ion-card>
       <ion-card-header>
         <ion-row class="ion-text-center">
@@ -38,10 +37,10 @@
           <ion-col size="3">
             <h4>ไอดี</h4>
           </ion-col>
-          <ion-col size="3">
+          <ion-col size="3" class="ion-text-left">
             <h4>ชื่อ - สกุล</h4>
           </ion-col>
-          <ion-col size="3">
+          <ion-col size="2.5" class="ion-text-left">
             <h4>เบอร์โทรศัพท์</h4>
           </ion-col>
         </ion-row>
@@ -59,22 +58,21 @@
           <ion-col size="3">
             {{item._id}}
           </ion-col>
-          <ion-col size="3" *ngIf = "item.th_Firstname != null">
+          <ion-col size="3" *ngIf = "item.th_Firstname != null" class="ion-text-left">
             {{item.th_Firstname}} {{item.th_Lastname}}
           </ion-col>
-          <ion-col size="3" *ngIf = "item.th_Firstname == null">
+          <ion-col size="3" *ngIf = "item.th_Firstname == null" class="ion-text-left">
             {{item.en_Firstname}} {{item.en_Lastname}}
           </ion-col>
-          <ion-col size="3">
+          <ion-col size="2.5" class="ion-text-left">
             {{item.telephone}}
           </ion-col>
-          <ion-col size="1">
-            <ion-button size="default" expand="block" type="submit">Check-in</ion-button>
+          <ion-col size="1.5">
+            <ion-button size="default" expand="block" type="submit">Check In</ion-button>
           </ion-col>
         </ion-item>
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </ion-card-content>
     </ion-card>
-  </div>
   <!-- </form> -->
 </ion-content>
