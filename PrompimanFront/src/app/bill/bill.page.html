@@ -4,6 +4,110 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-list lines="none">
+
+    <div scrollX="true" scrollY="true" class="ion-padding">
+      <table>
+        <thead class="bgb">
+          <tr>
+            <th width="600">รายการ</th>
+            <th width="150">ราคา (บาท)</th>
+            <th width="150">จำนวน</th>
+            <th width="200">รวม (บาท)</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td width="100" class="ion-text-left">ห้องพัก ห้องที่125-168</td>
+            <td width="100">30000000</td>
+            <td width="100">12/17/18</td>
+            <td width="100">30000000</td>
+          </tr>
+          <tr>
+            <td width="100" colspan="3">รวม</td>
+            <td width="100">30000000</td>
+          </tr>
+          <tr>
+            <td width="100" colspan="3">ค่ามัดจำ</td>
+            <td width="100">30000000</td>
+          </tr>
+          <tr>
+            <td width="100" colspan="3">ยอดสุทธิ</td>
+            <td width="100">30000000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ion-row>
+      <ion-col size="9">
+        <ion-item class="ion-text-right">
+          <ion-label>เลือกประเภทการจ่ายเงิน</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item class="ion-text-right">
+          <ion-select interface="action-sheet">
+            <ion-select-option value="cash">เงินสด</ion-select-option>
+            <ion-select-option value="credit">บัตรเครดิต</ion-select-option>
+            <ion-select-option value="promptpay">พร้อมเพย์</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="8"></ion-col>
+      <ion-col size="1">
+        <ion-item class="ion-text-right">
+          <ion-label>รับเงิน</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item class="ion-text-right">
+          <ion-input type="text" placeholder="กรุณากรอกข้อมูล"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="1">
+        <ion-item class="ion-text-right">
+          <ion-label>บาท</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8"></ion-col>
+      <ion-col size="1">
+        <ion-item class="ion-text-right">
+          <ion-label>เงินทอน</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item class="ion-text-right">
+          <ion-label>350</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="1">
+        <ion-item class="ion-text-right">
+          <ion-label>บาท</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col size="8">
+      </ion-col>
+      <ion-col size="1">
+      </ion-col>
+      <ion-col size="1.5">
+        <ion-button size="default" expand="block" type="">ยืนยัน</ion-button>
+      </ion-col>
+      <ion-col size="1">
+      </ion-col>
+    </ion-row>
+
+  </ion-list>
 
 </ion-content>
