@@ -62,7 +62,11 @@ export class AppComponent implements OnInit {
       url: './bill',
       icon: 'copy'
     },
-  
+    {
+      title: 'SelectRooms',
+      url: './select-rooms',
+      icon: 'bookmark'
+    },
   ];
 
   date: Date;
