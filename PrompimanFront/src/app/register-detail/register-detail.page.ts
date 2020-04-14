@@ -38,7 +38,7 @@ export class RegisterDetailPage implements OnInit {
     // });
 
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
-    console.log('_id is:',this._id);
+    console.log('_id is:', this._id);
 
     this.cloud.getByID(this._id).subscribe(data => {
       if (data != null) {
@@ -52,8 +52,9 @@ export class RegisterDetailPage implements OnInit {
   async editMember() {
     const modal = await this.modalController.create({
       component: RegisterInformationPage,
+      cssClass: 'dialog-modal',
       componentProps: {
-        passed_id : this._id
+        passed_id: this._id
       }
     });
     return await modal.present();
