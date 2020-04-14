@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DlgBookingDetailPageRoutingModule } from './dlg-booking-detail-routing.module';
+import { BookingDetailPageRoutingModule } from './booking-detail-routing.module';
 
-import { DlgBookingDetailPage } from './dlg-booking-detail.page';
+import { BookingDetailPage } from './booking-detail.page';
 import { ComponentsModule } from 'src/components/components.module';
 
 @NgModule({
@@ -16,9 +16,8 @@ import { ComponentsModule } from 'src/components/components.module';
     IonicModule,
     ReactiveFormsModule,
     ComponentsModule,
-    DlgBookingDetailPageRoutingModule,
-    ComponentsModule,
+    BookingDetailPageRoutingModule,
   ],
-  declarations: [DlgBookingDetailPage]
+  declarations: [BookingDetailPage]
 })
-export class DlgBookingDetailPageModule {}
+export class BookingDetailPageModule {}

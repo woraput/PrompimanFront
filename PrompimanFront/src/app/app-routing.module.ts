@@ -55,10 +55,10 @@ const routes: Routes = [
     path: 'register-detail',
     loadChildren: () => import('./register-detail/register-detail.module').then( m => m.RegisterDetailPageModule)
   },
-  {
-    path: 'dlg-booking-detail',
-    loadChildren: () => import('./dlg-booking-detail/dlg-booking-detail.module').then( m => m.DlgBookingDetailPageModule)
-  },
+  // {
+  //   path: 'dlg-booking-detail',
+  //   loadChildren: () => import('./dlg-booking-detail/dlg-booking-detail.module').then( m => m.DlgBookingDetailPageModule)
+  // },
   {  
     path: 'booking-information',
     loadChildren: () => import('./booking-information/booking-information.module').then( m => m.BookingInformationPageModule)
@@ -66,7 +66,12 @@ const routes: Routes = [
   {
     path: 'bill',
     loadChildren: () => import('./bill/bill.module').then( m => m.BillPageModule)
+  },
+  {
+    path: 'booking-detail',
+    loadChildren: () => import('./booking-detail/booking-detail.module').then( m => m.BookingDetailPageModule)
   }
+
 
 
 

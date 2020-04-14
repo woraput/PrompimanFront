@@ -1,20 +1,20 @@
 import { Component, OnInit, ViewChildren } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 
+
 @Component({
-  selector: 'app-dlg-booking-detail',
-  templateUrl: './dlg-booking-detail.page.html',
-  styleUrls: ['./dlg-booking-detail.page.scss'],
+  selector: 'app-booking-detail',
+  templateUrl: './booking-detail.page.html',
+  styleUrls: ['./booking-detail.page.scss'],
 })
-export class DlgBookingDetailPage implements OnInit {
+export class BookingDetailPage implements OnInit {
   public fg: FormGroup;
   private submitRequested: boolean;
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
 
-
-
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, public router:Router) { 
     this.fg = this.fb.group({
       'name': ['', Validators.required],
       'telephone': ['', Validators.required],
@@ -23,9 +23,9 @@ export class DlgBookingDetailPage implements OnInit {
       'count': ['', Validators.required],
       // room ของ component
       'money': ['', Validators.required],
-
     })
   }
+  
   public isValid(name: string): boolean {
     var ctrl = this.fg.get(name);
     if (name == 'anycheck') {
@@ -43,7 +43,9 @@ export class DlgBookingDetailPage implements OnInit {
     }
   }
 
-  
+  room(){
+    this.router.navigate(['/booking-information']);
+  }
 
   ngOnInit() {
   }

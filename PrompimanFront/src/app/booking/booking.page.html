@@ -7,7 +7,7 @@
 <ion-content class="ion-padding">
   <!-- <form [formGroup]="fg" (ngSubmit)="handleSubmit()"> -->
   <ion-item lines="none">
-    <ion-button size="default" (click)="register()" slot="end" expand="block" type="submit">
+    <ion-button (click)="bookinginformation()" size="default" slot="end" expand="block" type="submit">
       <ion-icon name="add-circle-outline"></ion-icon>
       เพิ่มข้อมูลการจอง
     </ion-button>
@@ -53,7 +53,7 @@
 
   <ion-card>
     <ion-card-content>
-      <ion-item>
+      <ion-item (click)="editMember()" >
         <ion-col size="1.5">
           02/02/2020
         </ion-col>
@@ -76,7 +76,7 @@
           <ion-button size="default" expand="block" type="submit">ยืนยันการจอง</ion-button>
         </ion-col>
         <ion-col size="1">
-          <ion-button size="default" expand="block" color="medium">แก้ไข</ion-button>
+          <ion-button (click)="editMember()" size="default" expand="block" color="medium" >แก้ไข</ion-button>
         </ion-col>
       </ion-item>
     </ion-card-content>
