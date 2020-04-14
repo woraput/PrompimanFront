@@ -14,65 +14,62 @@
   </ion-item>
 
   <ion-row class="ion-padding">
-    <ion-col size="11" >
-      <div>
-        <ion-searchbar [formControl]="searchBar"></ion-searchbar>
-      </div>
+    <ion-col size="11">
+      <ion-searchbar [formControl]="searchBar"></ion-searchbar>
     </ion-col>
     <ion-col size="1">
-      <div>
-        <ion-button size="default" slot="end" expand="block" color="dark" (click)="search(searchBar.value)">
-          ค้นหา
-        </ion-button>
-      </div>
+      <ion-button style="margin-top: 0.8em;" size="default" expand="block" color="dark"
+        (click)="search(searchBar.value)">
+        ค้นหา
+      </ion-button>
     </ion-col>
   </ion-row>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-row class="ion-text-center">
-          <ion-col size="2">
-            <h4>วันที่ลงทะเบียน</h4>
-          </ion-col>
-          <ion-col size="3">
-            <h4>ไอดี</h4>
-          </ion-col>
-          <ion-col size="3" class="ion-text-left">
-            <h4>ชื่อ - สกุล</h4>
-          </ion-col>
-          <ion-col size="2.5" class="ion-text-left">
-            <h4>เบอร์โทรศัพท์</h4>
-          </ion-col>
-        </ion-row>
-      </ion-card-header>
-    </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="ion-text-center">
+        <ion-col size="2">
+          <h4>วันที่ลงทะเบียน</h4>
+        </ion-col>
+        <ion-col size="3">
+          <h4>ไอดี</h4>
+        </ion-col>
+        <ion-col size="3" class="ion-text-left">
+          <h4>ชื่อ - สกุล</h4>
+        </ion-col>
+        <ion-col size="2.5" class="ion-text-left">
+          <h4>เบอร์โทรศัพท์</h4>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
 
-    <ion-card>
-      <ion-card-content>
-        <ion-item class="ion-text-center"
-          *ngFor="let item of paging.members  | paginate: { itemsPerPage: 10, currentPage: p }"
-          [routerLink]="['/register-detail/', item._id]" routerDirection="forward">
-          <ion-col size="2">
-            {{item.creationDateTime | date:"dd/MM/yyyy" }}
-          </ion-col>
-          <ion-col size="3">
-            {{item._id}}
-          </ion-col>
-          <ion-col size="3" *ngIf = "item.th_Firstname != null" class="ion-text-left">
-            {{item.th_Firstname}} {{item.th_Lastname}}
-          </ion-col>
-          <ion-col size="3" *ngIf = "item.th_Firstname == null" class="ion-text-left">
-            {{item.en_Firstname}} {{item.en_Lastname}}
-          </ion-col>
-          <ion-col size="2.5" class="ion-text-left">
-            {{item.telephone}}
-          </ion-col>
-          <ion-col size="1.5">
-            <ion-button size="default" expand="block" type="submit">Check In</ion-button>
-          </ion-col>
-        </ion-item>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
-      </ion-card-content>
-    </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-item class="ion-text-center"
+        *ngFor="let item of paging.members  | paginate: { itemsPerPage: 10, currentPage: p }"
+        [routerLink]="['/register-detail/', item._id]" routerDirection="forward">
+        <ion-col size="2">
+          {{item.creationDateTime | date:"dd/MM/yyyy" }}
+        </ion-col>
+        <ion-col size="3">
+          {{item._id}}
+        </ion-col>
+        <ion-col size="3" *ngIf="item.th_Firstname != null" class="ion-text-left">
+          {{item.th_Firstname}} {{item.th_Lastname}}
+        </ion-col>
+        <ion-col size="3" *ngIf="item.th_Firstname == null" class="ion-text-left">
+          {{item.en_Firstname}} {{item.en_Lastname}}
+        </ion-col>
+        <ion-col size="2.5" class="ion-text-left">
+          {{item.telephone}}
+        </ion-col>
+        <ion-col size="1.5">
+          <ion-button size="default" expand="block" type="submit">Check In</ion-button>
+        </ion-col>
+      </ion-item>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </ion-card-content>
+  </ion-card>
   <!-- </form> -->
 </ion-content>
