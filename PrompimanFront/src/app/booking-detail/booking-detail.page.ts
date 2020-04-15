@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChildren, Input } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 
 
@@ -11,10 +11,12 @@ import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 })
 export class BookingDetailPage implements OnInit {
   public fg: FormGroup;
+  public isCancel2: string;
+
   private submitRequested: boolean;
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
 
-  constructor(private fb: FormBuilder, public router:Router) { 
+  constructor(private fb: FormBuilder, public router:Router,  private activatedRoute: ActivatedRoute) { 
     this.fg = this.fb.group({
       'name': ['', Validators.required],
       'telephone': ['', Validators.required],
@@ -24,6 +26,9 @@ export class BookingDetailPage implements OnInit {
       // room ของ component
       'money': ['', Validators.required],
     })
+    this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');
+    console.log(this.isCancel2);
+    
   }
   
   public isValid(name: string): boolean {
