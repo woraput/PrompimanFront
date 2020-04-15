@@ -7,7 +7,7 @@ import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 @Component({
   selector: 'app-booking-detail',
   templateUrl: './booking-detail.page.html',
-  styleUrls: ['./booking-detail.page.scss'],
+  styleUrls: ['../app.component.scss'],
 })
 export class BookingDetailPage implements OnInit {
   public fg: FormGroup;
@@ -44,7 +44,10 @@ export class BookingDetailPage implements OnInit {
   }
 
   room(){
-    this.router.navigate(['/booking-information']);
+    './select-rooms.page.html'
+    // this.router.navigate(['/booking-information']);
+    this.router.navigate(['./select-rooms']);
+
   }
 
   ngOnInit() {
