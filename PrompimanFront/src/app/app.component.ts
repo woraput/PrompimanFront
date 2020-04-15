@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       icon: 'log-out'
     },
     {
-      title: 'Booking',
+      title: 'Reservation',
       url: '/booking',
       icon: 'book'
     },
