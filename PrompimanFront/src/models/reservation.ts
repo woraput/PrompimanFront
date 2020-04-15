@@ -13,33 +13,33 @@ export class Reservation {
 }
 
 export class RoomSelected {
-    RoomNo: string
-    Setting: SettingRoom
+    roomNo: string
+    setting: SettingRoom
 }
 
 export class SettingRoom {
-    HaveBreakfast: boolean
-    HaveAddBreakfast: boolean
-    AddBreakfastCount: number
-    HaveExtraBed: boolean
-    ExtraBedCount: number
-    Discount: number
+    haveBreakfast: boolean
+    haveAddBreakfast: boolean
+    addBreakfastCount: number
+    haveExtraBed: boolean
+    extraBedCount: number
+    discount: number
 }
 
 export class RoomActivated {
     _id: string
-    GroupId: string
-    RoomNo: string
-    RoomType: string
-    BedType: string
-    Rate: number                     //(ราคาไม่รวมอาหารเช้า)
-    ArrivalDate: Date
-    Departure: Date
-    Setting: SettingRoom
-    Status: string                // จอง, เข้าพัก, คืนห้อง, ออก, ยกเลิก
-    Active: boolean
-    CreationDateTime: Date
-    LastUpdate: Date
+    groupId: string
+    roomNo: string
+    roomType: string
+    bedType: string
+    rate: number                     //(ราคาไม่รวมอาหารเช้า)
+    arrivalDate: Date
+    departure: Date
+    setting: SettingRoom
+    status: string                // จอง, เข้าพัก, คืนห้อง, ออก, ยกเลิก
+    active: boolean
+    creationDateTime: Date
+    lastUpdate: Date
 }
 
 // export class Room {
