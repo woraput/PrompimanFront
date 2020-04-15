@@ -8,7 +8,7 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./select-rooms.page.scss'],
 })
 export class SelectRoomsPage implements OnInit {
-  public rooms = AllRooms.sort((a, b) => a - b);
+  public rooms = AllRooms.sort((a, b) => a.localeCompare(b));
   public roomsSelect = RoomsSelect;
   private floors = Floor;
   private color: "green";
