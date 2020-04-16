@@ -15,10 +15,11 @@
 
   <ion-row class="ion-padding">
     <ion-col size="11">
-      <ion-searchbar></ion-searchbar>
+      <ion-searchbar [formControl]="searchBar"></ion-searchbar>
     </ion-col>
     <ion-col size="1">
-      <ion-button style="margin-top: 0.8em;" size="default" expand="block" color="dark">
+      <ion-button style="margin-top: 0.8em;" size="default" expand="block" color="dark" 
+       (click)="searchReservation(searchBar.value)">
         ค้นหา
       </ion-button>
     </ion-col>
@@ -53,27 +54,26 @@
 
   <ion-card>
     <ion-card-content>
-      <ion-item lines="none">
+      <ion-item lines="none" *ngFor="let item of reservation">
         <ion-col size="10" [routerLink]="['/booking-detail/', 'cancel']">
           <ion-item lines="none">
             <ion-col size="2">
-              02/02/2020
+              {{item.checkInDate | date:"dd/MM/yyyy"}}
             </ion-col>
             <ion-col size="1.5">
-              04/02/2020
+              {{item.checkOutDate | date:"dd/MM/yyyy"}}
             </ion-col>
-
             <ion-col size="2" class="ion-text-center">
-              02/01/2020
+              {{item.creationDateTime | date:"dd/MM/yyyy"}}
             </ion-col>
             <ion-col size="2.5" class="ion-text-center">
-              ดงจัง ดีพังจุง
-            </ion-col> 
-            <ion-col size="2" class="ion-text-left">
-              021236548999
+              {{item.name}}
             </ion-col>
-            <ion-col size="2" class="ion-text-center" >
-              200
+            <ion-col size="2" class="ion-text-left">
+              {{item.telephone}}
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+              {{item.rooms.length}}
             </ion-col>
           </ion-item>
         </ion-col>
