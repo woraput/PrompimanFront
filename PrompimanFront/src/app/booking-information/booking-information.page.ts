@@ -3,6 +3,7 @@ import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
+import { CloudSyncService } from '../cloud-sync.service';
 
 @Component({
   selector: 'app-booking-information',
@@ -13,8 +14,9 @@ export class BookingInformationPage implements OnInit {
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
   public fg: FormGroup;
   public submitRequested: boolean;
-
-  constructor(private fb: FormBuilder, private router: Router) {
+  public text = "เงินสำรองจ่าย";
+  
+  constructor(private fb: FormBuilder, private router: Router, private clound: CloudSyncService) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       'telephone': [null, Validators.required],
@@ -32,14 +34,15 @@ export class BookingInformationPage implements OnInit {
   }
 
   public handleSubmit() {
-    console.log(this.fg.value)
-    console.log(this.fg.valid)
+    // console.log(this.fg.value)
+    // console.log(this.fg.valid)
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
-    
+
     if (this.fg.valid) {
-      this.router.navigate(['/bill',this.fg.value]);
-      console.log(this.fg.value);
+      this.clound.dataPass = this.fg.value;
+      this.router.navigate(['/bill',this.text]);
+      // console.log(this.fg.value);
     }
   }
 
