@@ -6,24 +6,58 @@
 
 <ion-content class="ion-padding">
   <ion-list lines="none">
-    <ion-item>
-      <ion-row>
-        <ion-col *ngIf="roomsSelect != []">
-          <ion-item>
-            <ion-button size="default" (click)="confirm()">
-              ยืนยัน
-            </ion-button>
-
-
-            <ion-button ion-button icon-end round color="secondary" *ngFor="let room of roomsSelect"
-              (click)="deleteRoom(room)">
+    <ion-row>
+      <ion-col size="5" *ngIf="roomsSelect != []">
+        <ion-item>
+          <ion-button size="default" (click)="confirm()">
+            ยืนยัน
+          </ion-button>
+          <ion-col>
+            <ion-button *ngFor="let room of roomsSelect" (click)="deleteRoom(room)">
               {{ room }}
               <ion-icon name="close"></ion-icon>
             </ion-button>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+          </ion-col>
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-row>
+          <ion-col size="2.5">
+            <ion-item>
+              <ion-label>
+                วันที่ {{checkInDate | date:"dd/mm/yy" }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>รูปแบบห้อง</ion-label>
+              <ion-select interface="popover" cancelText="string">
+                <ion-select-option [value]=1>สแตนดาร์ด</ion-select-option>
+                <ion-select-option [value]=2>ซูพิเรีย</ion-select-option>
+                <ion-select-option [value]=3>ดีลักซ์</ion-select-option>
+                <ion-select-option [value]=4>แกรนดีลักซ์</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>รูปแบบเตียง</ion-label>
+              <ion-select interface="popover">
+                <ion-select-option [value]=1>เดี่ยว</ion-select-option>
+                <ion-select-option [value]=2>เดี่ยว2เตียง</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="1">
+            <ion-button fill="clear" (click)="detailRooms()">
+              <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
 
     <ion-row *ngFor="let f of floors; let i= index; ">
       <ng-container>

@@ -75,6 +75,10 @@ const routes: Routes = [
     path: 'select-rooms',
     loadChildren: () => import('./select-rooms/select-rooms.module').then(m => m.SelectRoomsPageModule)
   },
+  {
+    path: 'dlg-select-rooms-detail',
+    loadChildren: () => import('./dlg-select-rooms-detail/dlg-select-rooms-detail.module').then( m => m.DlgSelectRoomsDetailPageModule)
+  },
 
 
 
