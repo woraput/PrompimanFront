@@ -10,6 +10,7 @@ export class CloudSyncService {
 
   private readonly baseUrl: string = 'http://localhost:5000/api/'; // local
   private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
+  public dataPass: any;
   constructor(private http: HttpClient) {
     console.log('Create CloudSyncProvider Provider');
   }
