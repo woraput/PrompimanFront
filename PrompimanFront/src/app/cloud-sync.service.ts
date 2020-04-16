@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Member, Paging, MemberResponse } from 'src/models/Member';
-import { Room, DateRequest } from 'src/models/reservation';
+import { Room, DateRequest, Reservation } from 'src/models/reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -45,10 +45,16 @@ export class CloudSyncService {
     return this.http.get<Paging>(this.baseUrlPublish + "Member/Get/" + page + "/" + size + "?word=" + word);
   }
 
-
   //Room
   public getAllRooms(timeData: DateRequest) {
     return this.http.put<Room>(this.baseUrlPublish + '/Room/Get/', timeData);
   }
 
+  public getReservation(): any {
+    return this.http.get<Reservation>(this.baseUrlPublish + 'Reservation/Get/');
+  }
+
+  public searchReservation(word: string): any {
+    return this.http.get<Reservation>(this.baseUrlPublish + 'Reservation/Get/' + "?word=" + word);
+  }
 }

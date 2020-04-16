@@ -29,7 +29,7 @@ export interface MemberResponse {
 export class Paging {
     page: number;
     count: number;
-    members: Member[]
+    members: Member[];
 }
 
 export interface Nationality {

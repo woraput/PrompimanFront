@@ -15,10 +15,9 @@ export class RegisterPage implements OnInit {
 
   public fg: FormGroup;
   public paging: Paging = new Paging;
-  // public currentPage = 1;
-  // public page =  this.cloud.getuser(1, 10);
   p: number = 1;
   public searchBar: FormControl;
+  dataxx: any={};
 
 
   constructor(private modalController: ModalController, private fb: FormBuilder, private nav: NavController, public router: Router, private cloud: CloudSyncService) {
@@ -44,6 +43,9 @@ export class RegisterPage implements OnInit {
   getPageUsers(p: number) {
     this.cloud.getuser(p, 10).subscribe(data => {
       this.paging = data;
+      console.log(this.paging.members[2]);
+      this.dataxx = this.paging.members[2];
+      console.log(this.dataxx.idCard);    
       console.log(this.paging.members);
       console.log(this.paging.count);
       console.log(this.paging.page);
