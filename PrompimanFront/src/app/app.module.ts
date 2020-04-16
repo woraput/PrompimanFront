@@ -1,3 +1,4 @@
+import { DlgSelectRoomsDetailPageModule } from './dlg-select-rooms-detail/dlg-select-rooms-detail.module';
 import { RegisterInformationPageModule } from './register-information/register-information.module';
 import { FormsModule } from '@angular/forms';
 import { MbscModule } from '@mobiscroll/angular';
@@ -24,6 +25,7 @@ import { BookingDetailPageModule } from './booking-detail/booking-detail.module'
     RegisterPageModule,
     RegisterInformationPageModule,
     BookingDetailPageModule,
+    DlgSelectRoomsDetailPageModule,
     MbscModule,
     BrowserModule,
     IonicModule.forRoot(),

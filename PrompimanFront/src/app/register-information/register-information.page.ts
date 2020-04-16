@@ -123,6 +123,8 @@ export class RegisterInformationPage implements OnInit {
   }
 
   public handleSubmit() {
+    console.log(this.fgTh.get('issueDate').value);
+    
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
 

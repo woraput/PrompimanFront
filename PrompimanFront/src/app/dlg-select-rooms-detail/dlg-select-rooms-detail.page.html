@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>รายละเอียดเพิ่มเติม</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-list class="ion-no-padding" lines="none">
+    <ion-list-header> รายละเอียดสีห้องพัก </ion-list-header>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" color="primary" class="ion-text-center">
+        </ion-button>
+        <ion-button expand="full" color="danger" class="ion-text-center">
+        </ion-button>
+        <ion-button expand="full" style=" --background: brown;" class="ion-text-center">
+        </ion-button>
+        <ion-button expand="full" color="warning" class="ion-text-center">
+        </ion-button>
+        <ion-button expand="full" style=" --background: blue;" class="ion-text-center">
+        </ion-button>
+        <ion-button expand="full" color="primary" class="ion-text-center" text lines="none">
+          102
+          <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>ว่าง </ion-label>
+        </ion-button>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>ขายแล้ว </ion-label>
+        </ion-button>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>กำลังซ่อม </ion-label>
+        </ion-button>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>จอง </ion-label>
+        </ion-button>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>ห้องพักผู้บริหาร </ion-label>
+        </ion-button>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>กำลังถูกจ้อง </ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <ion-list class="ion-no-padding" lines="none">
+    <ion-list-header> รายละเอียดประเภทห้องพัก </ion-list-header>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" fill="clear" class="ion-text-center">
+          <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button expand="full" fill="clear" class="ion-text-center">
+          <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button expand="full" fill="clear" class="ion-text-center">
+          <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button expand="full" fill="clear" class="ion-text-center">
+          <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>สแตนดาร์ด </ion-label>
+        </ion-button>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>ซูพิเรีย </ion-label>
+        </ion-button>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>ดีลักซ์ </ion-label>
+        </ion-button>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>แกรนดีลักซ์ </ion-label>
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <ion-list class="ion-no-padding" lines="none">
+    <ion-list-header> รายละเอียดประเภทห้องพัก </ion-list-header>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" fill="clear" class="ion-text-center">
+          <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button expand="full" fill="clear" class="ion-text-center">
+          <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>เดี่ยว </ion-label>
+        </ion-button>
+        <ion-button expand="full" color="dark" fill="clear" class="ion-text-center">
+          <ion-label>เดี่ยว2เตียง </ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <ion-button (click)="closeModal()" expand="block">
+    ปิด
+  </ion-button>
+</ion-content>
