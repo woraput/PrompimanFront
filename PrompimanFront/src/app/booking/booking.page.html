@@ -55,7 +55,7 @@
   <ion-card>
     <ion-card-content>
       <ion-item lines="none" *ngFor="let item of reservation">
-        <ion-col size="10" [routerLink]="['/booking-detail/', 'cancel']">
+        <ion-col size="10" [routerLink]="['/booking-detail/', item._id, 'cancel']">
           <ion-item lines="none">
             <ion-col size="2">
               {{item.checkInDate | date:"dd/MM/yyyy"}}
@@ -81,7 +81,7 @@
           <ion-button (click)="confirmMember()" size="default" expand="block">ยืนยัน</ion-button>
         </ion-col>
         <ion-col size="1">
-          <ion-button [routerLink]="['/booking-detail/', 'edit']" size="default" expand="block" color="medium">แก้ไข
+          <ion-button [routerLink]="['/booking-detail/', item._id, 'edit']" size="default" expand="block" color="medium">แก้ไข
           </ion-button>
         </ion-col>
       </ion-item>

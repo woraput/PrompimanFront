@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChildren, Input } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
-
+import { CloudSyncService } from '../cloud-sync.service';
+import { Reservation } from 'src/models/reservation';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-booking-detail',
@@ -10,27 +12,41 @@ import { DatetimeComponent } from 'src/components/datetime/datetime.component';
   styleUrls: ['../app.component.scss'],
 })
 export class BookingDetailPage implements OnInit {
-  public fg: FormGroup;
-  public isCancel2: string;
-
-  private submitRequested: boolean;
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
 
-  constructor(private fb: FormBuilder, public router:Router,  private activatedRoute: ActivatedRoute) { 
+  public fg: FormGroup;
+  public isCancel2: string;
+  public _id: string;
+  public listdataReservation: any = {};
+  public roomslength: number;
+  private submitRequested: boolean;
+
+  constructor(private fb: FormBuilder, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute, public alertController: AlertController) {
+    this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');
+    this._id = this.activatedRoute.snapshot.paramMap.get('_id');
+
     this.fg = this.fb.group({
       'name': ['', Validators.required],
       'telephone': ['', Validators.required],
-      'date1': ['', Validators.required],
-      'date2': ['', Validators.required],
-      'count': ['', Validators.required],
-      // room ของ component
-      'money': ['', Validators.required],
+      'checkInDate': ['', Validators.required],
+      'checkOutDate': ['', Validators.required],
+      'rooms': ['', Validators.required],
+      'reserve': ['', Validators.required],
+      'active': ['', Validators.required],
+      'note': ['', Validators.required],
     })
-    this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');
-    console.log(this.isCancel2);
-    
+
+    this.cloud.getByIDReservation(this._id).subscribe(data => {
+      if (data != null) {
+        this.listdataReservation = data;
+        this.fg.patchValue(data);
+        console.log(this.fg.value);
+        this.fg.get('rooms').setValue(this.fg.get('rooms').value.length);
+        this.roomslength = this.listdataReservation.rooms.length;
+      }
+    });
   }
-  
+
   public isValid(name: string): boolean {
     var ctrl = this.fg.get(name);
     if (name == 'anycheck') {
@@ -48,14 +64,41 @@ export class BookingDetailPage implements OnInit {
     }
   }
 
-  room(){
+  room() {
     './select-rooms.page.html'
     // this.router.navigate(['/booking-information']);
     this.router.navigate(['./select-rooms']);
-
   }
 
   ngOnInit() {
   }
 
+  async cancelReservation() {
+    const alert = await this.alertController.create({
+      header: 'หมายเหตุ',
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          placeholder: 'กรอกหมายเหตุยืนยันการยกเลิก'
+        },    
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 }

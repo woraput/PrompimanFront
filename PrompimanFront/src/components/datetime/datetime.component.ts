@@ -27,6 +27,14 @@ export class DatetimeComponent implements OnInit {
   constructor() {
   }
 
+  ngOnInit() {
+    console.log(this.text);
+    console.log(this.mode);
+    console.log(this.formName);
+    
+    this.submitRequested = false;
+  }
+
   datetimeSettings1: MbscCalendarOptions = {
     touchUi: false,
     controls: ['calendar'],
@@ -70,6 +78,7 @@ export class DatetimeComponent implements OnInit {
 
   public isValid(name: string): boolean {
     var ctrl = this.fg.get(name);
+    
     // if (name == 'anycheck') {
     //   ctrl = this.FormItem;
     //   return ctrl.errors && ctrl.errors.anycheck && (ctrl.dirty || this.submitRequested);
@@ -79,10 +88,6 @@ export class DatetimeComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-
-    this.submitRequested = false;
-  }
 
   submitRequest() {
     this.submitRequested = true;

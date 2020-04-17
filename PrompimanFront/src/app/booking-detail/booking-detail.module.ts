@@ -8,6 +8,7 @@ import { BookingDetailPageRoutingModule } from './booking-detail-routing.module'
 
 import { BookingDetailPage } from './booking-detail.page';
 import { ComponentsModule } from 'src/components/components.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
