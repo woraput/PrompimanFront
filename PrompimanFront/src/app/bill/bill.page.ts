@@ -58,7 +58,7 @@ export class BillPage implements OnInit {
   }
 
   handleSubmit() {
-    console.log('getMoney =',this.change);
+    console.log(this.fg.value);
     this.clound.createReservation(this.fg.value).subscribe(data =>{
       if (data != null) {
         console.log("edit success: ", data.isSuccess);

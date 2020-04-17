@@ -16,7 +16,7 @@ export class BookingInformationPage implements OnInit {
   public fg: FormGroup;
   public submitRequested: boolean;
   public text = "เงินสำรองจ่าย";
-  public test = ['201', '202', '203', '204', '501', '502', '503'];
+  public test = [{'roomNo':'201','Setting':null},{'roomNo':'202','Setting':null}];
   public addReserve : Number = 0;
 
   constructor(private fb: FormBuilder, private router: Router, private clound: CloudSyncService, private navCtrl: NavController) {
