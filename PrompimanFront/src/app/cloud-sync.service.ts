@@ -47,7 +47,7 @@ export class CloudSyncService {
 
   //Room
   public getAllRooms(timeData: DateRequest) {
-    return this.http.put<Room>(this.baseUrlPublish + '/Room/Get/', timeData);
+    return this.http.put<Room[]>(this.baseUrlPublish + '/Room/Get/', timeData);
   }
 
 }

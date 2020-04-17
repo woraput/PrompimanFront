@@ -33,7 +33,7 @@ export const AllRooms: string[] = [
 
 export const RoomsNotAvailable: string[] = ['405', '425', '501', '502', '503', '504', '601'];
 
-export const Floor: string[] = ['1', '2', '3', '4', '5', '6', '7'];
+export const Floor: string[] = ['2', '3', '4', '5', '6', '7'];
 
 export const RoomsSelect: string[] = [];
 
