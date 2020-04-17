@@ -4,6 +4,7 @@ import { Floor } from 'src/models/rooms';
 import { NavController, ModalController } from '@ionic/angular';
 import { DlgSelectRoomsDetailPage } from '../dlg-select-rooms-detail/dlg-select-rooms-detail.page';
 import { DateRequest, Room, RoomSelected } from 'src/models/reservation';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-select-rooms',
@@ -21,7 +22,9 @@ export class SelectRoomsPage implements OnInit {
   private date2: Date;
   private typeRoom: number;
   private typeBed: number;
-  constructor(private api: CloudSyncService, private navCtrl: NavController, private modalController: ModalController) {
+  constructor(private api: CloudSyncService, private navCtrl: NavController, private modalController: ModalController, private activatedRoute: ActivatedRoute) {
+    console.log(this.activatedRoute.snapshot.paramMap.get('checkInDate'));
+    console.log(this.activatedRoute.snapshot.paramMap.get('checkOutDate'));
   }
 
   ngOnInit() {

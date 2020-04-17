@@ -160,6 +160,8 @@ export class RegisterInformationPage implements OnInit {
   private createMember(fgType: FormGroup) {
     this.fg.patchValue(fgType.value);
     this.api.createMember(this.fg.value).subscribe(data => {
+      console.log(this.fg.value);
+      
       if (data != null) {
         console.log("create success: }", data.isSuccess);
       }
