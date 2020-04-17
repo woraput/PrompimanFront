@@ -42,16 +42,17 @@ export class RoomActivated {
     lastUpdate: Date
 }
 
+
 export class Room {
     _id: string
-    RoomType: number
-    BedType: number
-    Rate: number
-    Status: string                // ว่าง, แจ้งซ่อม, ห้องพักผู้บริหา
+    roomType: number
+    bedType: number
+    rate: number
+    status: string                // ว่าง, แจ้งซ่อม, ห้องพักผู้บริหา
 }
 
 export class DateRequest {
-    CheckInDate: Date
-    CheckOutDate: Date
+    checkInDate: Date
+    checkOutDate: Date
 
 }
