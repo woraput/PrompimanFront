@@ -76,7 +76,7 @@ const routes: Routes = [
     loadChildren: () => import('./booking-detail/booking-detail.module').then(m => m.BookingDetailPageModule)
   },
   {
-    path: 'select-rooms',
+    path: 'select-rooms/:checkInDate/:checkOutDate',
     loadChildren: () => import('./select-rooms/select-rooms.module').then(m => m.SelectRoomsPageModule)
   },
   {

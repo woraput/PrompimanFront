@@ -55,3 +55,8 @@ export class DateRequest {
     CheckOutDate: Date
 
 }
+
+export class ReserveResponse {
+    isSuccess: boolean;
+    errorMessage: string;
+}

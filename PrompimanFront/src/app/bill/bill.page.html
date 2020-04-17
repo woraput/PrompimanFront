@@ -20,7 +20,13 @@
           </thead>
 
           <tbody>
-            <tr>
+            <tr *ngIf="text == 'เงินสำรองจ่าย'">
+              <td width="100" class="ion-text-left"> เงินสำรองจ่าย</td>
+              <td width="100"></td>
+              <td width="100"></td>
+              <td width="100">{{this.fg.get('reserve').value}}</td>
+            </tr>
+            <tr *ngIf="text != 'เงินสำรองจ่าย'">
               <td width="100" class="ion-text-left"> {{text}}</td>
               <td width="100">{{this.fg.get('reserve').value}}</td>
               <td width="100">{{amount}}</td>
@@ -31,7 +37,7 @@
               <td width="100">{{allTotal}}</td>
             </tr>
             <tr>
-              <td width="100" colspan="3">ค่ามัดจำ</td>
+              <td width="100" colspan="3">ค่ามัดจำกุญแจ</td>
               <td width="100">{{reserveCalcutate}}</td>
             </tr>
             <tr>
@@ -68,7 +74,8 @@
         </ion-col>
         <ion-col size="2">
           <ion-item class="ion-text-right">
-            <ion-input type="text" placeholder="กรุณากรอกข้อมูล"></ion-input>
+            <ion-input type="number" placeholder="กรุณากรอกข้อมูล"
+            (ionChange)="onChangeValue($event)"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="1">
@@ -86,7 +93,7 @@
         </ion-col>
         <ion-col size="2">
           <ion-item class="ion-text-right">
-            <ion-label>350</ion-label>
+            <ion-label>{{ change }}</ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="1">

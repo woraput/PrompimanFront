@@ -10,14 +10,14 @@ import { CloudSyncService } from '../cloud-sync.service';
 })
 export class BillPage implements OnInit {
   public fg: FormGroup;
-  // myvalue;
   public text: string;
   public amount: number = 1;
   public total: number = 0;
   public allTotal: number = 0;
-  public reserveCalcutate: number = 0;
+  public keyDeposit: number = 0;
   public net: number = 0;
   public sendReserve: number = 0;
+  public change: number = 0;
 
   constructor(private fb: FormBuilder, private clound: CloudSyncService, private activatedRoute: ActivatedRoute) {
     this.fg = this.fb.group({
@@ -25,7 +25,7 @@ export class BillPage implements OnInit {
       'telephone': '',
       'checkInDate': '',
       'checkOutDate': '',
-      // 'rooms': SelectRoomsPage.CreateFormGroup(this.fg),
+      'rooms': [],
       'reserve': '',
     });
     this.text = this.activatedRoute.snapshot.paramMap.get('text');
@@ -53,10 +53,23 @@ export class BillPage implements OnInit {
     this.allTotal += this.total;
     console.log(this.allTotal);
 
-    this.net = this.allTotal + this.reserveCalcutate
+    this.net = this.allTotal + this.keyDeposit
+    
   }
 
   handleSubmit() {
+    console.log('getMoney =',this.change);
+    this.clound.createReservation(this.fg.value).subscribe(data =>{
+      if (data != null) {
+        console.log("edit success: ", data.isSuccess);
+      }
+    })
+
+  }
+
+  onChangeValue(event) {
+    let money = Number(event.detail.value);
+    this.change = money - this.net;
   }
 
 }

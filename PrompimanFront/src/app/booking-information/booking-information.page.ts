@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
 import { CloudSyncService } from '../cloud-sync.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-booking-information',
@@ -15,34 +16,40 @@ export class BookingInformationPage implements OnInit {
   public fg: FormGroup;
   public submitRequested: boolean;
   public text = "เงินสำรองจ่าย";
-  
-  constructor(private fb: FormBuilder, private router: Router, private clound: CloudSyncService) {
+  public test = ['201', '202', '203', '204', '501', '502', '503'];
+  public addReserve : Number = 0;
+
+  constructor(private fb: FormBuilder, private router: Router, private clound: CloudSyncService, private navCtrl: NavController) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       'telephone': [null, Validators.required],
       'checkInDate': [null, Validators.required],
       'checkOutDate': [null, Validators.required],
-      // 'rooms': SelectRoomsPage.CreateFormGroup(this.fg),
+      'rooms': [],
       'reserve': [null, Validators.required],
     });
+    console.log(this.fg.value);
   }
 
   ngOnInit() {
+    this.fg.get('rooms').setValue(this.test);
+    console.log(this.fg.get('rooms').value);
+    console.log(this.fg.value);
   }
 
   room() {
+    this.router.navigate(['/select-rooms',
+    this.fg.get('checkInDate').value],
+    this.fg.get('checkOutDate').value);
   }
 
   public handleSubmit() {
-    // console.log(this.fg.value)
-    // console.log(this.fg.valid)
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
-
     if (this.fg.valid) {
       this.clound.dataPass = this.fg.value;
-      this.router.navigate(['/bill',this.text]);
-      // console.log(this.fg.value);
+      this.router.navigate(['/bill', this.text]);
+      // this.navCtrl.navigateForward(['/bill',this.text]);
     }
   }
 
