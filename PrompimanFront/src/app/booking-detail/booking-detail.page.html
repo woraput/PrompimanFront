@@ -1,19 +1,132 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title  *ngIf="isCancel2 == 'edit'">แก้ไขข้อมูลการจอง</ion-title>
-    <ion-title  *ngIf="isCancel2 == 'cancel'">ยืนยันการจอง</ion-title>
+    <ion-title *ngIf="isCancel2 == 'edit'">แก้ไขข้อมูลการจอง</ion-title>
+    <ion-title *ngIf="isCancel2 == 'cancel'">ยืนยันการจอง</ion-title>
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-item lines="none" *ngIf="isCancel2 == 'cancel'">
-    <ion-button size="default" (click)="register()" slot="end" expand="block" type="submit">
+    <ion-button size="default" slot="end" expand="block" type="submit" (click)="cancelReservation()">
       ยกเลิกการจอง
     </ion-button>
   </ion-item>
+  <form [formGroup]="fg" (ngSubmit)="handleSubmit()" *ngIf="isCancel2 == 'cancel'">
+    <ion-list lines="none">
+      <ion-row>
+        <ion-col size="2">
+          <ion-item>
+            <ion-label>ชื่อ</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="10">
+          <ion-item>
+            <label>
+              {{listdataReservation.name}}
+            </label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-  <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
+      <ion-row>
+        <ion-col size="2">
+          <ion-item>
+            <ion-label>เบอร์โทรศัพท์</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="10">
+          <ion-item>
+            <label>
+              {{listdataReservation.telephone}}
+            </label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="2">
+          <ion-item>
+            <ion-label>วันที่เข้า</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="10">
+          <ion-item>
+            <label>
+              {{listdataReservation.checkInDate | date:"dd/MM/yyyy"}}
+            </label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="2">
+          <ion-item>
+            <ion-label>ออกวันที่</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="10">
+          <ion-item>
+            <label>
+              {{listdataReservation.checkOutDate | date:"dd/MM/yyyy"}}
+            </label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="2">
+          <ion-item>
+            <ion-label>จำนวนห้อง</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="10">
+          <ion-item>
+            <label>
+              {{roomslength}}
+            </label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="2">
+          <ion-item>
+            <ion-label>ห้อง</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="9">
+          <ion-item>
+            <ion-label>
+              {{xxx}}
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="2">
+          <ion-item>
+            <ion-label>เงินสำรองจ่าย</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="10">
+          <ion-item>
+            <label>
+              {{listdataReservation.reserve}}
+            </label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-item>
+        <ion-button size="default" slot="end" expand="block" [routerLink]="['/booking/']" color="danger">ยกเลิก
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
+
+  <form [formGroup]="fg" (ngSubmit)="handleSubmit()" *ngIf="isCancel2 == 'edit'">
     <ion-list lines="none">
       <ion-row>
         <ion-col size="2">
@@ -63,8 +176,8 @@
         </ion-col>
       </ion-row>
 
-      <app-datetime [fg]="fg" formName="date1" text="วันที่เข้า" mode="date"></app-datetime>
-      <app-datetime [fg]="fg" formName="date2" text="ออกวันที่" mode="date"></app-datetime>
+      <app-datetime [fg]="fg" formName="checkInDate" text="วันที่เข้า" mode="date"></app-datetime>
+      <app-datetime [fg]="fg" formName="checkOutDate" text="ออกวันที่" mode="date"></app-datetime>
 
       <ion-row>
         <ion-col size="2">
@@ -74,15 +187,15 @@
         </ion-col>
         <ion-col size="10">
           <ion-item>
-            <ion-input type="text" formControlName="count" placeholder="กรุณากรอกข้อมูล"
-              [class.invalid]="isValid('count')"></ion-input>
+            <ion-input type="text" formControlName="rooms" placeholder="กรุณากรอกข้อมูล"
+              [class.invalid]="isValid('rooms')"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="2"></ion-col>
         <ion-col size="10">
-          <ion-item *ngIf="isValid('count')">
+          <ion-item *ngIf="isValid('rooms')">
             <span class="invalid-msg">
               กรุณากรอกข้อมูล
             </span>
@@ -99,6 +212,7 @@
         <ion-col size="9">
           <ion-item>
             <ion-label>
+              555
             </ion-label>
           </ion-item>
         </ion-col>
@@ -117,15 +231,15 @@
         </ion-col>
         <ion-col size="10">
           <ion-item>
-            <ion-input type="text" formControlName="money" placeholder="กรุณากรอกข้อมูล"
-              [class.invalid]="isValid('money')"></ion-input>
+            <ion-input type="text" formControlName="reserve" placeholder="กรุณากรอกข้อมูล"
+              [class.invalid]="isValid('reserve')" disabled></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="2"></ion-col>
         <ion-col size="10">
-          <ion-item *ngIf="isValid('money')">
+          <ion-item *ngIf="isValid('reserve')">
             <span class="invalid-msg">
               กรุณากรอกข้อมูล
             </span>
@@ -133,16 +247,16 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="isCancel2 == 'edit'">
+      <ion-row>
         <ion-col size="2">
-          <ion-item  *ngIf="isCancel2 == 'edit'">
+          <ion-item>
             <ion-label>เพิ่มเงินสำรองจ่าย</ion-label>
             <ion-checkbox slot="start" value="false"></ion-checkbox>
           </ion-item>
         </ion-col>
         <ion-col size="1.5">
           <ion-item class="ion-text-center">
-            <ion-input type="text" placeholder="กรุณากรอกข้อมูล"></ion-input>
+            <ion-input type="text" placeholder="กรุณากรอกข้อมูล" ></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="1">
@@ -153,8 +267,10 @@
       </ion-row>
 
       <ion-item>
-        <ion-button size="default" slot="end" expand="block" [routerLink]="['/booking/']" color="danger">ยกเลิก</ion-button>
-        <ion-button  *ngIf="isCancel2 == 'edit'" size="default" slot="end" expand="block" type="submit">บันทึก</ion-button>
+        <ion-button size="default" slot="end" expand="block" [routerLink]="['/booking/']" color="danger">ยกเลิก
+        </ion-button>
+        <ion-button size="default" slot="end" expand="block" type="submit">บันทึก
+        </ion-button>
       </ion-item>
     </ion-list>
   </form>

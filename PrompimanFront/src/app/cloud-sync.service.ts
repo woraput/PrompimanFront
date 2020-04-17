@@ -57,4 +57,8 @@ export class CloudSyncService {
   public searchReservation(word: string): any {
     return this.http.get<Reservation>(this.baseUrlPublish + 'Reservation/Get/' + "?word=" + word);
   }
+  
+  public getByIDReservation(_id: string): any {
+    return this.http.get<Member>(this.baseUrlPublish + 'Reservation/GetById/' + _id);
+  }
 }

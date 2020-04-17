@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { BookingPage } from './booking.page';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ 
+  imports: [
+    //  NgxPaginationModule,
     FormsModule,  
     MbscModule, RouterModule.forChild(routes)],
   exports: [RouterModule],

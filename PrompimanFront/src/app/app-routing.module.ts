@@ -72,7 +72,7 @@ const routes: Routes = [
     loadChildren: () => import('./booking-detail/booking-detail.module').then(m => m.BookingDetailPageModule)
   },
   {
-    path: 'booking-detail/:isCancel',
+    path: 'booking-detail/:_id/:isCancel',
     loadChildren: () => import('./booking-detail/booking-detail.module').then(m => m.BookingDetailPageModule)
   },
   {
