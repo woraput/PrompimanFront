@@ -20,6 +20,8 @@ export class BookingDetailPage implements OnInit {
   public listdataReservation: any = {};
   public roomslength: number;
   private submitRequested: boolean;
+  public roomsnumber: [] = [];
+
 
   constructor(private fb: FormBuilder, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute, public alertController: AlertController) {
     this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');
@@ -30,7 +32,7 @@ export class BookingDetailPage implements OnInit {
       'telephone': ['', Validators.required],
       'checkInDate': ['', Validators.required],
       'checkOutDate': ['', Validators.required],
-      'rooms': ['', Validators.required],
+      'rooms': [],
       'reserve': ['', Validators.required],
       'active': ['', Validators.required],
       'note': ['', Validators.required],
@@ -41,8 +43,10 @@ export class BookingDetailPage implements OnInit {
         this.listdataReservation = data;
         this.fg.patchValue(data);
         console.log(this.fg.value);
-        this.fg.get('rooms').setValue(this.fg.get('rooms').value.length);
+        // this.fg.get('rooms').setValue(this.fg.get('rooms').value.length);
         this.roomslength = this.listdataReservation.rooms.length;
+        console.log( this.fg.get('rooms').value);
+        this.roomsnumber =  this.fg.get('rooms').value;      
       }
     });
   }

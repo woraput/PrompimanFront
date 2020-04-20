@@ -21,10 +21,12 @@ export class RegisterPage implements OnInit {
 
 
   constructor(private modalController: ModalController, private fb: FormBuilder, private nav: NavController, public router: Router, private cloud: CloudSyncService) {
-    this.getPageUsers(this.p);
     this.searchBar = new FormControl('');
   }
-
+  
+  ionViewDidEnter(){
+    this.getPageUsers(this.p);
+  }
 
   ngOnInit() {
   }
@@ -62,6 +64,4 @@ export class RegisterPage implements OnInit {
       console.log(this.paging.page);
     });
   }
-
-
 }
