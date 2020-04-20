@@ -4,7 +4,7 @@ import { Floor } from 'src/models/rooms';
 import { NavController, ModalController } from '@ionic/angular';
 import { DlgSelectRoomsDetailPage } from '../dlg-select-rooms-detail/dlg-select-rooms-detail.page';
 import { DateRequest, Room, RoomSelected } from 'src/models/reservation';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-rooms',
@@ -12,22 +12,30 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./select-rooms.page.scss'],
 })
 export class SelectRoomsPage implements OnInit {
-  // public rooms = AllRooms.sort((a, b) => a.localeCompare(b));
   private roomsSelect: RoomSelected[] = [];
   private floors = Floor;
-  private timePeriod = new DateRequest();
   private roomsStatic: Room[] = [];
+  private roomsByFilter: Room[] = [];
   public roomStaticSelect: Room[] = [];
-  private date1: Date;
-  private date2: Date;
-  private typeRoom: number;
-  private typeBed: number;
-  constructor(private api: CloudSyncService, private navCtrl: NavController, private modalController: ModalController, private activatedRoute: ActivatedRoute) {
-    console.log(this.activatedRoute.snapshot.paramMap.get('checkInDate'));
-    console.log(this.activatedRoute.snapshot.paramMap.get('checkOutDate'));
+  private displayDateIn: string
+  private displayDateOut: string
+  private roomType: number;
+  private bedType: number;
+  constructor(private api: CloudSyncService, private navCtrl: NavController, private modalController: ModalController, private activatedRoute: ActivatedRoute, private route: Router) {
+    this.roomType = 0;
+    this.bedType = 0;
   }
 
   ngOnInit() {
+    console.log(this.api.timePeriod);
+    this.api.getAllRooms(this.api.timePeriod).subscribe(data => {
+      if (data !== null) {
+        this.roomsStatic = data;
+        this.roomsByFilter = data;
+      }
+    })
+    this.displayDateIn = this.activatedRoute.snapshot.paramMap.get('checkInDate');
+    this.displayDateOut = this.activatedRoute.snapshot.paramMap.get('checkOutDate');
   }
 
   async detailRooms() {
@@ -37,16 +45,13 @@ export class SelectRoomsPage implements OnInit {
     return await modal.present();
   }
 
-  setTime() {
-    if ((this.date1 && this.date2) != null) {
-      this.timePeriod.checkInDate = this.date1;
-      this.timePeriod.checkOutDate = this.date2;
-      console.log(this.timePeriod);
-      this.api.getAllRooms(this.timePeriod).subscribe(data => {
-        if (data !== null) {
-          this.roomsStatic = data;
-        }
-      })
+  filterRoom() {
+    this.roomsByFilter = this.roomsStatic;
+    if (this.roomType != 0) {
+      this.roomsByFilter = this.roomsByFilter.filter(r => r.roomType == this.roomType);
+    }
+    if (this.bedType != 0) {
+      this.roomsByFilter = this.roomsByFilter.filter(r => r.bedType == this.bedType);
     }
   }
 
@@ -140,25 +145,18 @@ export class SelectRoomsPage implements OnInit {
       switch (room.roomType) {
         case 1:
           return "../../assets/icon/standardmdpi.svg";
-          break;
         case 2:
           return "../../assets/icon/superiormdpi.svg";
-          break;
         case 3:
           return "../../assets/icon/deluxemdpi.svg";
-          break;
         case 4:
           return "../../assets/icon/grand_deiuxemdpi.svg";
-          break;
         default:
-          return "../../assets/icon/standardmdpi.svg";
-          break;
+          return "../../assets/icon/help-circle-outline.svg";
       }
   }
 
-  // notAvailable(status: string): boolean {
-  //   return status != "ว่าง";
-  // }
+
   settingRoom() {
   }
 
@@ -166,7 +164,14 @@ export class SelectRoomsPage implements OnInit {
     this.roomsSelect = [];
   }
 
+  clearFilter() {
+    this.roomsByFilter = this.roomsStatic;
+    this.roomType = null;
+    this.bedType = null;
+  }
+
   confirm() {
-    this.navCtrl.pop();
+    this.api.lstRoomsSelect = this.roomsSelect;
+    this.route.navigate(['/booking-information']);
   }
 }
