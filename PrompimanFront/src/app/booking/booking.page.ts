@@ -17,28 +17,30 @@ export class BookingPage implements OnInit {
 
 
   constructor(private modalController: ModalController, public router: Router, public alertController: AlertController, private cloud: CloudSyncService) {
+    this.searchBar = new FormControl('');
+  }
+
+  ionViewDidEnter() {
     this.cloud.getReservation().subscribe(data => {
       console.log(data);
       this.reservation = data;
       console.log(this.reservation);
     });
-    this.searchBar = new FormControl('');
-
   }
 
   ngOnInit() {
   }
-          // let test = this.reservation[0]
-          // console.log(test.name);
-          // // console.log(this.roomCount);
-  
-          // for (let index = 0; index < this.reservation.length; index++) {
-          //   // this.roomCount =+ this.reservation[index].rooms.length;
-          //   console.log(this.reservation[index].rooms.length);
-          //   this.roomCount += Number(this.reservation[index].rooms.length);
-          //   // console.log(index , "/",this.reservation[index].rooms  );
-    //       }
-    // console.log(this.roomCount);
+  // let test = this.reservation[0]
+  // console.log(test.name);
+  // // console.log(this.roomCount);
+
+  // for (let index = 0; index < this.reservation.length; index++) {
+  //   // this.roomCount =+ this.reservation[index].rooms.length;
+  //   console.log(this.reservation[index].rooms.length);
+  //   this.roomCount += Number(this.reservation[index].rooms.length);
+  //   // console.log(index , "/",this.reservation[index].rooms  );
+  //       }
+  // console.log(this.roomCount);
 
   async confirmMember() {
     const alert = await this.alertController.create({
