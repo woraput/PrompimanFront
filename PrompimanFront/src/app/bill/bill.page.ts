@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CloudSyncService } from '../cloud-sync.service';
 
@@ -18,8 +18,9 @@ export class BillPage implements OnInit {
   public net: number = 0;
   public sendReserve: number = 0;
   public change: number = 0;
+  public fromPage: string;
 
-  constructor(private fb: FormBuilder, private clound: CloudSyncService, private activatedRoute: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private clound: CloudSyncService, private activatedRoute: ActivatedRoute, public router: Router) {
     this.fg = this.fb.group({
       'name': '',
       'telephone': '',
@@ -29,6 +30,9 @@ export class BillPage implements OnInit {
       'reserve': '',
     });
     this.text = this.activatedRoute.snapshot.paramMap.get('text');
+    this.fromPage = this.activatedRoute.snapshot.paramMap.get('pageName');
+    console.log(this.fromPage);
+
   }
 
   ngOnInit() {
@@ -54,22 +58,22 @@ export class BillPage implements OnInit {
     console.log(this.allTotal);
 
     this.net = this.allTotal + this.keyDeposit
-    
+
   }
 
   handleSubmit() {
     console.log(this.fg.value);
-    this.clound.createReservation(this.fg.value).subscribe(data =>{
-      if (data != null) {
-        console.log("edit success: ", data.isSuccess);
-      }
-    })
-
+    if (this.fromPage = "BookingInformationPage") {
+      this.clound.createReservation(this.fg.value).subscribe(data => {
+        if (data != null) {
+          console.log("edit success: ", data.isSuccess);
+        }});
+      this.router.navigate(['/booking']);
+    }
   }
 
   onChangeValue(event) {
     let money = Number(event.detail.value);
     this.change = money - this.net;
   }
-
 }

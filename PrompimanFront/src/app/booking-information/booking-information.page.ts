@@ -18,6 +18,7 @@ export class BookingInformationPage implements OnInit {
   public text = "เงินสำรองจ่าย";
   public test = [{ 'roomNo': '201', 'Setting': null }, { 'roomNo': '202', 'Setting': null }];
   public addReserve: Number = 0;
+  public pageName = "BookingInformationPage";
 
   constructor(private fb: FormBuilder, private router: Router, private clound: CloudSyncService, private navCtrl: NavController) {
     this.fg = this.fb.group({
@@ -48,7 +49,7 @@ export class BookingInformationPage implements OnInit {
     this.datetimeComponent.forEach(it => it.submitRequest());
     if (this.fg.valid) {
       this.clound.dataPass = this.fg.value;
-      this.router.navigate(['/bill', this.text]);
+      this.router.navigate(['/bill', this.text, this.pageName]);
       // this.navCtrl.navigateForward(['/bill',this.text]);
     }
   }
