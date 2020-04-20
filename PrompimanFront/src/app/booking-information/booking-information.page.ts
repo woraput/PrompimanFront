@@ -42,6 +42,8 @@ export class BookingInformationPage implements OnInit {
     this.router.navigate(['/select-rooms',
       this.fg.get('checkInDate').value,
       this.fg.get('checkOutDate').value]);
+    this.clound.timePeriod.checkInDate = this.fg.get('checkInDate').value;
+    this.clound.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
   }
 
   public handleSubmit() {
