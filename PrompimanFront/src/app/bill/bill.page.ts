@@ -18,6 +18,7 @@ export class BillPage implements OnInit {
   public net: number = 0;
   public sendReserve: number = 0;
   public change: number = 0;
+  public fromPage: string;
 
   constructor(private fb: FormBuilder, private clound: CloudSyncService, private activatedRoute: ActivatedRoute, public router: Router) {
     this.fg = this.fb.group({
@@ -29,6 +30,9 @@ export class BillPage implements OnInit {
       'reserve': '',
     });
     this.text = this.activatedRoute.snapshot.paramMap.get('text');
+    this.fromPage = this.activatedRoute.snapshot.paramMap.get('pageName');
+    console.log(this.fromPage);
+
   }
 
   ngOnInit() {
@@ -59,16 +63,17 @@ export class BillPage implements OnInit {
 
   handleSubmit() {
     console.log(this.fg.value);
-    this.clound.createReservation(this.fg.value).subscribe(data => {
-      if (data != null) {
-        console.log("edit success: ", data.isSuccess);
-      }});
-    this.router.navigate(['/booking']);
+    if (this.fromPage = "BookingInformationPage") {
+      this.clound.createReservation(this.fg.value).subscribe(data => {
+        if (data != null) {
+          console.log("edit success: ", data.isSuccess);
+        }});
+      this.router.navigate(['/booking']);
+    }
   }
 
   onChangeValue(event) {
     let money = Number(event.detail.value);
     this.change = money - this.net;
   }
-
 }
