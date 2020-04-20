@@ -9,30 +9,31 @@
 
 <ion-content class="ion-padding">
 
-  <ion-datetime display-format="DD-MM-YYYY" placeholder="กรุณาเลือกวันเข้า" value="" display-timezone="utc"
+  <!-- <ion-datetime display-format="DD-MM-YYYY" placeholder="กรุณาเลือกวันเข้า" value="" display-timezone="utc"
     [(ngModel)]="date1" (ionChange)="setTime()">
   </ion-datetime>
   <ion-datetime display-format="DD-MM-YYYY" placeholder="กรุณาเลือกออก" value="" display-timezone="utc"
     [(ngModel)]="date2" (ionChange)="setTime()">
-  </ion-datetime>
+  </ion-datetime> -->
   <ion-list lines="none">
     <ion-row>
-      <ion-col size="2"> </ion-col>
+      <ion-col> </ion-col>
       <ion-col size="10">
         <ion-row>
-          <ion-col size="4">
+          <ion-col>
             <ion-item>
               <ion-label class="ion-text-center">
-                วันที่ &nbsp;&nbsp;&nbsp;&nbsp;  {{timePeriod.checkInDate  | date:"dd/mm/yy" }}
-                &nbsp;-&nbsp; {{timePeriod.checkOutDate  | date:"dd/mm/yy" }}
+                วันที่ &nbsp;&nbsp;&nbsp;&nbsp; {{displayDateIn  | date:"dd/mm/yy" }}
+                &nbsp;-&nbsp; {{displayDateOut | date:"dd/mm/yy" }}
               </ion-label>
             </ion-item>
           </ion-col>
           <ion-col size="4">
             <ion-item row>
               <ion-label i4label>รูปแบบห้อง</ion-label>
-              <ion-icon [src]="setIconIonSelect(typeRoom)"></ion-icon>
-              <ion-select [(ngModel)]="typeRoom" interface="popover">
+              <ion-icon *ngIf="roomType != 0" [src]="setIconIonSelect(roomType)"></ion-icon>
+              <ion-select [(ngModel)]="roomType" interface="popover" [value]=0 (ionChange)="filterRoom()">
+                <ion-select-option [value]=0>ทุกแบบ </ion-select-option>
                 <ion-select-option [value]=1>สแตนดาร์ด </ion-select-option>
                 <ion-select-option [value]=2>ซูพิเรีย</ion-select-option>
                 <ion-select-option [value]=3>ดีลักซ์</ion-select-option>
@@ -43,8 +44,9 @@
           <ion-col size="4">
             <ion-item>
               <ion-label>รูปแบบเตียง</ion-label>
-              <ion-icon [src]="setIconIonSelect4Bed(typeBed)"></ion-icon>
-              <ion-select [(ngModel)]="typeBed" interface="popover">
+              <ion-icon *ngIf="bedType != 0" [src]="setIconIonSelect4Bed(bedType)"></ion-icon>
+              <ion-select [(ngModel)]="bedType" interface="popover" [value]=0 (ionChange)="filterRoom()">
+                <ion-select-option [value]=0>ทุกแบบ </ion-select-option>
                 <ion-select-option [value]=1>เดี่ยว</ion-select-option>
                 <ion-select-option [value]=2>เดี่ยว2เตียง</ion-select-option>
               </ion-select>
@@ -64,7 +66,6 @@
             <ion-button *ngFor="let room of roomsSelect" (click)="settingRoom(room)">
               {{ room.roomNo }}
               <ion-icon src="../../assets/icon/settings-outline.svg"></ion-icon>
-              <!-- <ion-icon name="close-outline" (click)="deleteRoom(room.roomNo)"></ion-icon> -->
             </ion-button>
             <ion-button *ngIf="roomsSelect.length != 0" color="danger" (click)="clearRooms()">
               ลบ
@@ -81,18 +82,16 @@
           <ion-item>
             ชั้น{{f}}
           </ion-item>
-          <ion-item>
-            <ion-row>
-              <ng-container *ngFor="let room of roomsStatic ">
-                <ion-col size="1" *ngIf="room._id.startsWith(i+2)">
-                  <ion-button expand=" block" [color]="setColor(room.status)" (click)="selectRoom(room)">
-                    {{ room._id }}
-                    <ion-icon [src]="setIcon(room)"></ion-icon>
-                  </ion-button>
-                </ion-col>
-              </ng-container>
-            </ion-row>
-          </ion-item>
+          <ion-col size="12">
+            <ng-container *ngFor="let room of roomsByFilter">
+              <ion-col *ngIf="room._id.startsWith(i+2)">
+                <ion-button expand=" block" [color]="setColor(room.status)" (click)="selectRoom(room)">
+                  {{ room._id }}
+                  <ion-icon [src]="setIcon(room)"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ng-container>
+          </ion-col>
         </ion-row>
       </ng-container>
     </ion-row>
