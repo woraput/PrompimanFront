@@ -17,6 +17,7 @@ import { ComponentsModule } from '../components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BookingDetailPageModule } from './booking-detail/booking-detail.module';
+import { DlgRoomDetailPageModule } from './dlg-room-detail/dlg-room-detail.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,6 +27,7 @@ import { BookingDetailPageModule } from './booking-detail/booking-detail.module'
     RegisterInformationPageModule,
     BookingDetailPageModule,
     DlgSelectRoomsDetailPageModule,
+    DlgRoomDetailPageModule,
     MbscModule,
     BrowserModule,
     IonicModule.forRoot(),
