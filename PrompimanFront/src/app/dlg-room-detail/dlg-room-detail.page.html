@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>รายละเอียดห้องพัก</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+  <ion-row>
+    <ion-col>
+      <!-- <ion-item >
+        <span class="invalid-msg">กรุณาเลือก</span>
+      </ion-item> -->
+      <ion-item>
+        <ion-label>อาหารเช้า</ion-label>
+        <ion-checkbox  slot="start" value="false"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>เพิ่มอาหารเช้า</ion-label>
+        <ion-checkbox  slot="start" value="false"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label>เพิ่มเตียงเสริม</ion-label>
+        <ion-checkbox  slot="start" value="false"></ion-checkbox>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>ส่วนลด</ion-label>
+        <ion-checkbox slot="start" value="false"></ion-checkbox>
+      </ion-item>
+    </ion-col>
+    <ion-col >
+      <ion-item class="ion-text-center">
+        <ion-input type="text" placeholder="กรุณากรอกข้อมูล" ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        บาท
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-item>
+    <ion-button size="default" slot="end" expand="block" color="danger" (click)="closeModal()">ยกเลิก
+    </ion-button>
+    <ion-button size="default" slot="end" expand="block" type="submit">บันทึก</ion-button>
+  </ion-item>
+  
+</ion-list>
+</ion-content>
