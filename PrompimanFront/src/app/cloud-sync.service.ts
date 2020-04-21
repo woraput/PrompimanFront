@@ -8,8 +8,8 @@ import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected } from 's
 })
 export class CloudSyncService {
 
-  private readonly baseUrlPublish: string = 'https://localhost:5001/api/'; // local
-  // private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
+  // private readonly baseUrlPublish: string = 'https://localhost:5001/api/'; // local
+  private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
   public dataPass: any;
   public timePeriod = new DateRequest();
   public lstRoomsSelect: RoomSelected[] = [];
