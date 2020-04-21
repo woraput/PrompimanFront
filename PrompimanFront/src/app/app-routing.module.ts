@@ -68,10 +68,6 @@ const routes: Routes = [
     loadChildren: () => import('./bill/bill.module').then(m => m.BillPageModule)
   },
   {
-    path: 'bill/:text/:addreserve',
-    loadChildren: () => import('./bill/bill.module').then(m => m.BillPageModule)
-  },
-  {
     path: 'booking-detail',
     loadChildren: () => import('./booking-detail/booking-detail.module').then(m => m.BookingDetailPageModule)
   },

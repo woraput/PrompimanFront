@@ -76,5 +76,15 @@ export class CloudSyncService {
   public createReservation(reservation: Reservation) {
     return this.http.post<ReserveResponse>(this.baseUrlPublish + 'Reservation/Create', reservation);
   }
+
+  public editReservation(_id: string, addReserve: number, reservation: Reservation) {
+    return this.http.put<ReserveResponse>(this.baseUrlPublish + 'Reservation/Update/' + _id + "?addReserve=" + addReserve , reservation);
+  }
+
+  public cancelReservation(_id: string, note: string) {
+    return this.http.put(this.baseUrlPublish + 'Reservation/Delete/' + _id + "?note=" + note, {});
+  }
+
 }
+
 
