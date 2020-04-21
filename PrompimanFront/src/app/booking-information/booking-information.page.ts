@@ -4,8 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
 import { CloudSyncService } from '../cloud-sync.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { RoomSelected } from 'src/models/reservation';
+import { BillPage } from '../bill/bill.page';
 
 @Component({
   selector: 'app-booking-information',
@@ -19,7 +20,7 @@ export class BookingInformationPage implements OnInit {
   public text = "เงินสำรองจ่าย";
   public addReserve: Number = 0;
 
-  constructor(private fb: FormBuilder, private router: Router, private clound: CloudSyncService, private navCtrl: NavController) {
+  constructor(private fb: FormBuilder, private router: Router, private clound: CloudSyncService, private navCtrl: NavController, public modals: ModalController) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       'telephone': [null, Validators.required],
@@ -53,12 +54,36 @@ export class BookingInformationPage implements OnInit {
   public handleSubmit() {
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
+    
     if (this.fg.valid) {
-      this.clound.dataPass = this.fg.value;
-      this.router.navigate(['/bill', this.text]);
+      this.presentModal();
+      // this.clound.dataPass = this.fg.value;
+      // this.router.navigate(['/bill', this.text]);
       // this.navCtrl.navigateForward(['/bill',this.text]);
     }
-    console.log(this.fg.valid);
+    // console.log(this.fg.valid);
+  }
+
+  async presentModal() {
+    const modal = await this.modals.create({
+      component: BillPage,
+      componentProps: {
+        'text': this.text,
+        'reserve': this.fg.get('reserve').value,
+      }
+    });
+    modal.onWillDismiss().then(data =>{
+      let isOk = data
+      if (isOk.data) {
+        this.clound.createReservation(this.fg.value).subscribe(data => {
+          if (data != null) {
+            console.log("edit success: ", data.isSuccess);
+          }
+        });
+        this.router.navigate(['/booking']);
+      }
+    });
+    modal.present();
   }
 
   public isValid(name: string): boolean {
