@@ -58,27 +58,13 @@
       <app-datetime text="เข้าวันที่" mode="date" [fg]="fg" formName="checkInDate"></app-datetime>
       <app-datetime text="ออกวันที่" mode="date" [fg]="fg" formName="checkOutDate"></app-datetime>
 
-      <!-- <ion-row>
-        <ion-col size="2">
-          <ion-item>
-            <ion-label>จำนวนห้อง</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col size="10">
-          <ion-item>
-            <ion-input type="text" placeholder="กรุณากรอกข้อมูล"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row> -->
-
       <ion-row *ngIf="this.fg.get('checkInDate').value != null && this.fg.get('checkOutDate').value != null">
         <ion-col size="2">
           <ion-item>
             <ion-label>ห้อง</ion-label>
           </ion-item>
         </ion-col>
-
-        <ion-col size="9" [class.invalid]="isValid('rooms')">
+        <ion-col size="9"  (click)="room()" [class.invalid]="isValid('rooms')">
           <ion-item *ngFor="let item of this.fg.get('rooms').value" style="float:left">
             <ion-button color="light" disabled="true">
               {{item.roomNo}}
@@ -93,34 +79,6 @@
           </ion-item>
         </ion-col>
       </ion-row>
-<!-- 
-      <ion-row *ngIf="this.fg.get('checkInDate').value != null && this.fg.get('checkOutDate').value != null">
-        <ion-col size="2">
-          <ion-item>
-            <ion-label>ห้อง</ion-label>
-          </ion-item>
-        </ion-col>
-
-        <ion-col size="10" [class.invalid]="isValid('telephone')">
-          <ion-item (click)="room()">
-            <ion-col size="9">
-              <ion-item *ngFor="let item of this.fg.get('rooms').value" style="float:left">
-                <ion-button color="light" disabled="true">
-                  {{item.roomNo}}
-                </ion-button>
-              </ion-item>
-            </ion-col>
-            <ion-col size="1"  slot="end">
-              <ion-item >
-                <ion-button>
-                  <ion-icon name="search-outline"></ion-icon>
-                </ion-button>
-              </ion-item>
-
-            </ion-col>
-          </ion-item>
-        </ion-col>
-      </ion-row> -->
 
       <ion-row *ngIf="this.fg.get('checkInDate').value != null && this.fg.get('checkOutDate').value != null">
         <ion-col size="2"></ion-col>

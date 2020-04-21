@@ -5,7 +5,6 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
     <ion-list lines="none">
 
       <div scrollX="true" scrollY="true" class="ion-padding">
@@ -24,11 +23,11 @@
               <td width="100" class="ion-text-left"> เงินสำรองจ่าย</td>
               <td width="100"></td>
               <td width="100"></td>
-              <td width="100">{{this.fg.get('reserve').value}}</td>
+              <td width="100">{{ sendReserve }}</td>
             </tr>
             <tr *ngIf="text != 'เงินสำรองจ่าย'">
               <td width="100" class="ion-text-left"> {{text}}</td>
-              <td width="100">{{this.fg.get('reserve').value}}</td>
+              <td width="100">{{ sendReserve }}</td>
               <td width="100">{{amount}}</td>
               <td width="100">{{total}}</td>
             </tr>
@@ -104,9 +103,9 @@
       </ion-row>
 
       <ion-item>
-        <ion-button size="default" slot="end" expand="block" type="submit">ยืนยัน</ion-button>
+        <ion-button size="default" slot="end" expand="block" (click)="cancel()">ยกเลิก</ion-button>
+        <ion-button size="default" slot="end" expand="block" (click)="ok()">ยืนยัน</ion-button>
       </ion-item>
 
     </ion-list>
-  </form>
 </ion-content>

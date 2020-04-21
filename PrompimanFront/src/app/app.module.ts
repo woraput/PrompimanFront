@@ -19,9 +19,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { BookingDetailPageModule } from './booking-detail/booking-detail.module';
 import { DlgRoomDetailPageModule } from './dlg-room-detail/dlg-room-detail.module';
 import { BookingCancelPageModule } from './booking-cancel/booking-cancel.module';
+import { BillPageModule } from './bill/bill.module';
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
+  entryComponents: [
+
+  ],
   imports: [NgxPaginationModule,
     FormsModule,
     RegisterPageModule,
@@ -30,6 +33,7 @@ import { BookingCancelPageModule } from './booking-cancel/booking-cancel.module'
     DlgSelectRoomsDetailPageModule,
     BookingCancelPageModule,
     DlgRoomDetailPageModule,
+    BillPageModule,
     MbscModule,
     BrowserModule,
     IonicModule.forRoot(),
