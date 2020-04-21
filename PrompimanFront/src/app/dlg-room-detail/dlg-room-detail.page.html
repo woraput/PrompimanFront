@@ -5,51 +5,87 @@
 </ion-header>
 
 <ion-content>
-  <ion-list lines="none">
-  <ion-row>
-    <ion-col>
-      <!-- <ion-item >
-        <span class="invalid-msg">กรุณาเลือก</span>
-      </ion-item> -->
-      <ion-item>
-        <ion-label>อาหารเช้า</ion-label>
-        <ion-checkbox  slot="start" value="false"></ion-checkbox>
+  <form (ngSubmit)="handleSubmit()" [formGroup]="fg">
+    <ion-list lines="none">
+      <ion-item *ngIf="forType == 'each'">
+        <ion-label>ห้อง {{roomNo}}</ion-label>
       </ion-item>
-      <ion-item>
-        <ion-label>เพิ่มอาหารเช้า</ion-label>
-        <ion-checkbox  slot="start" value="false"></ion-checkbox>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>อาหารเช้า</ion-label>
+            <ion-checkbox slot="start" formControlName="haveBreakfast" value="true"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-item *ngIf="forType == 'each'">
+        <ion-label>อื่นๆ</ion-label>
       </ion-item>
-      <ion-item>
-        <ion-label>เพิ่มเตียงเสริม</ion-label>
-        <ion-checkbox  slot="start" value="false"></ion-checkbox>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>เพิ่มอาหารเช้า</ion-label>
+            <ion-checkbox slot="start" formControlName="haveAddBreakfast"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item *ngIf="fg.get('haveAddBreakfast').value" class="ion-text-center">
+            <ion-input type="number" clearOnEdit="true" formControlName="addBreakfastCount"
+              placeholder="กรุณากรอกข้อมูล"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2">
+          <ion-item *ngIf="fg.get('haveAddBreakfast').value">
+            ที่
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>เพิ่มเตียงเสริม</ion-label>
+            <ion-checkbox slot="start" formControlName="haveExtraBed"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item *ngIf="fg.get('haveExtraBed').value" class="ion-text-center">
+            <ion-input type="number" clearOnEdit="true" formControlName="extraBedCount" placeholder="กรุณากรอกข้อมูล">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2">
+          <ion-item *ngIf="fg.get('haveExtraBed').value">
+            ที่
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="forType != 'each'">
+        <ion-col>
+          <ion-item>
+            <ion-label>ส่วนลด</ion-label>
+            <ion-checkbox slot="start"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item class="ion-text-center">
+            <ion-input type="number" clearOnEdit="true" formControlName="discount" placeholder="กรุณากรอกข้อมูล">
+            </ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2">
+          <ion-item>
+            บาท
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-  <ion-row>
-    <ion-col>
       <ion-item>
-        <ion-label>ส่วนลด</ion-label>
-        <ion-checkbox slot="start" value="false"></ion-checkbox>
+        <ion-button size="default" slot="end" expand="block" color="danger" (click)="closeModal()">ยกเลิก
+        </ion-button>
+        <ion-button size="default" slot="end" expand="block" type="submit">บันทึก</ion-button>
       </ion-item>
-    </ion-col>
-    <ion-col >
-      <ion-item class="ion-text-center">
-        <ion-input type="text" placeholder="กรุณากรอกข้อมูล" ></ion-input>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        บาท
-      </ion-item>
-    </ion-col>
-  </ion-row>
 
-  <ion-item>
-    <ion-button size="default" slot="end" expand="block" color="danger" (click)="closeModal()">ยกเลิก
-    </ion-button>
-    <ion-button size="default" slot="end" expand="block" type="submit">บันทึก</ion-button>
-  </ion-item>
-  
-</ion-list>
+    </ion-list>
+  </form>
+
 </ion-content>

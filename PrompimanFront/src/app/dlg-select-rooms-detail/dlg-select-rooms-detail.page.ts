@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-dlg-select-rooms-detail',
@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class DlgSelectRoomsDetailPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private navParams: NavParams) { }
 
   ngOnInit() {
   }

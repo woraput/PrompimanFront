@@ -36,12 +36,14 @@ export class BookingInformationPage implements OnInit {
 
   ngOnInit() {
   }
-  
-  ionViewDidEnter(){
+
+  ionViewDidEnter() {
     this.roomsSelect = this.clound.lstRoomsSelect
     console.log(this.roomsSelect);
     this.fg.get('rooms').setValue(this.roomsSelect);
     console.log(this.fg.get('rooms').value);
+    console.log(this.clound.settingAllRoom);
+
   }
 
   room() {

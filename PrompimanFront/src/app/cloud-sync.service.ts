@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member, Paging, MemberResponse } from 'src/models/Member';
-import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected } from 'src/models/reservation';
+import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom } from 'src/models/reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class CloudSyncService {
   public dataPass: any;
   public timePeriod = new DateRequest();
   public lstRoomsSelect: RoomSelected[] = [];
+  public settingAllRoom = new SettingRoom();
   constructor(private http: HttpClient) {
     console.log('Create CloudSyncProvider Provider');
   }

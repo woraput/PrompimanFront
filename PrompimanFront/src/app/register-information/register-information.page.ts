@@ -72,7 +72,6 @@ export class RegisterInformationPage implements OnInit {
       'telephone': [null, Validators.required],
       'nationality': [null, Validators.required]
     });
-
   }
 
   async closeModal() {

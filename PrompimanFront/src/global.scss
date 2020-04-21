@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -27,26 +27,32 @@
 
 @import "~@mobiscroll/angular/dist/css/mobiscroll.scss";
 
+.dialog-modal-4-regis-info .modal-wrapper {
+  width: 90%;
+  height: 70%;
+  position: relative;
+  display: block;
+}
 
-.dialog-modal-4-regis-info .modal-wrapper{
-    width: 90%;
-    height: 70%;
-    position: relative; 
-    display: block;  
-  }
+.dialog-modal-4-setting-room .modal-wrapper {
+  width: 30%;
+  height: 65%;
+  position: relative;
+  display: block;
+}
 
-  .invalid {
-    border: 1px solid red;
-  }
-  
-  .invalid-msg{
-    color: red;
-  }
-  
-  .warning-msg {
-    color: orangered;
-  }
-  
-  .warning {
-    color: darkorange;
-  }
+.invalid {
+  border: 1px solid red;
+}
+
+.invalid-msg {
+  color: red;
+}
+
+.warning-msg {
+  color: orangered;
+}
+
+.warning {
+  color: darkorange;
+}
