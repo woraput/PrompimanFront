@@ -4,7 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 import { CloudSyncService } from '../cloud-sync.service';
 import { Reservation } from 'src/models/reservation';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { BookingCancelPage } from '../booking-cancel/booking-cancel.page';
 
 @Component({
   selector: 'app-booking-detail',
@@ -21,9 +22,10 @@ export class BookingDetailPage implements OnInit {
   public roomslength: number;
   private submitRequested: boolean;
   public roomsnumber: [] = [];
+  public addreserve: boolean = false;
 
-
-  constructor(private fb: FormBuilder, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute, public alertController: AlertController) {
+  constructor(private fb: FormBuilder, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
+    public alertController: AlertController, private clound: CloudSyncService) {
     this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
 
@@ -45,8 +47,8 @@ export class BookingDetailPage implements OnInit {
         console.log(this.fg.value);
         // this.fg.get('rooms').setValue(this.fg.get('rooms').value.length);
         this.roomslength = this.listdataReservation.rooms.length;
-        console.log( this.fg.get('rooms').value);
-        this.roomsnumber =  this.fg.get('rooms').value;      
+        console.log(this.fg.get('rooms').value);
+        this.roomsnumber = this.fg.get('rooms').value;
       }
     });
   }
@@ -69,40 +71,32 @@ export class BookingDetailPage implements OnInit {
   }
 
   room() {
-    './select-rooms.page.html'
+    // './select-rooms.page.html'
     // this.router.navigate(['/booking-information']);
-    this.router.navigate(['./select-rooms']);
+    this.router.navigate(['./select-rooms',
+      this.fg.get('checkInDate').value,
+      this.fg.get('rooms').value,
+      this.fg.get('checkOutDate').value]);
+
+    console.log(this.fg.get('checkInDate').value);
+    console.log(this.fg.get('checkOutDate').value);
+    console.log(this.fg.get('rooms').value);
+    // this.clound.timePeriod.checkInDate = this.fg.get('checkInDate').value;
+    // this.clound.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;    
   }
 
   ngOnInit() {
   }
 
   async cancelReservation() {
-    const alert = await this.alertController.create({
-      header: 'หมายเหตุ',
-      inputs: [
-        {
-          name: 'name1',
-          type: 'text',
-          placeholder: 'กรอกหมายเหตุยืนยันการยกเลิก'
-        },    
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Ok',
-          handler: () => {
-            console.log('Confirm Ok');
-          }
-        }
-      ]
+    const modal = await this.modalController.create({
+      component: BookingCancelPage,
+      cssClass: 'dialog-modal-4-regis-info',
     });
-    await alert.present();
+    return await modal.present();
+  }
+
+  isReserve() {
+    this.addreserve = !this.addreserve;
   }
 }

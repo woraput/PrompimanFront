@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BookingDetailPageModule } from './booking-detail/booking-detail.module';
 import { DlgRoomDetailPageModule } from './dlg-room-detail/dlg-room-detail.module';
+import { BookingCancelPageModule } from './booking-cancel/booking-cancel.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,6 +28,7 @@ import { DlgRoomDetailPageModule } from './dlg-room-detail/dlg-room-detail.modul
     RegisterInformationPageModule,
     BookingDetailPageModule,
     DlgSelectRoomsDetailPageModule,
+    BookingCancelPageModule,
     DlgRoomDetailPageModule,
     MbscModule,
     BrowserModule,
