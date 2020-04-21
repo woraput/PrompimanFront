@@ -37,8 +37,12 @@ export class BookingInformationPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.fg.get('rooms').setValue(this.clound.lstRoomsSelect);
+    let roomsSelect = this.clound.lstRoomsSelect
+    console.log(roomsSelect);
+    this.fg.get('rooms').setValue(roomsSelect);
     console.log(this.fg.get('rooms').value);
+    console.log(this.clound.settingAllRoom);
+
   }
 
   room() {
@@ -54,7 +58,7 @@ export class BookingInformationPage implements OnInit {
   public handleSubmit() {
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
-    
+
     if (this.fg.valid) {
       this.presentModal();
       // this.clound.dataPass = this.fg.value;
@@ -72,7 +76,7 @@ export class BookingInformationPage implements OnInit {
         'reserve': this.fg.get('reserve').value,
       }
     });
-    modal.onWillDismiss().then(data =>{
+    modal.onWillDismiss().then(data => {
       let isOk = data
       if (isOk.data) {
         this.clound.createReservation(this.fg.value).subscribe(data => {

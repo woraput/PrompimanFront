@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Floor } from 'src/models/rooms';
 import { NavController, ModalController } from '@ionic/angular';
 import { DlgSelectRoomsDetailPage } from '../dlg-select-rooms-detail/dlg-select-rooms-detail.page';
-import { DateRequest, Room, RoomSelected } from 'src/models/reservation';
+import { DateRequest, Room, RoomSelected, SettingRoom } from 'src/models/reservation';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 
 @Component({
   selector: 'app-select-rooms',
@@ -16,7 +17,6 @@ export class SelectRoomsPage implements OnInit {
   private floors = Floor;
   private roomsStatic: Room[] = [];
   private roomsByFilter: Room[] = [];
-  public roomStaticSelect: Room[] = [];
   private displayDateIn: string
   private displayDateOut: string
   private roomType: number;
@@ -38,6 +38,23 @@ export class SelectRoomsPage implements OnInit {
     this.displayDateOut = this.activatedRoute.snapshot.paramMap.get('checkOutDate');
   }
 
+  async settingRoom(room: RoomSelected) {
+    const modal = await this.modalController.create({
+      component: DlgRoomDetailPage,
+      componentProps: { room: room, for: 'each' },
+      cssClass: 'dialog-modal-4-setting-room',
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        console.log(dataReturned);
+        let dataRet = dataReturned.data;
+        let indexDataWillChange = this.roomsSelect.findIndex(r => r.roomNo == dataRet.roomNo);
+        this.roomsSelect[indexDataWillChange] = dataRet;
+      }
+    });
+    return await modal.present();
+  }
+
   async detailRooms() {
     const modal = await this.modalController.create({
       component: DlgSelectRoomsDetailPage,
@@ -57,14 +74,19 @@ export class SelectRoomsPage implements OnInit {
 
   selectRoom(room: Room) {
     if (room.status == "ว่าง") {
-      var room4Add = new RoomSelected();
-
       if (this.roomsSelect.every(r => r.roomNo != room._id)) {
+        let room4Add = new RoomSelected();
         room4Add.roomNo = room._id;
+        room4Add.setting = new SettingRoom();
+        room4Add.setting.haveBreakfast = true;
+        room4Add.setting.haveAddBreakfast = false;
+        room4Add.setting.addBreakfastCount = 0;
+        room4Add.setting.haveExtraBed = false;
+        room4Add.setting.extraBedCount = 0;
+        room4Add.setting.discount = 0;
         this.roomsSelect.push(room4Add);
         console.log(this.roomsSelect);
-
-        this.roomsSelect.sort((a, b) => (Number)(a) - (Number)(b));
+        this.roomsSelect.sort((a, b) => (Number)(a.roomNo) - (Number)(b.roomNo));
       } else {
         this.deleteRoom(room._id);
       }
@@ -156,10 +178,6 @@ export class SelectRoomsPage implements OnInit {
       }
   }
 
-
-  settingRoom() {
-  }
-
   clearRooms() {
     this.roomsSelect = [];
   }
@@ -172,6 +190,7 @@ export class SelectRoomsPage implements OnInit {
 
   confirm() {
     this.api.lstRoomsSelect = this.roomsSelect;
+    
     this.route.navigate(['/booking-information']);
   }
 }
