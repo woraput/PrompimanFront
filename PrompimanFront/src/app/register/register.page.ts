@@ -17,14 +17,14 @@ export class RegisterPage implements OnInit {
   public paging: Paging = new Paging;
   p: number = 1;
   public searchBar: FormControl;
-  dataxx: any={};
+  dataxx: any = {};
 
 
   constructor(private modalController: ModalController, private fb: FormBuilder, private nav: NavController, public router: Router, private cloud: CloudSyncService) {
     this.searchBar = new FormControl('');
   }
-  
-  ionViewDidEnter(){
+
+  ionViewDidEnter() {
     this.getPageUsers(this.p);
   }
 
@@ -47,7 +47,7 @@ export class RegisterPage implements OnInit {
       this.paging = data;
       console.log(this.paging.members[2]);
       this.dataxx = this.paging.members[2];
-      console.log(this.dataxx.idCard);    
+      console.log(this.dataxx.idCard);
       console.log(this.paging.members);
       console.log(this.paging.count);
       console.log(this.paging.page);
