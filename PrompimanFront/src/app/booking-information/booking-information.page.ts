@@ -18,9 +18,6 @@ export class BookingInformationPage implements OnInit {
   public submitRequested: boolean;
   public text = "เงินสำรองจ่าย";
   public addReserve: Number = 0;
-  public pageName = "BookingInformationPage";
-  public roomsSelect: RoomSelected[] = [];
-
 
   constructor(private fb: FormBuilder, private router: Router, private clound: CloudSyncService, private navCtrl: NavController) {
     this.fg = this.fb.group({
@@ -28,26 +25,27 @@ export class BookingInformationPage implements OnInit {
       'telephone': [null, Validators.required],
       'checkInDate': [null, Validators.required],
       'checkOutDate': [null, Validators.required],
-      'rooms': [],
+      'rooms': [null, Validators.required],
       'reserve': [null, Validators.required],
     });
     console.log(this.fg.value);
   }
 
   ngOnInit() {
+    this.clound.lstRoomsSelect = [];
   }
-  
-  ionViewDidEnter(){
-    this.roomsSelect = this.clound.lstRoomsSelect
-    console.log(this.roomsSelect);
-    this.fg.get('rooms').setValue(this.roomsSelect);
+
+  ionViewDidEnter() {
+    this.fg.get('rooms').setValue(this.clound.lstRoomsSelect);
     console.log(this.fg.get('rooms').value);
   }
 
   room() {
+    //todo: ถ้ากลับไปเลือกห้องอีกครั้งห้องเดิมต้องไม่หาย
     this.router.navigate(['/select-rooms',
       this.fg.get('checkInDate').value,
-      this.fg.get('checkOutDate').value]);
+      this.fg.get('checkOutDate').value]),
+      this.clound.dataPass = this.fg.get('rooms').value;
     this.clound.timePeriod.checkInDate = this.fg.get('checkInDate').value;
     this.clound.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
   }
@@ -57,9 +55,10 @@ export class BookingInformationPage implements OnInit {
     this.datetimeComponent.forEach(it => it.submitRequest());
     if (this.fg.valid) {
       this.clound.dataPass = this.fg.value;
-      this.router.navigate(['/bill', this.text, this.pageName]);
+      this.router.navigate(['/bill', this.text]);
       // this.navCtrl.navigateForward(['/bill',this.text]);
     }
+    console.log(this.fg.valid);
   }
 
   public isValid(name: string): boolean {
