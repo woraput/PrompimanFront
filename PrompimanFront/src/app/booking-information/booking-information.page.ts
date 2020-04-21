@@ -35,14 +35,13 @@ export class BookingInformationPage implements OnInit {
   }
 
   ngOnInit() {
-    this.fg.get('rooms').setValue(this.test);
-    console.log(this.fg.get('rooms').value);
-    console.log(this.fg.value);
   }
-
+  
   ionViewDidEnter(){
     this.roomsSelect = this.clound.lstRoomsSelect
     console.log(this.roomsSelect);
+    this.fg.get('rooms').setValue(this.roomsSelect);
+    console.log(this.fg.get('rooms').value);
   }
 
   room() {
