@@ -18,6 +18,7 @@ export class BillPage implements OnInit {
   public keyDeposit: number = 0;
   public net: number = 0;
   public sendReserve: number = 0;
+  // public addreserve: number = 0;
   public change: number = 0;
   public isOk: boolean;
 
@@ -26,6 +27,8 @@ export class BillPage implements OnInit {
  
     this.text = this.navParam.get('text');
     this.sendReserve = Number(this.navParam.get('reserve'));
+    // this.sendReserve = Number(this.navParam.get('addreserve'));
+
   }
 
   ngOnInit() {

@@ -74,6 +74,8 @@ export class BookingInformationPage implements OnInit {
     });
     modal.onWillDismiss().then(data =>{
       let isOk = data
+      console.log(isOk);
+      
       if (isOk.data) {
         this.clound.createReservation(this.fg.value).subscribe(data => {
           if (data != null) {

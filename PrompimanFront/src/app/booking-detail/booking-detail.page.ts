@@ -6,6 +6,7 @@ import { CloudSyncService } from '../cloud-sync.service';
 import { Reservation } from 'src/models/reservation';
 import { AlertController, ModalController } from '@ionic/angular';
 import { BookingCancelPage } from '../booking-cancel/booking-cancel.page';
+import { BillPage } from '../bill/bill.page';
 
 @Component({
   selector: 'app-booking-detail',
@@ -33,14 +34,14 @@ export class BookingDetailPage implements OnInit {
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
 
     this.fg = this.fb.group({
-      'name': ['', Validators.required],
-      'telephone': ['', Validators.required],
-      'checkInDate': ['', Validators.required],
-      'checkOutDate': ['', Validators.required],
+      'name': [null, Validators.required],
+      'telephone': [null, Validators.required],
+      'checkInDate': [null, Validators.required],
+      'checkOutDate': [null, Validators.required],
       'rooms': [],
-      'reserve': ['', Validators.required],
-      'active': ['', Validators.required],
-      'note': ['', Validators.required],
+      'reserve': [null, Validators.required],
+      'active': [null, Validators.required],
+      // 'note': [],
     })
 
     this.cloud.getByIDReservation(this._id).subscribe(data => {
@@ -71,11 +72,40 @@ export class BookingDetailPage implements OnInit {
     console.log(this.fg.value);
     console.log(this.addreserve);
     console.log("xxxxx", this.addreserve);
+    console.log("this.fg.valid", this.fg.valid);
 
     if (this.fg.valid) {
+      this.presentModal();
       // this.clound.dataEdit = this.fg.value;
-      this.router.navigate(['/bill', this.text,this.addreserve]);
-    }    
+      // this.router.navigate(['/bill', this.text,this.addreserve]);
+    }
+  }
+
+  async presentModal() {
+    console.log("modal");
+
+    const modal = await this.modalController.create({
+      component: BillPage,
+      cssClass: 'dialog-modal-4-regis-info',
+      componentProps: {
+        'text': this.text,
+        'reserve': this.addreserve,
+      }
+    });
+    modal.onWillDismiss().then(data => {
+      let isOk = data
+      if (isOk.data) {
+        console.log(this._id);
+
+        this.clound.editReservation(this._id, this.addreserve, this.fg.value).subscribe(data => {
+          if (data != null) {
+            console.log("edit success: ", data.isSuccess);
+          }
+        });
+        this.router.navigate(['/booking']);
+      }
+    });
+    modal.present();
   }
 
   room() {
@@ -83,14 +113,9 @@ export class BookingDetailPage implements OnInit {
     // this.router.navigate(['/booking-information']);
     this.router.navigate(['./select-rooms',
       this.fg.get('checkInDate').value,
-      this.fg.get('rooms').value,
-      this.fg.get('checkOutDate').value]);
-
-    console.log(this.fg.get('checkInDate').value);
-    console.log(this.fg.get('checkOutDate').value);
-    console.log(this.fg.get('rooms').value);
-    // this.clound.timePeriod.checkInDate = this.fg.get('checkInDate').value;
-    // this.clound.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;    
+      this.fg.get('checkOutDate').value,
+      this.clound.dataPass = this.fg.get('rooms').value
+    ]);
   }
 
   ngOnInit() {
@@ -100,6 +125,9 @@ export class BookingDetailPage implements OnInit {
     const modal = await this.modalController.create({
       component: BookingCancelPage,
       cssClass: 'dialog-modal-4-regis-info',
+      componentProps: {
+        '_id': this._id,
+      }
     });
     return await modal.present();
   }

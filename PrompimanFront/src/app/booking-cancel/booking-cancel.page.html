@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="fg" (ngSubmit)="handleSubmit()">
   <ion-list  lines="none">
     <ion-row>
       <ion-col size="2">
@@ -14,14 +15,25 @@
       </ion-col>
       <ion-col size="10">
         <ion-item>
-          <ion-input type="text" placeholder="กรุณากรอกข้อมูล"></ion-input>
-           <!-- formControlName="input3"  -->
+          <ion-input type="text"  formControlName="note"  placeholder="กรุณากรอกข้อมูล" [class.invalid]="isValid('note')"></ion-input>           
         </ion-item>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col size="10">
+        <ion-item *ngIf="isValid('note')">
+          <span class="invalid-msg">
+            กรุณากรอกข้อมูล
+          </span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
     <ion-item>
       <ion-button size="default" slot="end" expand="block" color="danger">ยกเลิก</ion-button>
       <ion-button size="default" slot="end" expand="block" type="submit">บันทึก</ion-button>
     </ion-item>
   </ion-list>
+  </form>
 </ion-content>
