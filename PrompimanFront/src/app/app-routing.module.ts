@@ -90,16 +90,11 @@ const routes: Routes = [
   {
     path: 'dlg-room-detail',
     loadChildren: () => import('./dlg-room-detail/dlg-room-detail.module').then( m => m.DlgRoomDetailPageModule)
-  },  {
+  },
+  {
     path: 'booking-cancel',
     loadChildren: () => import('./booking-cancel/booking-cancel.module').then( m => m.BookingCancelPageModule)
   },
-
-
-
-
-
-
 ];
 
 @NgModule({
