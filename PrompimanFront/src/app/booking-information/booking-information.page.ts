@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
 import { CloudSyncService } from '../cloud-sync.service';
 import { NavController } from '@ionic/angular';
+import { RoomSelected } from 'src/models/reservation';
 
 @Component({
   selector: 'app-booking-information',
@@ -16,9 +17,10 @@ export class BookingInformationPage implements OnInit {
   public fg: FormGroup;
   public submitRequested: boolean;
   public text = "เงินสำรองจ่าย";
-  public test = [{ 'roomNo': '201', 'Setting': null }, { 'roomNo': '202', 'Setting': null }];
   public addReserve: Number = 0;
   public pageName = "BookingInformationPage";
+  public roomsSelect: RoomSelected[] = [];
+
 
   constructor(private fb: FormBuilder, private router: Router, private clound: CloudSyncService, private navCtrl: NavController) {
     this.fg = this.fb.group({
@@ -36,6 +38,11 @@ export class BookingInformationPage implements OnInit {
     this.fg.get('rooms').setValue(this.test);
     console.log(this.fg.get('rooms').value);
     console.log(this.fg.value);
+  }
+
+  ionViewDidEnter(){
+    this.roomsSelect = this.clound.lstRoomsSelect
+    console.log(this.roomsSelect);
   }
 
   room() {
