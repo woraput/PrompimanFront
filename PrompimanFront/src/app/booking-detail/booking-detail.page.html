@@ -243,12 +243,12 @@
             <ion-checkbox slot="start" (ionChange)="isReserve()"></ion-checkbox>
           </ion-item>
         </ion-col>
-        <ion-col size="1.5" *ngIf="addreserve">
+        <ion-col size="1.5" *ngIf="isAddreserve">
           <ion-item class="ion-text-center">
-            <ion-input type="text" placeholder="กรุณากรอกข้อมูล"></ion-input>
+            <ion-input type="number" (ionChange)="isAdd($event)" value="0" placeholder="กรุณากรอกข้อมูล"></ion-input>
           </ion-item>
         </ion-col>
-        <ion-col size="1" *ngIf="addreserve">
+        <ion-col size="1" *ngIf="isAddreserve">
           <ion-item>
             บาท
           </ion-item>

@@ -22,7 +22,10 @@ export class BookingDetailPage implements OnInit {
   public roomslength: number;
   private submitRequested: boolean;
   public roomsnumber: [] = [];
-  public addreserve: boolean = false;
+  public isAddreserve: boolean = false;
+  public addreserve: number = 0;
+  public text = "เงินสำรองจ่าย";
+
 
   constructor(private fb: FormBuilder, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
     public alertController: AlertController, private clound: CloudSyncService) {
@@ -66,8 +69,13 @@ export class BookingDetailPage implements OnInit {
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
     console.log(this.fg.value);
+    console.log(this.addreserve);
+    console.log("xxxxx", this.addreserve);
+
     if (this.fg.valid) {
-    }
+      // this.clound.dataEdit = this.fg.value;
+      this.router.navigate(['/bill', this.text,this.addreserve]);
+    }    
   }
 
   room() {
@@ -97,6 +105,16 @@ export class BookingDetailPage implements OnInit {
   }
 
   isReserve() {
-    this.addreserve = !this.addreserve;
+    this.isAddreserve = !this.isAddreserve;
   }
+
+  isAdd(number: any) {
+    console.log(number);
+    console.log(number.detail.value);
+    this.addreserve = number.detail.value;
+    console.log(this.addreserve);
+
+  }
+
+
 }
