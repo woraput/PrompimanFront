@@ -8,8 +8,8 @@ import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingR
 })
 export class CloudSyncService {
 
-  // private readonly baseUrlPublish: string = 'https://localhost:5001/api/'; // local
-  private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
+  private readonly baseUrlPublish: string = 'http://localhost:5000/api/'; // local
+  // private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
   public dataPass: any;
   public dataEdit: any;
 
@@ -58,7 +58,7 @@ export class CloudSyncService {
 
   //Room
   public getAllRooms(timeData: DateRequest) {
-    return this.http.put<Room[]>(this.baseUrlPublish + '/Room/Get/', timeData);
+    return this.http.put<Room[]>(this.baseUrlPublish + 'Room/Get/', timeData);
   }
 
   public getReservation(): any {

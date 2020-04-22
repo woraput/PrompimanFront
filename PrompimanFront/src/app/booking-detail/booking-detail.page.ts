@@ -7,6 +7,7 @@ import { Reservation } from 'src/models/reservation';
 import { AlertController, ModalController } from '@ionic/angular';
 import { BookingCancelPage } from '../booking-cancel/booking-cancel.page';
 import { BillPage } from '../bill/bill.page';
+import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 
 @Component({
   selector: 'app-booking-detail',
@@ -79,6 +80,28 @@ export class BookingDetailPage implements OnInit {
       // this.clound.dataEdit = this.fg.value;
       // this.router.navigate(['/bill', this.text,this.addreserve]);
     }
+  }
+
+  async roomSettingModal() {
+    const modal = await this.modalController.create({
+      component: DlgRoomDetailPage,
+      componentProps: { room: this.fg.get('rooms').value, for: 'all' },
+      cssClass: 'dialog-modal-4-setting-room',
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        console.log(dataReturned);
+        // let dataRet = dataReturned.data;
+        console.log(this.cloud.settingAllRoom);
+
+        this.cloud.lstRoomsSelect.forEach(r => r.setting = this.cloud.settingAllRoom);
+        // let indexDataWillChange = this.roomsSelect.findIndex(r => r.roomNo == dataRet.roomNo);
+        // this.roomsSelect[indexDataWillChange] = dataRet;
+        console.log(this.cloud.lstRoomsSelect);
+
+      }
+    });
+    return await modal.present();
   }
 
   async presentModal() {
