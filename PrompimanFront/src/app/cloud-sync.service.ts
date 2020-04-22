@@ -12,11 +12,13 @@ export class CloudSyncService {
   private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
   public dataPass: any;
   public dataEdit: any;
-
+  public roomReserve: string[];
   public timePeriod = new DateRequest();
   public lstRoomsSelect: RoomSelected[] = [];
   public settingAllRoom = new SettingRoom();
   constructor(private http: HttpClient) {
+    this.timePeriod.checkInDate = new Date();
+    this.timePeriod.checkOutDate = new Date();
     console.log('Create CloudSyncProvider Provider');
     this.settingAllRoom.haveBreakfast = true;
     this.settingAllRoom.haveAddBreakfast = false;
@@ -78,7 +80,7 @@ export class CloudSyncService {
   }
 
   public editReservation(_id: string, addReserve: number, reservation: Reservation) {
-    return this.http.put<ReserveResponse>(this.baseUrlPublish + 'Reservation/Update/' + _id + "?addReserve=" + addReserve , reservation);
+    return this.http.put<ReserveResponse>(this.baseUrlPublish + 'Reservation/Update/' + _id + "?addReserve=" + addReserve, reservation);
   }
 
   public cancelReservation(_id: string, note: string) {

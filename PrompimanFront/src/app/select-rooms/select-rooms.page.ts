@@ -1,7 +1,8 @@
+import { async } from '@angular/core/testing';
 import { CloudSyncService } from './../cloud-sync.service';
 import { Component, OnInit } from '@angular/core';
 import { Floor } from 'src/models/rooms';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, NavParams } from '@ionic/angular';
 import { DlgSelectRoomsDetailPage } from '../dlg-select-rooms-detail/dlg-select-rooms-detail.page';
 import { DateRequest, Room, RoomSelected, SettingRoom } from 'src/models/reservation';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,39 +14,56 @@ import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
   styleUrls: ['./select-rooms.page.scss'],
 })
 export class SelectRoomsPage implements OnInit {
-  private roomsSelect: RoomSelected[] = [];
+  private roomsSelect: RoomSelected[];
   private floors = Floor;
   private roomsStatic: Room[] = [];
   private roomsByFilter: Room[] = [];
-  private displayDateIn: string
-  private displayDateOut: string
+  private displayDateIn: Date;
+  private displayDateOut: Date;
   private roomType: number;
+  private roomParam: RoomSelected[];
   private bedType: number;
-  constructor(private api: CloudSyncService, private navCtrl: NavController, private modalController: ModalController, private activatedRoute: ActivatedRoute, private route: Router) {
+  constructor(private modalCtrl: ModalController, private api: CloudSyncService, private navParams: NavParams, private navCtrl: NavController, private activatedRoute: ActivatedRoute, private route: Router) {
     this.roomType = 0;
     this.bedType = 0;
   }
 
   ngOnInit() {
-    console.log(this.api.timePeriod);
+    this.checkNewOrEdit();
+    this.displayDateIn = this.api.timePeriod.checkInDate;
+    this.displayDateOut = this.api.timePeriod.checkOutDate;
     this.api.getAllRooms(this.api.timePeriod).subscribe(data => {
       if (data !== null) {
         this.roomsStatic = data;
-        this.roomsByFilter = data;
+        this.roomsByFilter = this.roomsStatic;
+        this.api.roomReserve
+        // let newLstNoRoom = this.roomsSelect.map(r => r.roomNo);
+        for (const i of this.api.roomReserve) {
+          this.roomsByFilter.find(r => r._id == i).status = "ว่าง";
+        }
       }
-    })
-    this.displayDateIn = this.activatedRoute.snapshot.paramMap.get('checkInDate');
-    this.displayDateOut = this.activatedRoute.snapshot.paramMap.get('checkOutDate');
+    });
+  }
+
+  private checkNewOrEdit() {
+    this.roomParam = this.navParams.data.rooms;
+    if ((this.roomParam && this.roomParam.length !== 0) || this.roomParam !== null) {
+      this.roomsSelect = this.navParams.data.rooms;
+    }
+    else {
+      this.roomsSelect = [];
+    }
+
   }
 
   async settingRoom(room: RoomSelected) {
-    const modal = await this.modalController.create({
+    const modal = await this.modalCtrl.create({
       component: DlgRoomDetailPage,
       componentProps: { room: room, for: 'each' },
       cssClass: 'dialog-modal-4-setting-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
+      if (dataReturned !== null && dataReturned.data !== undefined) {
         console.log(dataReturned);
         let dataRet = dataReturned.data;
         let indexDataWillChange = this.roomsSelect.findIndex(r => r.roomNo == dataRet.roomNo);
@@ -56,7 +74,7 @@ export class SelectRoomsPage implements OnInit {
   }
 
   async detailRooms() {
-    const modal = await this.modalController.create({
+    const modal = await this.modalCtrl.create({
       component: DlgSelectRoomsDetailPage,
     });
     return await modal.present();
@@ -85,7 +103,6 @@ export class SelectRoomsPage implements OnInit {
         room4Add.setting.extraBedCount = 0;
         room4Add.setting.discount = 0;
         this.roomsSelect.push(room4Add);
-        console.log(this.roomsSelect);
         this.roomsSelect.sort((a, b) => (Number)(a.roomNo) - (Number)(b.roomNo));
       } else {
         this.deleteRoom(room._id);
@@ -96,8 +113,6 @@ export class SelectRoomsPage implements OnInit {
   deleteRoom(noRoom: string) {
     let dupRoom = this.roomsSelect.find(r => r.roomNo == noRoom);
     let index = this.roomsSelect.indexOf(dupRoom);
-    console.log(this.roomsSelect);
-    console.log(index);
     this.roomsSelect.splice(index, 1);
   }
 
@@ -188,9 +203,14 @@ export class SelectRoomsPage implements OnInit {
     this.bedType = null;
   }
 
-  confirm() {
-    this.api.lstRoomsSelect = this.roomsSelect;
-    
-    this.route.navigate(['/booking-information']);
+  async closeModal() {
+    if (this.roomsSelect.length !== 0) {
+      await this.modalCtrl.dismiss(this.roomsSelect);
+    }
+    else if (this.roomsSelect.length == 0 && this.roomParam !== null) {
+      await this.modalCtrl.dismiss(this.roomParam);
+    }
+    else await this.modalCtrl.dismiss([] as RoomSelected[]);
   }
+
 }

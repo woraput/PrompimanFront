@@ -3,11 +3,12 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 import { CloudSyncService } from '../cloud-sync.service';
-import { Reservation } from 'src/models/reservation';
+import { Reservation, RoomSelected } from 'src/models/reservation';
 import { AlertController, ModalController } from '@ionic/angular';
 import { BookingCancelPage } from '../booking-cancel/booking-cancel.page';
 import { BillPage } from '../bill/bill.page';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
+import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
 
 @Component({
   selector: 'app-booking-detail',
@@ -23,7 +24,7 @@ export class BookingDetailPage implements OnInit {
   public listdataReservation: any = {};
   public roomslength: number;
   private submitRequested: boolean;
-  public roomsnumber: [] = [];
+  public rommsNumber: RoomSelected[];
   public isAddreserve: boolean = false;
   public addreserve: number = 0;
   public text = "เงินสำรองจ่าย";
@@ -53,7 +54,8 @@ export class BookingDetailPage implements OnInit {
         // this.fg.get('rooms').setValue(this.fg.get('rooms').value.length);
         this.roomslength = this.listdataReservation.rooms.length;
         console.log(this.fg.get('rooms').value);
-        this.roomsnumber = this.fg.get('rooms').value;
+        this.rommsNumber = this.fg.get('rooms').value;
+        this.cloud.roomReserve = this.rommsNumber.map(r => r.roomNo);
       }
     });
   }
@@ -89,7 +91,7 @@ export class BookingDetailPage implements OnInit {
       cssClass: 'dialog-modal-4-setting-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
+      if (dataReturned !== null && dataReturned.data !== undefined ) {
         console.log(dataReturned);
         // let dataRet = dataReturned.data;
         console.log(this.cloud.settingAllRoom);
@@ -131,14 +133,28 @@ export class BookingDetailPage implements OnInit {
     modal.present();
   }
 
-  room() {
-    // './select-rooms.page.html'
-    // this.router.navigate(['/booking-information']);
-    this.router.navigate(['./select-rooms',
-      this.fg.get('checkInDate').value,
-      this.fg.get('checkOutDate').value,
-      this.clound.dataPass = this.fg.get('rooms').value
-    ]);
+  async selectRoomModal() {
+    this.cloud.timePeriod.checkInDate = this.fg.get('checkInDate').value;
+    this.cloud.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
+    const modal = await this.modalController.create({
+      component: SelectRoomsPage,
+      componentProps: { rooms: this.fg.get('rooms').value },
+      cssClass: 'dialog-modal-4-select-room',
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      console.log(dataReturned);
+      console.log(this.fg.value);
+      // this.fg.get('rooms').patchValue(this.rommsNumber);
+      if (dataReturned !== null && dataReturned.data !== undefined) {
+        console.log(dataReturned.data);
+        let roomsSelect = dataReturned.data;
+        console.log(roomsSelect);
+        this.fg.get('rooms').patchValue(roomsSelect);
+        // this.roomsnumber = this.fg.get('rooms').value;
+        console.log(this.fg.get('rooms').value);
+      }
+    });
+    return await modal.present();
   }
 
   ngOnInit() {
