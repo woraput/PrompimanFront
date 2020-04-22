@@ -4,6 +4,7 @@ import { DatetimeComponent } from './datetime/datetime.component';
 import { IonicModule } from '@ionic/angular';
 import { MbscModule } from '@mobiscroll/angular';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BackToRootComponent } from './back-to-root/back-to-root.component';
 
 
 
@@ -17,10 +18,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
   declarations: [
     DatetimeComponent,
+    BackToRootComponent,
   ],
 
   exports: [
     DatetimeComponent,
+    BackToRootComponent,
   ]
 })
 export class ComponentsModule { }
