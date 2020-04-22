@@ -7,6 +7,7 @@ import { CloudSyncService } from '../cloud-sync.service';
 import { NavController, ModalController } from '@ionic/angular';
 import { RoomSelected } from 'src/models/reservation';
 import { BillPage } from '../bill/bill.page';
+import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 
 @Component({
   selector: 'app-booking-information',
@@ -20,7 +21,7 @@ export class BookingInformationPage implements OnInit {
   public text = "เงินสำรองจ่าย";
   public addReserve: Number = 0;
 
-  constructor(private fb: FormBuilder, private router: Router, private clound: CloudSyncService, private navCtrl: NavController, public modals: ModalController) {
+  constructor(private fb: FormBuilder, private router: Router, private cloud: CloudSyncService, private navCtrl: NavController, public modals: ModalController) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       'telephone': [null, Validators.required],
@@ -33,26 +34,23 @@ export class BookingInformationPage implements OnInit {
   }
 
   ngOnInit() {
-    this.clound.lstRoomsSelect = [];
   }
 
-  ionViewDidEnter() {
-    let roomsSelect = this.clound.lstRoomsSelect
-    console.log(roomsSelect);
-    this.fg.get('rooms').setValue(roomsSelect);
-    console.log(this.fg.get('rooms').value);
-    console.log(this.clound.settingAllRoom);
-
-  }
-
-  room() {
-    //todo: ถ้ากลับไปเลือกห้องอีกครั้งห้องเดิมต้องไม่หาย
-    this.router.navigate(['/select-rooms',
-      this.fg.get('checkInDate').value,
-      this.fg.get('checkOutDate').value]),
-      this.clound.dataPass = this.fg.get('rooms').value;
-    this.clound.timePeriod.checkInDate = this.fg.get('checkInDate').value;
-    this.clound.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
+  async selectRoomModal() {
+    this.cloud.timePeriod.checkInDate = this.fg.get('checkInDate').value;
+    this.cloud.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
+    const modal = await this.modals.create({
+      component: SelectRoomsPage,
+      componentProps: { rooms: this.fg.get('rooms').value },
+      cssClass: 'dialog-modal-4-select-room',
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned.data !== null && dataReturned.data !== undefined) {
+        let roomsSelect = dataReturned.data;
+        this.fg.get('rooms').patchValue(roomsSelect);
+      }
+    });
+    return await modal.present();
   }
 
   public handleSubmit() {
@@ -68,6 +66,23 @@ export class BookingInformationPage implements OnInit {
     // console.log(this.fg.valid);
   }
 
+
+  async roomSettingModal() {
+    const modal = await this.modals.create({
+      component: DlgRoomDetailPage,
+      componentProps: { room: this.fg.get('rooms').value, for: 'all' },
+      cssClass: 'dialog-modal-4-setting-room',
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null && dataReturned.data !== undefined) {
+        console.log(this.cloud.settingAllRoom);
+        this.cloud.lstRoomsSelect.forEach(r => r.setting = this.cloud.settingAllRoom);
+        console.log(this.cloud.lstRoomsSelect);
+      }
+    });
+    return await modal.present();
+  }
+
   async presentModal() {
     const modal = await this.modals.create({
       component: BillPage,
@@ -80,9 +95,9 @@ export class BookingInformationPage implements OnInit {
     modal.onWillDismiss().then(data => {
       let isOk = data
       console.log(isOk);
-      
+
       if (isOk.data) {
-        this.clound.createReservation(this.fg.value).subscribe(data => {
+        this.cloud.createReservation(this.fg.value).subscribe(data => {
           if (data != null) {
             console.log("edit success: ", data.isSuccess);
           }

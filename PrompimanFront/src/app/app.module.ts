@@ -1,3 +1,4 @@
+import { SelectRoomsPageModule } from './select-rooms/select-rooms.module';
 import { DlgSelectRoomsDetailPageModule } from './dlg-select-rooms-detail/dlg-select-rooms-detail.module';
 import { RegisterInformationPageModule } from './register-information/register-information.module';
 import { FormsModule } from '@angular/forms';
@@ -34,6 +35,7 @@ import { BillPageModule } from './bill/bill.module';
     BookingCancelPageModule,
     DlgRoomDetailPageModule,
     BillPageModule,
+    SelectRoomsPageModule,
     MbscModule,
     BrowserModule,
     IonicModule.forRoot(),

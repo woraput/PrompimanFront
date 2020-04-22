@@ -47,7 +47,7 @@
   <ion-card>
     <ion-card-content>
       <ion-item class="ion-text-center"
-        *ngFor="let item of paging.members  | paginate: { itemsPerPage: 10, currentPage: p }"
+        *ngFor="let item of paging.members  | paginate: { itemsPerPage: 10, currentPage: p ,totalItems: paging.count}"
         [routerLink]="['/register-detail/', item._id]" routerDirection="forward">
         <ion-col size="2">
           {{item.creationDateTime | date:"dd/MM/yyyy" }}
@@ -55,10 +55,10 @@
         <ion-col size="3">
           {{item._id}}
         </ion-col>
-        <ion-col size="3" *ngIf="item.th_Firstname != null || item.th_Lastname != null" class="ion-text-left">
+        <ion-col size="3" *ngIf="item.th_Firstname != '' || item.th_Lastname != ''" class="ion-text-left">
           {{item.th_Firstname}} {{item.th_Lastname}}
         </ion-col>
-        <ion-col size="3" *ngIf="item.th_Firstname == null" class="ion-text-left">
+        <ion-col size="3" *ngIf="item.th_Firstname == ''" class="ion-text-left">
           {{item.en_Firstname}} {{item.en_Lastname}}
         </ion-col>
         <ion-col size="2.5" class="ion-text-left">
@@ -68,7 +68,7 @@
           <ion-button size="default" expand="block" type="submit">Check In</ion-button>
         </ion-col>
       </ion-item>
-      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <pagination-controls (pageChange)="p = $event" (click)="getPageUsers(p)"></pagination-controls>
     </ion-card-content>
   </ion-card>
   <!-- </form> -->

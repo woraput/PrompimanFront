@@ -16,8 +16,8 @@
           <ion-col>
             <ion-item>
               <ion-label class="ion-text-center">
-                วันที่ &nbsp;&nbsp;&nbsp;&nbsp; {{displayDateIn  | date:"dd/mm/yy" }}
-                &nbsp;-&nbsp; {{displayDateOut | date:"dd/mm/yy" }}
+                วันที่ &nbsp;&nbsp;&nbsp;&nbsp; {{displayDateIn  | date:"dd/MM/yy" }}
+                &nbsp;-&nbsp; {{displayDateOut | date:"dd/MM/yy" }}
               </ion-label>
             </ion-item>
           </ion-col>
@@ -52,7 +52,7 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-button size="default" (click)="confirm()">
+          <ion-button size="default" (click)="closeModal()">
             ยืนยัน
           </ion-button>
           <ion-col>
