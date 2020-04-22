@@ -7,6 +7,7 @@ export class Reservation {
     rooms: RoomSelected[]
     reserve: number
     active: boolean
+    isConfirm: boolean
     note: string
     creationDateTime: Date
     lastUpdate: Date

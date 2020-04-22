@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CloudSyncService } from '../cloud-sync.service';
 import { Reservation } from 'src/models/reservation';
@@ -13,36 +13,50 @@ import { FormControl } from '@angular/forms';
 export class BookingPage implements OnInit {
   public reservation: Reservation[] = [];
   public searchBar: FormControl;
-
-
-
-  constructor(private modalController: ModalController, public router: Router, public alertController: AlertController, private cloud: CloudSyncService) {
+  public _id: string;
+  check: boolean;
+  private timeoutId: number;
+  constructor(public router: Router, public alertController: AlertController, private cloud: CloudSyncService) {
     this.searchBar = new FormControl('');
   }
 
   ionViewDidEnter() {
+    // this.cloud.getReservation().subscribe(data => {
+    //   console.log(data);
+    //   this.reservation = data;
+    // });
+    console.log(this.check);
+
+    if (this.check == true) {
+      this.cloud.getReservation().subscribe(data => {
+        console.log(data);
+        this.reservation = data;
+      });
+    }
     this.cloud.getReservation().subscribe(data => {
       console.log(data);
       this.reservation = data;
-      console.log(this.reservation);
     });
+
   }
+
 
   ngOnInit() {
+
+    // this.cloud.getReservation().subscribe(data => {
+    //   console.log(data);
+    //   this.reservation = data;
+    // });
+
   }
-  // let test = this.reservation[0]
-  // console.log(test.name);
-  // // console.log(this.roomCount);
+  confirmMembers(_id: string) {
+    console.log(_id);
+    this.confirmMember(_id);
+  }
 
-  // for (let index = 0; index < this.reservation.length; index++) {
-  //   // this.roomCount =+ this.reservation[index].rooms.length;
-  //   console.log(this.reservation[index].rooms.length);
-  //   this.roomCount += Number(this.reservation[index].rooms.length);
-  //   // console.log(index , "/",this.reservation[index].rooms  );
-  //       }
-  // console.log(this.roomCount);
-
-  async confirmMember() {
+  async confirmMember(_id: string) {
+    console.log(_id);
+    this._id = _id;
     const alert = await this.alertController.create({
       header: 'ยืนยันการจองห้อง',
       buttons: [
@@ -55,6 +69,16 @@ export class BookingPage implements OnInit {
         }, {
           text: 'ยืนยัน',
           handler: () => {
+            var check;
+            this.cloud.confirmReservation(_id).subscribe(data => {
+              console.log('xxxxxxxxxxxxxx', data);
+              check = data;
+              console.log(check.isSuccess);
+              this.check = check.isSuccess;
+              setTimeout(() => {
+                this.ionViewDidEnter();
+              }, 2000);
+            });
             console.log('ConfirmOkay');
           }
         }
@@ -65,7 +89,6 @@ export class BookingPage implements OnInit {
 
   bookinginformation() {
     this.router.navigate(['/booking-information']);
-
   }
   searchReservation(searchBar: string) {
     console.log(searchBar);

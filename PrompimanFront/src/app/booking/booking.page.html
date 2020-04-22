@@ -18,8 +18,8 @@
       <ion-searchbar [formControl]="searchBar"></ion-searchbar>
     </ion-col>
     <ion-col size="1">
-      <ion-button style="margin-top: 0.8em;" size="default" expand="block" color="dark" 
-       (click)="searchReservation(searchBar.value)">
+      <ion-button style="margin-top: 0.8em;" size="default" expand="block" color="dark"
+        (click)="searchReservation(searchBar.value)">
         ค้นหา
       </ion-button>
     </ion-col>
@@ -54,7 +54,7 @@
 
   <ion-card>
     <ion-card-content>
-      <ion-item lines="none" *ngFor="let item of reservation">
+      <ion-item lines="none" *ngFor="let item of reservation  ">
         <ion-col size="10" [routerLink]="['/booking-detail/', item._id, 'cancel']">
           <ion-item lines="none">
             <ion-col size="2">
@@ -77,11 +77,16 @@
             </ion-col>
           </ion-item>
         </ion-col>
-        <ion-col size="1">
-          <ion-button (click)="confirmMember()" size="default" expand="block">ยืนยัน</ion-button>
+        <ion-col size="1" *ngIf="item.isConfirm == false">
+          <ion-button (click)="confirmMembers(item._id)" size="default" expand="block">ยืนยัน</ion-button>
         </ion-col>
+        <ion-col size="1" *ngIf="item.isConfirm == true">
+          <ion-button  size="default" expand="block" disabled="true">ยืนยัน</ion-button>
+        </ion-col>
+
         <ion-col size="1">
-          <ion-button [routerLink]="['/booking-detail/', item._id, 'edit']" size="default" expand="block" color="medium">แก้ไข
+          <ion-button [routerLink]="['/booking-detail/', item._id, 'edit']" size="default" expand="block"
+            color="medium">แก้ไข
           </ion-button>
         </ion-col>
       </ion-item>

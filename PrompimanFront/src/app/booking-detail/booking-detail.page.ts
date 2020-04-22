@@ -27,7 +27,6 @@ export class BookingDetailPage implements OnInit {
   public addreserve: number = 0;
   public text = "เงินสำรองจ่าย";
 
-
   constructor(private fb: FormBuilder, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
     public alertController: AlertController, private clound: CloudSyncService) {
     this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');
@@ -73,8 +72,7 @@ export class BookingDetailPage implements OnInit {
     console.log(this.addreserve);
     console.log("xxxxx", this.addreserve);
     console.log("this.fg.valid", this.fg.valid);
-
-    if (this.fg.valid) {
+    if (this.fg.valid && this.addreserve >= 0) {
       this.presentModal();
       // this.clound.dataEdit = this.fg.value;
       // this.router.navigate(['/bill', this.text,this.addreserve]);
@@ -83,7 +81,6 @@ export class BookingDetailPage implements OnInit {
 
   async presentModal() {
     console.log("modal");
-
     const modal = await this.modalController.create({
       component: BillPage,
       cssClass: 'dialog-modal-4-regis-info',
@@ -108,9 +105,11 @@ export class BookingDetailPage implements OnInit {
     modal.present();
   }
 
+  cancel() {
+    this.router.navigate(['/booking']);
+  }
+
   room() {
-    // './select-rooms.page.html'
-    // this.router.navigate(['/booking-information']);
     this.router.navigate(['./select-rooms',
       this.fg.get('checkInDate').value,
       this.fg.get('checkOutDate').value,
