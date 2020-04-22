@@ -41,19 +41,18 @@ export class BookingCancelPage implements OnInit {
     console.log(this.fg.value);
 
     if (this.fg.valid) {
+      if (this.fg.value == null) {
+      }
       this.cloud.cancelReservation(this._id, this.fg.value).subscribe(data => {
         this.router.navigate(['/booking']);
+        this.modaLCtrl.dismiss()
       });
-
-
-      // this.clound.dataEdit = this.fg.value;
-      // this.router.navigate(['/bill', this.text,this.addreserve]);
     }
-    this.modaLCtrl.dismiss();
-
   }
 
-
+  cancel() {
+    this.modaLCtrl.dismiss()
+  }
 
   ngOnInit() {
   }

@@ -238,7 +238,7 @@
       </ion-row>
 
       <ion-row>
-        <ion-col size="2">
+        <ion-col size="3">
           <ion-item>
             <ion-label>เพิ่มเงินสำรองจ่าย</ion-label>
             <ion-checkbox slot="start" (ionChange)="isReserve()"></ion-checkbox>
@@ -246,7 +246,7 @@
         </ion-col>
         <ion-col size="1.5" *ngIf="isAddreserve">
           <ion-item class="ion-text-center">
-            <ion-input type="number" (ionChange)="isAdd($event)" value="0" placeholder="กรุณากรอกข้อมูล"></ion-input>
+            <ion-input type="number" (ionChange)="isAdd($event)" value="{{addreserve}}" placeholder="กรุณากรอกข้อมูล"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="1" *ngIf="isAddreserve">
@@ -255,9 +255,19 @@
           </ion-item>
         </ion-col>
       </ion-row>
-
+      <ion-row>
+      <ion-col size="3"></ion-col>
+      <ion-col size="3">
+        <ion-item *ngIf="addreserve < 0">
+          <span class="invalid-msg">
+            ตัวเลขห้ามติดลบ
+          </span>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <!-- [routerLink]="['/booking/']" -->
       <ion-item>
-        <ion-button size="default" slot="end" expand="block" [routerLink]="['/booking/']" color="danger">ยกเลิก
+        <ion-button size="default" slot="end" expand="block" (click)="cancel()"  color="danger">ยกเลิก
         </ion-button>
         <ion-button size="default" slot="end" expand="block" type="submit">บันทึก
         </ion-button>

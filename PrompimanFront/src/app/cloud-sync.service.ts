@@ -87,6 +87,11 @@ export class CloudSyncService {
     return this.http.put(this.baseUrlPublish + 'Reservation/Delete/' + _id + "?note=" + note, {});
   }
 
+  public confirmReservation(_id: string) {
+    return this.http.put(this.baseUrlPublish + 'Reservation/Confirm/' + _id , {});
+  }
+
+  // http://localhost:5000/api/Reservation/Confirm/637231486236762770
 }
 
 

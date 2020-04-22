@@ -29,7 +29,6 @@ export class BookingDetailPage implements OnInit {
   public addreserve: number = 0;
   public text = "เงินสำรองจ่าย";
 
-
   constructor(private fb: FormBuilder, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
     public alertController: AlertController, private clound: CloudSyncService) {
     this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');
@@ -76,8 +75,7 @@ export class BookingDetailPage implements OnInit {
     console.log(this.addreserve);
     console.log("xxxxx", this.addreserve);
     console.log("this.fg.valid", this.fg.valid);
-
-    if (this.fg.valid) {
+    if (this.fg.valid && this.addreserve >= 0) {
       this.presentModal();
       // this.clound.dataEdit = this.fg.value;
       // this.router.navigate(['/bill', this.text,this.addreserve]);
@@ -91,7 +89,7 @@ export class BookingDetailPage implements OnInit {
       cssClass: 'dialog-modal-4-setting-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null && dataReturned.data !== undefined ) {
+      if (dataReturned !== null && dataReturned.data !== undefined) {
         console.log(dataReturned);
         // let dataRet = dataReturned.data;
         console.log(this.cloud.settingAllRoom);
@@ -108,7 +106,6 @@ export class BookingDetailPage implements OnInit {
 
   async presentModal() {
     console.log("modal");
-
     const modal = await this.modalController.create({
       component: BillPage,
       cssClass: 'dialog-modal-4-regis-info',
@@ -155,6 +152,18 @@ export class BookingDetailPage implements OnInit {
       }
     });
     return await modal.present();
+  }
+  
+  cancel() {
+    this.router.navigate(['/booking']);
+  }
+
+  room() {
+    this.router.navigate(['./select-rooms',
+      this.fg.get('checkInDate').value,
+      this.fg.get('checkOutDate').value,
+      this.clound.dataPass = this.fg.get('rooms').value
+    ]);
   }
 
   ngOnInit() {
