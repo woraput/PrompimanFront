@@ -45,15 +45,12 @@ export class RegisterPage implements OnInit {
   getPageUsers(p: number) {
     this.cloud.getuser(p, 10).subscribe(data => {
       this.paging = data;
-      console.log(this.paging.members[2]);
-      this.dataxx = this.paging.members[2];
-      console.log(this.dataxx.idCard);
       console.log(this.paging.members);
       console.log(this.paging.count);
       console.log(this.paging.page);
     });
-
   }
+  
   search(searchBar: string) {
     this.p = 1;
     console.log(searchBar);
