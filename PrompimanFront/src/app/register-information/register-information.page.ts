@@ -41,9 +41,9 @@ export class RegisterInformationPage implements OnInit {
       'issueDate': '',
       'expiryDate': '',
       'telephone': '',
-      'job': '',
-      'nationality': '',
-      'photo': '',
+      'job': null,
+      'nationality': null,
+      'photo': null,
     });
 
     this.fgTh = this.fb.group({

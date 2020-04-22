@@ -64,7 +64,7 @@
             <ion-label>ห้อง</ion-label>
           </ion-item>
         </ion-col>
-        <ion-col size="8" (click)="room()" [class.invalid]="isValid('rooms')">
+        <ion-col size="8" (click)="selectRoomModal()" [class.invalid]="isValid('rooms')">
           <ion-item *ngFor="let item of this.fg.get('rooms').value" style="float:left">
             <ion-button color="light" disabled="true">
               {{item.roomNo}}
@@ -73,7 +73,7 @@
         </ion-col>
         <ion-col size="2">
           <ion-item [class.invalid]="isValid('rooms')">
-            <ion-icon slot="end" (click)="room()" name="search-outline"></ion-icon>
+            <ion-icon slot="end" (click)="selectRoomModal()" name="search-outline"></ion-icon>
             <ion-icon slot="end" (click)="roomSettingModal()" name="settings-outline"></ion-icon>
           </ion-item>
         </ion-col>

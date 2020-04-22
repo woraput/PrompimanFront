@@ -21,7 +21,7 @@ export class BookingInformationPage implements OnInit {
   public text = "เงินสำรองจ่าย";
   public addReserve: Number = 0;
 
-  constructor(private modalController: ModalController, private fb: FormBuilder, private router: Router, private cloud: CloudSyncService, private navCtrl: NavController, public modals: ModalController) {
+  constructor(private fb: FormBuilder, private router: Router, private cloud: CloudSyncService, private navCtrl: NavController, public modals: ModalController) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       'telephone': [null, Validators.required],
@@ -34,26 +34,23 @@ export class BookingInformationPage implements OnInit {
   }
 
   ngOnInit() {
-    this.cloud.lstRoomsSelect = [];
   }
 
-  ionViewDidEnter() {
-    let roomsSelect = this.cloud.lstRoomsSelect
-    console.log(roomsSelect);
-    this.fg.get('rooms').setValue(roomsSelect);
-    console.log(this.fg.get('rooms').value);
-    console.log(this.cloud.settingAllRoom);
-
-  }
-
-  room() {
-    //todo: ถ้ากลับไปเลือกห้องอีกครั้งห้องเดิมต้องไม่หาย
-    this.router.navigate(['/select-rooms',
-      this.fg.get('checkInDate').value,
-      this.fg.get('checkOutDate').value]),
-      this.cloud.dataPass = this.fg.get('rooms').value;
+  async selectRoomModal() {
     this.cloud.timePeriod.checkInDate = this.fg.get('checkInDate').value;
     this.cloud.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
+    const modal = await this.modals.create({
+      component: SelectRoomsPage,
+      componentProps: { rooms: this.fg.get('rooms').value },
+      cssClass: 'dialog-modal-4-select-room',
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned.data !== null && dataReturned.data !== undefined) {
+        let roomsSelect = dataReturned.data;
+        this.fg.get('rooms').patchValue(roomsSelect);
+      }
+    });
+    return await modal.present();
   }
 
   public handleSubmit() {
@@ -71,22 +68,16 @@ export class BookingInformationPage implements OnInit {
 
 
   async roomSettingModal() {
-    const modal = await this.modalController.create({
+    const modal = await this.modals.create({
       component: DlgRoomDetailPage,
       componentProps: { room: this.fg.get('rooms').value, for: 'all' },
       cssClass: 'dialog-modal-4-setting-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-        console.log(dataReturned);
-        // let dataRet = dataReturned.data;
+      if (dataReturned !== null && dataReturned.data !== undefined) {
         console.log(this.cloud.settingAllRoom);
-
         this.cloud.lstRoomsSelect.forEach(r => r.setting = this.cloud.settingAllRoom);
-        // let indexDataWillChange = this.roomsSelect.findIndex(r => r.roomNo == dataRet.roomNo);
-        // this.roomsSelect[indexDataWillChange] = dataRet;
         console.log(this.cloud.lstRoomsSelect);
-
       }
     });
     return await modal.present();

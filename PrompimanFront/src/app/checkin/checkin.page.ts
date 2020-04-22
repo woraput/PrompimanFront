@@ -24,16 +24,17 @@ export class CheckinPage implements OnInit {
       cssClass: 'dialog-modal-4-setting-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
+      console.log("ggg");
+      console.log(dataReturned);
       if (dataReturned !== null) {
-        console.log(dataReturned);
         // let dataRet = dataReturned.data;
         console.log(this.cloud.settingAllRoom);
-        
+
         this.cloud.lstRoomsSelect.forEach(r => r.setting = this.cloud.settingAllRoom);
         // let indexDataWillChange = this.roomsSelect.findIndex(r => r.roomNo == dataRet.roomNo);
         // this.roomsSelect[indexDataWillChange] = dataRet;
         console.log(this.cloud.lstRoomsSelect);
-        
+
       }
     });
     return await modal.present();
