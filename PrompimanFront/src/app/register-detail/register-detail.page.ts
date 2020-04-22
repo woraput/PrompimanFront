@@ -24,10 +24,19 @@ export class RegisterDetailPage implements OnInit {
     this.cloud.getByID(this._id).subscribe(data => {
       if (data != null) {
         this.listdata = data;
-        if (this.listdata.photo !== null) { this.urlPhoto = this.listdata.photo; }
+        if (this.listdata.photo !== null && this.listdata.photo != '') {
+          this.urlPhoto = this.listdata.photo;
+        }
+        if (this.listdata.photo == null) {
+          this.listdata.photo = this.urlPhoto
+        }
+        if (this.listdata.photo == ''){
+          this.listdata.photo = this.urlPhoto
+        }
       }
     });
   }
+
 
   async editMember() {
     const modal = await this.modalController.create({
