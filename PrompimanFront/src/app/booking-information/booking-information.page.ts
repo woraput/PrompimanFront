@@ -71,6 +71,7 @@ export class BookingInformationPage implements OnInit {
   async presentModal() {
     const modal = await this.modals.create({
       component: BillPage,
+      cssClass: 'dialog-modal-4-regis-info',
       componentProps: {
         'text': this.text,
         'reserve': this.fg.get('reserve').value,

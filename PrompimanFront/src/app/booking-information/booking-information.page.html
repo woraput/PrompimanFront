@@ -1,7 +1,8 @@
 <ion-header>
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-title>เพิ่มข้อมูลการจอง</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
+  <app-back-to-root title="เพิ่มข้อมูลการจอง"></app-back-to-root>
 </ion-header>
 
 <ion-content class="ion-padding">
@@ -114,6 +115,18 @@
           </ion-item>
         </ion-col>
       </ion-row>
+      <!-- <ion-row>
+        <ion-col size="2"></ion-col>
+        <ion-col size="10">
+          <ion-item *ngIf="fg.get('reserve').value < 0">
+            <ion-icon md="md-warning" class="warning"></ion-icon>
+            <span class="warning-msg">
+              กรุณาตรวจสอบจำนวนเงินสำรองจ่ายอีกครั้ง
+            </span>
+          </ion-item>
+        </ion-col>
+      </ion-row> -->
+      
 
       <ion-row class="ion-padding">
         <ion-col size="5.5">
