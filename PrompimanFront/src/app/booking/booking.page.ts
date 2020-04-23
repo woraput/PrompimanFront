@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CloudSyncService } from '../cloud-sync.service';
@@ -16,29 +16,29 @@ export class BookingPage implements OnInit {
   public _id: string;
   check: boolean;
   private timeoutId: number;
-  constructor(public router: Router, public alertController: AlertController, private cloud: CloudSyncService) {
+  constructor(public router: Router, public alertController: AlertController, private cloud: CloudSyncService, public zone: NgZone) {
     this.searchBar = new FormControl('');
   }
 
-  ionViewDidEnter() {
-    // this.cloud.getReservation().subscribe(data => {
-    //   console.log(data);
-    //   this.reservation = data;
-    // });
-    // console.log(this.check);
+  // ionViewDidEnter() {
+  //   // this.cloud.getReservation().subscribe(data => {
+  //   //   console.log(data);
+  //   //   this.reservation = data;
+  //   // });
+  //   // console.log(this.check);
 
-    // if (this.check == true) {
-    //   this.cloud.getReservation().subscribe(data => {
-    //     console.log(data);
-    //     this.reservation = data;
-    //   });
-    // }
-    this.cloud.getReservation().subscribe(data => {
-      console.log(data);
-      this.reservation = data;
-    });
-    
-  }
+  //   // if (this.check == true) {
+  //   //   this.cloud.getReservation().subscribe(data => {
+  //   //     console.log(data);
+  //   //     this.reservation = data;
+  //   //   });
+  //   // }
+  //   this.cloud.getReservation().subscribe(data => {
+  //     console.log(data);
+  //     this.reservation = data;
+  //   });
+
+  // }
 
 
   ngOnInit() {
@@ -52,6 +52,7 @@ export class BookingPage implements OnInit {
     // });
 
   }
+
   confirmMembers(_id: string) {
     console.log(_id);
     this.confirmMember(_id);
@@ -72,15 +73,18 @@ export class BookingPage implements OnInit {
         }, {
           text: 'ยืนยัน',
           handler: () => {
-            var check;
             this.cloud.confirmReservation(_id).subscribe(data => {
               console.log('xxxxxxxxxxxxxx', data);
-              // check = data;
-              // console.log(check.isSuccess);
-              // this.check = check.isSuccess;
-              setTimeout(() => {
-                this.ngOnInit();
-              }, 2000);
+              alert.onDidDismiss().then(data =>{
+                // this.router.navigate(['/booking']);
+                this.zone.run(data =>{
+                  this.ngOnInit();
+
+                });
+              })
+              // setTimeout(() => {
+              //   this.ngOnInit();
+              // }, 2000);
             });
             console.log('ConfirmOkay');
           }

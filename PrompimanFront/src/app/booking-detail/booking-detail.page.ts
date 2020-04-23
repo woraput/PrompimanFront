@@ -116,6 +116,8 @@ export class BookingDetailPage implements OnInit {
     });
     modal.onWillDismiss().then(data => {
       let isOk = data
+      console.log(data);
+      
       if (isOk.data) {
         console.log(this._id);
 

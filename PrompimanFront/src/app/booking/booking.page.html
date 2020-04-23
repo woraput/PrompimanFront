@@ -54,7 +54,7 @@
 
   <ion-card>
     <ion-card-content>
-      <ion-item lines="none" *ngFor="let item of reservation  ">
+      <ion-item lines="none" *ngFor="let item of reservation">
         <ion-col size="10" [routerLink]="['/booking-detail/', item._id, 'cancel']">
           <ion-item lines="none">
             <ion-col size="2">
@@ -81,7 +81,7 @@
           <ion-button (click)="confirmMembers(item._id)" size="default" expand="block">ยืนยัน</ion-button>
         </ion-col>
         <ion-col size="1" *ngIf="item.isConfirm == true">
-          <ion-button  size="default" expand="block" disabled="true">ยืนยัน</ion-button>
+          <ion-button color="medium" size="default" expand="block" disabled="true">ยืนยันแล้ว</ion-button>
         </ion-col>
 
         <ion-col size="1">
