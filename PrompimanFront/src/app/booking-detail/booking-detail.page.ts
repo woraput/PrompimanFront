@@ -90,14 +90,10 @@ export class BookingDetailPage implements OnInit {
     });
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null && dataReturned.data !== undefined) {
-        console.log(dataReturned);
-        // let dataRet = dataReturned.data;
-        console.log(this.cloud.settingAllRoom);
-
-        this.cloud.lstRoomsSelect.forEach(r => r.setting = this.cloud.settingAllRoom);
-        // let indexDataWillChange = this.roomsSelect.findIndex(r => r.roomNo == dataRet.roomNo);
-        // this.roomsSelect[indexDataWillChange] = dataRet;
+        let lstRoomWillSetting = this.fg.get('rooms').value as RoomSelected[];
+        lstRoomWillSetting.forEach(r => r.setting = this.cloud.settingAllRoom);
         console.log(this.cloud.lstRoomsSelect);
+        this.fg.get('rooms').patchValue(lstRoomWillSetting);
 
       }
     });
@@ -141,13 +137,11 @@ export class BookingDetailPage implements OnInit {
     modal.onDidDismiss().then((dataReturned) => {
       console.log(dataReturned);
       console.log(this.fg.value);
-      // this.fg.get('rooms').patchValue(this.rommsNumber);
       if (dataReturned !== null && dataReturned.data !== undefined) {
         console.log(dataReturned.data);
         let roomsSelect = dataReturned.data;
         console.log(roomsSelect);
         this.fg.get('rooms').patchValue(roomsSelect);
-        // this.roomsnumber = this.fg.get('rooms').value;
         console.log(this.fg.get('rooms').value);
       }
     });

@@ -74,10 +74,13 @@ export class BookingInformationPage implements OnInit {
       cssClass: 'dialog-modal-4-setting-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
+      console.log("เข้า dismiss setting");
+
       if (dataReturned !== null && dataReturned.data !== undefined) {
-        console.log(this.cloud.settingAllRoom);
-        this.cloud.lstRoomsSelect.forEach(r => r.setting = this.cloud.settingAllRoom);
+        let lstRoom = this.fg.get('rooms').value as RoomSelected[];
+        lstRoom.forEach(r => r.setting = this.cloud.settingAllRoom);
         console.log(this.cloud.lstRoomsSelect);
+        this.fg.get('rooms').patchValue(lstRoom);
       }
     });
     return await modal.present();
