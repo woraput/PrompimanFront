@@ -74,6 +74,8 @@ export class BookingInformationPage implements OnInit {
       cssClass: 'dialog-modal-4-setting-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
+      console.log("เข้า dismiss setting");
+      
       if (dataReturned !== null && dataReturned.data !== undefined) {
         console.log(this.cloud.settingAllRoom);
         this.cloud.lstRoomsSelect.forEach(r => r.setting = this.cloud.settingAllRoom);

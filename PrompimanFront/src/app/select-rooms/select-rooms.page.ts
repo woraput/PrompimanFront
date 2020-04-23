@@ -207,9 +207,6 @@ export class SelectRoomsPage implements OnInit {
     if (this.roomsSelect.length !== 0) {
       await this.modalCtrl.dismiss(this.roomsSelect);
     }
-    else if (this.roomsSelect.length == 0 && this.roomParam !== null) {
-      await this.modalCtrl.dismiss(this.roomParam);
-    }
     else await this.modalCtrl.dismiss([] as RoomSelected[]);
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { RoomSelected } from 'src/models/reservation';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CloudSyncService } from '../cloud-sync.service';
 
 @Component({
@@ -40,7 +40,30 @@ export class DlgRoomDetailPage implements OnInit {
     };
   }
 
+  private checkValidData() {
+    const haveAddBreakfast = this.fg.get('haveAddBreakfast').value;
+    const addBreakfastCount = this.fg.get('addBreakfastCount').value;
+    const haveExtraBed = this.fg.get('haveExtraBed').value;
+    const extraBedCount = this.fg.get('extraBedCount').value;
+
+    console.log("enter validate", haveAddBreakfast, addBreakfastCount, haveExtraBed, extraBedCount);
+
+    if (!haveAddBreakfast && addBreakfastCount != 0) {
+      this.fg.get('addBreakfastCount').patchValue(0);
+    }
+    if (haveAddBreakfast && addBreakfastCount == 0) {
+      this.fg.get('haveAddBreakfast').patchValue(false);
+    }
+    if (!haveExtraBed && extraBedCount != 0) {
+      this.fg.get('extraBedCount').patchValue(0);
+    }
+    if (haveExtraBed && extraBedCount == 0) {
+      this.fg.get('haveExtraBed').patchValue(false);
+    }
+  }
+
   async handleSubmit() {
+    this.checkValidData();
     if (this.forType == 'each') {
       this.dataRoom.setting = this.fg.value;
       await this.modalCtrl.dismiss(this.dataRoom as RoomSelected);

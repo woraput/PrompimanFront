@@ -29,7 +29,6 @@ export class BookingDetailPage implements OnInit {
   public addreserve: number = 0;
   public text = "เงินสำรองจ่าย";
 
-
   constructor(private fb: FormBuilder, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
     public alertController: AlertController, private clound: CloudSyncService) {
     this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');

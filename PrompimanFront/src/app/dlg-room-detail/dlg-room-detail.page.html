@@ -30,7 +30,7 @@
         </ion-col>
         <ion-col>
           <ion-item *ngIf="fg.get('haveAddBreakfast').value" class="ion-text-center">
-            <ion-input type="number" (ionFocus)="fg.get('haveAddBreakfast').setValue('')" clearOnEdit="true" formControlName="addBreakfastCount"
+            <ion-input type="number" (ionFocus)="fg.get('addBreakfastCount').setValue(null)"  formControlName="addBreakfastCount"
               placeholder="กรุณากรอกข้อมูล"></ion-input>
           </ion-item>
         </ion-col>
@@ -49,7 +49,7 @@
         </ion-col>
         <ion-col>
           <ion-item *ngIf="fg.get('haveExtraBed').value" class="ion-text-center">
-            <ion-input type="number" (ionFocus)="fg.get('extraBedCount').setValue('')" clearOnEdit="true" formControlName="extraBedCount" placeholder="กรุณากรอกข้อมูล">
+            <ion-input type="number" (ionFocus)="fg.get('extraBedCount').setValue(null)"  formControlName="extraBedCount" placeholder="กรุณากรอกข้อมูล">
             </ion-input>
           </ion-item>
         </ion-col>
@@ -67,13 +67,13 @@
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item class="ion-text-center">
-            <ion-input type="number" (ionFocus)="fg.get('discount').setValue('')" clearOnEdit="true" formControlName="discount" placeholder="กรุณากรอกข้อมูล">
+          <ion-item *ngIf="fg.get('discount').value" class="ion-text-center">
+            <ion-input type="number" (ionFocus)="fg.get('discount').setValue(null)"  formControlName="discount" placeholder="กรุณากรอกข้อมูล">
             </ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="2">
-          <ion-item>
+          <ion-item *ngIf="fg.get('discount').value" >
             บาท
           </ion-item>
         </ion-col>
