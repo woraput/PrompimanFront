@@ -68,6 +68,7 @@
           <ion-button size="default" expand="block" type="submit">Check In</ion-button>
         </ion-col>
       </ion-item>
+      <h1 *ngIf="this.paging.count == 0" class="ion-text-center">ไม่พบสิ่งที่ค้นหา</h1>
       <pagination-controls (pageChange)="p = $event" (click)="getPageUsers(p)"></pagination-controls>
     </ion-card-content>
   </ion-card>
