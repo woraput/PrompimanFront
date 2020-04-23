@@ -20,21 +20,7 @@ export class RegisterDetailPage implements OnInit {
 
   constructor(private fb: FormBuilder, private modalController: ModalController, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute) {
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
-
-    this.cloud.getByID(this._id).subscribe(data => {
-      if (data != null) {
-        this.listdata = data;
-        if (this.listdata.photo != null && this.listdata.photo != '') {
-          this.urlPhoto = this.listdata.photo;
-        }
-        else if (this.listdata.photo == null) {
-          this.listdata.photo = this.urlPhoto
-        }
-        else if (this.listdata.photo == ''){
-          this.listdata.photo = this.urlPhoto
-        }
-      }
-    });
+    this.ngOnInit();
   }
 
 
@@ -46,11 +32,27 @@ export class RegisterDetailPage implements OnInit {
         passed_id: this._id
       }
     });
+    modal.onDidDismiss().then(data => {
+      this.ngOnInit();
+    });
     return await modal.present();
   }
 
   ngOnInit() {
-
+    this.cloud.getByID(this._id).subscribe(data => {
+      if (data != null) {
+        this.listdata = data;
+        if (this.listdata.photo != null && this.listdata.photo != '') {
+          this.urlPhoto = this.listdata.photo;
+        }
+        else if (this.listdata.photo == null) {
+          this.listdata.photo = this.urlPhoto
+        }
+        else if (this.listdata.photo == '') {
+          this.listdata.photo = this.urlPhoto
+        }
+      }
+    });
   }
 
   handleSubmit() {
