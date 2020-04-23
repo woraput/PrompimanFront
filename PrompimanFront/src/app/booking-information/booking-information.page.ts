@@ -66,7 +66,6 @@ export class BookingInformationPage implements OnInit {
     // console.log(this.fg.valid);
   }
 
-
   async roomSettingModal() {
     const modal = await this.modals.create({
       component: DlgRoomDetailPage,
@@ -106,6 +105,7 @@ export class BookingInformationPage implements OnInit {
           }
         });
         this.router.navigate(['/booking']);
+        // this.navCtrl.navigateForward(['/booking']);
       }
     });
     modal.present();
