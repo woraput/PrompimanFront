@@ -107,6 +107,7 @@ export class BookingPage implements OnInit {
     console.log(searchBar);
     this.cloud.searchReservation(searchBar).subscribe(data => {
       this.reservation = data;
+      console.log(this.reservation.length);
     });
   }
 }
