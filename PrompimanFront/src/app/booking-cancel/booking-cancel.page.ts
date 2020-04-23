@@ -44,7 +44,6 @@ export class BookingCancelPage implements OnInit {
       if (this.fg.value == null) {
       }
       this.cloud.cancelReservation(this._id, this.fg.get('note').value).subscribe(data => {
-        this.router.navigate(['/booking']);
         this.modaLCtrl.dismiss()
       });
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, Input } from '@angular/core';
+import { Component, OnInit, ViewChildren, Input, NgZone } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
@@ -29,7 +29,7 @@ export class BookingDetailPage implements OnInit {
   public addreserve: number = 0;
   public text = "เงินสำรองจ่าย";
 
-  constructor(private fb: FormBuilder, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
+  constructor(private fb: FormBuilder , public zone: NgZone, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
     public alertController: AlertController, private clound: CloudSyncService) {
     this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
@@ -117,7 +117,7 @@ export class BookingDetailPage implements OnInit {
     modal.onWillDismiss().then(data => {
       let isOk = data
       console.log(data);
-      
+
       if (isOk.data) {
         console.log(this._id);
 
@@ -155,7 +155,7 @@ export class BookingDetailPage implements OnInit {
     });
     return await modal.present();
   }
-  
+
   cancel() {
     this.router.navigate(['/booking']);
   }
@@ -169,6 +169,9 @@ export class BookingDetailPage implements OnInit {
   }
 
   ngOnInit() {
+    this.cloud.getReservation().subscribe(data => {
+      console.log(data);
+    })
   }
 
   async cancelReservation() {
@@ -179,7 +182,13 @@ export class BookingDetailPage implements OnInit {
         '_id': this._id,
       }
     });
-    return await modal.present();
+    modal.onDidDismiss().then(data => {
+      this.zone.run(data => {
+        this.ngOnInit()
+        this.router.navigate(['/booking']);
+      })
+    });
+    modal.present();
   }
 
   isReserve() {
