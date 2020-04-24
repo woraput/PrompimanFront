@@ -16,6 +16,7 @@ export class BookingPage implements OnInit {
   public _id: string;
   check: boolean;
   private timeoutId: number;
+  // public showBadge;
   constructor(public router: Router, public alertController: AlertController, private cloud: CloudSyncService, public zone: NgZone, private navCtrl: NavController) {
     this.searchBar = new FormControl('');
   }
@@ -26,6 +27,9 @@ export class BookingPage implements OnInit {
       this.reservation = data;
       console.log('1');
       console.log(this.reservation);
+      // this.showBadge= (this.reservation.filter(it => it.isConfirm == false).length)
+      // console.log(this.showBadge);
+      
     });
     //   // this.cloud.getReservation().subscribe(data => {
     //   //   console.log(data);

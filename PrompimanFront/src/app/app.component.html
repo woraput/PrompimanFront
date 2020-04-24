@@ -15,6 +15,9 @@
               [class.selected]="selectedIndex == i" detail>
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
+              <ion-badge slot="end" color="danger" *ngIf="p.title == 'Reservation'">
+              13
+            </ion-badge>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
