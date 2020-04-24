@@ -14,7 +14,8 @@
         <ion-col>
           <ion-item>
             <ion-label>อาหารเช้า</ion-label>
-            <ion-checkbox slot="start" formControlName="haveBreakfast" value="true"></ion-checkbox>
+            <ion-checkbox [color]="setColor('haveBreakfast')" slot="start" formControlName="haveBreakfast" value="true">
+            </ion-checkbox>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -25,13 +26,14 @@
         <ion-col>
           <ion-item>
             <ion-label>เพิ่มอาหารเช้า</ion-label>
-            <ion-checkbox slot="start" formControlName="haveAddBreakfast"></ion-checkbox>
+            <ion-checkbox [color]="setColor('haveAddBreakfast')" slot="start" formControlName="haveAddBreakfast">
+            </ion-checkbox>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item *ngIf="fg.get('haveAddBreakfast').value" class="ion-text-center">
-            <ion-input type="number" (ionFocus)="fg.get('addBreakfastCount').setValue(null)"  formControlName="addBreakfastCount"
-              placeholder="กรุณากรอกข้อมูล"></ion-input>
+            <ion-input type="number" (ionFocus)="fg.get('addBreakfastCount').setValue(null)"
+              formControlName="addBreakfastCount" placeholder="กรุณากรอกข้อมูล"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="2">
@@ -44,12 +46,13 @@
         <ion-col>
           <ion-item>
             <ion-label>เพิ่มเตียงเสริม</ion-label>
-            <ion-checkbox slot="start" formControlName="haveExtraBed"></ion-checkbox>
+            <ion-checkbox [color]="setColor('haveExtraBed')" slot="start" formControlName="haveExtraBed"></ion-checkbox>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item *ngIf="fg.get('haveExtraBed').value" class="ion-text-center">
-            <ion-input type="number" (ionFocus)="fg.get('extraBedCount').setValue(null)"  formControlName="extraBedCount" placeholder="กรุณากรอกข้อมูล">
+            <ion-input type="number" (ionFocus)="fg.get('extraBedCount').setValue(null)" formControlName="extraBedCount"
+              placeholder="กรุณากรอกข้อมูล">
             </ion-input>
           </ion-item>
         </ion-col>
@@ -63,17 +66,20 @@
         <ion-col>
           <ion-item>
             <ion-label>ส่วนลด</ion-label>
-            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-checkbox checked="true" slot="start"></ion-checkbox>
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item *ngIf="fg.get('discount').value" class="ion-text-center">
-            <ion-input type="number" (ionFocus)="fg.get('discount').setValue(null)"  formControlName="discount" placeholder="กรุณากรอกข้อมูล">
+          <ion-item class="ion-text-center">
+            <!-- <ion-item *ngIf="fg.get('discount').value" class="ion-text-center"> -->
+            <ion-input type="number" (ionFocus)="fg.get('discount').setValue(null)" value="0" formControlName="discount"
+              placeholder="กรุณากรอกข้อมูล">
             </ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="2">
-          <ion-item *ngIf="fg.get('discount').value" >
+          <ion-item>
+            <!-- <ion-item *ngIf="fg.get('discount').value"> -->
             บาท
           </ion-item>
         </ion-col>

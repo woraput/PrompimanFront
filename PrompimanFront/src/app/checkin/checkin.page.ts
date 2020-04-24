@@ -27,13 +27,10 @@ export class CheckinPage implements OnInit {
       console.log("ggg");
       console.log(dataReturned);
       if (dataReturned !== null) {
-        // let dataRet = dataReturned.data;
-        console.log(this.cloud.settingAllRoom);
-
-        this.cloud.lstRoomsSelect.forEach(r => r.setting = this.cloud.settingAllRoom);
-        // let indexDataWillChange = this.roomsSelect.findIndex(r => r.roomNo == dataRet.roomNo);
-        // this.roomsSelect[indexDataWillChange] = dataRet;
-        console.log(this.cloud.lstRoomsSelect);
+        // let lstRoom = this.fg.get('rooms').value as RoomSelected[];
+        // lstRoom.forEach(r => r.setting = this.cloud.settingAllRoom);
+        // console.log(this.cloud.lstRoomsSelect);
+        // this.fg.get('rooms').patchValue(lstRoom);
 
       }
     });
