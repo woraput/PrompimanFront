@@ -34,11 +34,8 @@ export class CheckinPage implements OnInit {
         // let indexDataWillChange = this.roomsSelect.findIndex(r => r.roomNo == dataRet.roomNo);
         // this.roomsSelect[indexDataWillChange] = dataRet;
         console.log(this.cloud.lstRoomsSelect);
-
       }
     });
     return await modal.present();
   }
-
-
 }
