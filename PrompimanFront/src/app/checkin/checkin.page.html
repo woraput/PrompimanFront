@@ -7,7 +7,7 @@
 <ion-content>
   <ion-list lines="none">
     <ion-item lines="none">
-      <ion-button size="default" (click)="roomSetting()" slot="end" expand="block" type="submit">
+      <ion-button size="default" (click)="dataMember()" slot="end" expand="block" type="submit">
         <ion-icon name="settings"></ion-icon>
         ค้นหาสมาชิก
       </ion-button>
@@ -77,28 +77,39 @@
         </ion-item>
 
         <ion-row>
-        <ion-col size="9">
-          <ion-item >
-            <ion-button color="light">
-              111 222 333 444 444 444 444 444 444 444 444 444 444 444 444 
-            </ion-button>
-          </ion-item>
-        </ion-col>
-        <ion-col size="3">
-          <ion-item >
-            <!-- [class.invalid]="isValid('rooms')" -->
-            <ion-icon slot="end" (click)="selectRoomModal()" name="search-outline"></ion-icon>
-            <ion-icon slot="end" (click)="roomSetting()" name="settings-outline"></ion-icon>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+          <ion-col size="9">
+            <ion-item>
+              <ion-button color="light">
+                111
+              </ion-button>
+            </ion-item>
+          </ion-col>
+          <ion-col size="3">
+            <ion-item>
+              <!-- [class.invalid]="isValid('rooms')" -->
+              <ion-icon slot="end" (click)="selectRoomModal()" name="search-outline"></ion-icon>
+              <ion-icon slot="end" (click)="roomSetting()" name="settings-outline"></ion-icon>
+            </ion-item>
+          </ion-col>
+        </ion-row>
 
         <ion-item lines="none">
-          <ion-button size="default" (click)="roomSetting()" slot="start" expand="block" type="submit">
+          <ion-button size="default" (click)="dataReservation()" slot="start" expand="block" type="submit">
             <ion-icon name="settings"></ion-icon>
             ข้อมูลการจอง
           </ion-button>
         </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-padding">
+      <ion-col size="5.5">
+      </ion-col>
+      <ion-col size="1">
+        <ion-button size="default" expand="block" type="submit">
+          ถัดไป</ion-button>
+      </ion-col>
+      <ion-col size="5.5">
       </ion-col>
     </ion-row>
   </ion-list>

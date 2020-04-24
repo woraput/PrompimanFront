@@ -3,6 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 import { RoomSelected } from 'src/models/reservation';
 import { CloudSyncService } from '../cloud-sync.service';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
 
 @Component({
   selector: 'app-checkin',
@@ -11,8 +13,21 @@ import { CloudSyncService } from '../cloud-sync.service';
 })
 export class CheckinPage implements OnInit {
   private roomsSelect: RoomSelected[] = [];
+  public fg: FormGroup;
 
-  constructor(private modalController: ModalController, private cloud: CloudSyncService) { }
+
+  constructor(private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
+    this.fg = this.fb.group({
+      'name': [null, Validators.required],
+      'telephone': [null, Validators.required],
+      'checkInDate': [null, Validators.required],
+      'checkOutDate': [null, Validators.required],
+      'rooms': [],
+      'reserve': [null, Validators.required],
+      'active': [null, Validators.required],
+      // 'note': [],
+    })
+  }
 
   ngOnInit() {
   }
@@ -36,4 +51,38 @@ export class CheckinPage implements OnInit {
     });
     return await modal.present();
   }
+
+  async selectRoomModal() {
+    this.cloud.timePeriod.checkInDate = this.fg.get('checkInDate').value;
+    this.cloud.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
+    const modal = await this.modalController.create({
+      component: SelectRoomsPage,
+      componentProps: { rooms: this.fg.get('rooms').value },
+      cssClass: 'dialog-modal-4-select-room',
+    });
+    modal.onDidDismiss().then((dataReturned) => {
+      console.log(dataReturned);
+      console.log(this.fg.value);
+      if (dataReturned !== null && dataReturned.data !== undefined) {
+        console.log(dataReturned.data);
+        let roomsSelect = dataReturned.data;
+        console.log(roomsSelect);
+        this.fg.get('rooms').patchValue(roomsSelect);
+        console.log(this.fg.get('rooms').value);
+      }
+    });
+    return await modal.present();
+  }
+
+  // ข้อมูลการจอง
+  dataReservation(){
+
+  }
+
+  // ค้นหารายชื่อที่เคย register
+  dataMember(){
+
+  }
+
+
 }
