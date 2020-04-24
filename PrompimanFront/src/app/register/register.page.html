@@ -31,41 +31,45 @@
         <ion-col size="2">
           <h4>วันที่ลงทะเบียน</h4>
         </ion-col>
-        <ion-col size="3">
+        <ion-col size="2.5">
           <h4>ไอดี</h4>
         </ion-col>
-        <ion-col size="3" class="ion-text-left">
+        <ion-col size="3" class="ion-text-center">
           <h4>ชื่อ - สกุล</h4>
         </ion-col>
-        <ion-col size="2.5" class="ion-text-left">
+        <ion-col size="2.5" class="ion-text-center">
           <h4>เบอร์โทรศัพท์</h4>
         </ion-col>
       </ion-row>
     </ion-card-header>
   </ion-card>
 
-  <ion-card>
+  <ion-card >
     <ion-card-content>
-      <ion-item class="ion-text-center"
-        *ngFor="let item of paging.members  | paginate: { itemsPerPage: 10, currentPage: p ,totalItems: paging.count}"
-        [routerLink]="['/register-detail/', item._id]" routerDirection="forward">
-        <ion-col size="2">
-          {{item.creationDateTime | date:"dd/MM/yyyy" }}
-        </ion-col>
-        <ion-col size="3">
-          {{item._id}}
-        </ion-col>
-        <ion-col size="3" *ngIf="item.th_Firstname != '' || item.th_Lastname != ''" class="ion-text-left">
-          {{item.th_Firstname}} {{item.th_Lastname}}
-        </ion-col>
-        <ion-col size="3" *ngIf="item.th_Firstname == ''" class="ion-text-left">
-          {{item.en_Firstname}} {{item.en_Lastname}}
-        </ion-col>
-        <ion-col size="2.5" class="ion-text-left">
-          {{item.telephone}}
+      <ion-item lines="none" class="ion-text-center"
+        *ngFor="let item of paging.members  | paginate: { itemsPerPage: 10, currentPage: p ,totalItems: paging.count}">
+        <ion-col size="10.5" [routerLink]="['/register-detail/', item._id]">
+          <!-- routerDirection="forward" -->
+          <ion-item lines="none">
+            <ion-col size="2.5">
+              {{item.creationDateTime | date:"dd/MM/yyyy" }}
+            </ion-col>
+            <ion-col size="3.5">
+              {{item._id}}
+            </ion-col>
+            <ion-col size="3.5" *ngIf="item.th_Firstname != '' || item.th_Lastname != ''" class="ion-text-left">
+              {{item.th_Firstname}} {{item.th_Lastname}}
+            </ion-col>
+            <ion-col size="3.5" *ngIf="item.th_Firstname == ''" class="ion-text-left">
+              {{item.en_Firstname}} {{item.en_Lastname}}
+            </ion-col>
+            <ion-col size="2.5" class="ion-text-left">
+              {{item.telephone}}
+            </ion-col>
+          </ion-item>
         </ion-col>
         <ion-col size="1.5">
-          <ion-button size="default" expand="block" type="submit">Check In</ion-button>
+          <ion-button size="default" expand="block" type="submit" [routerLink]="['/checkin/']">Check In</ion-button>
         </ion-col>
       </ion-item>
       <h1 *ngIf="this.paging.count == 0" class="ion-text-center">ไม่พบสิ่งที่ค้นหา</h1>

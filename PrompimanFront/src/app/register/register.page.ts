@@ -23,8 +23,13 @@ export class RegisterPage implements OnInit {
   constructor(private modalController: ModalController, private fb: FormBuilder, private nav: NavController, public router: Router, private cloud: CloudSyncService) {
     this.searchBar = new FormControl('');
     
-    this.getPageUsers(this.p);
   }
+  
+  ionViewDidEnter() {
+    this.getPageUsers(this.p);
+    
+  }
+
   
   ngOnInit() {
   }
@@ -35,7 +40,7 @@ export class RegisterPage implements OnInit {
       cssClass: 'dialog-modal-4-regis-info',
     });
     modal.onDidDismiss().then(data=>{
-      this.getPageUsers(this.p)
+      this.ionViewDidEnter()
     })
     modal.present();
   }
