@@ -94,7 +94,15 @@ const routes: Routes = [
   {
     path: 'booking-cancel',
     loadChildren: () => import('./booking-cancel/booking-cancel.module').then( m => m.BookingCancelPageModule)
+  },  {
+    path: 'dlg-search-member',
+    loadChildren: () => import('./dlg-search-member/dlg-search-member.module').then( m => m.DlgSearchMemberPageModule)
   },
+  {
+    path: 'dlg-search-reservation',
+    loadChildren: () => import('./dlg-search-reservation/dlg-search-reservation.module').then( m => m.DlgSearchReservationPageModule)
+  },
+
 ];
 
 @NgModule({

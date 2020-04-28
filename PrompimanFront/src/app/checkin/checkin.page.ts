@@ -15,17 +15,15 @@ export class CheckinPage implements OnInit {
   private roomsSelect: RoomSelected[] = [];
   public fg: FormGroup;
 
-
   constructor(private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
-      'telephone': [null, Validators.required],
       'checkInDate': [null, Validators.required],
       'checkOutDate': [null, Validators.required],
       'rooms': [],
-      'reserve': [null, Validators.required],
-      'active': [null, Validators.required],
-      // 'note': [],
+      // 'telephone': [null, Validators.required],
+      // 'reserve': [null, Validators.required],
+      // 'active': [null, Validators.required],
     })
   }
 
@@ -46,7 +44,6 @@ export class CheckinPage implements OnInit {
         // lstRoom.forEach(r => r.setting = this.cloud.settingAllRoom);
         // console.log(this.cloud.lstRoomsSelect);
         // this.fg.get('rooms').patchValue(lstRoom);
-
       }
     });
     return await modal.present();
