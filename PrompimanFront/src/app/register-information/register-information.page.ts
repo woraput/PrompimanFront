@@ -47,7 +47,7 @@ export class RegisterInformationPage implements OnInit {
     });
 
     this.fgTh = this.fb.group({
-      'idCard': [null, Validators.required],
+      'idCard': [null, Validators.compose([Validators.maxLength(13),Validators.pattern('[0-9]*')])],
       'th_Prefix': [null, Validators.required],
       'th_Firstname': [null, Validators.required],
       'th_Lastname': [null, Validators.required],
