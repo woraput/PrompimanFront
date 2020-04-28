@@ -21,6 +21,8 @@ import { BookingDetailPageModule } from './booking-detail/booking-detail.module'
 import { DlgRoomDetailPageModule } from './dlg-room-detail/dlg-room-detail.module';
 import { BookingCancelPageModule } from './booking-cancel/booking-cancel.module';
 import { BillPageModule } from './bill/bill.module';
+import { DlgSearchReservationPageModule } from './dlg-search-reservation/dlg-search-reservation.module';
+import { DlgSearchMemberPageModule } from './dlg-search-member/dlg-search-member.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [
@@ -34,6 +36,8 @@ import { BillPageModule } from './bill/bill.module';
     DlgSelectRoomsDetailPageModule,
     BookingCancelPageModule,
     DlgRoomDetailPageModule,
+    DlgSearchReservationPageModule,
+    DlgSearchMemberPageModule,
     BillPageModule,
     SelectRoomsPageModule,
     MbscModule,

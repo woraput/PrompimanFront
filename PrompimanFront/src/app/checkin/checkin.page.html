@@ -69,13 +69,12 @@
         <ion-item>
           <ion-label>กรุ๊ป</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-label>วันที่เข้า</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>02/06/2555</ion-label>
-        </ion-item>
+       
+        <app-datetime [fg]="fg" formName="checkInDate" mode="date"></app-datetime>
+        <app-datetime [fg]="fg" formName="checkOutDate" mode="date"></app-datetime>
 
+
+       
         <ion-row>
           <ion-col size="9">
             <ion-item>

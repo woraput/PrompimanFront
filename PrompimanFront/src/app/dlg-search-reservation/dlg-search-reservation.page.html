@@ -1,9 +1,48 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>dlgSearchReservation</ion-title>
+    <ion-title>ข้อมูลการจองห้องพัก</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-row class="ion-padding">
+    <ion-col size="11">
+      <ion-searchbar></ion-searchbar>
+    </ion-col>
+    <ion-col size="1">
+      <ion-button style="margin-top: 0.8em;" size="default" expand="block" color="dark">
+        ค้นหา
+      </ion-button>
+    </ion-col>
+  </ion-row>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="ion-text-center">
+        <ion-col size="6">
+          <h4>ชื่อ - สกุล</h4>
+        </ion-col>
+        <ion-col size="6">
+          <h4>เบอร์โทรศัพท์</h4>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="none" class="ion-text-center">
+        <ion-col size="6">
+          ชื่อ - สกุล
+        </ion-col>
+        <ion-col size="6">
+          เบอร์โทรศัพท์
+        </ion-col>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item lines="none">
+    <ion-button size="default" slot="end" expand="block" color="danger">ยกเลิก</ion-button>
+  </ion-item>
 </ion-content>

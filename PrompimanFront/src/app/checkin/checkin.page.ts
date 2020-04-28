@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 import { RoomSelected } from 'src/models/reservation';
 import { CloudSyncService } from '../cloud-sync.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
+import { DlgSearchMemberPage } from '../dlg-search-member/dlg-search-member.page';
+import { DlgSearchReservationPage } from '../dlg-search-reservation/dlg-search-reservation.page';
+import { DatetimeComponent } from 'src/components/datetime/datetime.component';
+
 
 @Component({
   selector: 'app-checkin',
@@ -14,6 +18,10 @@ import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
 export class CheckinPage implements OnInit {
   private roomsSelect: RoomSelected[] = [];
   public fg: FormGroup;
+  @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
+  private submitRequested: boolean;
+
+
 
   constructor(private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
     this.fg = this.fb.group({
@@ -25,6 +33,24 @@ export class CheckinPage implements OnInit {
       // 'reserve': [null, Validators.required],
       // 'active': [null, Validators.required],
     })
+  }
+
+  
+  public handleSubmit() {
+    this.submitRequested = true;
+    this.datetimeComponent.forEach(it => it.submitRequest());
+    console.log(this.fg.value);
+    if (this.fg.valid) {
+    }
+  }
+
+  public isValid(name: string): boolean {
+    var ctrl = this.fg.get(name);
+    if (name == 'anycheck') {
+      ctrl = this.fg;
+      return ctrl.errors && ctrl.errors.anycheck && (ctrl.dirty || this.submitRequested);
+    }
+    return ctrl.invalid && (ctrl.dirty || this.submitRequested);
   }
 
   ngOnInit() {
@@ -72,14 +98,28 @@ export class CheckinPage implements OnInit {
   }
 
   // ข้อมูลการจอง
-  dataReservation(){
+    async dataReservation() {
+      const modal = await this.modalController.create({
+        component: DlgSearchReservationPage,
+        cssClass: 'dialog-modal-4-regis-info',
+      });
+      modal.onDidDismiss().then(data=>{
+        // this.ionViewDidEnter()
+      })
+      modal.present();
+    }
 
-  }
+  
 
   // ค้นหารายชื่อที่เคย register
-  dataMember(){
-
-  }
-
-
+    async dataMember() {
+      const modal = await this.modalController.create({
+        component: DlgSearchMemberPage,
+        cssClass: 'dialog-modal-4-regis-info',
+      });
+      modal.onDidDismiss().then(data=>{
+        // this.ionViewDidEnter()
+      })
+      modal.present();
+    }
 }
