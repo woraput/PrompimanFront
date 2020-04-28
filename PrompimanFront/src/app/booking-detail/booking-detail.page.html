@@ -99,7 +99,7 @@
         </ion-col>
         <ion-col size="9">
           <ion-item *ngFor="let item of fg.get('rooms').value" style="float:left">
-            <ion-button color="light">
+            <ion-button color="light" disabled="true">
               {{item.roomNo}}
             </ion-button>
           </ion-item>
@@ -162,7 +162,7 @@
         </ion-col>
         <ion-col size="10">
           <ion-item>
-            <ion-input type="text" formControlName="telephone" placeholder="กรุณากรอกข้อมูล"
+            <ion-input type="number" formControlName="telephone" placeholder="กรุณากรอกข้อมูล"
               [class.invalid]="isValid('telephone')"></ion-input>
           </ion-item>
         </ion-col>
@@ -189,7 +189,7 @@
         </ion-col>
         <ion-col size="10">
           <ion-item>
-            <ion-input type="text" value="{{roomslength}}" placeholder="กรุณากรอกข้อมูล"></ion-input>
+            <ion-input type="number" value="{{roomslength}}" placeholder="กรุณากรอกข้อมูล"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -202,7 +202,7 @@
         </ion-col>
         <ion-col size="8">
           <ion-item *ngFor="let item of this.fg.get('rooms').value" style="float:left">
-            <ion-button color="light">
+            <ion-button color="light" disabled="true">
               {{item.roomNo}}
             </ion-button>
           </ion-item>
