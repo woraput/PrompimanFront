@@ -102,6 +102,10 @@ const routes: Routes = [
     path: 'dlg-search-reservation',
     loadChildren: () => import('./dlg-search-reservation/dlg-search-reservation.module').then( m => m.DlgSearchReservationPageModule)
   },
+  {
+    path: 'cost-detail',
+    loadChildren: () => import('./cost-detail/cost-detail.module').then( m => m.CostDetailPageModule)
+  },
 
 ];
 
