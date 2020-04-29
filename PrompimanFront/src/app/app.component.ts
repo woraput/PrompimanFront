@@ -68,8 +68,8 @@ export class AppComponent implements OnInit {
       icon: 'bookmark'
     },
     {
-      title: 'MasterDetail',
-      url: './master-detail',
+      title: 'CheckinDetail',
+      url: './checkin-detail',
       icon: 'bookmark'
     },
   ];
