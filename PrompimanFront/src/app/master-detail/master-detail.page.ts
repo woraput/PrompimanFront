@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./master-detail.page.scss'],
 })
 export class MasterDetailPage implements OnInit {
+  private option = 'value1';
 
   constructor() { }
 
