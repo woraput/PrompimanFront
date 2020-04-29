@@ -1,0 +1,244 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>masterDetail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-segment [(ngModel)]="option" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="value1">
+      <ion-label>ยังไม่เปิด Master</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="value2">
+      <ion-label>checkout ยังมียอดเงินค้าง</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="value3">
+      <ion-label>checkout ไม่มียอดเงินค้าง</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="value4">
+      <ion-label>history</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ng-container [ngSwitch]="option" class="ion-padding">
+    <ng-container *ngSwitchCase="'value1'" class="ion-padding">
+      <ion-list class="ion-padding">
+        <ion-card>
+          <ion-card-header>
+            <ion-row class="ion-text-center">
+              <ion-col size="2">
+                <h4>ชื่อกรุ๊ป</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>เบอร์โทร</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>Bednight</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>เหลือวันพัก</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>วันที่เข้า</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>วันที่ออก</h4>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-content>
+            <ion-row class="ion-text-center">
+              <ion-col size="2">
+                ชื่อกรุ๊ป
+              </ion-col>
+              <ion-col size="2">
+                เบอร์โทร
+              </ion-col>
+              <ion-col size="2">
+                Bednight
+              </ion-col>
+              <ion-col size="2">
+                เหลือวันพัก
+              </ion-col>
+              <ion-col size="2">
+                วันที่เข้า
+              </ion-col>
+              <ion-col size="2">
+                วันที่ออก
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'value2'" class="ion-padding">
+      <ion-list class="ion-padding">
+        <ion-card>
+          <ion-card-header>
+            <ion-row class="ion-text-center">
+              <ion-col size="2">
+                <h4>ชื่อกรุ๊ป</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>เบอร์โทร</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>Bednight</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>เหลือวันพัก</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>วันที่เข้า</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>วันที่ออก</h4>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-content>
+            <ion-row class="ion-text-center">
+              <ion-col size="2">
+                ชื่อกรุ๊ป
+              </ion-col>
+              <ion-col size="2">
+                เบอร์โทร
+              </ion-col>
+              <ion-col size="2">
+                Bednight
+              </ion-col>
+              <ion-col size="2">
+                เหลือวันพัก
+              </ion-col>
+              <ion-col size="2">
+                วันที่เข้า
+              </ion-col>
+              <ion-col size="2">
+                วันที่ออก
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'value3'" class="ion-padding">
+      <ion-item lines="none">
+        <ion-button size="default" slot="end" expand="block" type="submit">ปิด Master ทั้งหมด</ion-button>
+      </ion-item>
+
+      <ion-list>
+        <ion-card>
+          <ion-card-header>
+            <ion-row class="ion-text-center">
+              <ion-col size="2">
+                <h4>ชื่อกรุ๊ป</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>เบอร์โทร</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>Bednight</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>เหลือวันพัก</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>วันที่เข้า</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>วันที่ออก</h4>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-content>
+            <ion-row class="ion-text-center">
+              <ion-col size="2">
+                ชื่อกรุ๊ป
+              </ion-col>
+              <ion-col size="2">
+                เบอร์โทร
+              </ion-col>
+              <ion-col size="2">
+                Bednight
+              </ion-col>
+              <ion-col size="2">
+                เหลือวันพัก
+              </ion-col>
+              <ion-col size="2">
+                วันที่เข้า
+              </ion-col>
+              <ion-col size="2">
+                วันที่ออก
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'value4'" class="ion-padding">
+      <ion-list class="ion-padding">
+        <ion-card>
+          <ion-card-header>
+            <ion-row class="ion-text-center">
+              <ion-col size="2">
+                <h4>ชื่อกรุ๊ป</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>เบอร์โทร</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>Bednight</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>เหลือวันพัก</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>วันที่เข้า</h4>
+              </ion-col>
+              <ion-col size="2">
+                <h4>วันที่ออก</h4>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-content>
+            <ion-row class="ion-text-center">
+              <ion-col size="2">
+                ชื่อกรุ๊ป
+              </ion-col>
+              <ion-col size="2">
+                เบอร์โทร
+              </ion-col>
+              <ion-col size="2">
+                Bednight
+              </ion-col>
+              <ion-col size="2">
+                เหลือวันพัก
+              </ion-col>
+              <ion-col size="2">
+                วันที่เข้า
+              </ion-col>
+              <ion-col size="2">
+                วันที่ออก
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </ng-container>
+  </ng-container>
+</ion-content>
