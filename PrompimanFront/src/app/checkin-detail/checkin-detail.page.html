@@ -9,7 +9,7 @@
     <ion-row>
       <ion-col size="2"></ion-col>
       <ion-col>
-        <ion-img src="../../assets/image/user-silhouette.png" alt=""></ion-img>
+        <ion-img style="width: 150; height: 300px;" src="../../assets/image/user-silhouette.png" alt=""></ion-img>
       </ion-col>
       <ion-col>
         <ion-item>
@@ -33,7 +33,7 @@
           <ion-button size="default" color="dark" (click)="register()" slot="start" expand="outline" type="submit">
             ดูรายละเอียดค้างจ่าย
           </ion-button>
-          <ion-button size="default" (click)="register()" slot="end" expand="block" type="submit">
+          <ion-button slot="end" size="default" (click)="register()" expand="block" type="submit">
             <ion-icon name="add-circle-outline"></ion-icon>
             ลงทะเบียน
           </ion-button>
@@ -41,94 +41,6 @@
       </ion-col>
       <ion-col size="1"></ion-col>
     </ion-row>
-    <!-- <ion-item lines="none">
-      <ion-button size="default" (click)="dataMember()" slot="end" expand="block" type="submit">
-        <ion-icon name="settings"></ion-icon>
-        ค้นหาสมาชิก
-      </ion-button>
-    </ion-item>
-    <ion-row>
-      <ion-col size="1">
-      </ion-col>
-      <ion-col size="2.5">
-        <ion-img class="img-size" [src]=urlPhoto class="img-responsive" alt="Image"></ion-img>
-      </ion-col>
-      <ion-col size="2">
-        <ion-item>
-          <ion-label>ข้อมูลผู้เข้าพักโรงแรม</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>ชื่อ-สกุล</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>เบอร์โทรศัพท์</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>เงินสำรองจ่าย</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>กรุ๊ป</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>วันที่เข้า</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>วันที่ออก</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>ห้อง</ion-label>
-        </ion-item>
-        <ion-item class="ion-text-left">
-          <ion-label>ค่ามัดจัด</ion-label>
-          <ion-checkbox slot="start" checked="true"></ion-checkbox>
-        </ion-item>
-        <ion-item class="ion-text-left">
-          <ion-label>ใบกำกับภาษี</ion-label>
-          <ion-checkbox slot="start"></ion-checkbox>
-        </ion-item>
-      </ion-col>
-      <ion-col size="6.5" class="ion-text-left">
-        <ion-item>
-          <ion-label></ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>ชื่อ-สกุล</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>เบอร์โทรศัพท์</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>เงินสำรองจ่าย</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>กรุ๊ป</ion-label>
-        </ion-item>
-
-        <ion-row>
-          <ion-col size="9">
-            <ion-item>
-              <ion-button color="light">
-                111
-              </ion-button>
-            </ion-item>
-          </ion-col>
-          <ion-col size="3">
-            <ion-item>
-              [class.invalid]="isValid('rooms')"
-              <ion-icon slot="end" (click)="selectRoomModal()" name="search-outline"></ion-icon>
-              <ion-icon slot="end" (click)="roomSetting()" name="settings-outline"></ion-icon>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-
-        <ion-item lines="none">
-          <ion-button size="default" (click)="dataReservation()" slot="start" expand="block" type="submit">
-            <ion-icon name="settings"></ion-icon>
-            ข้อมูลการจอง
-          </ion-button>
-        </ion-item>
-      </ion-col>
-    </ion-row> -->
 
     <ion-row>
       <ion-col size="1"> </ion-col>
