@@ -89,24 +89,28 @@ const routes: Routes = [
   },
   {
     path: 'dlg-room-detail',
-    loadChildren: () => import('./dlg-room-detail/dlg-room-detail.module').then( m => m.DlgRoomDetailPageModule)
+    loadChildren: () => import('./dlg-room-detail/dlg-room-detail.module').then(m => m.DlgRoomDetailPageModule)
   },
   {
     path: 'booking-cancel',
-    loadChildren: () => import('./booking-cancel/booking-cancel.module').then( m => m.BookingCancelPageModule)
-  },  {
+    loadChildren: () => import('./booking-cancel/booking-cancel.module').then(m => m.BookingCancelPageModule)
+  },
+  {
     path: 'dlg-search-member',
-    loadChildren: () => import('./dlg-search-member/dlg-search-member.module').then( m => m.DlgSearchMemberPageModule)
+    loadChildren: () => import('./dlg-search-member/dlg-search-member.module').then(m => m.DlgSearchMemberPageModule)
   },
   {
     path: 'dlg-search-reservation',
-    loadChildren: () => import('./dlg-search-reservation/dlg-search-reservation.module').then( m => m.DlgSearchReservationPageModule)
+    loadChildren: () => import('./dlg-search-reservation/dlg-search-reservation.module').then(m => m.DlgSearchReservationPageModule)
   },
   {
     path: 'master-detail',
-    loadChildren: () => import('./master-detail/master-detail.module').then( m => m.MasterDetailPageModule)
+    loadChildren: () => import('./master-detail/master-detail.module').then(m => m.MasterDetailPageModule)
   },
-
+  {
+    path: 'checkin-detail',
+    loadChildren: () => import('./checkin-detail/checkin-detail.module').then(m => m.CheckinDetailPageModule)
+  },
 ];
 
 @NgModule({
