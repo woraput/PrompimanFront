@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChildren } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 import { RoomSelected } from 'src/models/reservation';
 import { CloudSyncService } from '../cloud-sync.service';
@@ -23,7 +23,7 @@ export class CheckinPage implements OnInit {
 
 
 
-  constructor(private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
+  constructor(public alertController: AlertController,private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       'checkInDate': [null, Validators.required],
@@ -122,4 +122,29 @@ export class CheckinPage implements OnInit {
       })
       modal.present();
     }
+  
+    async presentAlertConfirm() {
+      const alert = await this.alertController.create({
+        // header: 'Confirm!',
+        message: 'ต้องการ<strong>เพิ่มห้องในกรุ๊ปเดิม</strong>หรือไม่',
+        buttons: [
+          {
+            text: 'ยกเลิก',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Confirm Cancel: blah');
+            }
+          }, {
+            text: 'ยืนยัน',
+            handler: () => {
+              console.log('Confirm Okay');
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
+    }
+  
 }
