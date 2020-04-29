@@ -13,6 +13,7 @@ export class BookingCancelPage implements OnInit {
   public fg: FormGroup;
   private submitRequested: boolean;
   public _id: string;
+  public isOk: boolean;
 
 
   constructor(private fb: FormBuilder, private cloud: CloudSyncService, public navParam: NavParams, public router: Router, public modaLCtrl: ModalController) {
@@ -36,21 +37,23 @@ export class BookingCancelPage implements OnInit {
 
   public handleSubmit() {
     this.submitRequested = true;
+    this.isOk = true;
     // this.datetimeComponent.forEach(it => it.submitRequest());
     console.log(this.fg.valid);
     console.log(this.fg.value);
-
     if (this.fg.valid) {
       if (this.fg.value == null) {
       }
       this.cloud.cancelReservation(this._id, this.fg.get('note').value).subscribe(data => {
-        this.modaLCtrl.dismiss()
+        this.modaLCtrl.dismiss(this.isOk)
       });
     }
   }
 
   cancel() {
     this.modaLCtrl.dismiss()
+    // this.router.navigate(['/booking-detail']);
+
   }
 
   ngOnInit() {

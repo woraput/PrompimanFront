@@ -29,7 +29,7 @@ export class BookingDetailPage implements OnInit {
   public addreserve: number = 0;
   public text = "เงินสำรองจ่าย";
 
-  constructor(private fb: FormBuilder , public zone: NgZone, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
+  constructor(private fb: FormBuilder, public zone: NgZone, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
     public alertController: AlertController, private clound: CloudSyncService) {
     this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
@@ -115,7 +115,7 @@ export class BookingDetailPage implements OnInit {
       console.log(data);
 
       if (isOk.data) {
-        console.log(this._id);
+        console.log(isOk.data);
 
         this.clound.editReservation(this._id, this.addreserve, this.fg.value).subscribe(data => {
           if (data != null) {
@@ -177,10 +177,14 @@ export class BookingDetailPage implements OnInit {
       }
     });
     modal.onDidDismiss().then(data => {
-      this.zone.run(data => {
-        this.ngOnInit()
-        this.router.navigate(['/booking']);
-      })
+      let isOk = data
+      console.log(isOk);
+      if (isOk.data) {
+        this.zone.run(data => {
+          this.ngOnInit()
+          this.router.navigate(['/booking']);
+        })
+      }
     });
     modal.present();
   }
@@ -194,7 +198,6 @@ export class BookingDetailPage implements OnInit {
     console.log(number.detail.value);
     this.addreserve = number.detail.value;
     console.log(this.addreserve);
-
   }
 
 
