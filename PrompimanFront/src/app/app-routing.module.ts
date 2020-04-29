@@ -94,7 +94,8 @@ const routes: Routes = [
   {
     path: 'booking-cancel',
     loadChildren: () => import('./booking-cancel/booking-cancel.module').then( m => m.BookingCancelPageModule)
-  },  {
+  },
+  {
     path: 'dlg-search-member',
     loadChildren: () => import('./dlg-search-member/dlg-search-member.module').then( m => m.DlgSearchMemberPageModule)
   },
@@ -105,6 +106,10 @@ const routes: Routes = [
   {
     path: 'master-detail',
     loadChildren: () => import('./master-detail/master-detail.module').then( m => m.MasterDetailPageModule)
+  },
+  {
+    path: 'cost-detail',
+    loadChildren: () => import('./cost-detail/cost-detail.module').then( m => m.CostDetailPageModule)
   },
 
 ];

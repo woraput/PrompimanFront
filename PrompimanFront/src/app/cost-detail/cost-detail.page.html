@@ -1,0 +1,175 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>รายละเอียดค่าใช้จ่าย (บาท)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- <form [formGroup]="fg" (ngSubmit)="handleSubmit()"> -->
+  <ion-list lines="none">
+    <ion-row>
+      <ion-col size="2">
+        <h3>กลุ่มห้องพัก</h3>
+      </ion-col>
+      <ion-col size="7">
+      </ion-col>
+      <ion-col size="3">
+        <ion-item>
+          <ion-checkbox slot="start" value="true"></ion-checkbox>
+          <ion-label>เลือกทั้งหมด</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row>
+      <ion-col size="0.5"></ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label><b>ห้อง {{201}}</b></ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>ค่าห้อง 600</ion-label>
+          <ion-checkbox slot="start" value="true">
+          </ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>อาหารเช้า 120</ion-label>
+          <ion-checkbox slot="start" value="true">
+          </ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>เสริมเตียง 100</ion-label>
+          <ion-checkbox slot="start" value="true">
+          </ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-item-divider>
+        <ion-col>
+        <h5>ห้อง {{201}}</h5>
+        <ion-item>
+          <ion-label>ค่าห้อง 600</ion-label>
+          <ion-checkbox slot="start" value="true"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>อาหารเช้า 120</ion-label>
+          <ion-checkbox slot="start" value="true"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>เสริมเตียง 100</ion-label>
+          <ion-checkbox slot="start" value="true"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-item-divider>
+    </ion-row>
+    <ion-row>
+      <ion-item-divider>
+        <ion-col >
+        <h5>ห้อง {{202}}</h5>
+        <ion-item>
+          <ion-label>ค่าห้อง 600</ion-label>
+          <ion-checkbox slot="start" value="true"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>อาหารเช้า 120</ion-label>
+          <ion-checkbox slot="start" value="true"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>เสริมเตียง 100</ion-label>
+          <ion-checkbox slot="start" value="true"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+    </ion-item-divider>
+    </ion-row>
+
+  </ion-list>
+  <!-- </form> -->
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="2">
+        <ion-item lines="none">ค่าใช้จ่ายทั้งหมด</ion-item>
+      </ion-col>
+      <ion-col size="1">
+        <ion-item lines="none">xxxxxx</ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item lines="none">บาท</ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="2">
+        <ion-item lines="none">ยอดที่ชำระแล้ว</ion-item>
+      </ion-col>
+      <ion-col size="1">
+        <ion-item lines="none">xxxxxx</ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item lines="none">บาท</ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="2">
+        <ion-item lines="none">คงค้าง</ion-item>
+      </ion-col>
+      <ion-col size="1">
+        <ion-item lines="none">xxxxxx</ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item lines="none">บาท</ion-item>
+      </ion-col>
+      <ion-col size="2.5">
+        <ion-item lines="none" style="color: red;">
+          <h3>
+            ยอดที่เลือกชำระ
+          </h3>
+        </ion-item>
+      </ion-col>
+      <ion-col size="1.5">
+        <ion-item lines="none" style="color: red;"> 
+          <h3>
+            xxxxxddd
+          </h3>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item lines="none" style="color: red;">
+          <h3>
+            บาท
+          </h3>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="1">
+        <ion-button expand="block" color="primary" class="ion-text-end" type="">ถัดไป</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+<!-- <ion-footer>
+  <ion-button  type="submit"  ion-button expand="full"
+    no-margin>ถัดไป</ion-button>
+</ion-footer> -->
