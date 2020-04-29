@@ -53,23 +53,13 @@ export class AppComponent implements OnInit {
       icon: 'copy'
     },
     {
-      title: 'BookingInformation',
-      url: './booking-information',
-      icon: 'copy'
-    },
-    {
-      title: 'Bill',
-      url: './bill',
-      icon: 'copy'
-    },
-    {
-      title: 'SelectRooms',
-      url: './select-rooms',
+      title: 'MasterDetail',
+      url: './master-detail',
       icon: 'bookmark'
     },
     {
-      title: 'MasterDetail',
-      url: './master-detail',
+      title: 'CostDetail',
+      url: './cost-detail',
       icon: 'bookmark'
     },
     {

@@ -111,6 +111,11 @@ const routes: Routes = [
     path: 'checkin-detail',
     loadChildren: () => import('./checkin-detail/checkin-detail.module').then(m => m.CheckinDetailPageModule)
   },
+  {
+    path: 'cost-detail',
+    loadChildren: () => import('./cost-detail/cost-detail.module').then(m => m.CostDetailPageModule)
+  },
+
 ];
 
 @NgModule({
