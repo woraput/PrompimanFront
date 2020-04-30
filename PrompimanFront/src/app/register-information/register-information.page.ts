@@ -9,7 +9,7 @@ import { IonSelect, NavParams, ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-register-information',
   templateUrl: './register-information.page.html',
-  styleUrls: ['./register-information.page.scss'],
+  styleUrls: ['../app.component.scss'],
 })
 export class RegisterInformationPage implements OnInit {
   @ViewChild("nationSelect", { static: false }) private nation: IonSelect;
@@ -47,7 +47,7 @@ export class RegisterInformationPage implements OnInit {
     });
 
     this.fgTh = this.fb.group({
-      'idCard': [null, Validators.compose([Validators.maxLength(13),Validators.pattern('[0-9]*')])],
+      'idCard': [null, [Validators.compose([Validators.pattern('[0-9]*')]), Validators.minLength(13), Validators.maxLength(13), Validators.required]],
       'th_Prefix': [null, Validators.required],
       'th_Firstname': [null, Validators.required],
       'th_Lastname': [null, Validators.required],
