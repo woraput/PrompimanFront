@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-booking-cancel',
   templateUrl: './booking-cancel.page.html',
-  styleUrls: ['../app.component.scss'],
+  styleUrls: ['./booking-cancel.page.scss'],
 })
 export class BookingCancelPage implements OnInit {
   public fg: FormGroup;

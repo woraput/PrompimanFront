@@ -9,7 +9,7 @@ import { IonSelect, NavParams, ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-register-information',
   templateUrl: './register-information.page.html',
-  styleUrls: ['../app.component.scss'],
+  styleUrls: ['./register-information.page.scss'],
 })
 export class RegisterInformationPage implements OnInit {
   @ViewChild("nationSelect", { static: false }) private nation: IonSelect;

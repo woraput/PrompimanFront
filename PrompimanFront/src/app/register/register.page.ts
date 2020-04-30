@@ -9,7 +9,7 @@ import { Paging } from 'src/models/Member';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
-  styleUrls: ['../app.component.scss'],
+  styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
 
