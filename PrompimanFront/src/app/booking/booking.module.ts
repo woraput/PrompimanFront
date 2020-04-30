@@ -19,4 +19,4 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   declarations: [BookingPage]
 })
-export class BookingPageModule {}
+export class BookingPageModule { }

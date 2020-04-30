@@ -17,29 +17,28 @@ export class RegisterPage implements OnInit {
   public paging: Paging = new Paging;
   p: number = 1;
   public searchBar: FormControl;
-  dataxx: any = {};
 
 
   constructor(private modalController: ModalController, private fb: FormBuilder, private nav: NavController, public router: Router, private cloud: CloudSyncService) {
     this.searchBar = new FormControl('');
-    
-  }
-  
-  ionViewDidEnter() {
-    this.getPageUsers(this.p);
-    
+
   }
 
-  
+  ionViewDidEnter() {
+    this.getPageUsers(this.p);
+
+  }
+
+
   ngOnInit() {
   }
-  
+
   async register() {
     const modal = await this.modalController.create({
       component: RegisterInformationPage,
       cssClass: 'dialog-modal-4-regis-info',
     });
-    modal.onDidDismiss().then(data=>{
+    modal.onDidDismiss().then(data => {
       this.ionViewDidEnter()
     })
     modal.present();

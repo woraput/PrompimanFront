@@ -4,20 +4,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-row class="ion-padding">
+<ion-content >
+  <ion-row>
     <ion-col size="11">
-      <ion-searchbar></ion-searchbar>
+      <ion-searchbar [formControl]="searchBar"></ion-searchbar>
     </ion-col>
     <ion-col size="1">
-      <ion-button style="margin-top: 0.8em;" size="default" expand="block" color="dark">
+      <ion-button style="margin-top: 0.8em;" size="default" expand="block" color="dark"
+        (click)="search(searchBar.value)">
         ค้นหา
       </ion-button>
     </ion-col>
   </ion-row>
 
   <ion-card>
-    <ion-card-header>
+    <!-- <ion-card-header> -->
       <ion-row class="ion-text-center">
         <ion-col size="6">
           <h4>ชื่อ - สกุล</h4>
@@ -26,23 +27,26 @@
           <h4>เบอร์โทรศัพท์</h4>
         </ion-col>
       </ion-row>
-    </ion-card-header>
+    <!-- </ion-card-header> -->
   </ion-card>
 
   <ion-card>
     <ion-card-content>
-      <ion-item lines="none" class="ion-text-center">
+      <ion-item lines="none" class="ion-text-center"
+        *ngFor="let item of dataReservation  | paginate: { itemsPerPage: 10, currentPage: p}">
         <ion-col size="6">
-          ชื่อ - สกุล
+          {{item.name}}
         </ion-col>
         <ion-col size="6">
-          เบอร์โทรศัพท์
+          {{item.telephone}}
         </ion-col>
       </ion-item>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <h1 *ngIf="this.dataReservation.length == 0" class="ion-text-center">ไม่พบสิ่งที่ค้นหา</h1>
     </ion-card-content>
   </ion-card>
 
   <ion-item lines="none">
-    <ion-button size="default" slot="end" expand="block" color="danger">ยกเลิก</ion-button>
+    <ion-button size="default" slot="end" expand="block" color="danger" (click)="cancel()">ยกเลิก</ion-button>
   </ion-item>
 </ion-content>

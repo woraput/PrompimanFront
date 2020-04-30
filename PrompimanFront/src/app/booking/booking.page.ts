@@ -29,7 +29,7 @@ export class BookingPage implements OnInit {
       console.log(this.reservation);
       // this.showBadge= (this.reservation.filter(it => it.isConfirm == false).length)
       // console.log(this.showBadge);
-      
+
     });
     //   // this.cloud.getReservation().subscribe(data => {
     //   //   console.log(data);
