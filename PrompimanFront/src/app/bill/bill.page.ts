@@ -7,7 +7,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 @Component({
   selector: 'app-bill',
   templateUrl: './bill.page.html',
-  styleUrls: ['../app.component.scss'],
+  styleUrls: ['./bill.page.scss'],
 })
 export class BillPage implements OnInit {
   public fg: FormGroup;

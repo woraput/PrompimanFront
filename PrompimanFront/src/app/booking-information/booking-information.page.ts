@@ -12,7 +12,7 @@ import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 @Component({
   selector: 'app-booking-information',
   templateUrl: './booking-information.page.html',
-  styleUrls: ['../app.component.scss'],
+  styleUrls: ['./booking-information.page.scss'],
 })
 export class BookingInformationPage implements OnInit {
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];

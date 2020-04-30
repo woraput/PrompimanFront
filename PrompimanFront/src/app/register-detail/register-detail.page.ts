@@ -9,7 +9,7 @@ import { RegisterInformationPage } from '../register-information/register-inform
 @Component({
   selector: 'app-register-detail',
   templateUrl: './register-detail.page.html',
-  styleUrls: ['../app.component.scss'],
+  styleUrls: ['./register-detail.page.scss'],
 })
 export class RegisterDetailPage implements OnInit {
 

@@ -13,7 +13,7 @@ import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
 @Component({
   selector: 'app-booking-detail',
   templateUrl: './booking-detail.page.html',
-  styleUrls: ['../app.component.scss'],
+  styleUrls: ['./booking-detail.page.scss'],
 })
 export class BookingDetailPage implements OnInit {
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
