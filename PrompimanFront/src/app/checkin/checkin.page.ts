@@ -101,7 +101,7 @@ export class CheckinPage implements OnInit {
     async dataReservation() {
       const modal = await this.modalController.create({
         component: DlgSearchReservationPage,
-        cssClass: 'dialog-modal-4-regis-info',
+        cssClass: 'dialog-modal-4-ch-re-mm',
       });
       modal.onDidDismiss().then(data=>{
         // this.ionViewDidEnter()
@@ -115,7 +115,7 @@ export class CheckinPage implements OnInit {
     async dataMember() {
       const modal = await this.modalController.create({
         component: DlgSearchMemberPage,
-        cssClass: 'dialog-modal-4-regis-info',
+        cssClass: 'dialog-modal-4-ch-re-mm',
       });
       modal.onDidDismiss().then(data=>{
         // this.ionViewDidEnter()
