@@ -15,11 +15,12 @@
         เพิ่มเอ็กตร้าซ์
       </ion-button>
     </ion-item>
-    <ion-row >
+    <ion-row>
       <ion-col size="1">
       </ion-col>
       <ion-col size="2.5">
-        <ion-img class="img-size" style="width: 150; height: 152px;" [src]=urlPhoto class="img-responsive" alt="Image"></ion-img>
+        <ion-img class="img-size" style="width: 150; height: 152px;" [src]=urlPhoto class="img-responsive" alt="Image">
+        </ion-img>
       </ion-col>
       <ion-col size="2.5">
         <ion-item>
@@ -40,40 +41,51 @@
           <ion-label> listdata.th_Prefix </ion-label>
         </ion-item>
         <ion-item>
-          <ion-label> listdata.th_Firstname   listdata.th_Lastname </ion-label>
+          <ion-label> listdata.th_Firstname listdata.th_Lastname </ion-label>
         </ion-item>
       </ion-col>
     </ion-row>
 
-    <ion-card >
+    <ion-card>
       <!-- <ion-card-header> -->
+      <ion-row class="ion-text-left">
+        <ion-col size="2"></ion-col>
+        <ion-col size="5">
+          <h4>รายการ</h4>
+        </ion-col>
+        <ion-col size="3">
+          <h4>ราคา (บาท)</h4>
+        </ion-col>
+        <ion-col size="2"></ion-col>
+      </ion-row>
+      <!-- </ion-card-header> -->
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
         <ion-row class="ion-text-left">
           <ion-col size="2"></ion-col>
           <ion-col size="5">
-            <h4>รายการ</h4>
+            มินิบาร์
           </ion-col>
           <ion-col size="3">
-            <h4>ราคา (บาท)</h4>
+            50
           </ion-col>
           <ion-col size="2"></ion-col>
         </ion-row>
-      <!-- </ion-card-header> -->
-    </ion-card>
-  
-    <ion-card>
-      <ion-card-content>
-          <ion-row class="ion-text-left">
-            <ion-col size="2"></ion-col>
-              <ion-col size="5" >
-                มินิบาร์
-              </ion-col>
-              <ion-col size="3">
-               50
-              </ion-col>
-              <ion-col size="2"></ion-col>
-            </ion-row>
       </ion-card-content>
     </ion-card>
 
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col>
+        <ion-button expand="block" color="medium" class="ion-text-end" type="">คืนห้อง</ion-button>
+      </ion-col>
+      <ion-col size="1"></ion-col>
+      <ion-col>
+        <ion-button expand="block" color="warning" class="ion-text-end" type="">เช็คเอ้าท์</ion-button>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
   </ion-list>
 </ion-content>
