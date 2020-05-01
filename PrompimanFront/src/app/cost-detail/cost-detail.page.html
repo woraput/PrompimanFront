@@ -62,45 +62,26 @@
         </ion-item>
       </ion-col>
     </ion-row> -->
-    <ion-row>
+    <ion-row *ngFor="let item of allRoom">
       <ion-item-divider>
         <ion-col>
-          <h5>ห้อง {{201}}</h5>
-          <ion-item>
-            <ion-label>ค่าห้อง 600</ion-label>
-            <ion-checkbox slot="start" value="true"></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>อาหารเช้า 120</ion-label>
-            <ion-checkbox slot="start" value="true"></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>เสริมเตียง 100</ion-label>
-            <ion-checkbox slot="start" value="true"></ion-checkbox>
-          </ion-item>
-        </ion-col>
-      </ion-item-divider>
-    </ion-row>
-    <ion-row>
-      <ion-item-divider>
-        <ion-col>
-          <h5>ห้อง {{202}}</h5>
-          <ion-item>
-            <ion-label>ค่าห้อง 600</ion-label>
-            <ion-checkbox slot="start" value="true"></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>อาหารเช้า 120</ion-label>
-            <ion-checkbox slot="start" value="true"></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>เสริมเตียง 100</ion-label>
-            <ion-checkbox slot="start" value="true"></ion-checkbox>
-          </ion-item>
-        </ion-col>
-      </ion-item-divider>
-    </ion-row>
+          <h5>ห้อง {{ item.room }}</h5>
+          <ion-item *ngFor="let item2 of item.roomDetail">
 
+            <ion-col size="2">
+              <ion-label>{{ item2.name }}</ion-label>
+            </ion-col>
+
+            <ion-col size="1" class="ion-text-right">
+              <ion-label>{{ item2.price }}</ion-label>
+            </ion-col>
+
+            <ion-checkbox slot="start" ></ion-checkbox>
+            <!-- Todo: add in checkbox (ionChange)="change(item2, item.room)" -->
+          </ion-item>
+        </ion-col>
+      </ion-item-divider>
+    </ion-row>
   </ion-list>
   <!-- </form> -->
 </ion-content>
@@ -166,7 +147,7 @@
       </ion-col>
       <ion-col size="4"></ion-col>
       <ion-col size="2">
-        <ion-button expand="block" color="primary" class="ion-text-end" type="">ถัดไป</ion-button>
+        <ion-button expand="block" color="primary" class="ion-text-end" type="" (click)="ok()">ถัดไป</ion-button>
       </ion-col>
       <ion-col size="1"></ion-col>
     </ion-row>
