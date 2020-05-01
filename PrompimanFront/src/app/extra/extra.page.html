@@ -4,6 +4,150 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-list lines="none">
+    <ion-item lines="none">
+      <ion-button size="default" slot="end" expand="block" type="submit">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        เพิ่ม Extra
+      </ion-button>
+    </ion-item>
+    <ion-row>
+      <ion-col size="4.5">
+      </ion-col>
+      <ion-col size="1">
+        <ion-item>
+          <ion-label>เลือกชั้น</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item>
+          <!-- <ion-label style="color: darkgrey;">กรุณาเลือก</ion-label> -->
+          <ion-select interface="action-sheet">
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+            <ion-select-option value="1">5</ion-select-option>
+            <ion-select-option value="2">6</ion-select-option>
+            <ion-select-option value="3">7</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4.5">
+      </ion-col>
+    </ion-row>
 
+    <ion-row>
+      <ion-col size="4.5">
+      </ion-col>
+      <ion-col size="1">
+        <ion-item>
+          <ion-label>เลือกห้อง</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-item>
+          <!-- <ion-label style="color: darkgrey;">กรุณาเลือก</ion-label> -->
+          <ion-select interface="action-sheet">
+            <ion-select-option value="1">111</ion-select-option>
+            <ion-select-option value="2">222</ion-select-option>
+            <ion-select-option value="3">333</ion-select-option>
+            <ion-select-option value="4">444</ion-select-option>
+            <ion-select-option value="1">555</ion-select-option>
+            <ion-select-option value="2">666</ion-select-option>
+            <ion-select-option value="3">777</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4.5">
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="ion-text-center">
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="2">
+          <h4>ประเภท</h4>
+        </ion-col>
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="4">
+          <h4>เวลา</h4>
+        </ion-col>
+        <ion-col size="4">
+          <h4>ราคา</h4>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item lines="none" class="ion-text-center">
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="2">
+          มินิบาร์
+        </ion-col>
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="4">
+          22/02/20 14.00
+        </ion-col>
+        <ion-col size="4">
+          45
+        </ion-col>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-text-center">
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="2">
+          ซักรีด
+        </ion-col>
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="4">
+          22/02/20 14.00
+        </ion-col>
+        <ion-col size="4">
+          50
+        </ion-col>
+      </ion-item>
+      <ion-item lines="none" class="ion-text-center">
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="2">
+          ค่าเสียหายอุปกรณ์
+        </ion-col>
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="4">
+          22/02/20 14.00
+        </ion-col>
+        <ion-col size="4">
+          55
+        </ion-col>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-row class="ion-text-center">
+        <ion-col size="4">
+        </ion-col>
+        <ion-col size="4">
+          รวม
+        </ion-col>
+        <ion-col size="4">
+          150(ยังไม่ได้คำนวณ)
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
 </ion-content>
