@@ -1,0 +1,79 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>รายละเอียดข้อมูลการเช็คเอ้าท์</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list lines="none">
+    <ion-item lines="none">
+      <ion-button size="default" (click)="dataMember()" slot="end" expand="block" type="submit">
+        <ion-icon name="add-circle-outline"></ion-icon>
+        เพิ่มเอ็กตร้าซ์
+      </ion-button>
+    </ion-item>
+    <ion-row >
+      <ion-col size="1">
+      </ion-col>
+      <ion-col size="2.5">
+        <ion-img class="img-size" style="width: 150; height: 152px;" [src]=urlPhoto class="img-responsive" alt="Image"></ion-img>
+      </ion-col>
+      <ion-col size="2.5">
+        <ion-item>
+          <ion-label>ห้อง</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>ชื่อผู้พัก</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>เบอร์โทรติดต่อ</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item>
+          <ion-label> 519 </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label> listdata.th_Prefix </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label> listdata.th_Firstname   listdata.th_Lastname </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-card >
+      <!-- <ion-card-header> -->
+        <ion-row class="ion-text-left">
+          <ion-col size="2"></ion-col>
+          <ion-col size="5">
+            <h4>รายการ</h4>
+          </ion-col>
+          <ion-col size="3">
+            <h4>ราคา (บาท)</h4>
+          </ion-col>
+          <ion-col size="2"></ion-col>
+        </ion-row>
+      <!-- </ion-card-header> -->
+    </ion-card>
+  
+    <ion-card>
+      <ion-card-content>
+          <ion-row class="ion-text-left">
+            <ion-col size="2"></ion-col>
+              <ion-col size="5" >
+                มินิบาร์
+              </ion-col>
+              <ion-col size="3">
+               50
+              </ion-col>
+              <ion-col size="2"></ion-col>
+            </ion-row>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+</ion-content>

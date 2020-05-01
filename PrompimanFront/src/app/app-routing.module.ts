@@ -115,6 +115,10 @@ const routes: Routes = [
     path: 'cost-detail',
     loadChildren: () => import('./cost-detail/cost-detail.module').then(m => m.CostDetailPageModule)
   },
+  {
+    path: 'checkout-detail',
+    loadChildren: () => import('./checkout-detail/checkout-detail.module').then(m => m.CheckoutDetailPageModule)
+  },
 
 ];
 

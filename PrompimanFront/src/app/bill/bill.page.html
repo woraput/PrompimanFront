@@ -23,25 +23,25 @@
               <td width="100" class="ion-text-left"> เงินสำรองจ่าย</td>
               <td width="100"></td>
               <td width="100"></td>
-              <td width="100">{{ sendReserve }}</td>
+              <td width="100">{{ sendReserve | number }}</td>
             </tr>
             <tr *ngIf="text != 'เงินสำรองจ่าย'">
               <td width="100" class="ion-text-left"> {{text}}</td>
-              <td width="100">{{ sendReserve }}</td>
-              <td width="100">{{amount}}</td>
-              <td width="100">{{total}}</td>
+              <td width="100">{{ sendReserve | number }}</td>
+              <td width="100">{{amount | number }}</td>
+              <td width="100">{{total | number }}</td>
             </tr>
             <tr>
               <td width="100" colspan="3">รวม</td>
-              <td width="100">{{allTotal}}</td>
+              <td width="100">{{allTotal | number }}</td>
             </tr>
             <tr>
               <td width="100" colspan="3">ค่ามัดจำกุญแจ</td>
-              <td width="100">{{reserveCalcutate}}</td>
+              <td width="100">{{reserveCalcutate | number }}</td>
             </tr>
             <tr>
               <td width="100" colspan="3">ยอดสุทธิ</td>
-              <td width="100">{{net}}</td>
+              <td width="100">{{net | number }}</td>
             </tr>
           </tbody>
         </table>
@@ -92,7 +92,7 @@
         </ion-col>
         <ion-col size="2">
           <ion-item class="ion-text-right">
-            <ion-label>{{ change }}</ion-label>
+            <ion-label>{{ change | number  }}</ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="1">
