@@ -44,7 +44,7 @@
           {{item.telephone}}
         </ion-col>
       </ion-item>
-      <pagination-controls (pageChange)="p = $event" (click)="getPageUsers(p)"></pagination-controls>
+      <pagination-controls (pageChange)="pageNumber = $event" (click)="search2(searchBar.value,pageNumber)"></pagination-controls>
       <h1 *ngIf="this.registerMember.length == 0" class="ion-text-center">ไม่พบสิ่งที่ค้นหา</h1>
     </ion-card-content>
   </ion-card>

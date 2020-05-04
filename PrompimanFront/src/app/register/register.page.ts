@@ -67,4 +67,16 @@ export class RegisterPage implements OnInit {
       console.log(this.paging.page);
     });
   }
+  
+  search2(searchBar: string,pageNumber:number) {
+    this.p = pageNumber;
+    console.log("p",pageNumber);  
+    console.log(searchBar);
+    this.cloud.search(pageNumber, 10, searchBar).subscribe(data => {
+      this.paging = data;
+      console.log(this.paging.members);
+      console.log(this.paging.count);
+      console.log(this.paging.page);
+    });
+  }
 }

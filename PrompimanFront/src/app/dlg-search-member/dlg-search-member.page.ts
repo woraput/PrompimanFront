@@ -43,6 +43,15 @@ export class DlgSearchMemberPage implements OnInit {
     });
   }
 
+  search2(searchBar: string,pageNumber:number) {
+    this.p = pageNumber;
+    console.log("p",pageNumber);  
+    console.log(searchBar);
+    this.cloud.search(pageNumber, 10, searchBar).subscribe(data => {
+      this.registerMember = data;
+    });
+  }
+
   cancel(){
     this.modaLCtrl.dismiss();
   }
