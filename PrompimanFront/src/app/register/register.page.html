@@ -73,7 +73,8 @@
         </ion-col>
       </ion-item>
       <h1 *ngIf="this.paging.count == 0" class="ion-text-center">ไม่พบสิ่งที่ค้นหา</h1>
-      <pagination-controls (pageChange)="p = $event" (click)="getPageUsers(p)"></pagination-controls>
+      <pagination-controls (pageChange)="pageNumber = $event" (click)="search2(searchBar.value,pageNumber)"></pagination-controls>
+      <!-- (click)="search(p)" -->
     </ion-card-content>
   </ion-card>
   <!-- </form> -->
