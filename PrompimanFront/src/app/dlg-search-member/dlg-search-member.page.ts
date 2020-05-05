@@ -3,6 +3,7 @@ import { CloudSyncService } from '../cloud-sync.service';
 import { Paging } from 'src/models/Member';
 import { FormControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dlg-search-member',
@@ -14,7 +15,7 @@ export class DlgSearchMemberPage implements OnInit {
   public registerMember: Paging = new Paging;
   public searchBar: FormControl;
 
-  constructor(private cloud: CloudSyncService, public modaLCtrl: ModalController) {
+  constructor(private cloud: CloudSyncService, public router: Router, public modaLCtrl: ModalController) {
     this.searchBar = new FormControl('');
     // this.ionViewDidEnter();
   }
@@ -54,5 +55,10 @@ export class DlgSearchMemberPage implements OnInit {
 
   cancel(){
     this.modaLCtrl.dismiss();
+  }
+
+  confirmMember(_id: string){
+    this.router.navigate(['/checkin', _id]);
+    this.modaLCtrl.dismiss()
   }
 }

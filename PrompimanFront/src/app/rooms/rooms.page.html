@@ -7,15 +7,23 @@
 <ion-content class="ion-padding">
   <ion-segment [(ngModel)]="option" (ionChange)="segmentChanged($event)">
     <ion-segment-button value="value1">
-      <ion-label>ooo</ion-label>
+      <ion-label>ห้องซ่อม</ion-label>
     </ion-segment-button>
     <ion-segment-button value="value2">
-      <ion-label>eut</ion-label>
+      <ion-label>ห้องพักผู้บริหาร</ion-label>
     </ion-segment-button>
   </ion-segment>
 
   <ng-container [ngSwitch]="option" class="ion-padding">
     <ng-container *ngSwitchCase="'value1'" class="ion-padding">
+
+      <ion-item lines="none">
+        <ion-button size="default" (click)="ooo()" slot="end" expand="block" type="submit">
+          <ion-icon name="add-circle-outline"></ion-icon>
+          เพิ่มห้องซ่อม
+        </ion-button>
+      </ion-item>
+
       <ion-list class="ion-padding">
         <ion-card>
           <ion-card-header>
@@ -37,22 +45,22 @@
 
         <ion-card>
           <ion-card-content>
-            <ion-item lines="none"> 
+            <ion-item lines="none">
               <ion-col size="10">
-                <ion-item lines="none" >
-                  <ion-col size="1.7"  class="ion-text-center">
+                <ion-item lines="none">
+                  <ion-col size="1.7" class="ion-text-center">
                     101
                   </ion-col>
-                  <ion-col size="7.3"  class="ion-text-center">
+                  <ion-col size="7.3" class="ion-text-center">
                     5555
                   </ion-col>
-                  <ion-col size="3"  class="ion-text-center">
+                  <ion-col size="3" class="ion-text-center">
                     ยังไม่ได้ซ่อม
                   </ion-col>
                 </ion-item>
               </ion-col>
               <ion-col size="2">
-                <ion-button color="medium" size="default" expand="block" disabled="true">ซ่อมแล้ว</ion-button>
+                <ion-button color="danger" size="default" expand="block">ซ่อมแล้ว</ion-button>
               </ion-col>
             </ion-item>
           </ion-card-content>
@@ -60,9 +68,15 @@
       </ion-list>
     </ng-container>
 
-
-
     <ng-container *ngSwitchCase="'value2'" class="ion-padding">
+
+      <ion-item lines="none">
+        <ion-button size="default" (click)="ooo()" slot="end" expand="block" type="submit">
+          <ion-icon name="add-circle-outline"></ion-icon>
+          เพิ่มห้องพัก
+        </ion-button>
+      </ion-item>
+
       <ion-list class="ion-padding">
         <ion-card>
           <ion-card-header>
@@ -70,36 +84,39 @@
               <ion-col size="2">
                 <h4>ห้อง</h4>
               </ion-col>
-              <ion-col size="4">
+              <ion-col size="5">
                 <h4>ผู้บริหาร</h4>
               </ion-col>
-              <ion-col size="4">
+              <ion-col size="3">
                 <h4>วันที่เข้าพัก</h4>
               </ion-col>
               <ion-col size="2">
-                <h4>ซ่อมแล้ว</h4>
               </ion-col>
             </ion-row>
           </ion-card-header>
         </ion-card>
 
         <ion-card>
-          <ion-card-header>
-            <ion-row class="ion-text-center">
+          <ion-card-content>
+            <ion-item lines="none">
+              <ion-col size="10">
+                <ion-item lines="none">
+                  <ion-col size="1.7" class="ion-text-center">
+                    101
+                  </ion-col>
+                  <ion-col size="7.3" class="ion-text-center">
+                    ฉันเอง นักเลงพอ
+                  </ion-col>
+                  <ion-col size="3" class="ion-text-center">
+                    20/06/2020
+                  </ion-col>
+                </ion-item>
+              </ion-col>
               <ion-col size="2">
-                ห้อง
+                <ion-button color="danger" size="default" expand="block">ลบ</ion-button>
               </ion-col>
-              <ion-col size="4">
-                ผู้บริหาร
-              </ion-col>
-              <ion-col size="4">
-                วันที่เข้าพัก
-              </ion-col>
-              <ion-col size="2">
-                ซ่อมแล้ว
-              </ion-col>
-            </ion-row>
-          </ion-card-header>
+            </ion-item>
+          </ion-card-content>
         </ion-card>
       </ion-list>
     </ng-container>
