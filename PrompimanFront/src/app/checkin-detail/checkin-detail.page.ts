@@ -1,4 +1,7 @@
+import { CloudSyncService } from './../cloud-sync.service';
 import { Component, OnInit } from '@angular/core';
+import { NavParams } from '@ionic/angular';
+import { Master, RoomActivate } from 'src/models/checkin';
 
 @Component({
   selector: 'app-checkin-detail',
@@ -6,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checkin-detail.page.scss'],
 })
 export class CheckinDetailPage implements OnInit {
-
-  constructor() { }
+  private _id: string;
+  private master = new Master();
+  private rooms: any[];
+  constructor(private api: CloudSyncService) { }
 
   ngOnInit() {
+    this._id = "637242708563864454";
+    // this._id = this.navParams.data._id;
+    this.api.getCheckinDetail(this._id).subscribe(dataRes => {
+      if (dataRes != null) {
+        console.log(dataRes);
+        this.master = dataRes.master;
+        this.rooms = dataRes.roomActLst;
+      }
+    })
   }
 
   setColor(status: string) {
@@ -20,7 +34,6 @@ export class CheckinDetailPage implements OnInit {
         return "danger";
       case "เช็คเอ้าท์":
         return "gray";
-
       default:
         return "primary";
     }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member, Paging, MemberResponse } from 'src/models/Member';
-import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom } from 'src/models/checkin';
+import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom, MasterDetail } from 'src/models/checkin';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,8 @@ export class CloudSyncService {
 
   private readonly baseUrlPublish: string = 'http://localhost:5000/api/'; // local
   // private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
-  
-  constructor(private http: HttpClient) {  }
+
+  constructor(private http: HttpClient) { }
 
   public getByID(_id: string): any {
     return this.http.get<Member>(this.baseUrlPublish + 'Member/GetById/' + _id);
@@ -72,6 +72,10 @@ export class CloudSyncService {
 
   public confirmReservation(_id: string) {
     return this.http.put(this.baseUrlPublish + 'Reservation/Confirm/' + _id, {});
+  }
+
+  public getCheckinDetail(_id: string) {
+    return this.http.get<MasterDetail>(this.baseUrlPublish + 'CheckIn/GetById/' + _id);
   }
 
   // http://localhost:5000/api/Reservation/Confirm/637231486236762770
