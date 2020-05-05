@@ -118,9 +118,14 @@ const routes: Routes = [
   {
     path: 'checkout-detail',
     loadChildren: () => import('./checkout-detail/checkout-detail.module').then(m => m.CheckoutDetailPageModule)
-  },  {
+  },
+  {
     path: 'dlg-add-extra',
     loadChildren: () => import('./dlg-add-extra/dlg-add-extra.module').then( m => m.DlgAddExtraPageModule)
+  },
+  {
+    path: 'dlg-return-room',
+    loadChildren: () => import('./dlg-return-room/dlg-return-room.module').then( m => m.DlgReturnRoomPageModule)
   },
 
 
