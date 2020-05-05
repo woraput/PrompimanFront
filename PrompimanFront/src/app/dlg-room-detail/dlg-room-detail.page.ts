@@ -3,6 +3,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { RoomSelected } from 'src/models/checkin';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CloudSyncService } from '../cloud-sync.service';
+import { SharingDataService } from '../sharing-data.service';
 
 @Component({
   selector: 'app-dlg-room-detail',
@@ -14,7 +15,7 @@ export class DlgRoomDetailPage implements OnInit {
   private roomNo: string;
   private dataRoom: RoomSelected[] = [];
   private fg: FormGroup;
-  constructor(private fb: FormBuilder, private modalCtrl: ModalController, private navParams: NavParams, private cloud: CloudSyncService) {
+  constructor(private shareData: SharingDataService, private fb: FormBuilder, private modalCtrl: ModalController, private navParams: NavParams, private cloud: CloudSyncService) {
     this.fg = this.fb.group({
       'haveBreakfast': true,
       'haveAddBreakfast': false,
@@ -29,7 +30,7 @@ export class DlgRoomDetailPage implements OnInit {
   ngOnInit() {
     this.forType = this.navParams.data.for;
     if (this.forType == 'all') {
-      this.fg.patchValue(this.cloud.settingAllRoom);
+      this.fg.patchValue(this.shareData.settingAllRoom);
       this.dataRoom = this.navParams.data.room as RoomSelected[];
       console.log(this.dataRoom);
     } else {
@@ -87,7 +88,7 @@ export class DlgRoomDetailPage implements OnInit {
       this.dataRoom[0].setting = this.fg.value;
       await this.modalCtrl.dismiss(this.dataRoom[0] as RoomSelected);
     } else {
-      this.cloud.settingAllRoom = this.fg.value;
+      this.shareData.settingAllRoom = this.fg.value;
       await this.modalCtrl.dismiss('ok');
     };
   }
