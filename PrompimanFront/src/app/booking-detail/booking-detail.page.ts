@@ -137,14 +137,9 @@ export class BookingDetailPage implements OnInit {
       cssClass: 'dialog-modal-4-select-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
-      console.log(dataReturned);
-      console.log(this.fg.value);
       if (dataReturned !== null && dataReturned.data !== undefined) {
-        console.log(dataReturned.data);
         let roomsSelect = dataReturned.data;
-        console.log(roomsSelect);
         this.fg.get('rooms').patchValue(roomsSelect);
-        console.log(this.fg.get('rooms').value);
       }
     });
     return await modal.present();
@@ -154,13 +149,13 @@ export class BookingDetailPage implements OnInit {
     this.router.navigate(['/booking']);
   }
 
-  room() {
-    this.router.navigate(['./select-rooms',
-      this.fg.get('checkInDate').value,
-      this.fg.get('checkOutDate').value,
-      this.clound.dataPass = this.fg.get('rooms').value
-    ]);
-  }
+  // room() {
+  //   this.router.navigate(['./select-rooms',
+  //     this.fg.get('checkInDate').value,
+  //     this.fg.get('checkOutDate').value,
+  //     this.clound.dataPass = this.fg.get('rooms').value
+  //   ]);
+  // }
 
   ngOnInit() {
     this.cloud.getReservation().subscribe(data => {

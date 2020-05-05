@@ -36,8 +36,11 @@ export class SelectRoomsPage implements OnInit {
       if (data !== null) {
         this.roomsStatic = data;
         this.roomsByFilter = this.roomsStatic;
-        this.api.roomReserve
-        // let newLstNoRoom = this.roomsSelect.map(r => r.roomNo);
+        console.log(this.roomsByFilter);
+
+        // this.api.roomReserve = this.roomsSelect.map(r => r.roomNo);
+        console.log(this.api.roomReserve);
+
         for (const i of this.api.roomReserve) {
           this.roomsByFilter.find(r => r._id == i).status = "ว่าง";
         }
@@ -120,22 +123,18 @@ export class SelectRoomsPage implements OnInit {
     switch (status) {
       case "ว่าง":
         return "primary";
-        break;
       case "ขายแล้ว":
         return "danger";
-        break;
+      case "เข้าพัก":
+        return "danger";
       case "กำลังซ่อม":
         return "brown";
-        break;
       case "จอง":
         return "warning";
-        break;
       case "ห้องพักผู้บริหาร":
         return "blue";
-        break;
       default:
         return "primary";
-        break;
     }
   }
 

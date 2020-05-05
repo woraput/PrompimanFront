@@ -10,9 +10,9 @@ export class CloudSyncService {
 
   private readonly baseUrlPublish: string = 'http://localhost:5000/api/'; // local
   // private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
-  public dataPass: any;
+  public dataPass: any;  //registerpage id 
   public dataEdit: any;
-  public roomReserve: string[];
+  public roomReserve: string[] = [];
   public timePeriod = new DateRequest();
   public lstRoomsSelect: RoomSelected[] = [];
   public settingAllRoom = new SettingRoom();
@@ -88,7 +88,7 @@ export class CloudSyncService {
   }
 
   public confirmReservation(_id: string) {
-    return this.http.put(this.baseUrlPublish + 'Reservation/Confirm/' + _id , {});
+    return this.http.put(this.baseUrlPublish + 'Reservation/Confirm/' + _id, {});
   }
 
   // http://localhost:5000/api/Reservation/Confirm/637231486236762770
