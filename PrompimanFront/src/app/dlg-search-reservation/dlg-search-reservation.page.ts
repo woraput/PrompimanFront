@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CloudSyncService } from '../cloud-sync.service';
-import { Reservation } from 'src/models/reservation';
+import { Reservation } from 'src/models/checkin';
 import { FormControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 

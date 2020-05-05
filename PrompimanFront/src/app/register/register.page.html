@@ -47,7 +47,7 @@
   <ion-card >
     <ion-card-content>
       <ion-item lines="none" class="ion-text-center"
-        *ngFor="let item of paging.members  | paginate: { itemsPerPage: 10, currentPage: p ,totalItems: paging.count}">
+        *ngFor="let item of paging.dataList  | paginate: { itemsPerPage: 10, currentPage: p ,totalItems: paging.count}">
         <ion-col size="10.5" [routerLink]="['/register-detail/', item._id]">
           <!-- routerDirection="forward" -->
           <ion-item lines="none">

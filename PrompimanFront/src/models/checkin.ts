@@ -1,84 +1,106 @@
-class Master {
+export class Master {
     _id: string
-    MemberId: string
-    Name: string
-    Telephone: string
-    GroupName: string
-    CheckInDate: Date
-    CheckOutDate: Date
-    Rooms: RoomSelected[]
-    Reserve: number
-    HaveRoomDeposit: boolean
-    HaveTaxInvoice: boolean
-    Deposit: number
-    TotalCost: number
-    Paid: number
-    Remaining: number
-    Active: boolean
-    CreationDate: Date
-    LastUpdate: Date
+    memberId: string
+    name: string
+    telephone: string
+    groupName: string
+    checkInDate: Date
+    checkOutDate: Date
+    rooms: RoomSelected[]
+    reserve: number
+    haveRoomDeposit: boolean
+    haveTaxInvoice: boolean
+    deposit: number
+    totalCost: number
+    paid: number
+    remaining: number
+    active: boolean
+    creationDateTime: Date
+    lastUpdate: Date
 }
 
-class RoomSelected {
-    RoomNo: string
-    Setting: SettingRoom
+export class RoomSelected {
+    roomNo: string
+    setting: SettingRoom
 }
 
-class SettingRoom {
-    HaveBreakfast: boolean
-    HaveAddBreakfast: boolean
-    AddBreakfastCount: number
-    HaveExtraBed: boolean
-    ExtraBedCount: number
-    Discount: number
+export class SettingRoom {
+    haveBreakfast: boolean
+    haveAddBreakfast: boolean
+    addBreakfastCount: number
+    haveExtraBed: boolean
+    extraBedCount: number
+    discount: number
 }
 
-class Reservation {
+export class Reservation {
     _id: string
-    Name: string
-    Telephone: string
-    CheckInDate: Date
-    CheckOutDate: Date
-    Rooms: RoomSelected[]
-    Reserve: number
-    IsConfirm: boolean
-    Active: boolean
-    Note: string
-    CreationDate: Date
-    LastUpdate: Date
+    name: string
+    telephone: string
+    checkInDate: Date
+    checkOutDate: Date
+    rooms: RoomSelected[]
+    reserve: number
+    isConfirm: boolean
+    active: boolean
+    note: string
+    creationDateTime: Date
+    lastUpdate: Date
 }
 
-class RoomActivate {
+export class RoomActivate {
     _id: string
-    GroupId: string
-    RoomNo: string
-    RoomType: string
-    BedType: string
-    Rate: number
-    ArrivalDate: Date
-    Departure: Date
-    ExpenseList: Expense[]
-    Status: string
-    Active: boolean
-    CreationDate: Date
-    LastUpdate: Date
+    groupId: string
+    roomNo: string
+    roomType: string
+    bedType: string
+    rate: number
+    discount: number
+    arrivalDate: Date
+    departure: Date
+    expenseList: Expense[]
+    totalCost: number
+    paid: number
+    remaining: number
+    status: string
+    note: string
+    active: boolean
+    creationDateTime: Date
+    lastUpdate: Date
 }
 
-class Expense {
-    IsPaid: boolean
-    IsSelected: boolean
-    Name: string
-    Details: Detail[]
-    TotalCost: number
-    CreationDate: Date
+export class Expense {
+    isPaid: boolean
+    isSelected: boolean
+    name: string
+    details: Detail[]
+    totalCost: number
+    creationDateTime: Date
 }
 
-class Detail {
-    Name: string
-    Cost: number
-    Count: number
+export class Detail {
+    name: string
+    cost: number
+    count: number
 }
 
+export class Room {
+    _id: string
+    roomType: number
+    bedType: number
+    rate: number
+    status: string                // ว่าง, แจ้งซ่อม, ห้องพักผู้บริหา
+}
+
+export class DateRequest {
+    checkInDate: Date
+    checkOutDate: Date
+}
+
+export class ReserveResponse {
+    isSuccess: boolean;
+    errorMessage: string;
+}
 // export enum ClassActionTypes {
 //     Verb1 = '[Class] Verb1',
 //     Verb2 = '[Class] Verb2'

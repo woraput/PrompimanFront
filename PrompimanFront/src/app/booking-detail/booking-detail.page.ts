@@ -3,7 +3,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 import { CloudSyncService } from '../cloud-sync.service';
-import { Reservation, RoomSelected } from 'src/models/reservation';
+import { Reservation, RoomSelected } from 'src/models/checkin';
 import { AlertController, ModalController } from '@ionic/angular';
 import { BookingCancelPage } from '../booking-cancel/booking-cancel.page';
 import { BillPage } from '../bill/bill.page';

@@ -2,8 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { CloudSyncService } from '../cloud-sync.service';
-import { Reservation } from 'src/models/reservation';
 import { FormControl } from '@angular/forms';
+import { Reservation } from 'src/models/checkin';
 
 @Component({
   selector: 'app-booking',
@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
 })
 export class BookingPage implements OnInit {
   public reservation: Reservation[] = [];
-  public searchBar: FormControl;
+ public searchBar: FormControl;
   public _id: string;
   check: boolean;
   private timeoutId: number;

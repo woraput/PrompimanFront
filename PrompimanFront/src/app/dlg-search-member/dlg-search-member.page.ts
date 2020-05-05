@@ -29,7 +29,7 @@ export class DlgSearchMemberPage implements OnInit {
   getPageUsers(p: number) {
     this.cloud.getuser(p, 10).subscribe(data => {
       this.registerMember = data;
-      console.log(this.registerMember.members);
+      console.log(this.registerMember.dataList);
       console.log(this.registerMember.count);
       console.log(this.registerMember.page);
     });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { RoomSelected } from 'src/models/reservation';
+import { RoomSelected } from 'src/models/checkin';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CloudSyncService } from '../cloud-sync.service';
 

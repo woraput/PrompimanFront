@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
 import { CloudSyncService } from '../cloud-sync.service';
 import { NavController, ModalController } from '@ionic/angular';
-import { RoomSelected } from 'src/models/reservation';
+import { RoomSelected } from 'src/models/checkin';
 import { BillPage } from '../bill/bill.page';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 
