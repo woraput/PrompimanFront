@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Floor } from 'src/models/rooms';
 import { NavController, ModalController, NavParams } from '@ionic/angular';
 import { DlgSelectRoomsDetailPage } from '../dlg-select-rooms-detail/dlg-select-rooms-detail.page';
-import { DateRequest, Room, RoomSelected, SettingRoom } from 'src/models/reservation';
+import { DateRequest, Room, RoomSelected, SettingRoom } from 'src/models/checkin';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 

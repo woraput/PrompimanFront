@@ -51,7 +51,7 @@ export class RegisterPage implements OnInit {
   getPageUsers(p: number) {
     this.cloud.getuser(p, 10).subscribe(data => {
       this.paging = data;
-      console.log(this.paging.members);
+      console.log(this.paging.dataList);
       console.log(this.paging.count);
       console.log(this.paging.page);
     });
@@ -62,7 +62,7 @@ export class RegisterPage implements OnInit {
     console.log(searchBar);
     this.cloud.search(this.p, 10, searchBar).subscribe(data => {
       this.paging = data;
-      console.log(this.paging.members);
+      console.log(this.paging.dataList);
       console.log(this.paging.count);
       console.log(this.paging.page);
     });
@@ -74,7 +74,7 @@ export class RegisterPage implements OnInit {
     console.log(searchBar);
     this.cloud.search(pageNumber, 10, searchBar).subscribe(data => {
       this.paging = data;
-      console.log(this.paging.members);
+      console.log(this.paging.dataList);
       console.log(this.paging.count);
       console.log(this.paging.page);
     });

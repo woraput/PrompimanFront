@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member, Paging, MemberResponse } from 'src/models/Member';
-import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom } from 'src/models/reservation';
+import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom } from 'src/models/checkin';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CloudSyncService {
 
-  // private readonly baseUrlPublish: string = 'http://localhost:5000/api/'; // local
-  private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
+  private readonly baseUrlPublish: string = 'http://localhost:5000/api/'; // local
+  // private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
   public dataPass: any;
   public dataEdit: any;
   public roomReserve: string[];

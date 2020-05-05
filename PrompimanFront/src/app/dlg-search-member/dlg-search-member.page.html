@@ -33,7 +33,7 @@
   <ion-card>
     <ion-card-content>
       <ion-item lines="none" class="ion-text-center"
-        *ngFor="let item of registerMember.members | paginate: { itemsPerPage: 10, currentPage: p ,totalItems: registerMember.count}">
+        *ngFor="let item of registerMember.dataList | paginate: { itemsPerPage: 10, currentPage: p ,totalItems: registerMember.count}">
         <ion-col size="6" *ngIf="item.th_Firstname != '' || item.th_Lastname != ''">
           {{item.th_Firstname}} {{item.th_Lastname}}
         </ion-col>
