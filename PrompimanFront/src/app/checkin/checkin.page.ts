@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChildren } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
-import { RoomSelected } from 'src/models/reservation';
+import { RoomSelected } from 'src/models/checkin';
 import { CloudSyncService } from '../cloud-sync.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
 import { DlgSearchMemberPage } from '../dlg-search-member/dlg-search-member.page';
 import { DlgSearchReservationPage } from '../dlg-search-reservation/dlg-search-reservation.page';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
+import { SharingDataService } from '../sharing-data.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class CheckinPage implements OnInit {
 
 
 
-  constructor(public alertController: AlertController,private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
+  constructor(private shareData: SharingDataService, public alertController: AlertController, private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       'checkInDate': [null, Validators.required],
@@ -35,7 +36,7 @@ export class CheckinPage implements OnInit {
     })
   }
 
-  
+
   public handleSubmit() {
     this.submitRequested = true;
     this.datetimeComponent.forEach(it => it.submitRequest());
@@ -63,21 +64,18 @@ export class CheckinPage implements OnInit {
       cssClass: 'dialog-modal-4-setting-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
-      console.log("ggg");
-      console.log(dataReturned);
-      if (dataReturned !== null) {
-        // let lstRoom = this.fg.get('rooms').value as RoomSelected[];
-        // lstRoom.forEach(r => r.setting = this.cloud.settingAllRoom);
-        // console.log(this.cloud.lstRoomsSelect);
-        // this.fg.get('rooms').patchValue(lstRoom);
+      if (dataReturned !== null && dataReturned.data !== undefined) {
+        let lstRoom = this.fg.get('rooms').value as RoomSelected[];
+        lstRoom.forEach(r => r.setting = this.shareData.settingAllRoom);
+        this.fg.get('rooms').patchValue(lstRoom);
       }
     });
     return await modal.present();
   }
 
   async selectRoomModal() {
-    this.cloud.timePeriod.checkInDate = this.fg.get('checkInDate').value;
-    this.cloud.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
+    this.shareData.timePeriod.checkInDate = this.fg.get('checkInDate').value;
+    this.shareData.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
     const modal = await this.modalController.create({
       component: SelectRoomsPage,
       componentProps: { rooms: this.fg.get('rooms').value },
@@ -98,53 +96,53 @@ export class CheckinPage implements OnInit {
   }
 
   // ข้อมูลการจอง
-    async dataReservation() {
-      const modal = await this.modalController.create({
-        component: DlgSearchReservationPage,
-        cssClass: 'dialog-modal-4-ch-re-mm',
-      });
-      modal.onDidDismiss().then(data=>{
-        // this.ionViewDidEnter()
-      })
-      modal.present();
-    }
+  async dataReservation() {
+    const modal = await this.modalController.create({
+      component: DlgSearchReservationPage,
+      cssClass: 'dialog-modal-4-ch-re-mm',
+    });
+    modal.onDidDismiss().then(data => {
+      // this.ionViewDidEnter()
+    })
+    modal.present();
+  }
 
-  
+
 
   // ค้นหารายชื่อที่เคย register
-    async dataMember() {
-      const modal = await this.modalController.create({
-        component: DlgSearchMemberPage,
-        cssClass: 'dialog-modal-4-ch-re-mm',
-      });
-      modal.onDidDismiss().then(data=>{
-        // this.ionViewDidEnter()
-      })
-      modal.present();
-    }
-  
-    async presentAlertConfirm() {
-      const alert = await this.alertController.create({
-        // header: 'Confirm!',
-        message: 'ต้องการ<strong>เพิ่มห้องในกรุ๊ปเดิม</strong>หรือไม่',
-        buttons: [
-          {
-            text: 'ยกเลิก',
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: (blah) => {
-              console.log('Confirm Cancel: blah');
-            }
-          }, {
-            text: 'ยืนยัน',
-            handler: () => {
-              console.log('Confirm Okay');
-            }
+  async dataMember() {
+    const modal = await this.modalController.create({
+      component: DlgSearchMemberPage,
+      cssClass: 'dialog-modal-4-ch-re-mm',
+    });
+    modal.onDidDismiss().then(data => {
+      // this.ionViewDidEnter()
+    })
+    modal.present();
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      // header: 'Confirm!',
+      message: 'ต้องการ<strong>เพิ่มห้องในกรุ๊ปเดิม</strong>หรือไม่',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
           }
-        ]
-      });
-  
-      await alert.present();
-    }
-  
+        }, {
+          text: 'ยืนยัน',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
 }

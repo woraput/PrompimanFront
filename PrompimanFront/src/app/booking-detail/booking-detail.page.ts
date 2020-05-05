@@ -9,6 +9,7 @@ import { BookingCancelPage } from '../booking-cancel/booking-cancel.page';
 import { BillPage } from '../bill/bill.page';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
+import { SharingDataService } from '../sharing-data.service';
 
 @Component({
   selector: 'app-booking-detail',
@@ -29,7 +30,7 @@ export class BookingDetailPage implements OnInit {
   public addreserve: number = 0;
   public text = "เงินสำรองจ่าย";
 
-  constructor(private fb: FormBuilder, public zone: NgZone, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
+  constructor(private shareData: SharingDataService, private fb: FormBuilder, public zone: NgZone, private modalController: ModalController, public router: Router, private cloud: CloudSyncService, private activatedRoute: ActivatedRoute,
     public alertController: AlertController, private clound: CloudSyncService) {
     this.isCancel2 = this.activatedRoute.snapshot.paramMap.get('isCancel');
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
@@ -54,7 +55,7 @@ export class BookingDetailPage implements OnInit {
         this.roomslength = this.listdataReservation.rooms.length;
         console.log(this.fg.get('rooms').value);
         this.rommsNumber = this.fg.get('rooms').value;
-        this.cloud.roomReserve = this.rommsNumber.map(r => r.roomNo);
+        this.shareData.roomReserve = this.rommsNumber.map(r => r.roomNo);
       }
     });
   }
@@ -77,8 +78,6 @@ export class BookingDetailPage implements OnInit {
     console.log("this.fg.valid", this.fg.valid);
     if (this.fg.valid && this.addreserve >= 0) {
       this.presentModal();
-      // this.clound.dataEdit = this.fg.value;
-      // this.router.navigate(['/bill', this.text,this.addreserve]);
     }
   }
 
@@ -91,8 +90,7 @@ export class BookingDetailPage implements OnInit {
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null && dataReturned.data !== undefined) {
         let lstRoomWillSetting = this.fg.get('rooms').value as RoomSelected[];
-        lstRoomWillSetting.forEach(r => r.setting = this.cloud.settingAllRoom);
-        console.log(this.cloud.lstRoomsSelect);
+        lstRoomWillSetting.forEach(r => r.setting = this.shareData.settingAllRoom);
         this.fg.get('rooms').patchValue(lstRoomWillSetting);
 
       }
@@ -129,22 +127,17 @@ export class BookingDetailPage implements OnInit {
   }
 
   async selectRoomModal() {
-    this.cloud.timePeriod.checkInDate = this.fg.get('checkInDate').value;
-    this.cloud.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
+    this.shareData.timePeriod.checkInDate = this.fg.get('checkInDate').value;
+    this.shareData.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
     const modal = await this.modalController.create({
       component: SelectRoomsPage,
       componentProps: { rooms: this.fg.get('rooms').value },
       cssClass: 'dialog-modal-4-select-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
-      console.log(dataReturned);
-      console.log(this.fg.value);
       if (dataReturned !== null && dataReturned.data !== undefined) {
-        console.log(dataReturned.data);
         let roomsSelect = dataReturned.data;
-        console.log(roomsSelect);
         this.fg.get('rooms').patchValue(roomsSelect);
-        console.log(this.fg.get('rooms').value);
       }
     });
     return await modal.present();
@@ -152,14 +145,6 @@ export class BookingDetailPage implements OnInit {
 
   cancel() {
     this.router.navigate(['/booking']);
-  }
-
-  room() {
-    this.router.navigate(['./select-rooms',
-      this.fg.get('checkInDate').value,
-      this.fg.get('checkOutDate').value,
-      this.clound.dataPass = this.fg.get('rooms').value
-    ]);
   }
 
   ngOnInit() {
