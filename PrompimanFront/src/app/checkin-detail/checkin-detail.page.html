@@ -13,21 +13,23 @@
       </ion-col>
       <ion-col size="6">
         <ion-item>
-          <h2><b>ข้อมูลมาสเตอร์:&nbsp;&nbsp;&nbsp;&nbsp;ff</b></h2>
+          <ion-label>
+            <h2><b>ข้อมูลมาสเตอร์</b></h2>
+          </ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>ชื่อ - นามสกุล:&nbsp;&nbsp;&nbsp;&nbsp;ff</ion-label>
+          <ion-label>ชื่อ - นามสกุล:&nbsp;&nbsp;&nbsp;&nbsp;{{master.name}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>เบอร์โทรศัพท์:&nbsp;&nbsp;&nbsp;&nbsp;ff</ion-label>
+          <ion-label>เบอร์โทรศัพท์:&nbsp;&nbsp;&nbsp;&nbsp;{{master.telephone}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>ค่าใช้จ่ายทั้งหมด:&nbsp;&nbsp;&nbsp;&nbsp;ff</ion-label>
-          <ion-label>ยอดคงค้างทั้งหมด:&nbsp;&nbsp;&nbsp;&nbsp;ff</ion-label>
+          <ion-label>ค่าใช้จ่ายทั้งหมด:&nbsp;&nbsp;&nbsp;&nbsp;{{master.totalCost}}</ion-label>
+          <ion-label>ยอดคงค้างทั้งหมด:&nbsp;&nbsp;&nbsp;&nbsp;{{master.remaining}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label>มัดจำที่จ่ายแล้ว:&nbsp;&nbsp;&nbsp;&nbsp;ff</ion-label>
-          <ion-label>เงินสำรองจ่าย:&nbsp;&nbsp;&nbsp;&nbsp;ff</ion-label>
+          <ion-label>มัดจำที่จ่ายแล้ว:&nbsp;&nbsp;&nbsp;&nbsp;{{master.paid}}</ion-label>
+          <ion-label>เงินสำรองจ่าย:&nbsp;&nbsp;&nbsp;&nbsp;{{master.deposit}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-button size="default" color="dark" (click)="register()" slot="start" expand="outline" type="submit">
@@ -39,38 +41,7 @@
           </ion-button>
         </ion-item>
       </ion-col>
-      <!-- <ion-col size="1"></ion-col> -->
     </ion-row>
-
-    <!-- <ion-row>
-      <ion-col size="1"> </ion-col>
-      <ion-col>
-        <div scrollX="true" scrollY="true" class="ion-no-padding">
-          <table>
-            <thead class="bgb">
-              <tr>
-                <th width="100">ห้อง</th>
-                <th width="100">วันที่เข้าพัก</th>
-                <th width="100">วันที่ออก</th>
-                <th width="100">เงินค้างจ่าย</th>
-                <th width="100">สถานะ</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td width="100">201</td>
-                <td width="100">16/17/2018</td>
-                <td width="100">12/17/18</td>
-                <td width="100">500</td>
-                <td width="100">ว่าง</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </ion-col>
-      <ion-col size="1"> </ion-col>
-    </ion-row> -->
 
     <ion-card>
       <ion-card-header>
@@ -98,45 +69,47 @@
 
     <ion-card>
       <ion-card-content>
-        <ion-row class="ion-text-center">
-          <ion-col size="1"></ion-col>
-          <ion-col size="2">
-            <ion-item class="ion-text-center">
-              <ion-label>
-                201
-              </ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="2">
-            <ion-item>
-              <ion-label style="text-align: center;">
-                12/05/2020
-              </ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="2">
-            <ion-item>
-              <ion-label style="text-align: center;">
-                13/05/2020
-              </ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="2">
-            <ion-item>
-              <ion-label style="text-align: center;">
-                500
-              </ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="2">
-            <ion-item [color]="setColor('เข้าพัก')">
-              <ion-label color="dark" style="text-align: center;">
-                เข้าพัก
-              </ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col size="1"></ion-col>
-        </ion-row>
+        <ng-container *ngFor="let r of rooms">
+          <ion-row class="ion-text-center">
+            <ion-col size="1"></ion-col>
+            <ion-col size="2">
+              <ion-item class="ion-text-center">
+                <ion-label>
+                  {{r.roomNo}}
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="2">
+              <ion-item>
+                <ion-label style="text-align: center;">
+                  {{r.arrivalDate}}
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="2">
+              <ion-item>
+                <ion-label style="text-align: center;">
+                  {{r.departure}}
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="2">
+              <ion-item>
+                <ion-label style="text-align: center;">
+                  {{r.remaining}}
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="2">
+              <ion-item [color]="setColor('เข้าพัก')">
+                <ion-label color="dark" style="text-align: center;">
+                  {{r.status}}
+                </ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col size="1"></ion-col>
+          </ion-row>
+        </ng-container>
       </ion-card-content>
     </ion-card>
   </ion-list>

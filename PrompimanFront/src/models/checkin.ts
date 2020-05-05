@@ -19,6 +19,11 @@ export class Master {
     lastUpdate: Date
 }
 
+export class MasterDetail {
+    master: Master
+    roomActLst: RoomActivate[]
+}
+
 export class RoomSelected {
     roomNo: string
     setting: SettingRoom
