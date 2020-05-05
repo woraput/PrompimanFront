@@ -15,29 +15,45 @@ export class CostDetailPage implements OnInit {
   // }
 
   // public Cost : Summm[] = [];
-
-  public allRoom = [
-    {
-      'room': '201',
-      'roomDetail': [
-        { 'name': 'ค่าห้อง', 'price': 600, 'isPaid': false },
-        { 'name': 'อาหารเช้า', 'price': 120, 'isPaid': true },
-        { 'name': 'เสริมเตียง', 'price': 100, 'isPaid': true }
-      ]
-    },
-    {
-      'room': '202',
-      'roomDetail': [
-        { 'name': 'ค่าห้อง', 'price': 1500, 'isPaid': true },
-        { 'name': 'อาหารเช้า', 'price': 10, 'isPaid': true },
-        { 'name': 'เสริมเตียง', 'price': 20, 'isPaid': true }
-      ]
-    }
-  ];
+  public isIndeterminate: boolean;
+  public masterCheck: boolean;
+  public checkBoxList: any;
 
   constructor() {
-    console.log(this.allRoom);
-    console.log(this.allRoom[0].roomDetail[0]);
+    console.log(this.masterCheck);
+
+    this.checkBoxList = [
+      {
+        'room': '201',
+        'roomDetail': [
+          {
+            'name': 'ค่าห้อง', 'price': 600, 'isPaid': false, 'isChecked': true,
+          },
+          {
+            'name': 'อาหารเช้า', 'price': 120, 'isPaid': true, 'isChecked': false,
+          },
+          {
+            'name': 'เสริมเตียง', 'price': 100, 'isPaid': true, 'isChecked': false,
+          }
+        ],
+      },
+      {
+        'room': '202',
+        'roomDetail': [
+          {
+            'name': 'ค่าห้อง', 'price': 1500, 'isPaid': true, 'isChecked': false,
+          },
+          {
+            'name': 'อาหารเช้า', 'price': 100, 'isPaid': true, 'isChecked': false,
+          },
+          {
+            'name': 'เสริมเตียง', 'price': 20, 'isPaid': true, 'isChecked': false,
+          }
+        ]
+      }
+    ];
+    console.log(this.checkBoxList);
+    console.log(this.checkBoxList[0].roomDetail[0]);
   }
 
   // change(item:Summm, room){
@@ -64,10 +80,37 @@ export class CostDetailPage implements OnInit {
 
 
   //   console.log(price);
-    
+
   // }
 
   ngOnInit() {
+  }
+
+  checkMaster() {
+    console.log(this.masterCheck); // false
+    console.log(this.checkBoxList);
+
+    setTimeout(() => {
+      this.checkBoxList.forEach(obj => {
+        obj.roomDetail.forEach(item => {
+          item.isChecked = this.masterCheck;
+          console.log(this.masterCheck);
+        });
+      });
+    });
+  }
+
+  checkEvent(event) {
+    console.log(event);
+    let totalItem = this.checkBoxList.length;
+    console.log(totalItem);
+
+    if (event.detail.checked == false) {
+      this.masterCheck = false;
+    }
+    if (event.detail.checked == true) {
+      this.masterCheck = true;
+    }
   }
 
 }
