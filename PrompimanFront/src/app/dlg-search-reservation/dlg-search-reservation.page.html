@@ -32,7 +32,7 @@
 
   <ion-card>
     <ion-card-content>
-      <ion-item lines="none" class="ion-text-center"
+      <ion-item lines="none" class="ion-text-center" (click)="confirmReservation(item._id)"
         *ngFor="let item of dataReservation  | paginate: { itemsPerPage: 10, currentPage: p}">
         <ion-col size="6">
           {{item.name}}

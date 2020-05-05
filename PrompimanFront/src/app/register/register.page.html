@@ -69,7 +69,7 @@
           </ion-item>
         </ion-col>
         <ion-col size="1.5">
-          <ion-button size="default" expand="block" type="submit" [routerLink]="['/checkin/']">Check In</ion-button>
+          <ion-button size="default" expand="block" type="submit" [routerLink]="['/checkin/', item._id]">Check In</ion-button>
         </ion-col>
       </ion-item>
       <h1 *ngIf="this.paging.count == 0" class="ion-text-center">ไม่พบสิ่งที่ค้นหา</h1>

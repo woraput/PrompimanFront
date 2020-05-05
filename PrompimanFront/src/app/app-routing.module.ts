@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: () => import('./checkin/checkin.module').then(m => m.CheckinPageModule)
   },
   {
+    path: 'checkin/:_id',
+    loadChildren: () => import('./checkin/checkin.module').then(m => m.CheckinPageModule)
+  },
+  {
     path: 'checkout',
     loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutPageModule)
   },

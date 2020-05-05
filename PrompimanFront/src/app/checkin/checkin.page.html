@@ -13,13 +13,12 @@
       </ion-button>
     </ion-item>
     <!-- <form [formGroup]="fg" (ngSubmit)="handleSubmit()"> -->
-    <ion-row>
+    <ion-row class="ion-text-left">
       <ion-col size="1">
       </ion-col>
       <ion-col size="2.5">
-        <ion-img class="img-size"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRY9bMq4kHtIcAO8iHZVB_jXQlLI2QqSKUL7eyrg806X6Qd4Y5z&usqp=CAU"
-          class="img-responsive" alt="Image"></ion-img>
+        <ion-img class="img-size" style="width: 150; height: 152px;" [src]=urlPhoto class="img-responsive" alt="Image">
+        </ion-img>
       </ion-col>
       <ion-col size="1.7">
         <ion-item>
@@ -39,22 +38,36 @@
         <ion-item>
           <ion-label>กรุ๊ป</ion-label>
         </ion-item>
+    
       </ion-col>
       <ion-col size="6.8" class="ion-text-left">
         <ion-item>
           <ion-label></ion-label>
         </ion-item>
+
+          <ion-item *ngIf="listdata.th_Firstname != ''">
+            <ion-label>{{listdata.th_Firstname}} {{listdata.th_Lastname}}</ion-label>
+          </ion-item>
+          <ion-item *ngIf="listdata.th_Firstname == '' || listdata.th_Lastname == '' ">
+            <ion-label>{{listdata.en_Firstname}} {{listdata.en_Lastname}}</ion-label>
+          </ion-item>        
+
         <ion-item>
-          <ion-label>ชื่อ-สกุล</ion-label>
+          <ion-label>{{listdata.telephone}}</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-label>เบอร์โทรศัพท์</ion-label>
+        <ion-item *ngIf="listdata.reserve != null">
+          <ion-label>{{listdata.reserve}}</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-label>เงินสำรองจ่าย</ion-label>
+        <ion-item *ngIf="listdata.reserve == null || listdata.reserve == 0">
+          <ion-label></ion-label>
         </ion-item>
-        <ion-item>
-          <ion-input type="text" placeholder="กรุณากรอกข้อมูล">
+        <ion-item *ngIf="listdata.th_Firstname != null">
+          <ion-input type="text" placeholder="กรุณากรอกข้อมูล"
+            value="{{listdata.th_Firstname}} {{listdata.th_Lastname}}">
+          </ion-input>
+        </ion-item>
+        <ion-item *ngIf="listdata.th_Firstname == null">
+          <ion-input type="text" placeholder="กรุณากรอกข้อมูล" value="{{listdata.name}}">
           </ion-input>
         </ion-item>
       </ion-col>
@@ -78,9 +91,9 @@
         </ion-item>
       </ion-col>
       <ion-col size="3.8">
-        <ion-item>
+        <ion-item *ngFor="let item of this.fg.get('rooms').value" style="float:left">
           <ion-button color="light">
-            111
+            {{item.roomNo}}
           </ion-button>
         </ion-item>
       </ion-col>

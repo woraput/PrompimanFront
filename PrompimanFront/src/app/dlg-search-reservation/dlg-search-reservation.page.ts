@@ -3,6 +3,7 @@ import { CloudSyncService } from '../cloud-sync.service';
 import { Reservation } from 'src/models/checkin';
 import { FormControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dlg-search-reservation',
@@ -14,7 +15,7 @@ export class DlgSearchReservationPage implements OnInit {
   p: number = 1;
   public searchBar: FormControl;
 
-  constructor(private cloud: CloudSyncService, public modaLCtrl: ModalController) {
+  constructor(private cloud: CloudSyncService, public modaLCtrl: ModalController, public router: Router) {
     this.searchBar = new FormControl('');
     this.cloud.getReservation().subscribe(data => {
       console.log(data);
@@ -46,5 +47,11 @@ export class DlgSearchReservationPage implements OnInit {
 
   cancel() {
     this.modaLCtrl.dismiss();
+  }
+
+  confirmReservation(idReservation: string){
+    this.router.navigate(['/checkin', idReservation]);
+    this.modaLCtrl.dismiss()
+
   }
 }

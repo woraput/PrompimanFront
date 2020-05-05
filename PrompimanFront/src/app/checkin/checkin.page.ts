@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChildren } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 import { RoomSelected } from 'src/models/checkin';
+// import { RoomSelected } from 'src/models/reservation';
 import { CloudSyncService } from '../cloud-sync.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
@@ -9,6 +10,8 @@ import { DlgSearchMemberPage } from '../dlg-search-member/dlg-search-member.page
 import { DlgSearchReservationPage } from '../dlg-search-reservation/dlg-search-reservation.page';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 import { SharingDataService } from '../sharing-data.service';
+// import { RoomSelected } from 'src/models/checkin';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -21,10 +24,16 @@ export class CheckinPage implements OnInit {
   public fg: FormGroup;
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
   private submitRequested: boolean;
+  public _id: string;
+  public roomslength: number;
+  public listdata: any = {};
+  private urlPhoto = "../../assets/image/user-silhouette.png";
+  public rommsNumber: RoomSelected[];
 
+  constructor(private shareData: SharingDataService, public alertController: AlertController, private activatedRoute: ActivatedRoute, private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
+    this._id = this.activatedRoute.snapshot.paramMap.get('_id');
+    console.log("yyyyyyyy", this._id);
 
-
-  constructor(private shareData: SharingDataService, public alertController: AlertController, private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       'checkInDate': [null, Validators.required],
@@ -35,7 +44,6 @@ export class CheckinPage implements OnInit {
       // 'active': [null, Validators.required],
     })
   }
-
 
   public handleSubmit() {
     this.submitRequested = true;
@@ -55,6 +63,35 @@ export class CheckinPage implements OnInit {
   }
 
   ngOnInit() {
+    this.cloud.getByID(this._id).subscribe(data => {
+      console.log(data);
+      
+      if (data != null) {
+        this.listdata = data;
+        if (this.listdata.photo != null && this.listdata.photo != '') {
+          this.urlPhoto = this.listdata.photo;
+        }
+        else if (this.listdata.photo == null) {
+          this.listdata.photo = this.urlPhoto
+        }
+        else if (this.listdata.photo == '') {
+          this.listdata.photo = this.urlPhoto
+        }
+      }
+    });
+
+    this.cloud.getByIDReservation(this._id).subscribe(data => {
+      if (data != null) {
+        this.listdata = data;
+        this.fg.patchValue(data);
+        console.log(this.fg.value);
+        // this.fg.get('rooms').setValue(this.fg.get('rooms').value.length);
+        this.roomslength = this.listdata.rooms.length;
+        console.log(this.fg.get('rooms').value);
+        this.rommsNumber = this.fg.get('rooms').value;
+        this.shareData.roomReserve = this.rommsNumber.map(r => r.roomNo);
+      }
+    });
   }
 
   async roomSetting() {

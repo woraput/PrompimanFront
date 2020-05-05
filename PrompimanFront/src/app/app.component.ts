@@ -67,21 +67,21 @@ export class AppComponent implements OnInit {
       url: './checkin-detail',
       icon: 'bookmark'
     },
-    // {
-    //   title: 'AddExtra',
-    //   url: './dlg-add-extra',
-    //   icon: 'bookmark'
-    // },
-    // {
-    //   title: 'CheckoutDetail',
-    //   url: './checkout-detail',
-    //   icon: 'bookmark'
-    // },
-    // {
-    //   title: 'DlgReturnRoom',
-    //   url: './dlg-return-room',
-    //   icon: 'bookmark'
-    // },
+    {
+      title: 'AddExtra',
+      url: './dlg-add-extra',
+      icon: 'bookmark'
+    },
+    {
+      title: 'CheckoutDetail',
+      url: './checkout-detail',
+      icon: 'bookmark'
+    },
+    {
+      title: 'DlgReturnRoom',
+      url: './dlg-return-room',
+      icon: 'bookmark'
+    },
   ];
 
   date: Date;
