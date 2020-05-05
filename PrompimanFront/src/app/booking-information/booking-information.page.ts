@@ -8,6 +8,7 @@ import { NavController, ModalController } from '@ionic/angular';
 import { RoomSelected } from 'src/models/checkin';
 import { BillPage } from '../bill/bill.page';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
+import { SharingDataService } from '../sharing-data.service';
 
 @Component({
   selector: 'app-booking-information',
@@ -21,7 +22,7 @@ export class BookingInformationPage implements OnInit {
   public text = "เงินสำรองจ่าย";
   public addReserve: Number = 0;
 
-  constructor(private fb: FormBuilder, private router: Router, private cloud: CloudSyncService, private navCtrl: NavController, public modals: ModalController) {
+  constructor(private shareData: SharingDataService, private fb: FormBuilder, private router: Router, private cloud: CloudSyncService, private navCtrl: NavController, public modals: ModalController) {
     this.fg = this.fb.group({
       'name': [null, Validators.required],
       'telephone': [null, Validators.required],
@@ -37,8 +38,8 @@ export class BookingInformationPage implements OnInit {
   }
 
   async selectRoomModal() {
-    this.cloud.timePeriod.checkInDate = this.fg.get('checkInDate').value;
-    this.cloud.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
+    this.shareData.timePeriod.checkInDate = this.fg.get('checkInDate').value;
+    this.shareData.timePeriod.checkOutDate = this.fg.get('checkOutDate').value;
     const modal = await this.modals.create({
       component: SelectRoomsPage,
       componentProps: { rooms: this.fg.get('rooms').value },
@@ -59,11 +60,7 @@ export class BookingInformationPage implements OnInit {
 
     if (this.fg.valid) {
       this.presentModal();
-      // this.clound.dataPass = this.fg.value;
-      // this.router.navigate(['/bill', this.text]);
-      // this.navCtrl.navigateForward(['/bill',this.text]);
     }
-    // console.log(this.fg.valid);
   }
 
   async roomSettingModal() {
@@ -73,12 +70,9 @@ export class BookingInformationPage implements OnInit {
       cssClass: 'dialog-modal-4-setting-room',
     });
     modal.onDidDismiss().then((dataReturned) => {
-      console.log("เข้า dismiss setting");
-
       if (dataReturned !== null && dataReturned.data !== undefined) {
         let lstRoom = this.fg.get('rooms').value as RoomSelected[];
-        lstRoom.forEach(r => r.setting = this.cloud.settingAllRoom);
-        console.log(this.cloud.lstRoomsSelect);
+        lstRoom.forEach(r => r.setting = this.shareData.settingAllRoom);
         this.fg.get('rooms').patchValue(lstRoom);
       }
     });

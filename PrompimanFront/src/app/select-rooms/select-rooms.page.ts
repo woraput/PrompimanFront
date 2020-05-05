@@ -7,6 +7,7 @@ import { DlgSelectRoomsDetailPage } from '../dlg-select-rooms-detail/dlg-select-
 import { DateRequest, Room, RoomSelected, SettingRoom } from 'src/models/checkin';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
+import { SharingDataService } from '../sharing-data.service';
 
 @Component({
   selector: 'app-select-rooms',
@@ -23,25 +24,21 @@ export class SelectRoomsPage implements OnInit {
   private roomType: number;
   private roomParam: RoomSelected[];
   private bedType: number;
-  constructor(private modalCtrl: ModalController, private api: CloudSyncService, private navParams: NavParams, private navCtrl: NavController, private activatedRoute: ActivatedRoute, private route: Router) {
+  constructor(private shareData: SharingDataService, private modalCtrl: ModalController, private api: CloudSyncService, private navParams: NavParams, private navCtrl: NavController, private activatedRoute: ActivatedRoute, private route: Router) {
     this.roomType = 0;
     this.bedType = 0;
   }
 
   ngOnInit() {
     this.checkNewOrEdit();
-    this.displayDateIn = this.api.timePeriod.checkInDate;
-    this.displayDateOut = this.api.timePeriod.checkOutDate;
-    this.api.getAllRooms(this.api.timePeriod).subscribe(data => {
+    this.displayDateIn = this.shareData.timePeriod.checkInDate;
+    this.displayDateOut = this.shareData.timePeriod.checkOutDate;
+    this.api.getAllRooms(this.shareData.timePeriod).subscribe(data => {
       if (data !== null) {
         this.roomsStatic = data;
         this.roomsByFilter = this.roomsStatic;
-        console.log(this.roomsByFilter);
 
-        // this.api.roomReserve = this.roomsSelect.map(r => r.roomNo);
-        console.log(this.api.roomReserve);
-
-        for (const i of this.api.roomReserve) {
+        for (const i of this.shareData.roomReserve) {
           this.roomsByFilter.find(r => r._id == i).status = "ว่าง";
         }
       }
