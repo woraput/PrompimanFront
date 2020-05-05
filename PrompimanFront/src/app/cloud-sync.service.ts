@@ -10,29 +10,12 @@ export class CloudSyncService {
 
   private readonly baseUrlPublish: string = 'http://localhost:5000/api/'; // local
   // private readonly baseUrlPublish: string = 'http://prompiman-api.azurewebsites.net/api/'; // publish
-  public dataPass: any;
-  public dataEdit: any;
-  public roomReserve: string[];
-  public timePeriod = new DateRequest();
-  public lstRoomsSelect: RoomSelected[] = [];
-  public settingAllRoom = new SettingRoom();
-  constructor(private http: HttpClient) {
-    this.timePeriod.checkInDate = new Date();
-    this.timePeriod.checkOutDate = new Date();
-    console.log('Create CloudSyncProvider Provider');
-    this.settingAllRoom.haveBreakfast = true;
-    this.settingAllRoom.haveAddBreakfast = false;
-    this.settingAllRoom.addBreakfastCount = 0;
-    this.settingAllRoom.haveExtraBed = false;
-    this.settingAllRoom.extraBedCount = 0;
-    this.settingAllRoom.discount = 0;
-  }
-
+  
+  constructor(private http: HttpClient) {  }
 
   public getByID(_id: string): any {
     return this.http.get<Member>(this.baseUrlPublish + 'Member/GetById/' + _id);
   }
-
 
   public createMember(member: Member) {
     return this.http.post<MemberResponse>(this.baseUrlPublish + "Member/Create/", member);
@@ -88,7 +71,7 @@ export class CloudSyncService {
   }
 
   public confirmReservation(_id: string) {
-    return this.http.put(this.baseUrlPublish + 'Reservation/Confirm/' + _id , {});
+    return this.http.put(this.baseUrlPublish + 'Reservation/Confirm/' + _id, {});
   }
 
   // http://localhost:5000/api/Reservation/Confirm/637231486236762770
