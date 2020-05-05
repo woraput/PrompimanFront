@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rooms.page.scss'],
 })
 export class RoomsPage implements OnInit {
+  private option = 'value1';
 
   constructor() { }
 
