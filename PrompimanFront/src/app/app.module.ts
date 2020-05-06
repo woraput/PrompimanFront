@@ -24,6 +24,7 @@ import { BillPageModule } from './bill/bill.module';
 import { DlgSearchReservationPageModule } from './dlg-search-reservation/dlg-search-reservation.module';
 import { DlgSearchMemberPageModule } from './dlg-search-member/dlg-search-member.module';
 import { DlgReturnRoomPageModule } from './dlg-return-room/dlg-return-room.module';
+import { CostDetailPageModule } from './cost-detail/cost-detail.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [
@@ -41,6 +42,7 @@ import { DlgReturnRoomPageModule } from './dlg-return-room/dlg-return-room.modul
     DlgSearchMemberPageModule,
     BillPageModule,
     DlgReturnRoomPageModule,
+    CostDetailPageModule,
     SelectRoomsPageModule,
     MbscModule,
     BrowserModule,

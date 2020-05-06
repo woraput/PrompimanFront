@@ -49,9 +49,11 @@ export class DlgSearchReservationPage implements OnInit {
     this.modaLCtrl.dismiss();
   }
 
-  confirmReservation(idReservation: string){
-    this.router.navigate(['/checkin', idReservation]);
-    this.modaLCtrl.dismiss()
+  confirmReservation(_idReservation: string){
+    // this.router.navigate(['/checkin', _id]);
+    this.modaLCtrl.dismiss(_idReservation)
+    console.log(_idReservation);
+    
 
   }
 }
