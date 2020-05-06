@@ -102,6 +102,12 @@ export class DateRequest {
     checkOutDate: Date
 }
 
+export class PagingMaster {
+    page: number;
+    count: number;
+    dataList: Master[];
+}
+
 export class ReserveResponse {
     isSuccess: boolean;
     errorMessage: string;
