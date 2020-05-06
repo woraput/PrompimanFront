@@ -38,36 +38,23 @@
         <ion-item>
           <ion-label>กรุ๊ป</ion-label>
         </ion-item>
-    
+
       </ion-col>
       <ion-col size="6.8" class="ion-text-left">
         <ion-item>
-          <ion-label></ion-label>
+          <ion-label>😊</ion-label>
         </ion-item>
-
-          <ion-item *ngIf="listdata.th_Firstname != ''">
-            <ion-label>{{listdata.th_Firstname}} {{listdata.th_Lastname}}</ion-label>
-          </ion-item>
-          <ion-item *ngIf="listdata.th_Firstname == '' || listdata.th_Lastname == '' ">
-            <ion-label>{{listdata.en_Firstname}} {{listdata.en_Lastname}}</ion-label>
-          </ion-item>        
-
         <ion-item>
-          <ion-label>{{listdata.telephone}}</ion-label>
+          <ion-label>{{fg.get('name').value}}</ion-label>
         </ion-item>
-        <ion-item *ngIf="listdata.reserve != null">
-          <ion-label>{{listdata.reserve}}</ion-label>
+        <ion-item>
+          <ion-label>{{fg.get('telephone').value}}</ion-label>
         </ion-item>
-        <ion-item *ngIf="listdata.reserve == null || listdata.reserve == 0">
-          <ion-label></ion-label>
+        <ion-item>
+          <ion-label>{{fg.get('reserve').value}}</ion-label>
         </ion-item>
-        <ion-item *ngIf="listdata.th_Firstname != null">
-          <ion-input type="text" placeholder="กรุณากรอกข้อมูล"
-            value="{{listdata.th_Firstname}} {{listdata.th_Lastname}}">
-          </ion-input>
-        </ion-item>
-        <ion-item *ngIf="listdata.th_Firstname == null">
-          <ion-input type="text" placeholder="กรุณากรอกข้อมูล" value="{{listdata.name}}">
+        <ion-item>
+          <ion-input type="text" placeholder="กรุณากรอกข้อมูล" value="{{fg.get('name').value}}">
           </ion-input>
         </ion-item>
       </ion-col>
@@ -118,11 +105,11 @@
         </ion-item>
         <ion-item class="ion-text-left">
           <ion-label>ค่ามัดจัด</ion-label>
-          <ion-checkbox slot="start" checked="true"></ion-checkbox>
+          <ion-checkbox slot="start" checked="true" (ionChange)="isReserve()"></ion-checkbox>
         </ion-item>
         <ion-item class="ion-text-left">
           <ion-label>ใบกำกับภาษี</ion-label>
-          <ion-checkbox slot="start"></ion-checkbox>
+          <ion-checkbox slot="start" (ionChange)="isReserve2()"></ion-checkbox>
         </ion-item>
       </ion-col>
       <ion-col size="6.5">
@@ -133,19 +120,8 @@
       <ion-col size="5.5">
       </ion-col>
       <ion-col size="1">
-        <ion-button size="default" expand="block" type="submit">
-          ถัดไป</ion-button>
-      </ion-col>
-      <ion-col size="5.5">
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="ion-padding">
-      <ion-col size="5.5">
-      </ion-col>
-      <ion-col size="1">
         <ion-button size="default" expand="block" type="submit" (click)="presentAlertConfirm()">
-          dialog</ion-button>
+          ถัดไป</ion-button>
       </ion-col>
       <ion-col size="5.5">
       </ion-col>
