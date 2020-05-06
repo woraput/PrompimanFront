@@ -120,10 +120,6 @@ const routes: Routes = [
     loadChildren: () => import('./cost-detail/cost-detail.module').then(m => m.CostDetailPageModule)
   },
   {
-    path: 'cost-detail/:masterId/:roomId',
-    loadChildren: () => import('./cost-detail/cost-detail.module').then(m => m.CostDetailPageModule)
-  },
-  {
     path: 'checkout-detail',
     loadChildren: () => import('./checkout-detail/checkout-detail.module').then(m => m.CheckoutDetailPageModule)
   },

@@ -34,7 +34,7 @@
           <ion-label>เงินสำรองจ่าย:&nbsp;&nbsp;&nbsp;&nbsp;{{master.deposit}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-button size="default" color="dark" [routerLink]="['/cost-detail']" slot="start" expand="outline"
+          <ion-button size="default" color="dark" (click)="costDetail4All()" slot="start" expand="outline"
             type="submit">
             ดูรายละเอียดค้างจ่าย
           </ion-button>
@@ -72,8 +72,8 @@
 
     <ion-card>
       <ion-card-content>
-        <ng-container *ngFor="let r of rooms">
-          <ion-row class="ion-text-center" [routerLink]="['/cost-detail/',master._id,r.roomNo]">
+        <ng-container *ngFor="let r of roomsAct">
+          <ion-row class="ion-text-center" (click)="costDetail4EachRoom(r.roomNo)">
             <ion-col size="1"></ion-col>
             <ion-col size="2">
               <ion-item class="ion-text-center">

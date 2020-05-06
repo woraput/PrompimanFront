@@ -1,8 +1,10 @@
+import { async } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { CloudSyncService } from './../cloud-sync.service';
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 import { Master, RoomActivate } from 'src/models/checkin';
+import { CostDetailPage } from '../cost-detail/cost-detail.page';
 
 @Component({
   selector: 'app-checkin-detail',
@@ -12,8 +14,8 @@ import { Master, RoomActivate } from 'src/models/checkin';
 export class CheckinDetailPage implements OnInit {
   private _id: string;
   private master = new Master();
-  private rooms: any[] = [];
-  constructor(private api: CloudSyncService, private activatedRoute: ActivatedRoute) {
+  private roomsAct: any[] = [];
+  constructor(private api: CloudSyncService, private modalController: ModalController, private activatedRoute: ActivatedRoute) {
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
   }
 
@@ -24,7 +26,7 @@ export class CheckinDetailPage implements OnInit {
       if (dataRes != null) {
         console.log(dataRes);
         this.master = dataRes.master;
-        this.rooms = dataRes.roomActLst;
+        this.roomsAct = dataRes.roomActLst;
       }
     })
   }
@@ -45,7 +47,43 @@ export class CheckinDetailPage implements OnInit {
   }
 
   checkDisplayCloseMasterButton(): boolean {
-    return this.rooms.every(r => r.status == "เช็คเอ้าท์" || r.status == "ออก");
+    return this.roomsAct.every(r => r.status == "เช็คเอ้าท์" || r.status == "ออก");
   }
 
+
+  async costDetail4All() {
+    const modal = await this.modalController.create({
+      component: CostDetailPage,
+      componentProps: { roomActivate: this.roomsAct },
+      cssClass: 'dialog-modal-4-select-room',
+    });
+    modal.onDidDismiss().then(data => {
+      // this.ionViewDidEnter()
+    })
+    modal.present();
+  }
+
+  async costDetail4EachRoom(roomNo: string) {
+    let roomAct;
+
+    await this.api.getRoomActByRoom(this._id, roomNo).subscribe(dataRes => {
+      if (dataRes != null) {
+        roomAct = dataRes;
+      }
+    });
+
+    setTimeout(async () => {
+      const modal = await this.modalController.create({
+        component: CostDetailPage,
+        componentProps: { roomActivate: roomAct },
+        cssClass: 'dialog-modal-4-select-room',
+      });
+      modal.onDidDismiss().then(data => {
+        // this.ionViewDidEnter()
+      })
+      modal.present();
+    }, 100);
+
+
+  }
 }

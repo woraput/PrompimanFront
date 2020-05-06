@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member, Paging, MemberResponse } from 'src/models/Member';
-import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom, MasterDetail } from 'src/models/checkin';
+import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom, MasterDetail, RoomActivate } from 'src/models/checkin';
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +76,10 @@ export class CloudSyncService {
 
   public getCheckinDetail(_id: string) {
     return this.http.get<MasterDetail>(this.baseUrlPublish + 'CheckIn/GetById/' + _id);
+  }
+
+  public getRoomActByRoom(_id: string, roomNo: string) {
+    return this.http.get<RoomActivate[]>(this.baseUrlPublish + 'CheckIn/GetRoomActLst/' + _id + '/' + roomNo);
   }
 
   // http://localhost:5000/api/Reservation/Confirm/637231486236762770
