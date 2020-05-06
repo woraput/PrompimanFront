@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>CheckinDetail</ion-title>
+    <ion-title>รายละเอียดการเช็คอิน</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,6 +16,8 @@
           <ion-label>
             <h2><b>ข้อมูลมาสเตอร์</b></h2>
           </ion-label>
+          <ion-button *ngIf="checkDisplayCloseMasterButton()" slot="end" [routerLink]="['/master-detail']"
+            size="default">ปิดมาสเตอร์</ion-button>
         </ion-item>
         <ion-item>
           <ion-label>ชื่อ - นามสกุล:&nbsp;&nbsp;&nbsp;&nbsp;{{master.name}}</ion-label>
@@ -32,12 +34,13 @@
           <ion-label>เงินสำรองจ่าย:&nbsp;&nbsp;&nbsp;&nbsp;{{master.deposit}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-button size="default" color="dark" (click)="register()" slot="start" expand="outline" type="submit">
+          <ion-button size="default" color="dark" [routerLink]="['/cost-detail']" slot="start" expand="outline"
+            type="submit">
             ดูรายละเอียดค้างจ่าย
           </ion-button>
-          <ion-button slot="end" size="default" (click)="register()" expand="block" type="submit">
+          <ion-button slot="end" size="default" [routerLink]="['/checkin/', master._id]" expand="block" type="submit">
             <ion-icon name="add-circle-outline"></ion-icon>
-            ลงทะเบียน
+            เพิ่มห้องพัก
           </ion-button>
         </ion-item>
       </ion-col>
@@ -70,7 +73,7 @@
     <ion-card>
       <ion-card-content>
         <ng-container *ngFor="let r of rooms">
-          <ion-row class="ion-text-center">
+          <ion-row class="ion-text-center" [routerLink]="['/cost-detail/',master._id,r.roomNo]">
             <ion-col size="1"></ion-col>
             <ion-col size="2">
               <ion-item class="ion-text-center">
@@ -82,14 +85,14 @@
             <ion-col size="2">
               <ion-item>
                 <ion-label style="text-align: center;">
-                  {{r.arrivalDate}}
+                  {{r.arrivalDate | date:"dd/MM/yyyy"}}
                 </ion-label>
               </ion-item>
             </ion-col>
             <ion-col size="2">
               <ion-item>
                 <ion-label style="text-align: center;">
-                  {{r.departure}}
+                  {{r.departure | date:"dd/MM/yyyy"}}
                 </ion-label>
               </ion-item>
             </ion-col>
@@ -101,7 +104,7 @@
               </ion-item>
             </ion-col>
             <ion-col size="2">
-              <ion-item [color]="setColor('เข้าพัก')">
+              <ion-item [color]="setColor(r.status)">
                 <ion-label color="dark" style="text-align: center;">
                   {{r.status}}
                 </ion-label>
