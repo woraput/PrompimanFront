@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 // import { Summm } from 'src/models/reservation';
 
 @Component({
@@ -19,8 +20,10 @@ export class CostDetailPage implements OnInit {
   public masterCheck: boolean;
   public checkBoxList: any;
 
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute) {
     console.log(this.masterCheck);
+    console.log(this.activatedRoute.snapshot.paramMap);
+
 
     this.checkBoxList = [
       {
