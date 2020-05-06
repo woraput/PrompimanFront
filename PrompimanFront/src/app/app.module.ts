@@ -1,3 +1,4 @@
+import { CostDetailPageModule } from './cost-detail/cost-detail.module';
 import { SelectRoomsPageModule } from './select-rooms/select-rooms.module';
 import { DlgSelectRoomsDetailPageModule } from './dlg-select-rooms-detail/dlg-select-rooms-detail.module';
 import { RegisterInformationPageModule } from './register-information/register-information.module';
@@ -45,6 +46,7 @@ import { CostDetailPageModule } from './cost-detail/cost-detail.module';
     CostDetailPageModule,
     SelectRoomsPageModule,
     MbscModule,
+    CostDetailPageModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,

@@ -1,7 +1,8 @@
+import { PagingMaster } from './../models/checkin';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member, Paging, MemberResponse } from 'src/models/Member';
-import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom, MasterDetail } from 'src/models/checkin';
+import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom, MasterDetail, RoomActivate } from 'src/models/checkin';
 
 @Injectable({
   providedIn: 'root'
@@ -74,10 +75,25 @@ export class CloudSyncService {
     return this.http.put(this.baseUrlPublish + 'Reservation/Confirm/' + _id, {});
   }
 
+  //checkin
   public getCheckinDetail(_id: string) {
     return this.http.get<MasterDetail>(this.baseUrlPublish + 'CheckIn/GetById/' + _id);
   }
 
+  public getRoomActByRoom(_id: string, roomNo: string) {
+    return this.http.get<RoomActivate[]>(this.baseUrlPublish + 'CheckIn/GetRoomActLst/' + _id + '/' + roomNo);
+  }
+
+  //master detail
+  public getLstMasterNotCloseYet(page: number, size: number, word: string) {
+    return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/Get/' + page + '/' + size + "?word=" + word);
+  }
+  public getLstMasterHaveOrNotRemaining(page: number, size: number, word: string) {
+    return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/GetAllCheckOut/' + page + '/' + size + "?word=" + word);
+  }
+  public getLstMasterHistory(page: number, size: number, word: string) {
+    return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/GetHistory/' + page + '/' + size + "?word=" + word);
+  }
   // http://localhost:5000/api/Reservation/Confirm/637231486236762770
 }
 
