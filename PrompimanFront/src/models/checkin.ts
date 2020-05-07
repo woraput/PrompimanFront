@@ -91,6 +91,7 @@ export class Expense {
     details: Detail[]
     totalCost: number
     creationDateTime: Date
+    lastUpdate: Date
 }
 
 export class Detail {
