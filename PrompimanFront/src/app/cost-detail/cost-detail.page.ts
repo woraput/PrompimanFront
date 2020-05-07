@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
+import { RoomActivate } from 'src/models/checkin';
 // import { Summm } from 'src/models/reservation';
 
 @Component({
@@ -16,46 +17,45 @@ export class CostDetailPage implements OnInit {
   // }
 
   // public Cost : Summm[] = [];
-  public isIndeterminate: boolean;
+  // public checkBoxList: any;
+  // public isIndeterminate: boolean;
   public masterCheck: boolean;
-  public checkBoxList: any;
+  public roomsAct: RoomActivate[] = [];
+  public totalCost: number;
+  public paid: number;
+  public remaining: number;
 
-  constructor(private navParams: NavParams) {
-    console.log(this.masterCheck);
-    console.log(this.navParams.data);
-
-    this.checkBoxList = [
-      {
-        'room': '201',
-        'roomDetail': [
-          {
-            'name': 'ค่าห้อง', 'price': 600, 'isPaid': false, 'isChecked': true,
-          },
-          {
-            'name': 'อาหารเช้า', 'price': 120, 'isPaid': true, 'isChecked': false,
-          },
-          {
-            'name': 'เสริมเตียง', 'price': 100, 'isPaid': true, 'isChecked': false,
-          }
-        ],
-      },
-      {
-        'room': '202',
-        'roomDetail': [
-          {
-            'name': 'ค่าห้อง', 'price': 1500, 'isPaid': true, 'isChecked': false,
-          },
-          {
-            'name': 'อาหารเช้า', 'price': 100, 'isPaid': true, 'isChecked': false,
-          },
-          {
-            'name': 'เสริมเตียง', 'price': 20, 'isPaid': true, 'isChecked': false,
-          }
-        ]
-      }
-    ];
-    console.log(this.checkBoxList);
-    console.log(this.checkBoxList[0].roomDetail[0]);
+  constructor(private navParams: NavParams, private modalCtrl: ModalController) {
+    // this.checkBoxList = [
+    //   {
+    //     'room': '201',
+    //     'roomDetail': [
+    //       {
+    //         'name': 'ค่าห้อง', 'price': 600, 'isPaid': false, 'isChecked': true,
+    //       },
+    //       {
+    //         'name': 'อาหารเช้า', 'price': 120, 'isPaid': true, 'isChecked': false,
+    //       },
+    //       {
+    //         'name': 'เสริมเตียง', 'price': 100, 'isPaid': true, 'isChecked': false,
+    //       }
+    //     ],
+    //   },
+    //   {
+    //     'room': '202',
+    //     'roomDetail': [
+    //       {
+    //         'name': 'ค่าห้อง', 'price': 1500, 'isPaid': true, 'isChecked': false,
+    //       },
+    //       {
+    //         'name': 'อาหารเช้า', 'price': 100, 'isPaid': true, 'isChecked': false,
+    //       },
+    //       {
+    //         'name': 'เสริมเตียง', 'price': 20, 'isPaid': true, 'isChecked': false,
+    //       }
+    //     ]
+    //   }
+    // ];
   }
 
   // change(item:Summm, room){
@@ -86,16 +86,23 @@ export class CostDetailPage implements OnInit {
   // }
 
   ngOnInit() {
+    this.roomsAct = this.navParams.get('roomActivate');
+    this.totalCost = this.navParams.get('totalCost');
+    this.paid = this.navParams.get('paid');
+    this.remaining = this.navParams.get('remaining');
+    
+    console.log(this.navParams.get('roomActivate'));
+    console.log('roomsAct: ', this.roomsAct);
   }
 
   checkMaster() {
     console.log(this.masterCheck); // false
-    console.log(this.checkBoxList);
+    console.log(this.roomsAct);
 
     setTimeout(() => {
-      this.checkBoxList.forEach(obj => {
-        obj.roomDetail.forEach(item => {
-          item.isChecked = this.masterCheck;
+      this.roomsAct.forEach(obj => {
+        obj.expenseList.forEach(item => {
+          item.isSelected = this.masterCheck;
           console.log(this.masterCheck);
         });
       });
@@ -104,7 +111,7 @@ export class CostDetailPage implements OnInit {
 
   checkEvent(event) {
     console.log(event);
-    let totalItem = this.checkBoxList.length;
+    let totalItem = this.roomsAct.length;
     console.log(totalItem);
 
     if (event.detail.checked == false) {

@@ -1,8 +1,8 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-back-button defaultHref=""></ion-back-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-title>รายละเอียดค่าใช้จ่าย (บาท)</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -25,22 +25,23 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngFor="let item of checkBoxList">
+    <ion-row *ngFor="let item of roomsAct">
       <ion-item-divider>
         <ion-col>
-          <h5>ห้อง {{ item.room }}</h5>
-          <ion-item *ngFor="let item2 of item.roomDetail">
+          <h5>ห้อง {{ item.roomNo }}</h5>
+          <ion-item *ngFor="let item2 of item.expenseList">
 
             <ion-col size="2">
               <ion-label>{{ item2.name }}</ion-label>
             </ion-col>
 
             <ion-col size="1" class="ion-text-right">
-              <ion-label>{{ item2.price }}</ion-label>
+              <ion-label>{{ item2.totalCost }}</ion-label>
             </ion-col>
 
-            <ion-checkbox slot="start" checked="{{ item2.isChecked }}" (ionChange)="checkEvent($event)"></ion-checkbox>
-            <!-- Todo: add in checkbox (ionChange)="change(item2, item.room)" -->
+            <ion-checkbox slot="start" checked="{{ item2.isSelected }}" disabled="{{ item2.isPaid }}"
+            [(ngModel)]="item2.isSelected" ></ion-checkbox>
+            <!-- Todo: add in checkbox (ionChange)="change(item2, item.room (ionChange)="checkEvent($event)")" -->
           </ion-item>
         </ion-col>
       </ion-item-divider>
@@ -56,7 +57,7 @@
         <ion-item lines="none">ค่าใช้จ่ายทั้งหมด</ion-item>
       </ion-col>
       <ion-col size="1">
-        <ion-item lines="none">xxxxxx</ion-item>
+        <ion-item lines="none">{{ totalCost }}</ion-item>
       </ion-col>
       <ion-col size="2">
         <ion-item lines="none">บาท</ion-item>
@@ -68,7 +69,7 @@
         <ion-item lines="none">ยอดที่ชำระแล้ว</ion-item>
       </ion-col>
       <ion-col size="1">
-        <ion-item lines="none">xxxxxx</ion-item>
+        <ion-item lines="none">{{ paid }}</ion-item>
       </ion-col>
       <ion-col size="2">
         <ion-item lines="none">บาท</ion-item>
@@ -103,7 +104,7 @@
         <ion-item lines="none">คงค้าง</ion-item>
       </ion-col>
       <ion-col size="1">
-        <ion-item lines="none">xxxxxx</ion-item>
+        <ion-item lines="none">{{ remaining }}</ion-item>
       </ion-col>
       <ion-col size="2">
         <ion-item lines="none">บาท</ion-item>
