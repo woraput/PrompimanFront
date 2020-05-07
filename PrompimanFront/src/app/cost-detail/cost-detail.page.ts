@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
-import { RoomActivate } from 'src/models/checkin';
+import { RoomActivate, Expense } from 'src/models/checkin';
 // import { Summm } from 'src/models/reservation';
 
 @Component({
@@ -21,6 +21,7 @@ export class CostDetailPage implements OnInit {
   // public isIndeterminate: boolean;
   public masterCheck: boolean;
   public roomsAct: RoomActivate[] = [];
+  public expenseList: Expense[] = [];
   public totalCost: number;
   public paid: number;
   public remaining: number;
@@ -58,6 +59,29 @@ export class CostDetailPage implements OnInit {
     // ];
   }
 
+  onClick(item2: Expense, room) {
+    console.log('item2.isSelected:', item2.isSelected);
+    console.log(room);
+
+    let roomInd = this.roomsAct.findIndex(it => it.roomNo == room);
+    console.log(roomInd);
+    
+    if (roomInd < 0) {
+      this.roomsAct.push(item2[roomInd]);
+    }
+    else {
+      this.roomsAct.splice(roomInd, 1)
+    }
+    console.log(this.roomsAct);
+
+
+    // let expenseInd = this.expenseList.forEach(element => {
+    //   element.name == item2.name
+    //   console.log(expenseInd);
+    // });
+
+
+  }
   // change(item:Summm, room){
   //   console.log(item);
   //   console.log(room);
@@ -68,7 +92,6 @@ export class CostDetailPage implements OnInit {
   //     this.Cost.push(item);
   //   }else{
   //     this.Cost.splice(find,1);
-
   //   }
 
   //   // this.Cost += price;
@@ -90,7 +113,7 @@ export class CostDetailPage implements OnInit {
     this.totalCost = this.navParams.get('totalCost');
     this.paid = this.navParams.get('paid');
     this.remaining = this.navParams.get('remaining');
-    
+
     console.log(this.navParams.get('roomActivate'));
     console.log('roomsAct: ', this.roomsAct);
   }

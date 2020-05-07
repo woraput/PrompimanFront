@@ -38,9 +38,10 @@
             <ion-col size="1" class="ion-text-right">
               <ion-label>{{ item2.totalCost }}</ion-label>
             </ion-col>
-
-            <ion-checkbox slot="start" checked="{{ item2.isSelected }}" disabled="{{ item2.isPaid }}"
-            [(ngModel)]="item2.isSelected" ></ion-checkbox>
+            <!-- checked="{{ item2.isSelected }}" disabled="{{ item2.isPaid }}" -->
+            <ion-checkbox slot="start"
+            [(ngModel)]="item2.isSelected" 
+            (click)="onClick(item2,item.roomNo)"></ion-checkbox>
             <!-- Todo: add in checkbox (ionChange)="change(item2, item.room (ionChange)="checkEvent($event)")" -->
           </ion-item>
         </ion-col>
