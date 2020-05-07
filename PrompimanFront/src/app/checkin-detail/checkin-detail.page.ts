@@ -75,10 +75,10 @@ export class CheckinDetailPage implements OnInit {
     }, 100);
   }
 
-  async costDetail4EachRoom(roomNo: string) {
+  async costDetail4EachRoom(room_id: string) {
     let roomAct;
 
-    await this.api.getRoomAct(this._id, roomNo).subscribe(dataRes => {
+    await this.api.getRoomAct(this._id, room_id).subscribe(dataRes => {
       if (dataRes != null) {
         roomAct = dataRes;
       }
