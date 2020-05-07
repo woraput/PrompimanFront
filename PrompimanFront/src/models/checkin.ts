@@ -122,6 +122,7 @@ export class ReserveResponse {
     isSuccess: boolean;
     errorMessage: string;
 }
+
 // export enum ClassActionTypes {
 //     Verb1 = '[Class] Verb1',
 //     Verb2 = '[Class] Verb2'

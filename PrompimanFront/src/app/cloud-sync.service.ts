@@ -84,6 +84,10 @@ export class CloudSyncService {
     return this.http.get<RoomActivate[]>(this.baseUrlPublish + 'CheckIn/GetRoomActLst/' + _id + "?roomId=" + roomId);
   }
 
+  public updateRoomAct(roomAct: RoomActivate[]) {
+    return this.http.put<ReserveResponse>(this.baseUrlPublish + 'CheckIn/Update/' + roomAct, {});
+  }
+
   //master detail
   public getLstMasterNotCloseYet(page: number, size: number, word?: string) {
     if (word === undefined || word === null || word == '' || word === "") {

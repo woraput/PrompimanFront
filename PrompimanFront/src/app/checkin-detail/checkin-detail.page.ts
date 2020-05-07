@@ -2,7 +2,7 @@ import { async } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { CloudSyncService } from './../cloud-sync.service';
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { Master, RoomActivate } from 'src/models/checkin';
 import { CostDetailPage } from '../cost-detail/cost-detail.page';
 
@@ -68,8 +68,16 @@ export class CheckinDetailPage implements OnInit {
         },
         cssClass: 'dialog-modal-4-select-room',
       });
-      modal.onDidDismiss().then(data => {
-        // this.ionViewDidEnter()
+      modal.onDidDismiss().then(dataDismiss => {
+        if (dataDismiss != null || dataDismiss != undefined) {
+          let roomActReturn = dataDismiss as RoomActivate[];
+          this.api.updateRoomAct(roomActReturn).subscribe(dataRes => {
+            if (dataRes != null) {
+              console.log(dataRes.isSuccess);
+            }
+          })
+
+        }
       })
       modal.present();
     }, 100);
@@ -93,8 +101,16 @@ export class CheckinDetailPage implements OnInit {
         },
         cssClass: 'dialog-modal-4-select-room',
       });
-      modal.onDidDismiss().then(data => {
-        // this.ionViewDidEnter()
+      modal.onDidDismiss().then(dataDismiss => {
+        if (dataDismiss != null || dataDismiss != undefined) {
+          let roomActReturn = dataDismiss as RoomActivate[];
+          this.api.updateRoomAct(roomActReturn).subscribe(dataRes => {
+            if (dataRes != null) {
+              console.log(dataRes.isSuccess);
+            }
+          })
+
+        }
       })
       modal.present();
     }, 100);
