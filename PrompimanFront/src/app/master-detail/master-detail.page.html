@@ -60,10 +60,10 @@
                   {{p.telephone}}
                 </ion-col>
                 <ion-col size="2">
-                  Bednight
+                  {{p.bedNight}}
                 </ion-col>
                 <ion-col size="2">
-                  <!-- {{calDay( p.checkOutDate ,p.checkInDate)}} -->
+                  {{p.daysLeft}}
                 </ion-col>
                 <ion-col size="2">
                   {{p.checkInDate | date:"dd/MM/yyyy" }}
@@ -110,26 +110,29 @@
 
         <ion-card>
           <ion-card-content>
-            <ion-row class="ion-text-center">
-              <ion-col size="2">
-                ชื่อกรุ๊ป
-              </ion-col>
-              <ion-col size="2">
-                เบอร์โทร
-              </ion-col>
-              <ion-col size="2">
-                Bednight
-              </ion-col>
-              <ion-col size="2">
-                เหลือวันพัก
-              </ion-col>
-              <ion-col size="2">
-                วันที่เข้า
-              </ion-col>
-              <ion-col size="2">
-                วันที่ออก
-              </ion-col>
-            </ion-row>
+            <ng-container
+              *ngFor="let p of paging.dataList  | paginate: { itemsPerPage: 10, currentPage: p ,totalItems: paging.count}">
+              <ion-row class="ion-text-center">
+                <ion-col size="2">
+                  ชื่อกรุ๊ป {{p.groupName}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.telephone}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.bedNight}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.daysLeft}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.checkInDate | date:"dd/MM/yyyy" }}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.checkOutDate | date:"dd/MM/yyyy" }}
+                </ion-col>
+              </ion-row>
+            </ng-container>
           </ion-card-content>
         </ion-card>
       </ion-list>
@@ -168,26 +171,29 @@
 
         <ion-card>
           <ion-card-content>
-            <ion-row class="ion-text-center">
-              <ion-col size="2">
-                ชื่อกรุ๊ป
-              </ion-col>
-              <ion-col size="2">
-                เบอร์โทร
-              </ion-col>
-              <ion-col size="2">
-                Bednight
-              </ion-col>
-              <ion-col size="2">
-                เหลือวันพัก
-              </ion-col>
-              <ion-col size="2">
-                วันที่เข้า
-              </ion-col>
-              <ion-col size="2">
-                วันที่ออก
-              </ion-col>
-            </ion-row>
+            <ng-container
+              *ngFor="let p of paging.dataList  | paginate: { itemsPerPage: 10, currentPage: p ,totalItems: paging.count}">
+              <ion-row class="ion-text-center">
+                <ion-col size="2">
+                  ชื่อกรุ๊ป {{p.groupName}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.telephone}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.bedNight}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.daysLeft}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.checkInDate | date:"dd/MM/yyyy" }}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.checkOutDate | date:"dd/MM/yyyy" }}
+                </ion-col>
+              </ion-row>
+            </ng-container>
           </ion-card-content>
         </ion-card>
       </ion-list>
@@ -222,26 +228,29 @@
 
         <ion-card>
           <ion-card-content>
-            <ion-row class="ion-text-center">
-              <ion-col size="2">
-                ชื่อกรุ๊ป
-              </ion-col>
-              <ion-col size="2">
-                เบอร์โทร
-              </ion-col>
-              <ion-col size="2">
-                Bednight
-              </ion-col>
-              <ion-col size="2">
-                เหลือวันพัก
-              </ion-col>
-              <ion-col size="2">
-                วันที่เข้า
-              </ion-col>
-              <ion-col size="2">
-                วันที่ออก
-              </ion-col>
-            </ion-row>
+            <ng-container
+              *ngFor="let p of paging.dataList  | paginate: { itemsPerPage: 10, currentPage: p ,totalItems: paging.count}">
+              <ion-row class="ion-text-center">
+                <ion-col size="2">
+                  ชื่อกรุ๊ป {{p.groupName}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.telephone}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.bedNight}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.daysLeft}}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.checkInDate | date:"dd/MM/yyyy" }}
+                </ion-col>
+                <ion-col size="2">
+                  {{p.checkOutDate | date:"dd/MM/yyyy" }}
+                </ion-col>
+              </ion-row>
+            </ng-container>
           </ion-card-content>
         </ion-card>
       </ion-list>

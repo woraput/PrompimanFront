@@ -17,7 +17,7 @@ export class MasterDetailPage implements OnInit {
   constructor(private api: CloudSyncService) { }
 
   ngOnInit() {
-    this.api.getLstMasterNotCloseYet(this.p, 10, '').subscribe(dataRes => {
+    this.api.getLstMasterNotCloseYet(this.p, 10).subscribe(dataRes => {
       if (dataRes != null) {
         console.log(dataRes);
         this.paging = dataRes;
@@ -26,15 +26,48 @@ export class MasterDetailPage implements OnInit {
 
   }
 
-  calDay(dayOut: Date, dayIn: Date) {
+  segmentChanged(ev: CustomEvent) {
+    console.log(ev);
 
-    let result = dayOut.valueOf() - dayIn.valueOf();
-    console.log(result);
-    let a: Date;
-    a.setDate(result);
-    console.log(a);
+    switch (ev.detail.value) {
+      case "value1":
+        this.api.getLstMasterNotCloseYet(this.p, 10).subscribe(dataRes => {
+          if (dataRes != null) {
+            console.log(dataRes);
+            this.paging = dataRes;
+          }
+        });
+        break;
+      case "value2":
+        this.api.getLstMasterHaveOrNotRemaining(this.p, 10, true).subscribe(dataRes => {
+          if (dataRes != null) {
+            console.log(dataRes);
+            this.paging = dataRes;
+          }
+        })
+        break;
+      case "value3":
+        this.api.getLstMasterHaveOrNotRemaining(this.p, 10, false).subscribe(dataRes => {
+          if (dataRes != null) {
+            console.log(dataRes);
+            this.paging = dataRes;
+          }
+        })
+        break;
+      case "value4":
+        this.api.getLstMasterHistory(this.p, 10).subscribe(dataRes => {
+          if (dataRes != null) {
+            console.log(dataRes);
+            this.paging = dataRes;
+          }
+        })
+        break;
 
-    return a;
+      default:
+        break;
+    }
   }
+
+
 
 }

@@ -85,14 +85,25 @@ export class CloudSyncService {
   }
 
   //master detail
-  public getLstMasterNotCloseYet(page: number, size: number, word: string) {
-    return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/Get/' + page + '/' + size + "?word=" + word);
+  public getLstMasterNotCloseYet(page: number, size: number, word?: string) {
+    if (word === undefined || word === null || word == '' || word === "") {
+      return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/Get/' + page + '/' + size);
+    } else
+      return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/Get/' + page + '/' + size + "?word=" + word);
+
   }
-  public getLstMasterHaveOrNotRemaining(page: number, size: number, word: string) {
-    return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/GetAllCheckOut/' + page + '/' + size + "?word=" + word);
+  public getLstMasterHaveOrNotRemaining(page: number, size: number, haveRemaining: boolean, word?: string) {
+    if (word === undefined || word === null || word == '' || word === "") {
+      return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/GetAllCheckOut/' + page + '/' + size + '/' + haveRemaining);
+    } else
+      return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/GetAllCheckOut/' + page + '/' + size + '/' + haveRemaining + "?word=" + word);
   }
-  public getLstMasterHistory(page: number, size: number, word: string) {
-    return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/GetHistory/' + page + '/' + size + "?word=" + word);
+  public getLstMasterHistory(page: number, size: number, word?: string) {
+    if (word === undefined || word === null || word == '' || word === "") {
+      return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/GetHistory/' + page + '/' + size);
+    } else
+      return this.http.get<PagingMaster>(this.baseUrlPublish + 'CheckIn/GetHistory/' + page + '/' + size + "?word=" + word);
+
   }
   // http://localhost:5000/api/Reservation/Confirm/637231486236762770
 }
