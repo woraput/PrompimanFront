@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Member, Paging, MemberResponse } from 'src/models/Member';
-import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom, MasterDetail } from 'src/models/checkin';
+import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom, MasterDetail, Master } from 'src/models/checkin';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,6 @@ export class CloudSyncService {
     return this.http.get<Paging>(this.baseUrlPublish + "Member/Get/" + page + "/" + size + "?word=" + word);
   }
 
-  //Room
   public getAllRooms(timeData: DateRequest) {
     return this.http.put<Room[]>(this.baseUrlPublish + 'Room/Get/', timeData);
   }
@@ -78,7 +77,13 @@ export class CloudSyncService {
     return this.http.get<MasterDetail>(this.baseUrlPublish + 'CheckIn/GetById/' + _id);
   }
 
-  // http://localhost:5000/api/Reservation/Confirm/637231486236762770
+  public getIsAlready(_id: string, groupName: string ) {
+    return this.http.get(this.baseUrlPublish + 'CheckIn/IsAlready/' + _id + "/" + groupName);
+  }
+
+  // public putGetRoomActLst() {
+  //   return this.http.put(this.baseUrlPublish + 'CheckIn/GetRoomActLst' , {});
+  // }
 }
 
 
