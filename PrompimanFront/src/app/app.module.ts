@@ -1,4 +1,3 @@
-import { CostDetailPageModule } from './cost-detail/cost-detail.module';
 import { SelectRoomsPageModule } from './select-rooms/select-rooms.module';
 import { DlgSelectRoomsDetailPageModule } from './dlg-select-rooms-detail/dlg-select-rooms-detail.module';
 import { RegisterInformationPageModule } from './register-information/register-information.module';
@@ -7,11 +6,9 @@ import { MbscModule } from '@mobiscroll/angular';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterPageModule } from './register/register.module';
@@ -46,7 +43,6 @@ import { CostDetailPageModule } from './cost-detail/cost-detail.module';
     CostDetailPageModule,
     SelectRoomsPageModule,
     MbscModule,
-    CostDetailPageModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
