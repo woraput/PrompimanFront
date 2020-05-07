@@ -80,8 +80,8 @@ export class CloudSyncService {
     return this.http.get<MasterDetail>(this.baseUrlPublish + 'CheckIn/GetById/' + _id);
   }
 
-  public getRoomActByRoom(_id: string, roomNo: string) {
-    return this.http.get<RoomActivate[]>(this.baseUrlPublish + 'CheckIn/GetRoomActLst/' + _id + '/' + roomNo);
+  public getRoomAct(_id: string, roomId: string) {
+    return this.http.get<RoomActivate[]>(this.baseUrlPublish + 'CheckIn/GetRoomActLst/' + _id + "?roomId=" + roomId);
   }
 
   //master detail
