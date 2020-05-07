@@ -10,112 +10,58 @@ import { RoomActivate, Expense } from 'src/models/checkin';
 })
 
 export class CostDetailPage implements OnInit {
-  //todo add Model (ex.)
-  // export class Summm{
-  //   name: string
-  //   price:number
-  // }
-
-  // public Cost : Summm[] = [];
-  // public checkBoxList: any;
-  // public isIndeterminate: boolean;
   public masterCheck: boolean;
   public roomsAct: RoomActivate[] = [];
-  public expenseList: Expense[] = [];
+  public cost: Expense[] = [];
   public totalCost: number;
   public paid: number;
   public remaining: number;
+  public costSelect: number = 0;
 
   constructor(private navParams: NavParams, private modalCtrl: ModalController) {
-    // this.checkBoxList = [
-    //   {
-    //     'room': '201',
-    //     'roomDetail': [
-    //       {
-    //         'name': 'ค่าห้อง', 'price': 600, 'isPaid': false, 'isChecked': true,
-    //       },
-    //       {
-    //         'name': 'อาหารเช้า', 'price': 120, 'isPaid': true, 'isChecked': false,
-    //       },
-    //       {
-    //         'name': 'เสริมเตียง', 'price': 100, 'isPaid': true, 'isChecked': false,
-    //       }
-    //     ],
-    //   },
-    //   {
-    //     'room': '202',
-    //     'roomDetail': [
-    //       {
-    //         'name': 'ค่าห้อง', 'price': 1500, 'isPaid': true, 'isChecked': false,
-    //       },
-    //       {
-    //         'name': 'อาหารเช้า', 'price': 100, 'isPaid': true, 'isChecked': false,
-    //       },
-    //       {
-    //         'name': 'เสริมเตียง', 'price': 20, 'isPaid': true, 'isChecked': false,
-    //       }
-    //     ]
-    //   }
-    // ];
   }
 
-  onClick(item2: Expense, room) {
-    console.log('item2.isSelected:', item2.isSelected);
-    console.log(room);
+  change2(item2, roomNo) {
+    console.log('roomNo' + roomNo);
+    console.log('Expense' + item2);
+    let roomInd = this.roomsAct.findIndex(it => it.roomNo == roomNo);
+    let find = this.cost.findIndex(it => it.name == item2.name);
 
-    let roomInd = this.roomsAct.findIndex(it => it.roomNo == room);
     console.log(roomInd);
-    
-    if (roomInd < 0) {
-      this.roomsAct.push(item2[roomInd]);
+    console.log(find);
+
+    if (find < 0) {
+      this.cost.push(item2);
+    } else {
+      this.cost.splice(find, 1);
     }
-    else {
-      this.roomsAct.splice(roomInd, 1)
-    }
-    console.log(this.roomsAct);
+    console.log(this.cost);
 
-
-    // let expenseInd = this.expenseList.forEach(element => {
-    //   element.name == item2.name
-    //   console.log(expenseInd);
-    // });
-
-
+    let price = 0
+    this.cost.forEach(item => {
+      price += item.totalCost
+    });
   }
-  // change(item:Summm, room){
-  //   console.log(item);
-  //   console.log(room);
-  //   //todo: ต้องส่งห้องเข้าไปตอน findIndex ด้วยเพราะจะได้รู้ว่าคือห้องไหน
-  //   let find = this.Cost.findIndex(it => it.name == item.name);
-  //   console.log(find);
-  //   if (find < 0) {
-  //     this.Cost.push(item);
-  //   }else{
-  //     this.Cost.splice(find,1);
-  //   }
-
-  //   // this.Cost += price;
-  //   console.log(this.Cost);
-  //   let price = 0
-
-
-  //   this.Cost.forEach(item => {
-  //     price += item.price
-  //   });
-
-
-  //   console.log(price);
-
-  // }
 
   ngOnInit() {
+    this.masterCheck = true;
     this.roomsAct = this.navParams.get('roomActivate');
     this.totalCost = this.navParams.get('totalCost');
     this.paid = this.navParams.get('paid');
     this.remaining = this.navParams.get('remaining');
-
-    console.log(this.navParams.get('roomActivate'));
     console.log('roomsAct: ', this.roomsAct);
+    this.firstCal();
+  }
+
+  firstCal() {
+    this.roomsAct.forEach(obj => {
+      obj.expenseList.forEach(it => {
+        if (it.isSelected && (it.isPaid == false)) {
+          this.costSelect += it.totalCost;
+        }
+        console.log(this.costSelect);
+      });
+    });
   }
 
   checkMaster() {
