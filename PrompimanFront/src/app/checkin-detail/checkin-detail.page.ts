@@ -65,7 +65,6 @@ export class CheckinDetailPage implements OnInit {
         componentProps: {
           roomActivate: roomAct, totalCost: this.master.totalCost,
           paid: this.master.paid, remaining: this.master.remaining,
-          flag: "edit"
         },
         cssClass: 'dialog-modal-4-select-room',
       });
@@ -91,7 +90,6 @@ export class CheckinDetailPage implements OnInit {
         componentProps: {
           roomActivate: roomAct, totalCost: this.master.totalCost,
           paid: this.master.paid, remaining: this.master.remaining,
-          flag: "edit"
         },
         cssClass: 'dialog-modal-4-select-room',
       });
