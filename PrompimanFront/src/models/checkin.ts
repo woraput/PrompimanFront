@@ -24,6 +24,16 @@ export class MasterDetail {
     roomActLst: RoomActivate[]
 }
 
+export class Master_Info {
+    _id: string
+    groupName: string
+    telephone: string
+    bedNight: number
+    daysLeft: number
+    checkInDate: Date
+    checkOutDate: Date
+}
+
 export class RoomSelected {
     roomNo: string
     setting: SettingRoom
@@ -94,7 +104,7 @@ export class Room {
     roomType: number
     bedType: number
     rate: number
-    status: string                // ว่าง, แจ้งซ่อม, ห้องพักผู้บริหา
+    status: string                // ว่าง แจ้งซ่อม, ห้องพักผู้บริหา
 }
 
 export class DateRequest {
@@ -105,7 +115,7 @@ export class DateRequest {
 export class PagingMaster {
     page: number;
     count: number;
-    dataList: Master[];
+    dataList: Master_Info[];
 }
 
 export class ReserveResponse {

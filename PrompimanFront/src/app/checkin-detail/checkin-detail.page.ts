@@ -52,21 +52,8 @@ export class CheckinDetailPage implements OnInit {
 
 
   async costDetail4All() {
-    const modal = await this.modalController.create({
-      component: CostDetailPage,
-      componentProps: { roomActivate: this.roomsAct },
-      cssClass: 'dialog-modal-4-select-room',
-    });
-    modal.onDidDismiss().then(data => {
-      // this.ionViewDidEnter()
-    })
-    modal.present();
-  }
-
-  async costDetail4EachRoom(roomNo: string) {
     let roomAct;
-
-    await this.api.getRoomActByRoom(this._id, roomNo).subscribe(dataRes => {
+    await this.api.getRoomAct(this._id, '').subscribe(dataRes => {
       if (dataRes != null) {
         roomAct = dataRes;
       }
@@ -75,7 +62,35 @@ export class CheckinDetailPage implements OnInit {
     setTimeout(async () => {
       const modal = await this.modalController.create({
         component: CostDetailPage,
-        componentProps: { roomActivate: roomAct },
+        componentProps: {
+          roomActivate: roomAct, totalCost: this.master.totalCost,
+          paid: this.master.paid, remaining: this.master.remaining,
+        },
+        cssClass: 'dialog-modal-4-select-room',
+      });
+      modal.onDidDismiss().then(data => {
+        // this.ionViewDidEnter()
+      })
+      modal.present();
+    }, 100);
+  }
+
+  async costDetail4EachRoom(roomNo: string) {
+    let roomAct;
+
+    await this.api.getRoomAct(this._id, roomNo).subscribe(dataRes => {
+      if (dataRes != null) {
+        roomAct = dataRes;
+      }
+    });
+
+    setTimeout(async () => {
+      const modal = await this.modalController.create({
+        component: CostDetailPage,
+        componentProps: {
+          roomActivate: roomAct, totalCost: this.master.totalCost,
+          paid: this.master.paid, remaining: this.master.remaining,
+        },
         cssClass: 'dialog-modal-4-select-room',
       });
       modal.onDidDismiss().then(data => {
