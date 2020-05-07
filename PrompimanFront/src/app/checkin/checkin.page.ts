@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChildren, NgZone } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 import { RoomSelected, Master } from 'src/models/checkin';
-// import { RoomSelected } from 'src/models/reservation';
 import { CloudSyncService } from '../cloud-sync.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
@@ -10,7 +9,6 @@ import { DlgSearchMemberPage } from '../dlg-search-member/dlg-search-member.page
 import { DlgSearchReservationPage } from '../dlg-search-reservation/dlg-search-reservation.page';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 import { SharingDataService } from '../sharing-data.service';
-// import { RoomSelected } from 'src/models/checkin';
 import { ActivatedRoute } from '@angular/router';
 import { CostDetailPage } from '../cost-detail/cost-detail.page';
 
@@ -26,14 +24,14 @@ export class CheckinPage implements OnInit {
   private submitRequested: boolean;
   public _id: string;
   public _idReservation: string;
-  // public roomslength: number;
   public listdata: any = {};
   private urlPhoto = "../../assets/image/user-silhouette.png";
   public rommsNumber: RoomSelected[];
   datacheckin: Master = new Master;
   datacheckin2: Master = new Master;
+  public value: string;
 
-  constructor(private shareData: SharingDataService, public alertController: AlertController, private activatedRoute: ActivatedRoute, private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
+  constructor(private shareData: SharingDataService, public zone: NgZone, public alertController: AlertController, private activatedRoute: ActivatedRoute, private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
 
     this.fg = this.fb.group({
       '_id': [null],
@@ -44,7 +42,7 @@ export class CheckinPage implements OnInit {
       'groupName': [null, Validators.required],
       'checkInDate': [null, Validators.required],
       'checkOutDate': [null, Validators.required],
-      'rooms': [],
+      'rooms': [null, Validators.required],
       'haveRoomDeposit': [true, Validators.required],
       'haveTaxInvoice': [null, Validators.required],
       // 'deposit': [null],
@@ -69,11 +67,11 @@ export class CheckinPage implements OnInit {
         console.log("uuuuu", this.fg);
 
         if (data.th_Firstname != null) {
-          this.fg.get('name').setValue(data.th_Firstname + "   "   + data.th_Lastname);
+          this.fg.get('name').setValue(data.th_Firstname + "   " + data.th_Lastname);
           console.log(this.fg.get('name').value);
         }
         if (data.th_Firstname == "") {
-          this.fg.get('name').setValue(data.en_Firstname + "   "   + data.en_Lastname);
+          this.fg.get('name').setValue(data.en_Firstname + "   " + data.en_Lastname);
           console.log(this.fg.get('name').value);
         }
         this.listdata = data;
@@ -108,7 +106,6 @@ export class CheckinPage implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   async roomSetting() {
@@ -155,8 +152,7 @@ export class CheckinPage implements OnInit {
       cssClass: 'dialog-modal-4-ch-re-mm',
     });
     modal.onDidDismiss().then(data => {
-      // this.ionViewDidEnter()
-      console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", data);
+      console.log("xxx", data);
       this._idReservation = data.data;
       this.cloud.getByIDReservation(this._idReservation).subscribe(data => {
         this.datacheckin2 = data;
@@ -189,50 +185,108 @@ export class CheckinPage implements OnInit {
     modal.present();
   }
 
-
-  isReserve() {
-    this.fg.value.haveRoomDeposit = !this.fg.value.haveRoomDeposit;
-    console.log(this.fg.value.haveRoomDeposit);
+  isReserve(event) {
+    console.log(this.fg.get('haveRoomDeposit').value);
+    console.log('event:' + event.detail.checked);
+    this.fg.get('haveRoomDeposit').setValue(event.detail.checked);
+    console.log(this.fg.get('haveRoomDeposit').value);
   }
 
-  isReserve2() {
-    this.fg.value.haveTaxInvoice = !this.fg.value.haveTaxInvoice;
-    console.log(this.fg.value.haveTaxInvoice);
+  isReserve2(event) {
+    console.log('event:' + event.detail.checked);
+    this.fg.get('haveTaxInvoice').setValue(event.detail.checked);
+    console.log(this.fg.get('haveTaxInvoice').value);
   }
 
-  async presentAlertConfirm() {
-    if (this.fg.value._id == null) {
-      const modal = await this.modalController.create({
-        component: CostDetailPage, 
-        cssClass: 'dialog-modal-4-regis-info',
-      });
-      modal.onDidDismiss().then(data => {
-        this.ionViewDidEnter()
-      })
-      modal.present();
-    }
+  presentAlertConfirm() {
+    this.cloud.getIsAlready(this.fg.value.memberId, this.fg.value.groupName).subscribe(data => {
+      console.log(data);
+      if (data == "0") {
+        console.log(data);
+        // this.zone.run(data => {
+        this.goCostDetail()
+        // })
+      }
+      if (data == "1") {
+        console.log(data);
+        this.confirmMaster()
+      }
+      if (data == "2") {
+        console.log(data);
+        this.changeGroupName()
+      }
+    })
+  }
 
-    if (this.fg.value._id != null) {
-      const alert = await this.alertController.create({
-        // header: 'Confirm!',
-        message: 'ต้องการ<strong>เพิ่มห้องในกรุ๊ปเดิม</strong>หรือไม่',
-        buttons: [
-          {
-            text: 'ยกเลิก',
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: (blah) => {
-              console.log('Confirm Cancel: blah');
-            }
-          }, {
-            text: 'ยืนยัน',
-            handler: () => {
-              console.log('Confirm Okay');
-            }
+  async goCostDetail() {
+    // this.cloud.putGetRoomActLst().subscribe(data => {
+    //   console.log('yyyyyyyy', data);
+    // });
+    const modal = await this.modalController.create({
+      component: CostDetailPage,
+      cssClass: 'dialog-modal-4-ch-re-mm',
+    });
+    modal.onDidDismiss().then(data => {
+    })
+    modal.present();
+  }
+
+  async confirmMaster() {
+    const alert = await this.alertController.create({
+      header: 'เพิ่มห้องต่อ Master เดิม',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('textCancel');
+            this.changeGroupName()
           }
-        ]
-      });
-      await alert.present();
-    }
+        },
+        {
+          text: 'ยืนยัน',
+          handler: () => {
+            // this.cloud.confirmReservation(_id).subscribe(data => {
+            //   console.log('xxxxxxxxxxxxxx', data);
+            alert.onDidDismiss().then(data => {
+              this.goCostDetail()
+            });
+            console.log('ConfirmOkay');
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async changeGroupName() {
+    let change
+    const alert = await this.alertController.create({
+      header: 'เปลี่ยนชื่อ Group',
+      inputs: [
+        {
+          name: 'checkbox1',
+          type: 'text',
+          value: '555',
+        },
+      ],
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('textCancel');
+          }
+        }, {
+          text: 'ยืนยัน',
+          handler: () => {
+            alert.onDidDismiss().then(data => {
+            });
+            console.log('ConfirmOkay');
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 }
