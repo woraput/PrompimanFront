@@ -113,9 +113,11 @@ export class CloudSyncService {
     return this.http.get(this.baseUrlPublish + 'CheckIn/IsAlready/' + _id + "/" + groupName);
   }
 
-  // public putGetRoomActLst() {
-  //   return this.http.put(this.baseUrlPublish + 'CheckIn/GetRoomActLst' , {});
-  // }
+  // https://localhost:5001/api/CheckIn/GetRoomActLst
+  public putGetRoomActLst(master: Master) {
+    return this.http.put<Master>(this.baseUrlPublish + 'CheckIn/GetRoomActLst', master);
+  }
 }
+
 
 
