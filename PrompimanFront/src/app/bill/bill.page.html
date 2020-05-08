@@ -25,7 +25,7 @@
               <td width="100"></td>
               <td width="100">{{ sendReserve | number }}</td>
             </tr>
-            <tr *ngIf="text != 'เงินสำรองจ่าย'">
+            <tr *ngIf="text != ''">
               <td width="100" class="ion-text-left"> {{text}}</td>
               <td width="100">{{ sendReserve | number }}</td>
               <td width="100">{{amount | number }}</td>

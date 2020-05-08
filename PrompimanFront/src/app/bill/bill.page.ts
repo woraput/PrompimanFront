@@ -18,17 +18,24 @@ export class BillPage implements OnInit {
   public keyDeposit: number = 0;
   public net: number = 0;
   public sendReserve: number = 0;
-  // public addreserve: number = 0;
   public change: number = 0;
   public isOk: boolean;
+  public roomsAct: any[] = [];
 
   constructor(private fb: FormBuilder, private clound: CloudSyncService, private activatedRoute: ActivatedRoute, 
     public router: Router, public navParam: NavParams, public modaLCtrl: ModalController) {
  
     this.text = this.navParam.get('text');
     this.sendReserve = Number(this.navParam.get('reserve'));
-    // this.sendReserve = Number(this.navParam.get('addreserve'));
+    this.roomsAct = this.navParam.get('roomActivate');
+    console.log(this.roomsAct);
 
+    this.roomsAct.forEach(obj => {
+      this.text = obj.roomNo;
+      console.log(this.text);
+      
+    });
+    
   }
 
   ngOnInit() {
