@@ -116,6 +116,10 @@ const routes: Routes = [
     loadChildren: () => import('./checkin-detail/checkin-detail.module').then(m => m.CheckinDetailPageModule)
   },
   {
+    path: 'checkin-detail/:_id',
+    loadChildren: () => import('./checkin-detail/checkin-detail.module').then(m => m.CheckinDetailPageModule)
+  },
+  {
     path: 'cost-detail',
     loadChildren: () => import('./cost-detail/cost-detail.module').then(m => m.CostDetailPageModule)
   },
