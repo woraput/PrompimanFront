@@ -39,7 +39,7 @@
             </ion-col>
             <!-- checked="{{ item2.isSelected }}" disabled="{{ item2.isPaid }}" -->
             <ion-checkbox slot="start" [(ngModel)]="item2.isSelected" (click)="change2(item2,item.roomNo)"
-              disabled="{{ item2.isPaid == true && item2.isSelected == true }}" checked="{{ item2.isSelected }}"></ion-checkbox>
+              disabled="{{ item2.isPaid == true }}" checked="{{ item2.isSelected == true }}"></ion-checkbox>
             <!-- Todo: add in checkbox (ionChange)="change(item2, item.room (ionChange)="checkEvent($event)")" -->
           </ion-item>
         </ion-col>
@@ -110,7 +110,7 @@
       </ion-col>
       <ion-col size="4"></ion-col>
       <ion-col size="2">
-        <ion-button expand="block" color="primary" class="ion-text-end" type="" (click)="ok()">ถัดไป</ion-button>
+        <ion-button expand="block" color="primary" class="ion-text-end" (click)="ok()">ถัดไป</ion-button>
       </ion-col>
       <ion-col size="1"></ion-col>
     </ion-row>
