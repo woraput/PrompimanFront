@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChildren, NgZone } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
-import { RoomSelected, Master, Room } from 'src/models/checkin';
+import { RoomSelected, Master, Room, RoomActivate, MasterDetail } from 'src/models/checkin';
 import { CloudSyncService } from '../cloud-sync.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
@@ -20,6 +20,7 @@ import { CostDetailPage } from '../cost-detail/cost-detail.page';
 export class CheckinPage implements OnInit {
   private roomsSelect: RoomSelected[] = [];
   public fg: FormGroup;
+  public fgMd: FormGroup;
   @ViewChildren(DatetimeComponent) private datetimeComponent: DatetimeComponent[];
   private submitRequested: boolean;
   public _id: string;
@@ -28,9 +29,20 @@ export class CheckinPage implements OnInit {
   private urlPhoto = "../../assets/image/user-silhouette.png";
   public rommsNumber: RoomSelected[];
   public groupName: string;
+  public masterDetail: MasterDetail;
 
   constructor(private shareData: SharingDataService, public alertController: AlertController, private activatedRoute: ActivatedRoute, private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
-    this.fg = this.fb.group({
+
+    this.fgMd = this.fb.group({
+      'master': CheckinPage.CreateFormMasterGroup(this.fb),
+      'roomActLst': CheckinPage.CreateFormRoomActLstGroup(this.fb)
+    })
+
+    this.fg = CheckinPage.CreateFormMasterGroup(this.fb);
+  }
+
+  public static CreateFormMasterGroup(fb: FormBuilder): FormGroup {
+    return fb.group({
       '_id': [null],
       'memberId': [null],
       'name': [null, Validators.required],
@@ -49,7 +61,30 @@ export class CheckinPage implements OnInit {
       'active': [false],
       // 'creationDateTime': [null],
       // 'lastUpdate': [null],
-    })
+    });
+  }
+
+  public static CreateFormRoomActLstGroup(fb: FormBuilder): FormGroup {
+    return fb.group({
+      '_id': null,
+      'groupId': null,
+      'roomNo': null,
+      'roomType': null,
+      'bedType': null,
+      'rate': null,
+      'discount': null,
+      'arrivalDate': null,
+      'departure': null,
+      'expenseList': null,
+      'totalCost': null,
+      'paid': null,
+      'remaining': null,
+      'status': null,
+      'note': null,
+      'active': null,
+      'creationDateTime': null,
+      'lastUpdate': null,
+    });
   }
 
   ionViewDidEnter() {
@@ -71,7 +106,7 @@ export class CheckinPage implements OnInit {
           this.fg.get('name').setValue(data.en_Firstname + "   " + data.en_Lastname);
           console.log(this.fg.get('name').value);
           this.groupName = this.fg.get('name').value
-          console.log(' this.groupName2' ,this.groupName);
+          console.log(' this.groupName2', this.groupName);
         }
         this.listdata = data;
         if (this.listdata.photo != null && this.listdata.photo != '') {
@@ -84,7 +119,9 @@ export class CheckinPage implements OnInit {
           this.listdata.photo = this.urlPhoto
         }
       }
+      console.log(this.fg.value);
     });
+    
   }
 
   public handleSubmit() {
@@ -163,6 +200,8 @@ export class CheckinPage implements OnInit {
           this.rommsNumber = this.fg.get('rooms').value;
           this.shareData.roomReserve = this.rommsNumber.map(r => r.roomNo);
         }
+        console.log(this.fg.value);
+        
       });
     })
     modal.present();
@@ -213,12 +252,14 @@ export class CheckinPage implements OnInit {
   async goCostDetail() {
     let roomAct
     console.log('bbbbbbbbbbbb');
+    this.fgMd.patchValue(this.fg.value);
+    console.log('fgMd', this.fg.value);
     this.cloud.putGetRoomActLst(this.fg.value).subscribe(data => {
       console.log('5555555555555555555', data);
       if (data != null) {
         console.log('5555555555555555555');
-        roomAct = data
-        console.log('roomNonaja', roomAct);
+        roomAct = data,
+          console.log('roomNonaja', roomAct);
       }
     })
 
@@ -233,7 +274,20 @@ export class CheckinPage implements OnInit {
         },
         cssClass: 'dialog-modal-4-select-room',
       });
+
       modal.onDidDismiss().then(dataDismiss => {
+        if (dataDismiss != null || dataDismiss != undefined) {
+          let roomActReturn = dataDismiss as RoomActivate[];
+          this.fgMd.get('roomActLst').patchValue(roomActReturn);
+          this.fgMd.get('master').patchValue(this.fg.value)
+          console.log(this.fgMd.value);
+          
+          this.cloud.putCreateRoomActLst(this.fgMd.value).subscribe(data => {
+            if (data != null) {
+              console.log('ddddddddddddd');
+            }
+          })
+        }
       })
       modal.present();
     }, 100);
@@ -289,15 +343,15 @@ export class CheckinPage implements OnInit {
           text: 'ยืนยัน',
           handler: () => {
             alert.onDidDismiss().then(data => {
-              console.log("heha",data.data.values.changeGroupName);
-              console.log("heha2",this.fg.get('groupName').value);
-              if(data.data.values.changeGroupName == this.fg.get('groupName').value){
-                  console.log('เหมือน');
-                  
-              }    
-              if(data.data.values.changeGroupName != this.fg.get('groupName').value){
+              console.log("heha", data.data.values.changeGroupName);
+              console.log("heha2", this.fg.get('groupName').value);
+              if (data.data.values.changeGroupName == this.fg.get('groupName').value) {
+                console.log('เหมือน');
+
+              }
+              if (data.data.values.changeGroupName != this.fg.get('groupName').value) {
                 console.log('ไม่เหมือน');
-              }   
+              }
             });
             console.log('ConfirmOkay');
           }
@@ -307,8 +361,8 @@ export class CheckinPage implements OnInit {
     await alert.present();
   }
 
-  changeNameGroup(event){
-    console.log(event.detail.value);   
+  changeNameGroup(event) {
+    console.log(event.detail.value);
     this.fg.get('groupName').setValue(event.detail.value);
   }
 }
