@@ -20,8 +20,6 @@ export class CheckinDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this._id = "637242708563864454";
-    // this._id = this.navParams.data._id;
     this.api.getCheckinDetail(this._id).subscribe(dataRes => {
       if (dataRes != null) {
         console.log(dataRes);
@@ -109,7 +107,6 @@ export class CheckinDetailPage implements OnInit {
               console.log(dataRes.isSuccess);
             }
           })
-
         }
       })
       modal.present();

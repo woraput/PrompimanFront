@@ -11,7 +11,6 @@ import { PagingMaster } from 'src/models/checkin';
 export class MasterDetailPage implements OnInit {
   private option = 'value1';
   private p = 1;
-  // private paging = new PagingMaster();
   private paging = new PagingMaster();
 
   constructor(private api: CloudSyncService) { }
@@ -19,11 +18,18 @@ export class MasterDetailPage implements OnInit {
   ngOnInit() {
     this.api.getLstMasterNotCloseYet(this.p, 10).subscribe(dataRes => {
       if (dataRes != null) {
-        console.log(dataRes);
         this.paging = dataRes;
       }
     })
 
+  }
+
+  search(pageNumber: number) {
+    this.p = pageNumber;
+    console.log("p", pageNumber);
+    this.api.getLstMasterNotCloseYet(pageNumber, 10).subscribe(data => {
+      this.paging = data;
+    });
   }
 
   segmentChanged(ev: CustomEvent) {
