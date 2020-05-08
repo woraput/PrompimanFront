@@ -117,6 +117,11 @@ export class CloudSyncService {
   public putGetRoomActLst(master: Master) {
     return this.http.put<Master>(this.baseUrlPublish + 'CheckIn/GetRoomActLst', master);
   }
+
+    // https://localhost:5001/api/CheckIn/Create
+    public putCreateRoomActLst(MasterDetail: MasterDetail) {
+      return this.http.put<MasterDetail>(this.baseUrlPublish + 'CheckIn/Create', MasterDetail);
+    }
 }
 
 
