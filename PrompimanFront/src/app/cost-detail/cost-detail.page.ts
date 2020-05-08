@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
-import { RoomActivate } from 'src/models/checkin';
+import { RoomActivate, Expense } from 'src/models/checkin';
+import { BillPage } from '../bill/bill.page';
+import { Router } from '@angular/router';
+import { async } from 'rxjs/internal/scheduler/async';
 // import { Summm } from 'src/models/reservation';
 
 @Component({
@@ -10,89 +13,72 @@ import { RoomActivate } from 'src/models/checkin';
 })
 
 export class CostDetailPage implements OnInit {
-  //todo add Model (ex.)
-  // export class Summm{
-  //   name: string
-  //   price:number
-  // }
-
-  // public Cost : Summm[] = [];
-  // public checkBoxList: any;
-  // public isIndeterminate: boolean;
   public masterCheck: boolean;
   public roomsAct: RoomActivate[] = [];
+  public roomsActBySelect: RoomActivate[] = [];
+  public cost: Expense[] = [];
   public totalCost: number;
   public paid: number;
   public remaining: number;
+  public costSelect: number = 0;
 
-  constructor(private navParams: NavParams, private modalCtrl: ModalController) {
-    // this.checkBoxList = [
-    //   {
-    //     'room': '201',
-    //     'roomDetail': [
-    //       {
-    //         'name': 'ค่าห้อง', 'price': 600, 'isPaid': false, 'isChecked': true,
-    //       },
-    //       {
-    //         'name': 'อาหารเช้า', 'price': 120, 'isPaid': true, 'isChecked': false,
-    //       },
-    //       {
-    //         'name': 'เสริมเตียง', 'price': 100, 'isPaid': true, 'isChecked': false,
-    //       }
-    //     ],
-    //   },
-    //   {
-    //     'room': '202',
-    //     'roomDetail': [
-    //       {
-    //         'name': 'ค่าห้อง', 'price': 1500, 'isPaid': true, 'isChecked': false,
-    //       },
-    //       {
-    //         'name': 'อาหารเช้า', 'price': 100, 'isPaid': true, 'isChecked': false,
-    //       },
-    //       {
-    //         'name': 'เสริมเตียง', 'price': 20, 'isPaid': true, 'isChecked': false,
-    //       }
-    //     ]
-    //   }
-    // ];
+  constructor(private navParams: NavParams, private router: Router, private modals: ModalController) {
   }
 
-  // change(item:Summm, room){
-  //   console.log(item);
-  //   console.log(room);
-  //   //todo: ต้องส่งห้องเข้าไปตอน findIndex ด้วยเพราะจะได้รู้ว่าคือห้องไหน
-  //   let find = this.Cost.findIndex(it => it.name == item.name);
-  //   console.log(find);
-  //   if (find < 0) {
-  //     this.Cost.push(item);
-  //   }else{
-  //     this.Cost.splice(find,1);
+  change2(item2, roomNo) {
+    console.log('roomNo', roomNo);
+    console.log('Expense', item2);
 
-  //   }
+    let roomInd = this.roomsAct.findIndex(it => it.roomNo == roomNo);
+    let find = this.cost.findIndex(it => it.name == item2.name);
 
-  //   // this.Cost += price;
-  //   console.log(this.Cost);
-  //   let price = 0
+    console.log(roomInd);
+    console.log(find);
+    // if ((this.roomsAct[roomInd]).expenseList[find]) {
+    console.log('11111');
 
+    if (find < 0) {
+      this.cost.push(item2);
+    } else {
+      this.cost.splice(find, 1);
+    }
+    console.log(this.cost);
 
-  //   this.Cost.forEach(item => {
-  //     price += item.price
-  //   });
+    let price = 0
+    this.cost.forEach(item => {
+      price += item.totalCost
+    });
 
+    this.costSelect -= price;
+    // }
+  }
 
-  //   console.log(price);
-
-  // }
 
   ngOnInit() {
+    this.masterCheck = true;
     this.roomsAct = this.navParams.get('roomActivate');
+    console.log(this.roomsAct);
+
+    // this.roomsActBySelect = this.roomsAct;
+    // console.log(this.roomsActBySelect);
+
     this.totalCost = this.navParams.get('totalCost');
     this.paid = this.navParams.get('paid');
     this.remaining = this.navParams.get('remaining');
-    
-    console.log(this.navParams.get('roomActivate'));
     console.log('roomsAct: ', this.roomsAct);
+    this.firstCal();
+
+  }
+
+  firstCal() {
+    this.roomsAct.forEach(obj => {
+      obj.expenseList.forEach(it => {
+        if ((it.isSelected == true) && (it.isPaid == false)) {
+          this.costSelect += it.totalCost;
+        }
+        console.log(this.costSelect);
+      });
+    });
   }
 
   checkMaster() {
@@ -122,4 +108,30 @@ export class CostDetailPage implements OnInit {
     }
   }
 
+  async ok() {
+    const modal = await this.modals.create({
+      component: BillPage,
+      cssClass: 'dialog-modal-4-regis-info',
+      componentProps: {
+        'text': '',
+        'reserve': this.costSelect,
+      }
+    });
+    modal.onWillDismiss().then(data => {
+      let isOk = data
+      console.log(isOk);
+      this.closeModal(this.roomsAct);
+      // if (isOk.data) {
+      //   // this.router.navigate(['/booking']);
+      //   this.modals.dismiss(this.roomsAct);
+      // }
+    });
+    await modal.present();
+  }
+
+
+  closeModal(roomsAct: RoomActivate[]) {
+
+    this.modals.dismiss(roomsAct);
+  }
 }
