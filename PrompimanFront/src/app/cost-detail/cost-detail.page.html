@@ -1,14 +1,10 @@
 <ion-header translucent>
   <ion-toolbar>
-    <!-- <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
-    </ion-buttons> -->
     <ion-title>รายละเอียดค่าใช้จ่าย (บาท)</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- <form [formGroup]="fg" (ngSubmit)="handleSubmit()"> -->
   <ion-list lines="none">
     <ion-row>
       <ion-col size="2">
@@ -37,16 +33,13 @@
             <ion-col size="1" class="ion-text-right">
               <ion-label>{{ item2.totalCost }}</ion-label>
             </ion-col>
-            <!-- checked="{{ item2.isSelected }}" disabled="{{ item2.isPaid }}" -->
-            <ion-checkbox slot="start" [(ngModel)]="item2.isSelected" (click)="change2(item2,item.roomNo)"
+            <ion-checkbox slot="start" [(ngModel)]="item2.isSelected" (ionChange)="change()"
               disabled="{{ item2.isPaid == true }}" checked="{{ item2.isSelected == true }}"></ion-checkbox>
-            <!-- Todo: add in checkbox (ionChange)="change(item2, item.room (ionChange)="checkEvent($event)")" -->
           </ion-item>
         </ion-col>
       </ion-item-divider>
     </ion-row>
   </ion-list>
-  <!-- </form> -->
 </ion-content>
 
 <ion-footer style="--ion-background-color:#f5f2ea;">

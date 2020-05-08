@@ -15,59 +15,21 @@ import { async } from 'rxjs/internal/scheduler/async';
 export class CostDetailPage implements OnInit {
   public masterCheck: boolean;
   public roomsAct: RoomActivate[] = [];
-  public roomsActBySelect: RoomActivate[] = [];
-  public cost: Expense[] = [];
-  public totalCost: number;
-  public paid: number;
-  public remaining: number;
+  public totalCost: number = 0;
+  public paid: number = 0;
+  public remaining: number = 0;
   public costSelect: number = 0;
 
   constructor(private navParams: NavParams, private router: Router, private modals: ModalController) {
   }
 
-  change2(item2, roomNo) {
-    console.log('roomNo', roomNo);
-    console.log('Expense', item2);
-
-    let roomInd = this.roomsAct.findIndex(it => it.roomNo == roomNo);
-    let find = this.cost.findIndex(it => it.name == item2.name);
-
-    console.log(roomInd);
-    console.log(find);
-    // if ((this.roomsAct[roomInd]).expenseList[find]) {
-    console.log('11111');
-
-    if (find < 0) {
-      this.cost.push(item2);
-    } else {
-      this.cost.splice(find, 1);
-    }
-    console.log(this.cost);
-
-    let price = 0
-    this.cost.forEach(item => {
-      price += item.totalCost
-    });
-
-    this.costSelect -= price;
-    // }
-  }
-
-
   ngOnInit() {
-    this.masterCheck = true;
     this.roomsAct = this.navParams.get('roomActivate');
-    console.log(this.roomsAct);
-
-    // this.roomsActBySelect = this.roomsAct;
-    // console.log(this.roomsActBySelect);
-
     this.totalCost = this.navParams.get('totalCost');
     this.paid = this.navParams.get('paid');
     this.remaining = this.navParams.get('remaining');
     console.log('roomsAct: ', this.roomsAct);
     this.firstCal();
-
   }
 
   firstCal() {
@@ -81,10 +43,22 @@ export class CostDetailPage implements OnInit {
     });
   }
 
-  checkMaster() {
-    console.log(this.masterCheck); // false
-    console.log(this.roomsAct);
+  change() {
+    setTimeout(async () => {
+      this.costSelect = 0;
+      this.roomsAct.forEach(obj => {
+        obj.expenseList.forEach(item => {
+          if (item.isSelected && (item.isPaid == false)) {
+            this.costSelect += item.totalCost;
+          }
+          console.log(this.roomsAct);
 
+        });
+      });
+    }, 100);
+  }
+
+  checkMaster() {
     setTimeout(() => {
       this.roomsAct.forEach(obj => {
         obj.expenseList.forEach(item => {
@@ -95,19 +69,6 @@ export class CostDetailPage implements OnInit {
     });
   }
 
-  checkEvent(event) {
-    console.log(event);
-    let totalItem = this.roomsAct.length;
-    console.log(totalItem);
-
-    if (event.detail.checked == false) {
-      this.masterCheck = false;
-    }
-    if (event.detail.checked == true) {
-      this.masterCheck = true;
-    }
-  }
-
   async ok() {
     const modal = await this.modals.create({
       component: BillPage,
@@ -115,23 +76,22 @@ export class CostDetailPage implements OnInit {
       componentProps: {
         'text': '',
         'reserve': this.costSelect,
+        'roomActivate': this.roomsAct
       }
     });
     modal.onWillDismiss().then(data => {
       let isOk = data
       console.log(isOk);
-      this.closeModal(this.roomsAct);
+      // this.closeModal(this.roomsAct);
       // if (isOk.data) {
       //   // this.router.navigate(['/booking']);
-      //   this.modals.dismiss(this.roomsAct);
+      this.modals.dismiss(this.roomsAct);
+      console.log('2222',this.roomsAct);
       // }
     });
     await modal.present();
   }
-
-
-  closeModal(roomsAct: RoomActivate[]) {
-
-    this.modals.dismiss(roomsAct);
-  }
+  // closeModal(roomsAct: RoomActivate[]) {
+  //   this.modals.dismiss(roomsAct);
+  // }
 }
