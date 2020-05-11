@@ -3,13 +3,13 @@ import { ModalController, AlertController } from '@ionic/angular';
 import { DlgRoomDetailPage } from '../dlg-room-detail/dlg-room-detail.page';
 import { RoomSelected, Master, Room, RoomActivate, MasterDetail } from 'src/models/checkin';
 import { CloudSyncService } from '../cloud-sync.service';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { SelectRoomsPage } from '../select-rooms/select-rooms.page';
 import { DlgSearchMemberPage } from '../dlg-search-member/dlg-search-member.page';
 import { DlgSearchReservationPage } from '../dlg-search-reservation/dlg-search-reservation.page';
 import { DatetimeComponent } from 'src/components/datetime/datetime.component';
 import { SharingDataService } from '../sharing-data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CostDetailPage } from '../cost-detail/cost-detail.page';
 
 @Component({
@@ -30,14 +30,15 @@ export class CheckinPage implements OnInit {
   public rommsNumber: RoomSelected[];
   public groupName: string;
   public masterDetail: MasterDetail;
+  public roomActReturn: RoomActivate[] = [];
 
-  constructor(private shareData: SharingDataService, public alertController: AlertController, private activatedRoute: ActivatedRoute, private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
+  constructor(public router: Router, private shareData: SharingDataService, public alertController: AlertController, private activatedRoute: ActivatedRoute, private modalController: ModalController, private cloud: CloudSyncService, private fb: FormBuilder) {
 
     this.fgMd = this.fb.group({
       'master': CheckinPage.CreateFormMasterGroup(this.fb),
-      'roomActLst': CheckinPage.CreateFormRoomActLstGroup(this.fb)
+      'roomActLst': []
+      // CheckinPage.CreateFormRoomActLstGroup(this.fb)
     })
-
     this.fg = CheckinPage.CreateFormMasterGroup(this.fb);
   }
 
@@ -64,31 +65,34 @@ export class CheckinPage implements OnInit {
     });
   }
 
-  public static CreateFormRoomActLstGroup(fb: FormBuilder): FormGroup {
-    return fb.group({
-      '_id': null,
-      'groupId': null,
-      'roomNo': null,
-      'roomType': null,
-      'bedType': null,
-      'rate': null,
-      'discount': null,
-      'arrivalDate': null,
-      'departure': null,
-      'expenseList': null,
-      'totalCost': null,
-      'paid': null,
-      'remaining': null,
-      'status': null,
-      'note': null,
-      'active': null,
-      'creationDateTime': null,
-      'lastUpdate': null,
-    });
-  }
+  // public static CreateFormRoomActLstGroup(fb: FormBuilder): FormArray {
+  //   return new FormArray([
+  //     fb.group({
+  //       '_id': [null],
+  //       'groupId': [null],
+  //       'roomNo': [null],
+  //       'roomType': [1],
+  //       'bedType': [1],
+  //       'rate': [0],
+  //       'discount': [0],
+  //       'arrivalDate': [null],
+  //       'departure': [null],
+  //       'expenseList': [null],
+  //       'totalCost': [0],
+  //       'paid': [0],
+  //       'remaining': [0],
+  //       'status': [null],
+  //       'note': [null],
+  //       'active': [true],
+  //       'creationDateTime': [null],
+  //       'lastUpdate': [null],
+  //     })
+  //   ])
+  // }
 
   ionViewDidEnter() {
     this._id = this.activatedRoute.snapshot.paramMap.get('_id');
+    console.log('master', this._id);
     this.fg.get('memberId').setValue(this._id);
     console.log("yyyyyyyy", this._id);
     this.cloud.getByID(this._id).subscribe(data => {
@@ -121,7 +125,7 @@ export class CheckinPage implements OnInit {
       }
       console.log(this.fg.value);
     });
-    
+
   }
 
   public handleSubmit() {
@@ -201,7 +205,7 @@ export class CheckinPage implements OnInit {
           this.shareData.roomReserve = this.rommsNumber.map(r => r.roomNo);
         }
         console.log(this.fg.value);
-        
+
       });
     })
     modal.present();
@@ -254,43 +258,45 @@ export class CheckinPage implements OnInit {
     console.log('bbbbbbbbbbbb');
     this.fgMd.patchValue(this.fg.value);
     console.log('fgMd', this.fg.value);
-    this.cloud.putGetRoomActLst(this.fg.value).subscribe(data => {
+    this.cloud.putGetRoomActLst(this.fg.value).subscribe(async data => {
       console.log('5555555555555555555', data);
       if (data != null) {
         console.log('5555555555555555555');
         roomAct = data,
           console.log('roomNonaja', roomAct);
+        const modal = await this.modalController.create({
+          component: CostDetailPage,
+          componentProps: {
+            roomActivate: roomAct,
+            totalCost: this.fg.get('totalCost').value,
+            paid: this.fg.get('paid').value,
+            remaining: this.fg.get('remaining').value,
+          },
+          cssClass: 'dialog-modal-4-select-room',
+        });
+
+        modal.onDidDismiss().then(dataDismiss => {
+          console.log('ggggggggggggg', dataDismiss);
+
+          if (dataDismiss != null || dataDismiss != undefined) {
+            this.roomActReturn = dataDismiss.data
+            console.log('ttttttttttttt', this.roomActReturn);
+            this.fgMd.get('roomActLst').patchValue(this.roomActReturn);
+            this.fgMd.get('master').patchValue(this.fg.value)
+            console.log(this.fgMd.value);
+
+            this.cloud.putCreateRoomActLst(this.fgMd.value).subscribe(data => {
+              if (data != null) {
+                console.log('ddddddddddddd', data);
+                this.router.navigate(['/master-detail']);
+              }
+            })
+          }
+        })
+        modal.present();
       }
     })
 
-    setTimeout(async () => {
-      const modal = await this.modalController.create({
-        component: CostDetailPage,
-        componentProps: {
-          roomActivate: roomAct,
-          totalCost: this.fg.get('totalCost').value,
-          paid: this.fg.get('paid').value,
-          remaining: this.fg.get('remaining').value,
-        },
-        cssClass: 'dialog-modal-4-select-room',
-      });
-
-      modal.onDidDismiss().then(dataDismiss => {
-        if (dataDismiss != null || dataDismiss != undefined) {
-          let roomActReturn = dataDismiss as RoomActivate[];
-          this.fgMd.get('roomActLst').patchValue(roomActReturn);
-          this.fgMd.get('master').patchValue(this.fg.value)
-          console.log(this.fgMd.value);
-          
-          this.cloud.putCreateRoomActLst(this.fgMd.value).subscribe(data => {
-            if (data != null) {
-              console.log('ddddddddddddd');
-            }
-          })
-        }
-      })
-      modal.present();
-    }, 100);
   }
 
   async confirmMaster() {
