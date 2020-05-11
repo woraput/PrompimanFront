@@ -98,10 +98,13 @@ export class CheckinDetailPage implements OnInit {
           paid: this.master.paid, remaining: this.master.remaining,
         },
         cssClass: 'dialog-modal-4-select-room',
+        backdropDismiss: false
       });
-      modal.onDidDismiss().then(dataDismiss => {
+      modal.onWillDismiss().then(dataDismiss => {
         if (dataDismiss != null || dataDismiss != undefined) {
           let roomActReturn = dataDismiss as RoomActivate[];
+          console.log(roomActReturn);
+
           this.api.updateRoomAct(roomActReturn).subscribe(dataRes => {
             if (dataRes != null) {
               console.log(dataRes.isSuccess);
@@ -109,7 +112,8 @@ export class CheckinDetailPage implements OnInit {
           })
         }
       })
-      modal.present();
+      modal.present()
+      return this.modalController.dismiss();
     }, 100);
 
 

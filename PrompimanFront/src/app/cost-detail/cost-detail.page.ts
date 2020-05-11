@@ -4,6 +4,7 @@ import { RoomActivate, Expense } from 'src/models/checkin';
 import { BillPage } from '../bill/bill.page';
 import { Router } from '@angular/router';
 import { async } from 'rxjs/internal/scheduler/async';
+import { flatten } from '@angular/compiler';
 // import { Summm } from 'src/models/reservation';
 
 @Component({
@@ -19,6 +20,7 @@ export class CostDetailPage implements OnInit {
   public paid: number = 0;
   public remaining: number = 0;
   public costSelect: number = 0;
+  public isOk: boolean;
 
   constructor(private navParams: NavParams, private router: Router, private modals: ModalController) {
   }
@@ -69,29 +71,34 @@ export class CostDetailPage implements OnInit {
     });
   }
 
-  async ok() {
-    const modal = await this.modals.create({
+  ok() {
+    if (this.isOk) {
+      return this.modals.dismiss();
+      // this.modals.dismiss();
+    } else {
+      this.closeModal();
+    }
+  }
+
+  async closeModal() {
+    let mod = await this.modals.create({
       component: BillPage,
       cssClass: 'dialog-modal-4-regis-info',
       componentProps: {
         'text': '',
         'reserve': this.costSelect,
-        'roomActivate': this.roomsAct
+        'roomActivate': this.roomsAct,
+      },
+      backdropDismiss: false
+    });
+    mod.onDidDismiss().then(async data => {
+      this.isOk = data.data;
+      console.log(this.isOk);
+      if (this.isOk) {
+        console.log('2222', this.roomsAct);
       }
+      return await this.modals.dismiss();
     });
-    modal.onWillDismiss().then(data => {
-      let isOk = data
-      console.log(isOk);
-      // this.closeModal(this.roomsAct);
-      // if (isOk.data) {
-      //   // this.router.navigate(['/booking']);
-      this.modals.dismiss(this.roomsAct);
-      console.log('2222',this.roomsAct);
-      // }
-    });
-    await modal.present();
+    await mod.present();
   }
-  // closeModal(roomsAct: RoomActivate[]) {
-  //   this.modals.dismiss(roomsAct);
-  // }
 }
