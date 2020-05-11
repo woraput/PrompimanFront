@@ -73,7 +73,7 @@ export class CostDetailPage implements OnInit {
 
   ok() {
     if (this.isOk) {
-      return this.modals.dismiss();
+      return this.modals.dismiss(this.roomsAct);
       // this.modals.dismiss();
     } else {
       this.closeModal();

@@ -98,7 +98,7 @@ export class CheckinDetailPage implements OnInit {
           paid: this.master.paid, remaining: this.master.remaining,
         },
         cssClass: 'dialog-modal-4-select-room',
-        backdropDismiss: false
+        // backdropDismiss: false
       });
       modal.onWillDismiss().then(dataDismiss => {
         if (dataDismiss != null || dataDismiss != undefined) {
