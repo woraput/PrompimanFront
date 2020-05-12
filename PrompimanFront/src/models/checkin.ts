@@ -113,6 +113,11 @@ export class DateRequest {
     checkOutDate: Date
 }
 
+export class RoomActRequest {
+    masterId: string
+    roomActLst: RoomActivate[]
+}
+
 export class PagingMaster {
     page: number;
     count: number;

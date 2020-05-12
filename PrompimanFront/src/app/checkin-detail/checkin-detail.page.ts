@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CloudSyncService } from './../cloud-sync.service';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Master, RoomActivate } from 'src/models/checkin';
+import { Master, RoomActivate, RoomActRequest } from 'src/models/checkin';
 import { CostDetailPage } from '../cost-detail/cost-detail.page';
 
 @Component({
@@ -67,14 +67,16 @@ export class CheckinDetailPage implements OnInit {
         cssClass: 'dialog-modal-4-select-room',
       });
       modal.onDidDismiss().then(dataDismiss => {
-        if (dataDismiss != null || dataDismiss != undefined) {
-          let roomActReturn = dataDismiss as RoomActivate[];
-          this.api.updateRoomAct(roomActReturn).subscribe(dataRes => {
+        if (dataDismiss.data != null || dataDismiss.data != undefined) {
+          let roomActRequest: RoomActRequest = new RoomActRequest();
+          roomActRequest.masterId = this._id;
+          roomActRequest.roomActLst = dataDismiss.data;
+          console.log(roomActRequest);
+          this.api.updateRoomAct(roomActRequest).subscribe(dataRes => {
             if (dataRes != null) {
               console.log(dataRes.isSuccess);
             }
           })
-
         }
       })
       modal.present();
@@ -100,12 +102,13 @@ export class CheckinDetailPage implements OnInit {
         cssClass: 'dialog-modal-4-select-room',
         // backdropDismiss: false
       });
-      modal.onWillDismiss().then(dataDismiss => {
-        if (dataDismiss != null || dataDismiss != undefined) {
-          let roomActReturn = dataDismiss as RoomActivate[];
-          console.log(roomActReturn);
-
-          this.api.updateRoomAct(roomActReturn).subscribe(dataRes => {
+      modal.onWillDismiss().then( dataDismiss => {
+        if (dataDismiss.data != null || dataDismiss.data != undefined) {
+          let roomActRequest: RoomActRequest = new RoomActRequest();
+          roomActRequest.masterId = this._id;
+          roomActRequest.roomActLst =  dataDismiss.data;
+          console.log(roomActRequest);
+          this.api.updateRoomAct(roomActRequest).subscribe(dataRes => {
             if (dataRes != null) {
               console.log(dataRes.isSuccess);
             }
