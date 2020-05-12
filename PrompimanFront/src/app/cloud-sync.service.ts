@@ -1,8 +1,8 @@
-import { PagingMaster } from './../models/checkin';
+import { PagingMaster, RoomActRequest } from './../models/checkin';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Member, Paging, MemberResponse } from 'src/models/Member';
-import { Room, DateRequest, Reservation, ReserveResponse, RoomSelected, SettingRoom, MasterDetail, RoomActivate, Master } from 'src/models/checkin';
+import { Room, DateRequest, Reservation, ReserveResponse, MasterDetail, RoomActivate, Master } from 'src/models/checkin';
 
 @Injectable({
   providedIn: 'root'
@@ -83,8 +83,8 @@ export class CloudSyncService {
     return this.http.get<RoomActivate[]>(this.baseUrlPublish + 'CheckIn/GetRoomActLst/' + _id + "?roomId=" + roomId);
   }
 
-  public updateRoomAct(roomAct: RoomActivate[]) {
-    return this.http.put<ReserveResponse>(this.baseUrlPublish + 'CheckIn/Update/' + roomAct, {});
+  public updateRoomAct(roomActRequest: RoomActRequest) {
+    return this.http.put<ReserveResponse>(this.baseUrlPublish + 'CheckIn/Update/', roomActRequest);
   }
 
   //master detail
@@ -109,7 +109,7 @@ export class CloudSyncService {
 
   }
   // http://localhost:5000/api/Reservation/Confirm/637231486236762770
-  public getIsAlready(_id: string, groupName: string ) {
+  public getIsAlready(_id: string, groupName: string) {
     return this.http.get(this.baseUrlPublish + 'CheckIn/IsAlready/' + _id + "/" + groupName);
   }
 
@@ -118,10 +118,10 @@ export class CloudSyncService {
     return this.http.put<Master>(this.baseUrlPublish + 'CheckIn/GetRoomActLst', master);
   }
 
-    // https://localhost:5001/api/CheckIn/Create
-    public putCreateRoomActLst(MasterDetail: MasterDetail) {
-      return this.http.put<MasterDetail>(this.baseUrlPublish + 'CheckIn/Create', MasterDetail);
-    }
+  // https://localhost:5001/api/CheckIn/Create
+  public putCreateRoomActLst(MasterDetail: MasterDetail) {
+    return this.http.put<MasterDetail>(this.baseUrlPublish + 'CheckIn/Create', MasterDetail);
+  }
 }
 
 
